@@ -202,11 +202,254 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-2012-03-08-learn-vim-3-post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/16/2012-03-08-learn-vim-3-post/" class="article-date">
+  	<time datetime="2015-12-16T13:37:34.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/16/2012-03-08-learn-vim-3-post/">vim学习 jsctags</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><br>ctags不能非常胜任对现在的javascript代码的解析，尤其是遇到：<br><pre class="prettyprint"><br>Test.object.do = function(obj) {// …}<br>ajaxSetup: function( settings ) {//..}<br></pre><br>网上搜索了下，发现了doctorjs.git (以前叫jsctags), 号称被应用于Cloud9 IDE’s Ace online editor.<br><div class="comment"><br><ul><br>  <li>安装doctorjs需要nodejs环境，如何安装nodejs自己google去</li><br>  <li>安装ctags，brew也好macports也好。</li><br>  <li>git  clone <a href="https://github.com/mozilla/doctorjs.git" target="_blank" rel="external">https://github.com/mozilla/doctorjs.git</a> –recursive</li><br>  <li>make install</li><br>  <li>Add export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH to your .zshrc or .bashrc</li><br>  <li>然后就可以使用了，直接jsctags your_js_dir</li><br>  <li>配合vim的tagbar非常好用。</li><br></ul><br></div><br><br></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/vim/">vim</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-03-07-learn-vim-2-post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/16/2012-03-07-learn-vim-2-post/" class="article-date">
+  	<time datetime="2015-12-16T13:37:34.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/16/2012-03-07-learn-vim-2-post/">vim学习 shiftwidth, tabstop, softtabstop和expandtab</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><br></p><h6>1. shiftwidth</h6><br><p><br>这个是用于程序中自动缩进所使用的空白长度指示的。一般来说为了保持程序的美观，和下面的参数最好一致。同时它也是符号移位(&gt;&gt;)长度的制定者。<br></p><br><p></p>
+
+<p><br></p><h6>2. tabstop<br></h6><br><p><br>定义tab所等同的空格长度，一般来说最好设置成8，因为如果是其它值的话，可能引起文件在打印之类的场合中看起来很别扭。<br>除非你设置了 expandtab模式，也就是把tabs转换成空格，这样的话就不会一起混淆，不过毕竟制表符为8是最常用最普遍的设置，所以一般还是不要改。<br>(lz总是把它设置为4个空格)<br></p><br><p></p><br><p><br></p><h6>3. softtabstop</h6><br><p><br>如果我们希望改变程序中的缩进怎么办？shiftwidth和tabstop不一样的话，你会发现程序比较难看的。<br>这时候，softtabstop就起作用了。可以从vim的说明中看到，一旦设置了softtabstop的值时，你按下tab键，<br>插入的是空格和tab制表符的混合，具体如何混合取决于你设定的softtabstop，举个例子，如果设定softtabstop=8,<br>那么按下tab键，插入的就是正常的一个制表符;如果设定 softtabstop=16,那么插入的就是两个制表符；如果softtabstop=12,<br>那么插入的就是一个制表符加上4个空格；如果 softtabstop=4呢？那么一开始，插入的就是4个空格，此时一旦你再按下一次tab，<br>这次的四个空格就会和上次的四个空格组合起来变成一个制表符。<br>换句话说，softtabstop是“逢8空格进1制表符”,前提是你tabstop=8。<br></p><br><p></p><br><p><br></p><h6>4. expandtab</h6><br><p><br>因为tab的大小不一样，在多人一起开发项目时，为了使代码风格尽量保持一致，<br>一般不允许在代码使用TAB符，而以4个空格代之。<br></p><br><p></p>
+
+<p></p><p>一般的shiftwidth, tabstop, softtabstop和expandtab的配置</p><p></p>
+<pre class="prettyprint">
+set shiftwidth=4                " use indents of 4 spaces
+set tabstop=4                   " an indentation every four columns
+set softtabstop=4               " let backspace delete indent
+set expandtab                   " tabs are spaces, not tabs
+</pre>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/vim/">vim</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-03-07-learn-vim-1-post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/16/2012-03-07-learn-vim-1-post/" class="article-date">
+  	<time datetime="2015-12-16T13:37:34.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/16/2012-03-07-learn-vim-1-post/">vim学习 listchars</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><br>在ruby-china.org混，看到很多vimer，于是就请教了如何学习vim，@jinleileiking同学就给了建议，非常中用，他说：<br><div class="comment"><br><ul><br><li>vimcasts.org 类似railscasts</li><br><li>[学习vi和Vim编辑器(第7版)].(Learning.the.vi.and.Vim.Editors.7th.Edition).A.Robbins&amp;E.Hannah&amp;L.Lamb.文字版</li><br><li>[Hacking.Vim].[Hacking.Vim].[Hacking.Vim].Packt.Publishing.Hacking.Vim.May.2007</li><br><li>:help vim内置帮助</li><br></ul></div><br><br></p>
+
+<p><br>    先看vimcasts.org, 第一章：[显示不可视的字符] (<a href="http://vimcasts.org/episodes/show-invisibles/" target="_blank" rel="external">http://vimcasts.org/episodes/show-invisibles/</a>)<br><pre class="prettyprint"><br>“ 设置显示空格，tab的切换键<br>nmap &lt;leader&gt;l :set list!<cr><br><br>“ 设置tab用小三角加重复的空格显示，换行用横折符号显示。可以:help listchars<br>set listchars=tab:▸\ ,eol:¬<br></cr></pre><br></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/vim/">vim</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
     <article id="post-2012-02-23-use-spf13-vim-config-post" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/12/16/2012-02-23-use-spf13-vim-config-post/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+  	<time datetime="2015-12-16T13:37:34.000Z" itemprop="datePublished">2015-12-16</time>
 </a>
     </div>
   
@@ -242,7 +485,7 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/vim/">Vim</a>
+	<a class="article-category-link" href="/categories/vim/">vim</a>
 	</div>
 
 
@@ -283,10 +526,10 @@
      
 
   
-    <article id="post-2013-04-26-jmeter-bing-qi-pu-zhi-xpath-extractor" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2012-08-01-xiao-qing-xin-outlookshi-yong-ji" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-xpath-extractor/" class="article-date">
+      <a href="/2015/12/16/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/" class="article-date">
   	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
 </a>
     </div>
@@ -300,7 +543,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-xpath-extractor/">Jmeter 兵器谱之 Xpath Extractor</a>
+      <a class="article-title" href="/2015/12/16/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/">小清新 Outlook 试用记</a>
     </h1>
   
 
@@ -310,66 +553,113 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extractor。</p>
-<h2 id="u9700_u6C42"><a href="#u9700_u6C42" class="headerlink" title="需求"></a>需求</h2><p>大家都知道，传统的表单登陆有几个特点：</p>
-<ol>
-<li>有一个特定的 action</li>
-<li>使用 Post 协议</li>
-<li>post 参数一般为用户名和密码</li>
-<li>有很多的 hidden input 随机值</li>
-</ol>
-<p>比如百度的登陆，就有相当多的 hidden input。这些 hidden input 的 value 在每次请求时，都会随机生成不同的值。所以你不得不把它提取出来，参数化。于是我们就用到了 XPATH Extractor。</p>
-<h2 id="u5B9E_u8DF5"><a href="#u5B9E_u8DF5" class="headerlink" title="实践"></a>实践</h2><p>假设我们有这样一个登陆的form：</p>
-<pre><code>&lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
-  &lt;input id=&quot;username&quot; name=&quot;username&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
-  &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; value=&quot;&quot;&gt;
-  &lt;input type=&quot;hidden&quot; name=&quot;lt&quot; value=&quot;20120001&quot;&gt;
-  &lt;input type=&quot;hidden&quot; name=&quot;_eventId&quot; value=&quot;submit&quot;&gt;
-  &lt;input class=&quot;btn-submit&quot; name=&quot;submit&quot; value=&quot;Log In&quot; type=&quot;submit&quot;&gt;
-&lt;/form&gt;
-</code></pre><p> 可以看到有两个 hidden input， 其中 lt 值是每次刷新页面时候，随机生成的值，另外一个是固定。那我们的策略是：</p>
-<ol>
-<li>第一次请求这个页面时候，获取随机生成的 lt 值。</li>
-<li>用这个获得的 lt 值，和用户名，密码一起做为 post 的参数，传递到后台去。</li>
-</ol>
-<p>所以在jmeter里面，先创建一个 HTTP 请求，这个请求的作用就是访问网站登录页面，并在这个请求填加后置处理器： XPATH Extractor，来提取请求返回的 html response 里面的 <strong>lt</strong> 的值。</p>
-<p><img src="https://jzycow.bn1.livefilestore.com/y1mkZeGi_ZuSphq77cecvcz5J1NwURw4cnG5JgR4Ar0pN2TjMfYVwjllWUY9LM-pWS-m92mtRx6lAvb1hLbYSUpa1Mh__u99xrNRP2-pIqWtum_W_dWGH_J6g/xpath.png?psid=1" alt="alt text"></p>
-<p>然后在 XPATH Extractor 里，将要提取 lt 的 XPATH query 填写正确， 如下</p>
-<p><img src="https://jzycow.bn1.livefilestore.com/y1mohY_XIe6MBQXnE3vqzOPbsjuuUc6HTUnImhsM8G6n2I5E1ry9mecSCxJuytZWlxGHIsgcNBtSQY-K4PYt1-9xQ9jvbT65BuUt_bRcZWo7tPWYLEq4ryryQ/query.png?psid=1" alt="alt text"></p>
-<p>在第一个 http 的请求中，我们取得了 lt 的值。接着我们创建第二个 http request， 这次要完成的就是将这些参数 post 到 form 制定的 action 中去。</p>
-<p><img src="https://jzycow.bn1.livefilestore.com/y1mktMNz2jyfvCicq9jS5QnbKT0wNVxDfq13v1MD1QboYPq78Jx8sLv8-YAGaB_waaCQ1c8lDNUISQ8eVIlnfDSVVyuvd6u4cLJE2E5jvnh36rQIymo7wOxLA/http.png?psid=1" alt="alt text" title="12"></p>
-<p>需要注意的是，这次的方法变成了 Post， 还有参数都要填写到参数列表中，注意那个 lt 值， jmeter 使用 ${} 获取参数的值。</p>
-<p>好，大功告成，试试看吧。</p>
-<hr>
-<h2 id="XPATH_Extractor__u8BE6_u8BF4"><a href="#XPATH_Extractor__u8BE6_u8BF4" class="headerlink" title="XPATH Extractor 详说"></a>XPATH Extractor 详说</h2><p>盗用下Apache上的图片：<br><img src="http://jmeter.apache.org/images/screenshots/xpath_extractor.png" alt="alt text"></p>
-<p>我们来一一解说下，这些图片上的属性，英语好的人可以直接移步 <a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath_Extractor" title="XPATH Extractor" target="_blank" rel="external">Apache Jmeter Xpath Extractor</a>。</p>
-<p><strong>Name</strong>： XPATH Extractor， 就是一个该节点的描述信息，你可以任意更改，会立刻反应在你的节点树上。<br><strong>Comments</strong>: 同样也是描述信息。<br><strong>Apply to</strong>：一般只针对于那些有子 sample 的 sample， apply to 有4种：</p>
-<ul>
-<li>Main sample only： 只对主 sample 起作用。</li>
-<li>Sub-samples only: 只对子 sample 起作用。</li>
-<li>Main sample and sub-samles: 两种都起作用。</li>
-<li>JMeter Varibale: 这个变量是用于 JMeter的assertion， assertion 会对这个变量的内容起作用。</li>
-</ul>
-<p>XPATH的会对每一个被 <em>Apply to</em> 的 Sample 依次起作用， 并所有的匹配结果都会返回。</p>
-<p><strong>XPATH Parsing Options</strong></p>
-<p><strong>Use Tidy(tolerant parser)</strong>: 如果选择 Use Tidy， 就是解析response的时候将 HTML 转成 XHTML。</p>
-<ul>
-<li>对于所有的 HTML response， 我们应该选择 Use Tidy， 这样的 response 会被转为有效的 XHTML。</li>
-<li>对于所有的 XHTML 和 XML， 就不需要再选择使用 Use Tidy 了。</li>
-</ul>
-<p><strong>Quiet</strong>: tidy 的 quiet flag 设置， 选中了会抑制一些不必要的输出。<br><strong>Report error</strong>： 如果 Tidy 发生错误， 那么触发相应的 Assertion。<br><strong>Show warnings</strong>： 显示 Tidy Warning 信息的开关。</p>
-<p><strong>Use Namespaces</strong>， <strong>Validate XML</strong>，  <strong>Ignore Whitespace</strong>，  <strong>Fetch External DTDs</strong> 这四个只有在 Use Tidy 没有选中才会被激活。</p>
-<p><strong>Use Namespaces</strong>： 如果选中此选项，那么 XML 解析器会使用命名空间，我也不是很熟这一块，可以参考<br><a href="http://www.cnblogs.com/meng-meng/archive/2011/09/26/2192355.html" target="_blank" rel="external">XML解析中的namespace初探</a></p>
-<p> <strong>Validate XML</strong>： 验证 XML 是不是 well formed。</p>
-<p> <strong>Ignore Whitespace</strong>： 忽略空格字符</p>
-<p><strong>Fetch External DTDs</strong>： 获取外部的 DTD 文件</p>
-<p><strong>Return entire XPath fragment instead of text content?</strong>： 这个很简单，举个例子：</p>
-<p>html 片段是：</p>
-<pre><code>&lt;titile&gt;
-Apache JMeter
-&lt;/title&gt;
-</code></pre><p>那么，//title 会返回 “<code>&lt;title&gt;Apache JMeter&lt;/title&gt;</code>“ 而不是 “Apache JMeter”.</p>
-<p><strong>Reference Name</strong>： 就是用来存放 XPATH 提取出来的值。<br><strong>XPath Query</strong>： XPATH 的查询语句。<br><strong>Default Value</strong>： 默认值。</p>
+              <p>我不得不说，outlook 不错。Metro 风格像清新的风让人觉得惬意。目前 outlook 提供从 hotmail 升级和注册新用户两种方式。</p>
+<p>登入<a href="http://www.hotmail.com">Hotmail</a>，</p>
+<p><img src="/photos/hotmail.png"></img></p>
+<p>点击<strong>了解详情</strong>， 进入<strong>Outlook 预览</strong>页面</p>
+<p><img src="/photos/outlookpreview.png"></img></p>
+<p>点击<strong>试用 Outlook</strong>进入注册页面，在这个页面你可以试用原先的 hotmail 邮箱，也可以注册一个新的 outlook 的邮箱。</p>
+<p><img src="/photos/register.png"></img></p>
+<p>我将我的 hotmail 升级了一把。然后登陆 outlook， 登陆之后的界面：</p>
+<p><img src="/photos/main.png"></img></p>
+<p>很棒吧！ 干净清爽！</p>
+<p>用半小时粗略的试用了 outlook 的各种功能。为之倾倒，不吝言辞，我来说几句。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/windows/">windows</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metro/">Metro</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/12/16/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-04-06-webdriver-1-post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/16/2012-04-06-webdriver-1-post/" class="article-date">
+  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/16/2012-04-06-webdriver-1-post/">WebDriver 1: Set up WebDriver using Maven3</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><br></p><h3>1. Learn Maven3 first.</h3><br>  This is quite simple. Go through <a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" target="_blank" rel="external">Maven in 5 Minutes</a><br>  That’s quite enough.<br><p></p>
+
+<p><br></p><h3>2. Set up project</h3><br>Using the command in Maven in 5 Minutes to create a project using your own groupId and artifactId.<br><pre class="prettyprint"><br>mvn archetype:generate -DgroupId=com.ahchoo.automation -DartifactId=ahcoo -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false<br></pre><br><p></p>
+
+<p><br>Change the pom.xml to add Junit and WebDriver dependencies<br><pre class="prettyprint"><br>&lt;project&gt;<br>…<br>    &lt;dependencies&gt;<br>        &lt;dependency&gt;<br>            &lt;groupId&gt;junit&lt;/groupId&gt;<br>            &lt;artifactId&gt;junit&lt;/artifactId&gt;<br>            &lt;version&gt;4.10&lt;/version&gt;<br>            &lt;scope&gt;test&lt;/scope&gt;<br>        &lt;/dependency&gt;<br>        &lt;dependency&gt;<br>            &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;<br>            &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;<br>            &lt;version&gt;2.20.0&lt;/version&gt;<br>            &lt;/dependency&gt;<br>            &lt;/dependencies&gt;&lt;/scope&gt;&lt;/version&gt;&lt;/artifactId&gt;&lt;/groupId&gt;<br>        &lt;/dependency&gt;<br>    &lt;/dependencies&gt;<br>…<br>&lt;/project&gt;<br></pre><br>Then run <code class="cmd">mvn clean install</code><br></p>
+
+<p><br></p><h3>3. Using eclipse to import this project</h3><br>install <a href="http://eclipse.org/m2e/" target="_blank" rel="external">m2eclipse</a> and<br>run command in the project root directory:<br><pre class="prettyprint"><br>mvn eclipse:clean<br>mvn eclipse:eclipse<br></pre><br><br>open eclise, click File and choose Import:<br><p><br>    <img src="/photos/1.png"><br></p><br>Choose Existing Projects into Workspace<br><p><br>    <img src="/photos/2.png"><br></p>
+
+<p>After import, you will see the file tree in eclipse project explorer:</p>
+<p><br><img src="/photos/3.png"><br></p><br><p></p>
+
+<p>Thus the environment is set up.</p>
 
       
     </div>
@@ -378,15 +668,11 @@ Apache JMeter
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/jmeter/">Jmeter</a>
+	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
 	</div>
 
 
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test-china-org/">test-china.org</a></li></ul>
-	</div>
-
       
       <div class="clearfix"></div>
     </div>
@@ -423,10 +709,10 @@ Apache JMeter
      
 
   
-    <article id="post-2013-10-15-you-xi-kai-fa-chang-yong-gai-nian" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2012-03-04-zsh-config-post" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2013-10-15-you-xi-kai-fa-chang-yong-gai-nian/" class="article-date">
+      <a href="/2015/12/16/2012-03-04-zsh-config-post/" class="article-date">
   	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
 </a>
     </div>
@@ -440,7 +726,7 @@ Apache JMeter
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-10-15-you-xi-kai-fa-chang-yong-gai-nian/">游戏开发常用概念</a>
+      <a class="article-title" href="/2015/12/16/2012-03-04-zsh-config-post/">oh my zsh</a>
     </h1>
   
 
@@ -450,106 +736,9 @@ Apache JMeter
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>zz from <a href="http://xiandanboke.com.cn/game.html" target="_blank" rel="external">守望者科技博客</a></p>
-<p>游戏开发中，需要了解 概念，分别是导演、场景、布景和人物角色。这几个概念和拍电影相似，那么我们就拿电影和游戏做对比，一一讲解这几个概念。</p>
-<ul>
-<li><em>导演</em>（在cocos2d-x引擎中与之对应的类事CCDirector）。游戏里，导演是游戏创作的组织者和领导者，是把游戏策划变成游戏的总指挥，导演制定规则让游戏内的场景、布景和人物角色有序地运行。</li>
-<li><p><em>场景</em>（在cocos2d-x引擎中与之对应的类事CCScene)。场景是一个个的关卡，关卡主要有布景和人物角色组成。</p>
-</li>
-<li><p><em>布景</em>（在cocos2d-x引擎中与之对应的类事CClayer)。布景是每个关卡里面的背景，同样，不同的关卡需要的背景也是完全不一样的。</p>
-</li>
-<li><em>人物角色</em>（在cocos2d-x引擎中与之对应的类事CCSprite)。人物角色包括游戏的主玩家和其他玩家了。其他玩家既可以是一个真实的玩家，也可以是游戏虚拟出来的玩家。</li>
-<li><em>动作</em>（在cocos2d-x引擎中与之对应的类事CCAction)。动作是游戏内人物角色的动作。</li>
-<li><em>摄像机</em>（CCCamera），每个节点都需要使用摄像机，当节点发生缩放，旋转，和位置变化时，都需要覆盖摄像机，让这个节点通过摄像机重新渲染。</li>
-</ul>
+        <p>Mac自带zsh， 先设置你的默认shell为zsh</p><br><pre class="prettyprint"><br>chsh -s /bin/zsh<br></pre><br><p><br>然后使用oh-my-zsh的配置。参见<a href="https://github.com/robbyrussell/oh-my-zsh/" target="_blank" rel="external">oh my zsh</a><br><pre class="prettyprint"><br>cd ~<br>curl -L <a href="https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh" target="_blank" rel="external">https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh</a> | sh</pre><br></p><br><p>修改.zshrc,把你需要的环境变量配置全部加到.zshrc中去。定义自己的主题。可以在.oh-my-zsh/themes下面找到所有的主题<br>同时你也可以去<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/themes" target="_blank" rel="external">themes</a>里去找你喜欢的主题。个人比较喜欢gnzh.<br><pre class="prettyprint"><br>zhangmatoMacBook-Pro.local ~/.oh-my-zsh/themes  ‹master›<br>Soliah.zsh-theme              daveverwer.zsh-theme          frisk.zsh-theme               josh.zsh-theme                mikeh.zsh-theme               rgm.zsh-theme                 suvash.zsh-theme<br>afowler.zsh-theme             dieter.zsh-theme              funky.zsh-theme               jreese.zsh-theme              miloshadzic.zsh-theme         risto.zsh-theme               takashiyoshida.zsh-theme<br>…<br></pre><br></p><br><p>安装插件，在.zshrc文件里找到”plugins=”,然后在里面添加你所需要的插件，你安装的插件可以在.oh-my-zsh/plugins下面找到。<br><pre class="prettyprint"><br>plugins=(rails3 rails git textmate ruby rvm gem git github brew bundler textmate pow)<br></pre><br></p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/cocos2d-x/">cocos2d-x</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/游戏开发/">游戏开发</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-10-09-cron-jobs-and-random-times-within-giving-hours" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2013-10-09-cron-jobs-and-random-times-within-giving-hours/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-10-09-cron-jobs-and-random-times-within-giving-hours/">Cron jobs and random times, within giving hours</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>最近给 <code>Dota 圣剑传说</code> 添加一个随机活动，每小时里在聊天室生成一个 <code>黄金巨龙来袭事件</code>。从 stackoverflow 找来一个方法如下：</p>
-<p><a href="http://stackoverflow.com/questions/9049460/cron-jobs-and-random-times-within-giving-hours" target="_blank" rel="external">http://stackoverflow.com/questions/9049460/cron-jobs-and-random-times-within-giving-hours</a></p>
-<p>If I understand what you’re looking for, you’ll need to do something a bit messy, like having a cron job that runs a bash script that randomizes the run times… Something like this:</p>
-<p>crontab:</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 9 <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> /path/to/bashscript</span><br></pre></td></tr></table></figure>
-<p>and in /path/to/bashscript:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line">maxdelay=$((<span class="number">14</span>*<span class="number">60</span>))  <span class="comment"># 14 hours from 9am to 11pm, converted to minutes</span></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">1</span>; i&lt;=<span class="number">20</span>; i++)); <span class="keyword">do</span></span><br><span class="line">    delay=$((<span class="variable">$RANDOM</span>%maxdelay)) <span class="comment"># pick an independent random delay for each of the 20 runs</span></span><br><span class="line">    (sleep $((delay*<span class="number">60</span>)); /path/to/phpscript.php) &amp; <span class="comment"># background a subshell to wait, then run the php script</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<p>A few notes: this approach it a little wasteful of resources, as it fires off 20 background processes at 9am, each of which waits around for a random number of minutes (up to 14 hours, i.e. 11pm), then launches the php script and exits. Also, since it uses a random number of minutes (not seconds), the start times aren’t quite as random as they could be. But $RANDOM only goes up to 32,767, and there are 50,400 seconds between 9am and 11pm, it’d be a little more complicated to randomize the seconds as well. Finally, since the start times are random and independent of each other, it’s possible (but not very likely) that two or more instances of the script will be started simultaneously.</p>
+<p><br>重启下终端，然后就可以使用订制好的zsh了。<br></p><br><p><br><img src="/photos/zsh.png"><br></p>
 
       
     </div>
@@ -599,10 +788,10 @@ Apache JMeter
      
 
   
-    <article id="post-2013-09-24-fluentwait-with-webelement" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2013-09-24-fluentwait-with-webelement/" class="article-date">
+      <a href="/2015/12/16/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/" class="article-date">
   	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
 </a>
     </div>
@@ -616,7 +805,7 @@ Apache JMeter
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-09-24-fluentwait-with-webelement/">FluentWait with WebElement</a>
+      <a class="article-title" href="/2015/12/16/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/">在WebDriver里使用Sizzle.js</a>
     </h1>
   
 
@@ -626,27 +815,18 @@ Apache JMeter
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><em>原文-<a href="http://seleniumsimplified.com/2012/08/22/fluentwait-with-webelement/" target="_blank" rel="external">FluentWait with WebElement</a></em></p>
-<p>我在 WebDriver 上的同步策略一般都是围绕 WebDriverWait 和 自定义 ExpectedCondition 来做文章。当我第一眼看到 FluentWait，<br>我以为这是一个自定义化更多的一个 WebDriverWait。 但是当我仔细研究它的构造函数的时候，我注意到它使用了 Generics （范型）。<br>Generics 的使用意味着我不需要再传一个 WebDriver 了， 我可以使用 WebElement 或者 By 或者任何我想要的。 这样对于 Ajax 的应用，真是方便了不少。</p>
-<blockquote>
-<p>org.openqa.selenium.support.ui<br>Class FluentWait\<t\></t\></p>
-<p>java.lang.Object<br>org.openqa.selenium.support.ui.FluentWait\<t\></t\></p>
-<p>Type Parameters:<br>T - The input type for each condition used with this instance.</p>
-<p>All Implemented Interfaces:<br>Wait\<t\></t\></p>
-<p>Direct Known Subclasses:<br>WebDriverWait</p>
-</blockquote>
-<p>看下面这段代码， 我用了一个倒计时的计数器做例子。</p>
-<p>这段代码实现了：</p>
+              <p>##XPATH vs CSS</p>
+<p>2008年的时候， 开始使用 Selenium RC 来写 Web 自动化测试，用的是 XPATH 定位，在 Firefox 上工作的很好，可惜在 IE 上跑不起来。<br>因为后来转去做开发工作，对此问题也没深究。时隔5年，09年时候转测试，已经4年多了。Selenium RC 都变成了 WebDriver， 从2013 GTAC 来看，<br>WebDriver 逐渐成为 Web 自动化的主流框架。</p>
+<p>WebDriver 同样使用 XPATH 和 CSS locator。孰优孰劣，google 一下，一大把，不过目前风向偏向 CSS， 理由如下</p>
 <ol>
-<li>用一个 WebDriverWait 等待元素出现。</li>
-<li>看计数器是否倒数到 04.</li>
+<li>更快(尤其在 IE 上)</li>
+<li>更简单</li>
+<li>更加可读</li>
+<li>符合 Jquery 定位逻辑</li>
+<li>XPATH 在不同浏览器上的实现可能不太一样，也许在 Firefox 工作，在 IE 上就不一定了。</li>
+<li>CSS 可以引入第三方的 Javascript 库来更好的定位元素， 比如马上要说的 Sizzle.js</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">WebElement countdown = driver.findElement(By.id(<span class="string">"javascript_countdown_time"</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> WebDriverWait(driver,<span class="number">10</span>).until(ExpectedConditions.visibilityOf(countdown));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> FluentWait&lt;WebElement&gt;(countdown).withTimeout(<span class="number">10</span>, TimeUnit.SECONDS).</span><br><span class="line">  pollingEvery(<span class="number">100</span>,TimeUnit.MILLISECONDS).</span><br><span class="line">    until(<span class="keyword">new</span> Function&lt;WebElement  , Boolean&gt;() &#123;</span><br><span class="line">      <span class="annotation">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> Boolean <span class="title">apply</span><span class="params">(WebElement element)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> element.getText().endsWith(<span class="string">"04"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>注意在上述代码中，我告诉 FluentWait, apply 方法里接收的将是一个 WebElement。FluentWait 可以接受一个 Predicate 或者 Function 做为 until 方法的参。<br>我用了 Function 并在 这个 Function 里面返回一个 Boolean。 </p>
-<p>FluentWait 非常灵活，你可以很轻松的调整等待和轮询时间， 你也可以设置哪些 exceptions 可以忽略， 比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Waiting 30 seconds for an element to be present on the page, checking</span></span><br><span class="line">   <span class="comment">// for its presence once every 5 seconds.</span></span><br><span class="line">   Wait&lt;WebDriver&gt; wait = <span class="keyword">new</span> FluentWait&lt;WebDriver&gt;(driver)</span><br><span class="line">       .withTimeout(<span class="number">30</span>, SECONDS)</span><br><span class="line">       .pollingEvery(<span class="number">5</span>, SECONDS)</span><br><span class="line">       .ignoring(NoSuchElementException.class); <span class="comment">//  我们主动忽略了 NoSuchElementExceptions 的异常</span></span><br><span class="line"></span><br><span class="line">   WebElement foo = wait.until(<span class="keyword">new</span> Function&lt;WebDriver, WebElement&gt;() &#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> WebElement <span class="title">apply</span><span class="params">(WebDriver driver)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> driver.findElement(By.id(<span class="string">"foo"</span>));</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-<p>怎样，看上去是不是优雅多了？</p>
-
+          
       
     </div>
     
@@ -654,15 +834,15 @@ Apache JMeter
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/webdriver/">webdriver</a>
+	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
 	</div>
 
 
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/翻译/">翻译</a></li></ul>
-	</div>
-
+      
+        <p class="article-more-link">
+          <a  href="/2015/12/16/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -699,11 +879,11 @@ Apache JMeter
      
 
   
-    <article id="post-2013-09-14-gatling-shi-yong" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2013-12-26-fan-yi-android-and-ios-support" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2013-09-14-gatling-shi-yong/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+      <a href="/2013/12/26/2013-12-26-fan-yi-android-and-ios-support/" class="article-date">
+  	<time datetime="2013-12-26T13:37:00.000Z" itemprop="datePublished">2013-12-26</time>
 </a>
     </div>
   
@@ -716,7 +896,7 @@ Apache JMeter
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-09-14-gatling-shi-yong/">Gatling 试用 1</a>
+      <a class="article-title" href="/2013/12/26/2013-12-26-fan-yi-android-and-ios-support/">[翻译]Android and iOS Support</a>
     </h1>
   
 
@@ -726,131 +906,17 @@ Apache JMeter
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h1><hr>
-<p>在微博上看到 <code>Gatling</code>，号称超越 <code>jmeter</code> 的性能测试工具。顿时手痒，想来个试用。</p>
-<p>Gatling <em>格林机关枪</em>，看名字就恨凶悍。</p>
-<p>Gatling 的动机是因为性能测试工具已经无法测试当今的应用了。</p>
-<p>比如：</p>
-<ol>
-<li>LoadRunner 太贵了。</li>
-<li>页面又改了，又要打开界面，重新录制。</li>
-<li>客户说用 <code>OpenSTA</code> ， 我们只能用 windows 的虚拟机。</li>
-<li>Jmeter 太弱了，并发的好假，还得建立集群，而且还不知道每个节点的信息能不能回收。。</li>
-<li>Grinder 又内存泄露了，苦逼的 python 开发。。。（不知道是哪个工具）</li>
-</ol>
-<p>看来业界对市场上的性能测试工具都恨之入骨。</p>
-<p>再来看下 Gatling：</p>
-<ol>
-<li><p>高效<br>Gatling 用了 actors 模型，真是一个好演员啊。</p>
-<blockquote>
-<p>Actor模型</p>
-<p>当一个请求来了之后， 则委派给一个Actor处理， 和事件驱动的区别是， 这些Actor之间不共享任何资源， 可进行并行处理， 事件驱动模型和Actor模型很容易被搞混淆， 如果事件驱动模型来一个请求则委派一个线程去处理并且这些线程之间不共享资源，不会出现锁的问题， 则可以认为这种事件驱动模型等价于Actor模型， Scala的Actor模型就是这么处理的， Actor会被代理到线程处理， 海量的Actor会被代理到一个JVM线程池处理，这样提升了很大的效率，而这种映射是scala帮你做好了； 而Erlang中Actor模型则更加彻底， 其实是OTP实现了操作系统中的线程的功能， 这些“线程”叫做process， 只不过这些process占用的资源很少， 也不共享任何资源， 这样每个actor可以跟process一一对应</p>
-</blockquote>
-</li>
-<li><p>Gatling 脚本是代码，而且优雅简洁</p>
-<p>其实就是 scala 和 scala 写的 DSL， 不觉得 scala 优雅啊。。。</p>
-</li>
-<li><p>Gatling 的报表很有意义。</p>
-</li>
-<li><p>Gatling 免费的，明显最重要的。</p>
-</li>
-</ol>
-<h1 id="u4E0A_u624B"><a href="#u4E0A_u624B" class="headerlink" title="上手"></a>上手</h1><hr>
-<p>略过下载安装之类的，实在要看，自己看 <a href="https://github.com/excilys/gatling/wiki/Getting-Started" target="_blank" rel="external">Getting-started</a> 吧。<br>我们按照 <a href="https://github.com/excilys/gatling/wiki/First-Steps-with-Gatling" target="_blank" rel="external">First Steps with Gatling</a> 走一遍。<br>这个 First Steps 就是测试一个 e-banking 的应用，很可惜这个应用放在 Cloud Foundry， 国内估计访问不了。</p>
-<p>这个应用的链接在：</p>
-<p><a href="http://excilysbank.gatling.cloudbees.net" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net</a></p>
-<p>主要实现了以下功能：</p>
-<blockquote>
-<ol>
-<li>Session management (login, logout)</li>
-<li>Accounts visualization</li>
-<li>Operations visualization by month</li>
-<li>Cards Operations visualization by month</li>
-<li>Transfers visualization and transfer performing</li>
-</ol>
-</blockquote>
-<h2 id="u6D4B_u8BD5_u8BA1_u5212"><a href="#u6D4B_u8BD5_u8BA1_u5212" class="headerlink" title="测试计划"></a>测试计划</h2><p>我们对一些具有代表性的场景进行性能测试，所以我们想象了下，用户会做的事情：</p>
-<ol>
-<li>用户访问应用</li>
-<li>用户获得认证并登陆</li>
-<li>用户访问具体的账号</li>
-<li>用户查看上个月的状况</li>
-<li>用户登出</li>
-</ol>
-<p>我们要用 Gatling 来录制这 5 个场景。</p>
-<h2 id="Gatling_Recorder"><a href="#Gatling_Recorder" class="headerlink" title="Gatling Recorder"></a>Gatling Recorder</h2><p>一般工具都提供 recorder 否则就弱爆了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="variable">$GATLING_HOME</span>/bin/recorder.sh</span><br></pre></td></tr></table></figure>
-<p>启动这个脚本之后，会跳出一个类似 jmeter 的界面，我们得配置下：</p>
-<ul>
-<li>package: com.excilys.ebi.bank.stress</li>
-<li>class name: MySimulation</li>
-<li>output folder: /Users/lihuazhang/Documents/Simulation</li>
-</ul>
-<p><img src="/photos/gatling_gui.png" alt="alt text"></p>
-<p>和 jmeter 一样， Gatling 的 recorder 一样也充当着浏览器和应用之间 proxy 的角色，从上图来看：</p>
-<ul>
-<li>http  8000</li>
-<li>https 8001</li>
-</ul>
-<p>所以必须在浏览器设置代理。然后在浏览器上的所有 request 都会被记录下来。当然 Gatling 也提供了 Filters 来过滤<br>无关信息：</p>
-<blockquote>
-<ul>
-<li>NONE: Doesn’t apply any filter one the requests, even if there are some declared;</li>
-<li>EXCEPT: Allows all requests to be logged except those which filters apply on the URI;</li>
-<li>ONLY: Allows only requests, which URI matches one of the filters, to be logged.</li>
-</ul>
-</blockquote>
-<p>更加具体的，不妨看下 <a href="https://github.com/excilys/gatling/wiki/Recorder#wiki-browser-config" target="_blank" rel="external">Recorder details</a></p>
-<h2 id="u5F00_u59CB_u5F55_u5236_u5427"><a href="#u5F00_u59CB_u5F55_u5236_u5427" class="headerlink" title="开始录制吧"></a>开始录制吧</h2><p>设置好代理之后，开始执行第一个场景：</p>
-<ol>
-<li><p>访问 <a href="http://excilysbank.gatling.cloudbees.net" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net</a></p>
-</li>
-<li><p>登陆</p>
-<p>username = user1</p>
-<p>password = password1</p>
-</li>
-<li><p>Click on PERSONNAL_CHECKING</p>
-</li>
-<li><p>Click on the previous month (for us it was November as we were in December)</p>
-</li>
-<li><p>Log out</p>
-</li>
-</ol>
-<p>然后点击 Recorder 上的 stop， 就会在之前设置的 output folder 里面生成 <code>MySimulation.scala</code> 文件。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.excilys.ebi.bank.stress</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.gatling.core.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.core.session.<span class="type">Expression</span></span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.jdbc.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Names</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Values</span>._</span><br><span class="line"><span class="keyword">import</span> scala.concurrent.duration._</span><br><span class="line"><span class="keyword">import</span> bootstrap._</span><br><span class="line"><span class="keyword">import</span> assertions._</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySimulation</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Simulation</span> &#123;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> httpProtocol = http</span><br><span class="line">    .baseURL(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span><br><span class="line">    .acceptHeader(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span><br><span class="line">    .acceptEncodingHeader(<span class="string">"gzip, deflate"</span>)</span><br><span class="line">    .acceptLanguageHeader(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span><br><span class="line">    .connection(<span class="string">"keep-alive"</span>)</span><br><span class="line">    .userAgentHeader(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">"""Cache-Control"""</span> -&gt; <span class="string">"""max-age=0"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""text/css,*/*;q=0.1"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""image/png,image/*;q=0.8,*/*;q=0.5"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""*/*"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">"""Content-Type"""</span> -&gt; <span class="string">"""application/x-www-form-urlencoded"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">"""Accept"""</span> -&gt; <span class="string">"""application/json, text/javascript, */*; q=0.01"""</span>,</span><br><span class="line">    <span class="string">"""X-Requested-With"""</span> -&gt; <span class="string">"""XMLHttpRequest"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">      .get(<span class="string">"""/"""</span>)</span><br><span class="line">      .headers(headers_1))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">      .get(<span class="string">"""/img/favicon.ico"""</span>))</span><br><span class="line">    .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">      .get(<span class="string">"""/gzip_N2030079394/bundles/all.css"""</span>)</span><br><span class="line">      .headers(headers_3))</span><br><span class="line">    .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb1024132465/img/background.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb4077127084/img/small_window_content.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">      .get(<span class="string">"""/gzip_N762261864/bundles/all.js"""</span>)</span><br><span class="line">      .headers(headers_6))</span><br><span class="line">    .pause(<span class="number">1</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb3761658453/img/sprite.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">30</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">      .post(<span class="string">"""/login"""</span>)</span><br><span class="line">      .headers(headers_8)</span><br><span class="line">      .param(<span class="string">"""username"""</span>, <span class="string">"""user1"""</span>)</span><br><span class="line">      .param(<span class="string">"""password"""</span>, <span class="string">"""password1"""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb2545837452/img/big_window_content.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">21</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/operations.html"""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">43</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/operations.html"""</span>))</span><br><span class="line">    .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">4</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">      .get(<span class="string">"""/logout"""</span>))</span><br><span class="line"></span><br><span class="line">  setUp(scn.inject(atOnce(<span class="number">1</span> user))).protocols(httpProtocol)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u4EE3_u7801_u5206_u6790"><a href="#u4EE3_u7801_u5206_u6790" class="headerlink" title="代码分析"></a>代码分析</h2><p>MySimulation class 可以分为 4 部分：</p>
-<ol>
-<li>The HTTP protocol configuration</li>
-<li>The headers definition</li>
-<li>The scenario definition</li>
-<li>The simulation definition</li>
-</ol>
-<p><em>The HTTP protocol configuration</em></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">val httpProtocol = http</span><br><span class="line">  .<span class="function"><span class="title">baseURL</span><span class="params">(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptHeader</span><span class="params">(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptEncodingHeader</span><span class="params">(<span class="string">"gzip, deflate"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptLanguageHeader</span><span class="params">(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">connection</span><span class="params">(<span class="string">"keep-alive"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">userAgentHeader</span><span class="params">(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span></span></span><br></pre></td></tr></table></figure>
-<p>除了设置 http 协议之外，最重要的就是指定了 baseUrl</p>
-<p><em>The headers definition</em></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">"""Cache-Control"""</span> -&gt; <span class="string">"""max-age=0"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""text/css,*/*;q=0.1"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""image/png,image/*;q=0.8,*/*;q=0.5"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""*/*"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">"""Content-Type"""</span> -&gt; <span class="string">"""application/x-www-form-urlencoded"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">"""Accept"""</span> -&gt; <span class="string">"""application/json, text/javascript, */*; q=0.01"""</span>,</span><br><span class="line">    <span class="string">"""X-Requested-With"""</span> -&gt; <span class="string">"""XMLHttpRequest"""</span>)</span><br></pre></td></tr></table></figure>
-<p>每一个 header 都是一个 scala 的 Map。</p>
-<blockquote>
-<p>这些通用的 header 信息看上去没用，其实这些信息也额外增加了负载，也不容忽视的。</p>
-</blockquote>
-<p><em>The scenario definition</em></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">    .get(<span class="string">"""/"""</span>)</span><br><span class="line">    .headers(headers_1))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">    .get(<span class="string">"""/img/favicon.ico"""</span>))</span><br><span class="line">  .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">    .get(<span class="string">"""/gzip_N2030079394/bundles/all.css"""</span>)</span><br><span class="line">    .headers(headers_3))</span><br><span class="line">  .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb1024132465/img/background.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb4077127084/img/small_window_content.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">    .get(<span class="string">"""/gzip_N762261864/bundles/all.js"""</span>)</span><br><span class="line">    .headers(headers_6))</span><br><span class="line">  .pause(<span class="number">1</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb3761658453/img/sprite.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">30</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">    .post(<span class="string">"""/login"""</span>)</span><br><span class="line">    .headers(headers_8)</span><br><span class="line">    .param(<span class="string">"""username"""</span>, <span class="string">"""user1"""</span>)</span><br><span class="line">    .param(<span class="string">"""password"""</span>, <span class="string">"""password1"""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb2545837452/img/big_window_content.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">21</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/operations.html"""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">43</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/operations.html"""</span>))</span><br><span class="line">  .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">4</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">    .get(<span class="string">"""/logout"""</span>))</span><br></pre></td></tr></table></figure>
-<p>一个simluation 里面可以定义一个或者多个 scenario， 每个 scenario 是一个 scala 对象，</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">val scn = scenario(<span class="string">"Name of my Scenario"</span>)...</span><br><span class="line">``` </span><br><span class="line">scenario 有两个方法：</span><br><span class="line"></span><br><span class="line">* exec  - describe <span class="operator">an</span> action, usually <span class="operator">a</span> request sent <span class="built_in">to</span> <span class="operator">the</span> tested application</span><br><span class="line">* pause - simulate <span class="operator">the</span> thinking <span class="built_in">time</span> <span class="operator">of</span> <span class="operator">the</span> user between pages</span><br><span class="line"></span><br><span class="line">每个 scenario 里会发送很多个 request， 也会思考好多次。所以你看到上面的代码都是 exec <span class="keyword">http</span> request 和 pause。</span><br><span class="line"></span><br><span class="line">HTTP requests 的定义包括 名字，<span class="built_in">post</span> 或者 <span class="built_in">get</span> 方法，headers， 还有参数 :</span><br></pre></td></tr></table></figure>
-<p>  http(“request_3”)<br>    .post(“/login”)<br>    .headers(headers_3)<br>    .param(“username”, “user1”)<br>    .param(“password”, “password1”)<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这段代码会发送一个 <span class="keyword">POST</span> 请求：</span><br></pre></td></tr></table></figure></p>
-<p>POST <a href="http://excilysbank.gatling.cloudbees.net/login" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net/login</a><br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8<br>Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7<br>Accept-Encoding: gzip,deflate<br>Accept-Language: fr,en-us;q=0.7,en;q=0.3<br>Host: excilysbank.gatling.cloudbees.net<br>Keep-Alive: 115<br>User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.17) Gecko/20110422 Ubuntu/9.10 Firefox/3.6.17<br>Content-Length: 33<br>Content-Type: application/x-www-form-urlencoded<br>Referer: <a href="http://excilysbank.gatling.cloudbees.net/public/login.html" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net/public/login.html</a></p>
-<p>username=user1&amp;password=password1</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">*</span>The simulation definition<span class="keyword">*</span></span><br></pre></td></tr></table></figure>
-<p>setUp(scn.inject(atOnce(1 user))).protocols(httpProtocol)<br>```</p>
-<h2 id="u8FD0_u884C_u4E0B_u5427_uFF01"><a href="#u8FD0_u884C_u4E0B_u5427_uFF01" class="headerlink" title="运行下吧！"></a>运行下吧！</h2><p>首先我们要把这个 Simulation move 到 user-files/simulations/下。</p>
-<p>然后运行<code>$GATHING_HOME/bin/gatling.sh</code>, Gatling 会找到 MySimulation。    </p>
-<p><img src="/photos/run.png" alt=""></p>
-<p>选择 MySimulation，一路回车，然后等待运行结束，生成 report：</p>
-<p><img src="/photos/report.png" alt=""></p>
-<h2 id="u5206_u6790_u62A5_u8868_u5427_uFF01"><a href="#u5206_u6790_u62A5_u8868_u5427_uFF01" class="headerlink" title="分析报表吧！"></a>分析报表吧！</h2><p>Gatling 生成的报表非常漂亮而且有意义。每个图表的具体含义可以参考 <a href="https://github.com/excilys/gatling/wiki/Reports" target="_blank" rel="external">Reports</a><br>这样子的报表几乎可以直接呈给领导，都不需要自己采集数据绘图了。</p>
-<p><img src="/photos/gatling_report.png" alt=""></p>
-<h1 id="u4E0B_u4E00_u8282"><a href="#u4E0B_u4E00_u8282" class="headerlink" title="下一节"></a>下一节</h1><p>到目前为止，我们都是照搬 Gatling wiki 来做的，其实就了解了下基本情况。下一节，应该搞个 project 试验下。</p>
+        <p>简而言之：我们准备淘汰 Selenium 自己的 AndroidDriver 和 iPhoneDriver，改用 Selendroid，iosdriver 和 Appium中的任意一个。如果你正在使用 Selenium 的 mobile driver 中的一个的话，请评价下这些替代品。</p>
+<p>正文：</p>
+<p>在 2007 年， 乔布斯发布了 iPhone，从此移动web从本来的新奇事物走上了主流，成为大众的宠儿。如今的趋势预示着在不远的将来，移动 web 的使用将超过桌面应用的使用。移动 Web 将成为你站点重要一部分，而且在移动设备上测试你的网站将是一个明智的想法。而这在未来将会持续一段时间。</p>
+<p>Selenium 项目通过实现 iOS 和 Android 版本的 webdriver 来回应崛起的移动 web。在2009年初期，我们加入了 iPhoneDriver (在 iPad 上也能工作)。2010年6月，最初由 Google 工程师开发的 AndroidDriver 也加入了阵营。 直到今天，你能在官方 Android SDK 的下载选项中发现 “Google WebDriver”的身影。</p>
+<p>在最初的工作完成之后，一些有趣的事情发生了。在 Selenium 项目之外，坊间对这些移动 driver 做了很多实验性的扩展和修改。第一个就是“nativedriver”，我也参与于此。它采用了一个新奇的方式，使用熟悉的 WebDriver 接口，允许用户和手机(Android 或者 iOS)原生的 UI 交互。我第一次见到它时，惊呆了。但是开发它的工程师很快就向我证明了这是有意义的。你猜怎样，他们是对的。</p>
+<p>可惜的是，在证明这个主意是可行且能工作后，NativeDriver 项目突然失去了动力。但是，它给其他三个项目做好了准备，这三个项目采用了它的理念，创造了非常棒的移动测试软件，他们就是：  Selendroid， iosdriver 和 Appium。这三个项目都允许用户用熟知的 WebDriver 接口来测试iOS 和 Android 上的应用。不仅仅是原生的应用，也包括混合或者纯web的应用。最近 Windows Phone WebDriver 也加入了他们，我们可以用来测试 WinPhone 8 上的移动 web 应用。</p>
+<p>这些项目都有一个共同点：他们比 Selenium 移动主项目更加地活跃，更能胜任移动测试工作，也已经走的更远。事实上，原先在 AndroidDriver 和 iPhoneDriver 上的贡献者也开始在这些项目上工作了。我们需要维护不同 driver 间的互通性，允许用户选择最适合他们的框架，而不必担心他们的测试会需要大量重构。</p>
+<p>这就意味着在 selenium 项目中继续保留 AndroidDriver 和 iPhoneDriver 已经不能帮助用户了。那些替代者才是更好的选择。保留这些所谓官方的 driver 只会污染了项目。而且更糟糕的是，selenium 的开发修复这些 driver 上的 bug 非常慢，而这些 bug 让每个参与与此的人都非常沮丧。鉴于此，Selenium 项目决定删除这些driver的代码。我们推荐大家评估那些备选的其中之一使用。</p>
+<p>当然，这些代码会仍然保留在我们的代码历史中，所以如果你想自己构建一个的话，还是有可能的。最新的 iPhoneDriver 是 ef9d578，最新的 AndroidDriver 代码是 00a3c7d。我们已经上传了最新版本的 AndroidDriver 供你下载。</p>
+<p>这些改变并不意味着我们不再支持移动测试。它意味着我们只支持最好的 mobile WebDriver 实现，只是他们不是 Selenium 项目的一部分而已。</p>
+<p>原文见 <a href="http://seleniumhq.wordpress.com/2013/12/24/android-and-ios-support/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+Selenium+%28The+Official+Selenium+Blog%29" target="_blank" rel="external">http://seleniumhq.wordpress.com/2013/12/24/android-and-ios-support/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+Selenium+%28The+Official+Selenium+Blog%29</a></p>
 
       
     </div>
@@ -859,104 +925,7 @@ Apache JMeter
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/gatling/">gatling</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-08-29-add-hover-event-to-capybara" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2013-08-29-add-hover-event-to-capybara/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-08-29-add-hover-event-to-capybara/">add hover event to capybara</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Seems capybara has implemented the <code>hover</code> function</p>
-<p>check <em><code>capybara/selenium/node.rb</code></em></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Capybara::Selenium::Node</span> <span class="inheritance">&lt; <span class="parent">Capybara::Driver</span></span>::<span class="title">Node</span></span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hover</span></span></span><br><span class="line">    driver.browser.action.move_to(native).perform</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>But it’s only a selenium implementation. Not all the browsers implement <code>hover</code> function,<br>Capybara has not apply the method.</p>
-<p>check <em><code>capybara/session.rb</code></em></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="constant">NODE_METHODS</span> = [</span><br><span class="line">  <span class="symbol">:all</span>, <span class="symbol">:first</span>, <span class="symbol">:attach_file</span>, <span class="symbol">:text</span>, <span class="symbol">:check</span>, <span class="symbol">:choose</span>,</span><br><span class="line">  <span class="symbol">:click_link_or_button</span>, <span class="symbol">:click_button</span>, <span class="symbol">:click_link</span>, <span class="symbol">:field_labeled</span>,</span><br><span class="line">  <span class="symbol">:fill_in</span>, <span class="symbol">:find</span>, <span class="symbol">:find_button</span>, <span class="symbol">:find_by_id</span>, <span class="symbol">:find_field</span>, <span class="symbol">:find_link</span>,</span><br><span class="line">  <span class="symbol">:has_content?</span>, <span class="symbol">:has_text?</span>, <span class="symbol">:has_css?</span>, <span class="symbol">:has_no_content?</span>, <span class="symbol">:has_no_text?</span>,</span><br><span class="line">  <span class="symbol">:has_no_css?</span>, <span class="symbol">:has_no_xpath?</span>, <span class="symbol">:resolve</span>, <span class="symbol">:has_xpath?</span>, <span class="symbol">:select</span>, <span class="symbol">:uncheck</span>,</span><br><span class="line">  <span class="symbol">:has_link?</span>, <span class="symbol">:has_no_link?</span>, <span class="symbol">:has_button?</span>, <span class="symbol">:has_no_button?</span>, <span class="symbol">:has_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_field?</span>, <span class="symbol">:has_checked_field?</span>, <span class="symbol">:has_unchecked_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_table?</span>, <span class="symbol">:has_table?</span>, <span class="symbol">:unselect</span>, <span class="symbol">:has_select?</span>, <span class="symbol">:has_no_select?</span>,</span><br><span class="line">  <span class="symbol">:has_selector?</span>, <span class="symbol">:has_no_selector?</span>, <span class="symbol">:click_on</span>, <span class="symbol">:has_no_checked_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_unchecked_field?</span>, <span class="symbol">:query</span>, <span class="symbol">:assert_selector</span>, <span class="symbol">:assert_no_selector</span></span><br><span class="line">]</span><br><span class="line"><span class="constant">SESSION_METHODS</span> = [</span><br><span class="line">  <span class="symbol">:body</span>, <span class="symbol">:html</span>, <span class="symbol">:source</span>, <span class="symbol">:current_url</span>, <span class="symbol">:current_host</span>, <span class="symbol">:current_path</span>,</span><br><span class="line">  <span class="symbol">:execute_script</span>, <span class="symbol">:evaluate_script</span>, <span class="symbol">:visit</span>,</span><br><span class="line">  <span class="symbol">:within</span>, <span class="symbol">:within_fieldset</span>, <span class="symbol">:within_table</span>, <span class="symbol">:within_frame</span>, <span class="symbol">:within_window</span>,</span><br><span class="line">  <span class="symbol">:save_page</span>, <span class="symbol">:save_and_open_page</span>, <span class="symbol">:save_screenshot</span>,</span><br><span class="line">  <span class="symbol">:reset_session!</span>, <span class="symbol">:response_headers</span>, <span class="symbol">:status_code</span>,</span><br><span class="line">  <span class="symbol">:title</span>, <span class="symbol">:has_title?</span>, <span class="symbol">:has_no_title?</span>, <span class="symbol">:current_scope</span></span><br><span class="line">]</span><br><span class="line"><span class="constant">DSL_METHODS</span> = <span class="constant">NODE_METHODS</span> + <span class="constant">SESSION_METHODS</span></span><br></pre></td></tr></table></figure>
-<p>You have two ways to use the hover function:</p>
-<ol>
-<li><p>convert element to selenium element and call hover</p>
-<p><code>element.native.hover</code></p>
-</li>
-</ol>
-<ol>
-<li><p>Add the snippet below to <code>hook.rb</code> file under the support directory.</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># find("span.assign").hover</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">Capybara</span></span></span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">Node</span></span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Element</span></span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">hover</span></span></span><br><span class="line">        <span class="variable">@session</span>.driver.browser.action.move_to(<span class="keyword">self</span>.native).perform</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/capybara/">Capybara</a>
+	<a class="article-category-link" href="/categories/移动测试/">移动测试</a>
 	</div>
 
 
@@ -997,11 +966,11 @@ Apache JMeter
      
 
   
-    <article id="post-2013-08-25-du-lu-fan-yan-shi" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2013-10-15-you-xi-kai-fa-chang-yong-gai-nian" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2013-08-25-du-lu-fan-yan-shi/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+      <a href="/2013/10/15/2013-10-15-you-xi-kai-fa-chang-yong-gai-nian/" class="article-date">
+  	<time datetime="2013-10-15T13:37:00.000Z" itemprop="datePublished">2013-10-15</time>
 </a>
     </div>
   
@@ -1014,7 +983,7 @@ Apache JMeter
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-08-25-du-lu-fan-yan-shi/">读陆犯焉识</a>
+      <a class="article-title" href="/2013/10/15/2013-10-15-you-xi-kai-fa-chang-yong-gai-nian/">游戏开发常用概念</a>
     </h1>
   
 
@@ -1024,14 +993,18 @@ Apache JMeter
     <div class="article-entry" itemprop="articleBody">
       
           
-        <blockquote>
-<p>妻子悄悄问：“他回来了吗？” 丈夫于是明白了，她打听的是她一直在等的那个人，虽然她已经忘了他的名字叫陆焉识。 “回来了。”丈夫悄悄地回答她。 “还来得及吗？”妻子又问。 “来得及的。他已经在路上了。” “哦，路很远的。” 婉喻最后这句话是袒护她的焉识；就是焉识来不及赶到也不是他的错，是路太远。</p>
-</blockquote>
-<p>不得不说严歌苓写人物很厉害，行云流水间，<br>把人物的一颦一笑展现在读者眼前，有时浓郁，有时淡雅。小姨多鹤如此，陆犯焉识也如此。</p>
-<p>一口气把陆犯焉识读完，地铁上，马桶上，床上，然后不停的像身边人推荐，来读读看吧。<br>朋友会问有什么好的？ 说不上来，我不是一个擅长评价的人，特别是书籍电影之类的，<br>看完之后，常常就两个评价，好看。我一直以为一部好的作品，最大的作用就是加速无聊时间。<br>在地铁始发站，找个位置，然后开始读，没几章，目的地到了，心想还没看够呢。然后心满意足地继续看。</p>
-<p>这总归是一本幸福的书，人们看事情，总是看一个头看一个尾，开头是幸福的，结尾是幸福的，所以<br>全部都是幸福的。失败的人才会把过程拿出来说事。陆焉识从没觉得过不开心，他最多觉得不自在，这是知识分子的臭老九。<br>女人的离开，好友的翻脸，政治的迫害，对他而言就是人生的一种经历，经过了，就留下幸福的回忆。到最后，婉喻去了，就剩下<br>老几在回忆。</p>
-<p>这总归也是一本有关知识分子和政治的书。陆焉识的人生和政治碰撞交织融汇，知识分子的尊严碎了一地，自由的只有思维，<br>20 年的大西北出来了一个抖抖索索的老几，饶是如此，内心还是知识分子。给小孩们补课的时候，还不忘讽刺下毛主席。<br>谁对谁错呢？谁也不敢说，但我想陆焉识还是更适合美国。</p>
-<p>这当然也是一本关于爱情的书，三段爱情，一段异国恋，两段婚外恋，还有一段异地恋。这段异地恋持续了 20 年，并越来越浓烈。</p>
+        <p>zz from <a href="http://xiandanboke.com.cn/game.html" target="_blank" rel="external">守望者科技博客</a></p>
+<p>游戏开发中，需要了解 概念，分别是导演、场景、布景和人物角色。这几个概念和拍电影相似，那么我们就拿电影和游戏做对比，一一讲解这几个概念。</p>
+<ul>
+<li><em>导演</em>（在cocos2d-x引擎中与之对应的类事CCDirector）。游戏里，导演是游戏创作的组织者和领导者，是把游戏策划变成游戏的总指挥，导演制定规则让游戏内的场景、布景和人物角色有序地运行。</li>
+<li><p><em>场景</em>（在cocos2d-x引擎中与之对应的类事CCScene)。场景是一个个的关卡，关卡主要有布景和人物角色组成。</p>
+</li>
+<li><p><em>布景</em>（在cocos2d-x引擎中与之对应的类事CClayer)。布景是每个关卡里面的背景，同样，不同的关卡需要的背景也是完全不一样的。</p>
+</li>
+<li><em>人物角色</em>（在cocos2d-x引擎中与之对应的类事CCSprite)。人物角色包括游戏的主玩家和其他玩家了。其他玩家既可以是一个真实的玩家，也可以是游戏虚拟出来的玩家。</li>
+<li><em>动作</em>（在cocos2d-x引擎中与之对应的类事CCAction)。动作是游戏内人物角色的动作。</li>
+<li><em>摄像机</em>（CCCamera），每个节点都需要使用摄像机，当节点发生缩放，旋转，和位置变化时，都需要覆盖摄像机，让这个节点通过摄像机重新渲染。</li>
+</ul>
 
       
     </div>
@@ -1040,257 +1013,13 @@ Apache JMeter
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/读书笔记/">读书笔记</a>
+	<a class="article-category-link" href="/categories/cocos2d-x/">cocos2d-x</a>
 	</div>
 
 
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/陆犯焉识/">陆犯焉识</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao/">我的 nexus 7 2013 软件列表</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>首先感谢<a href="http://weibo.com/u/1868904263" target="_blank" rel="external">小郭</a>，感谢美帝，没有你们，我就不会有 nexus 7 2013。<br>其实我一直想要台 Android 的平板，早在 2011 年的时候，当时同办公室的同事做 google image 测试，发了台 moto 的 xoom 做测试机，我就眼红不已。<br>在 2012 年的时候，我让<a href="http://weibo.com/dantawangzi" target="_blank" rel="external">小立</a>给我带过一个 nexus 7 2012， 结果被同事很喜欢，就转给他了。</p>
-<p>可想而知： 一个人想得到一个平板，这其中需要无数的机缘巧合。</p>
-<p>这台<em>奶骑</em>（网上人都这么叫-_-!），我拿到手差不多一个礼拜，<green>新买粪坑三天香</green>的热情也退了。中间装过无数软件，也卸载过无数软件，<br>也发现了几个问题。于是想总结下，一来以后自己可以用到，二来也和大家分享下。</p>
-<p>###问题：</p>
-<ol>
-<li><p>外壳脆弱</p>
-<p> nexus 7 2013 很轻很薄，所以显得特别柔弱，用力捏下，可以听见塑料的声响。当然塑料也很嫩，磕一下就一个小坑。</p>
-</li>
-<li><p>触屏失灵</p>
-<p> 在国外网上看到的是，多点触摸有问题，会触发别的按键。这个我还没遇到，但是我遇到的是，触屏失灵，没有反应，在重新打开屏幕之后就恢复了。<br> 不确定是硬件还是软件的问题。 </p>
-</li>
-<li><p>按钮生硬</p>
-<p> 无论是电源按钮还是音量按钮，都硬的很，没有手感可言。</p>
-</li>
-<li><p>应用太少</p>
-<p> HD 的应用实在太少了，相比苹果系列， Android 真是要加油啊！</p>
-</li>
-</ol>
-<p>其实做为第一批， google 和 asus 做的还算不错啦， 虽然网上都说 google + asus = bad quality。</p>
-<p>###应用：</p>
-<ul>
-<li><p>音乐视频：</p>
-<ul>
-<li>豆瓣FM</li>
-<li>虾米音乐</li>
-<li>MoboPlayer </li>
-<li>MXPlayer (有广告)</li>
-<li>快手看片</li>
-<li>哗哩哗哩动画</li>
-<li>PPTV HD</li>
-<li>QQ 音乐 (我用的时候音乐断断续续过一次)</li>
-</ul>
-</li>
-<li><p>阅读工具:</p>
-<ul>
-<li>多看阅读 (强烈推荐，买了好多书了。不过前面说到触屏失去反应也有可能是多看造成的。)</li>
-<li>布卡漫画 (强烈推荐，宅男腐女必备)</li>
-<li>Kindle</li>
-<li>Adobe Reader</li>
-<li>Flipboard</li>
-<li>鲜果网</li>
-<li>网易云阅读</li>
-</ul>
-</li>
-<li><p>聊天社交：</p>
-<ul>
-<li>QQ hd</li>
-<li>微信</li>
-<li>Skype</li>
-<li>豆果网</li>
-<li>大众点评</li>
-<li>weico 实在找不到好的微博的应用</li>
-</ul>
-</li>
-<li><p>工具类：</p>
-<ul>
-<li>ES 文件浏览器 (强烈推荐)</li>
-<li>爱壁纸 HD</li>
-<li>有道词典</li>
-<li>墨迹天气</li>
-<li>金山快盘</li>
-</ul>
-</li>
-<li><p>游戏：</p>
-<ul>
-<li>Doodle Fit2</li>
-</ul>
-</li>
-</ul>
-<p>以上应用如果不是指明 HD 的，基本就是矮子拔将军，但是效果不错哦！其实这些软件中有很多都有 HD 版本的，可惜都是一年半载不更新的那种，可惜了。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>对我而言，平板的主要用途就是看书，看视频，相对而言上面的这些应用也足够了。当然这也是我一家之言，我也到底没有把所有的应用都体验过一把，所以希望有好用的，<br>请大力推给我</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/android/">Android</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nexus-7-2013/">nexus 7 2013</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-08-16-vim-cha-jian-tui-jian" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2013-08-16-vim-cha-jian-tui-jian/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-08-16-vim-cha-jian-tui-jian/">vim 插件推荐</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>早上起来逛 <a href="http://ruby-china.org" target="_blank" rel="external">ruby china</a>， 看到 <a href="http://ruby-china.org/topics/13350" target="_blank" rel="external">vim 插件推荐</a>，进去一看果然有料。</p>
-<ul>
-<li>vim-easy-align</li>
-<li>tcomment_vim</li>
-</ul>
-<p>果断把我的 tabular 和 nerdcommenter 替换掉。</p>
-<h3 id="vim-easy-align"><a href="#vim-easy-align" class="headerlink" title="vim-easy-align"></a>vim-easy-align</h3><p>地址： <a href="https://github.com/junegunn/vim-easy-align" target="_blank" rel="external">https://github.com/junegunn/vim-easy-align</a></p>
-<p><img src="/images/vim-easy-align.gif" alt=""></p>
-<p>比任何一个对齐插件都简单啊，不愧是 <em>easy</em></p>
-<h3 id="tcomment_vim"><a href="#tcomment_vim" class="headerlink" title="tcomment_vim"></a>tcomment_vim</h3><p>地址: <a href="https://github.com/tomtom/tcomment_vim" target="_blank" rel="external">https://github.com/tomtom/tcomment_vim</a></p>
-<p>直接看介绍吧， <a href="http://vimsomnia.blogspot.com/2010/11/tcomment-vim-plugin.html" target="_blank" rel="external">http://vimsomnia.blogspot.com/2010/11/tcomment-vim-plugin.html</a></p>
-<p>这是一个快速注释的插件，有自动识别文件类型(甚至是嵌套的类型)等的功能，感觉比 nerdcommenter 好很多</p>
-<p>默认的快捷键是 <code>gcc</code>， 其实我就用那么一个。。。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/vim/">vim</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/游戏开发/">游戏开发</a></li></ul>
 	</div>
 
       

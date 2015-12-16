@@ -202,11 +202,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-2013-05-12-wo-de-mu-qin" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2013-08-06-git-revert" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2013-05-12-wo-de-mu-qin/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+      <a href="/2013/08/06/2013-08-06-git-revert/" class="article-date">
+  	<time datetime="2013-08-06T13:37:00.000Z" itemprop="datePublished">2013-08-06</time>
 </a>
     </div>
   
@@ -219,7 +219,597 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-05-12-wo-de-mu-qin/">我的母亲</a>
+      <a class="article-title" href="/2013/08/06/2013-08-06-git-revert/">git revert</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>最近一直在 github 上提交代码，所以总会遇到提交的代码 broken 了之前的 function。</p>
+<blockquote>
+<p>Perhaps you didn’t have enough coffee that morning, or it was just before lunch.</p>
+</blockquote>
+<p>其实这还无关紧要，再提交一个修复下就可以了。 但是也会遇到比较头疼的， 比如：</p>
+<p><img src="/photos/git_graph_error.jpg" alt=""></p>
+<p>注意蓝色这条线的 merge 那个点，开发同学因为粗心忘记把自动 merge 的代码提交了。<br>黑色这条线的同学，如果 pull 下来，就会发现一部分代码回到了蓝线的起点时候的状态。<br>然后呢，黑线这边的 merge 就会导致部分代码 rollback 了。很悲催吧。这个时候呢，提交修复也不太可能，最好的办法就是 <code>revert</code> 了。</p>
+<h3 id="u6982_u5FF5"><a href="#u6982_u5FF5" class="headerlink" title="概念"></a>概念</h3><p><code>git revert</code> 命令撤销一个 commit。它的做法是提交一个新的 commit， 这个 commit 里面将你要回滚的 commit 的修改全部撤销。<br>所以它不会破坏你的历史。如图所示：提交一个新的 commit （蓝球）， 撤销灰球修改。</p>
+<p><img src="/photos/git-tutorial_changes-revert.png" alt=""></p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p><a href="http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html" target="_blank" rel="external">http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html</a></p>
+<p>假设我们有这样一个 git 历史：</p>
+<p><img src="/photos/revert1.png" alt=""></p>
+<p>我们来一次 revert</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD</span><br><span class="line">Finished one revert.</span><br><span class="line">[master]: created <span class="number">1</span>e689e2:</span><br><span class="line">  <span class="string">"Revert "</span>Updated to Rails <span class="number">2.3</span>.<span class="number">2</span> and edge hoptoad_notifier<span class="string">""</span></span><br></pre></td></tr></table></figure>
+<p>revert 命令会自动帮你 commit， 并为你生成 commit 信息: Revert + 被回滚的 commit 的信息。<br>这里就是 “Revert “Updated to Rails 2.3.2 and edge hoptoad_notifier””</p>
+<p>再来看下 revert 后的历史图：</p>
+<p><img src="/photos/revert2.png" alt=""></p>
+<p>可以看到 revert 的在最前面添加了一个 commit。</p>
+<blockquote>
+<p>By default using this command will bring up your $EDITOR so you can modify the commit message of the revert.<br>Use this to explain why the changes are being backed out!<br>If for some reason you don’t want to edit the commit message, tacking on <code>--no-edit</code> will allow you do so.</p>
+</blockquote>
+<p>另外如果你不想 commit 的话，还可以用 <code>-n</code> 参数</p>
+<blockquote>
+<p>Another helpful option is the -n or –no-commit flag.<br>This will simply leave the reverted changes in your working directory and not automatically commit them.<br>If you need to edit files further to complete the revert or possibly revert more than one commit, try out this option.</p>
+</blockquote>
+<p>接着，我们是试试看 revert 一个 merge 的 commit</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD~<span class="number">1</span></span><br><span class="line">fatal: Commit <span class="number">137</span>ea95 is a merge but no -m option was given.</span><br></pre></td></tr></table></figure>
+<p>它告诉你 commit 137ea95 是一个 merge， 需要你指定一个 -m 的option。</p>
+<blockquote>
+<p>-m parent-number, –mainline parent-number<br>Usually you cannot revert a merge because you do not know which side of the merge should be considered the mainline.<br>This option specifies the parent number (starting from 1) of the mainline and allows revert to reverse the change relative to the specified parent.</p>
+</blockquote>
+<p>意思是，你需要指定一个 parent number （从1开始），然后 revert 会将基于这个 parent number 的改变都回滚。</p>
+<p>再来看下 merge commit 的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> HEAD~<span class="number">1</span> -<span class="number">1</span></span><br><span class="line">commit <span class="number">137</span>ea95c911633d3e908f6906e3adf6372cfb0ad</span><br><span class="line">Merge: <span class="number">5</span>f576a9... <span class="number">62</span>db4af...</span><br><span class="line">Author: Nick Quaranto &lt;nick@quaran.to&gt;</span><br><span class="line">Date:   Mon Mar <span class="number">16</span> <span class="number">16</span>:<span class="number">22</span>:<span class="number">37</span> <span class="number">2009</span> -<span class="number">0400</span></span><br><span class="line"></span><br><span class="line">    Merging <span class="keyword">in</span> rails-<span class="number">2.3</span> branch</span><br></pre></td></tr></table></figure>
+<p>可以看到 <code>5f576a9</code> 和 <code>62db4af</code> 被 merge 了。</p>
+<p>所以</p>
+<ol>
+<li><code>git revert HEAD~1 -m 1</code> 就会 revert 基于 <code>5f576a9</code> 所发生的变化</li>
+<li><code>git revert HEAD~1 -m 2</code> 就会 revert 基于 <code>62db4af</code> 所发生的变化  </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD~<span class="number">1</span> --no-edit --mainline <span class="number">2</span></span><br><span class="line">Finished one revert.</span><br><span class="line">[master]: created <span class="number">526</span>b346: <span class="string">"Revert "</span>Merging <span class="keyword">in</span> rails-<span class="number">2.3</span> branch<span class="string">""</span></span><br><span class="line"></span><br><span class="line">$ git <span class="built_in">log</span> -<span class="number">1</span></span><br><span class="line">commit d64d3983845dfa18a5d935c7ac5a4855c125e474</span><br><span class="line">Author: Nick Quaranto &lt;nick@quaran.to&gt;</span><br><span class="line">Date:   Mon Mar <span class="number">16</span> <span class="number">19</span>:<span class="number">24</span>:<span class="number">45</span> <span class="number">2009</span> -<span class="number">0400</span></span><br><span class="line"></span><br><span class="line">    Revert <span class="string">"Merging in rails-2.3 branch"</span></span><br><span class="line"></span><br><span class="line">    This reverts commit <span class="number">137</span>ea95c911633d3e908f6906e3adf6372cfb0ad, reversing</span><br><span class="line">    changes made to <span class="number">62</span>db4af8c77852d2cc9c19efc6dfb97e0d0067f5.</span><br></pre></td></tr></table></figure>
+<p>很明确的告诉你， 这个 revert 提交了一个 commit： 137ea95c911633d3e908f6906e3adf6372cfb0ad，这个 commit 把 merge 操作对 62db4af8c77852d2cc9c19efc6dfb97e0d0067f5 发生的改变都回滚了。</p>
+<h3 id="u901A_u4FD7_u8BF4_u6CD5"><a href="#u901A_u4FD7_u8BF4_u6CD5" class="headerlink" title="通俗说法"></a>通俗说法</h3><ol>
+<li>普通的 revert： 比如桌上有一碗饭， 我吃完了，然后我又把这碗饭填满，像没吃一样， 填满的动作就是 revert。 看上去桌上的饭没有动过，但是事情其实发生了，就是历史没有被改变。</li>
+<li>merge 的 revert：桌上有一碗饭，A 加了一道菜， B 加了一碗汤， merge 之后就是有饭有菜有汤。 现在在有饭有菜有汤的情况下去掉汤， 就是 <code>git revert &quot;commit of merge&quot; -m 菜</code>。</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/git/">git</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/08/02/2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi/" class="article-date">
+  	<time datetime="2013-08-02T13:37:00.000Z" itemprop="datePublished">2013-08-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/08/02/2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi/">8-02-工作琐事</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="Xpath_//_Trap"><a href="#Xpath_//_Trap" class="headerlink" title="Xpath // Trap"></a>Xpath // Trap</h3><p>I am trying to loacte a attr element in a label context using capybara. The html looks like:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"post_name"</span>&gt;</span></span><br><span class="line">      Name<span class="tag">&lt;<span class="title">attr</span> <span class="attribute">title</span>=<span class="value">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="title">attr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>And I use the code like:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">within <span class="string">"div.post"</span></span><br><span class="line"></span><br><span class="line">  label = page.find <span class="string">"label"</span>, <span class="string">"Name"</span></span><br><span class="line">  label.find <span class="symbol">:xpath</span>, <span class="string">"//attr[@title=\"required\"]"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>As usual, I’m pretty sure that the find will work like:</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//label//attr</span></span><br></pre></td></tr></table></figure>
+<p>the find search the xpath in label context and find it.</p>
+<p>Quite easy but I’m wrong.</p>
+<p>In XPath the expression // means something very specific, and it might not be what you think.<br>Contrary to common belief, // means <red>anywhere in the document</red> not <red>anywhere in the current context</red>.<br>As an example:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page.find(<span class="symbol">:xpath</span>, <span class="string">'//body'</span>).all(<span class="symbol">:xpath</span>, <span class="string">'//script'</span>)</span><br></pre></td></tr></table></figure>
+<p>You might expect this to find all script tags in the body,<br>but actually, it finds all script tags in the entire document,<br>not only those in the body! What you’re looking for is the .// expression which means “any descendant of the current node”:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page.find(<span class="symbol">:xpath</span>, <span class="string">'//body'</span>).all(<span class="symbol">:xpath</span>, <span class="string">'.//script'</span>)</span><br></pre></td></tr></table></figure>
+<p>The same thing goes for within:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">within(<span class="symbol">:xpath</span>, <span class="string">'//body'</span>) <span class="keyword">do</span></span><br><span class="line">  page.find(<span class="symbol">:xpath</span>, <span class="string">'.//script'</span>)</span><br><span class="line">  within(<span class="symbol">:xpath</span>, <span class="string">'.//table/tbody'</span>) <span class="keyword">do</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>You can refer to <a href="https://github.com/jnicklas/capybara" target="_blank" rel="external">capybara document</a></p>
+<p>And also there is a great post: <a href="http://www.bennadel.com/blog/2142-Using-And-Expressions-In-XPath-XML-Search-Directives-In-ColdFusion.htm" target="_blank" rel="external">Using “//“ And “.//“ Expressions In XPath XML Search Directives In ColdFusion</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/workdiary/">WorkDiary</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/capybara/">capybara</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xpath/">xpath</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-07-30-gong-zuo-ri-ji-7-31" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/07/30/2013-07-30-gong-zuo-ri-ji-7-31/" class="article-date">
+  	<time datetime="2013-07-30T01:56:00.000Z" itemprop="datePublished">2013-07-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/30/2013-07-30-gong-zuo-ri-ji-7-31/">7-31-工作琐事</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="1-_Get_a_mail_from_a_colleague_this_morning"><a href="#1-_Get_a_mail_from_a_colleague_this_morning" class="headerlink" title="1. Get a mail from a colleague this morning"></a>1. Get a mail from a colleague this morning</h2><p>When you commit code, make sure you do it with your real name, and a proper email address (your scilearn address). You can set your name like this, in the repo:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config user.name <span class="string">"Hot Day"</span></span><br><span class="line">$ git config user.email <span class="string">"hday@hotday.com.cn"</span></span><br></pre></td></tr></table></figure>
+<p> You can also do it globally, for all repos:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"Hot Day"</span></span><br><span class="line">$ git config --global user.email <span class="string">"hday@hotday.com.cn"</span></span><br></pre></td></tr></table></figure>
+<p> and check the current name and email of a repo:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --get user.name</span><br><span class="line">$ git config --get user.email</span><br></pre></td></tr></table></figure>
+<p>Thanks!</p>
+<hr>
+<h2 id="2-_factory_girl_and_mysql"><a href="#2-_factory_girl_and_mysql" class="headerlink" title="2. factory_girl and mysql"></a>2. factory_girl and mysql</h2><p>用 <code>truncate</code> 清空的表 <code>id</code> 会从新记录, 而 <code>delete</code> 清空的表则不会从新记录 会继续原数据记录,当然这里 <code>id</code> 为自增长。</p>
+<p>When I am writing the cucucmber features for our new project, we meet an issue:</p>
+<p>the snippet below will not work.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Given the following posts exist&#10;      | id | name   | description    | user_id |&#10;      | 1  | a post | This is a post | 1       |</span><br></pre></td></tr></table></figure>
+<p>If everything is ok, the Given will find the step in <code>pickle_step.rb</code>:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create models from a table</span></span><br><span class="line"><span class="constant">Given</span>(<span class="regexp">/^the following <span class="subst">#&#123;capture_plural_factory&#125;</span> exists?:?$/</span>) <span class="keyword">do</span> |plural_factory, table|</span><br><span class="line">  create_models_from_table(plural_factory, table)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>And the code will call the factory which defined before using factory_girl.<br>Then it will save a post in database sure enough.</p>
+<p>But it says</p>
+<blockquote>
+<p>Mysql2::Error: Cannot add or update a child row: a foreign key constraint fails</p>
+</blockquote>
+<p>Obviously, we have something wrong with the user_id field. And more obviously, we have not generate a user.</p>
+<p>I thought before the factory_girl will take care of the association object if there is no record in database.<br>Actually, if we feed the factory attributes, factory_girl will take these values and create a post object rather than create a association record.</p>
+<p>So here, it won’t create a user with id 1. The Given will be interpreted to a sql at last:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`posts`</span> ( <span class="string">`created_at`</span>, <span class="string">`description`</span>, <span class="string">`id`</span>, <span class="string">`name`</span>,  <span class="string">`updated_at`</span>, <span class="string">`user_id`</span>) <span class="keyword">VALUES</span> (<span class="string">'2013-07-31 06:12:41'</span>, <span class="string">'This is a post'</span>, <span class="number">1</span>, <span class="string">'a post'</span>, <span class="number">1</span>, <span class="string">'2013-07-31 06:12:41'</span>, <span class="number">1</span>)</span></span><br></pre></td></tr></table></figure>
+<p>And we have a foreign key constraint on user_id, of course it will fail.</p>
+<p>###Solutions:</p>
+<ol>
+<li>Given a user with name: “Test”</li>
+<li>Prepare a user before test.</li>
+<li>If the user does not matter, just remove user_id, let factory_girl take care of user.</li>
+</ol>
+<h2 id="3-_Capybara_get_the_native_css_value"><a href="#3-_Capybara_get_the_native_css_value" class="headerlink" title="3. Capybara get the native css value"></a>3. Capybara get the native css value</h2><p><code>element.native.css_value(&quot;text-overflow&quot;)</code></p>
+<ol>
+<li>element is the capybara element</li>
+<li>native is used to get the selenium-webdriver element</li>
+<li>css_value is used to get the computed style.</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/workdiary/">WorkDiary</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/capybara/">capybara</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/factory-gril/">factory_gril</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-07-11-wo-de-vimrc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/07/11/2013-07-11-wo-de-vimrc/" class="article-date">
+  	<time datetime="2013-07-11T15:25:00.000Z" itemprop="datePublished">2013-07-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/11/2013-07-11-wo-de-vimrc/">我的 vimrc</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>##Update##</p>
+<p><em>1. 删除restore_view， 使用以下片段代替</em></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" Remove restore_view, since mkview will break rails vim in mac</span><br><span class="line"></span><span class="string">" When editing a file, always jump to the last known cursor position.</span><br><span class="line"></span><span class="string">" Don't do it when the position is invalid or when inside an event handler</span><br><span class="line"></span><span class="string">" (happens when dropping a file on gvim).</span><br><span class="line"></span><span class="string">" Also don't do it when the mark is in the first line, that is the default</span><br><span class="line"></span><span class="string">" position when opening a file.</span><br><span class="line"></span><span class="keyword">autocmd</span> BufReadPost *</span><br><span class="line">  \ <span class="keyword">if</span> <span class="built_in">line</span>(<span class="string">"'\""</span>) &gt; <span class="number">1</span> &amp;&amp; <span class="built_in">line</span>(<span class="string">"'\""</span>) &lt;= <span class="built_in">line</span>(<span class="string">"$"</span>) |</span><br><span class="line">  \   <span class="keyword">exe</span> <span class="string">"normal! g`\""</span> |</span><br><span class="line">  \ <span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+<p>理由见：<a href="https://github.com/tpope/vim-rails/issues/25" target="_blank" rel="external">tpope/vim-rails#25</a>,  restore_view (mkview) 导致 rails.vim 一直报错： E345: Can’t find file “xxx” in path。</p>
+<p><em>2. 加入 <a href="https://github.com/terryma/vim-multiple-cursors" target="_blank" rel="external">terryma/vim-multiple-cursors</a></em></p>
+<blockquote>
+<p>There have been many attempts at bringing Sublime Text’s awesome multiple selection feature into Vim,<br>but none so far have been in my opinion a faithful port that is simplistic to use,<br>yet powerful and intuitive enough for an existing Vim user. vim-multiple-cursors is yet another attempt at that.</p>
+</blockquote>
+<hr>
+<p><a href="http://spf13.com/project/spf13-vim" target="_blank" rel="external">spf13</a></p>
+<p><a href="https://github.com/carlhuda/janus" target="_blank" rel="external">Janus</a></p>
+<p><a href="https://github.com/lihuazhang/vim" target="_blank" rel="external">我的vim</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br></pre></td><td class="code"><pre><span class="line">set nocompatible               " be iMproved</span><br><span class="line">filetype off                   " required!</span><br><span class="line"></span><br><span class="line">set rtp+=~/.vim/bundle/vundle/</span><br><span class="line">call vundle#rc()</span><br><span class="line"></span><br><span class="line">" let Vundle manage Vundle</span><br><span class="line">" required! </span><br><span class="line">Bundle 'gmarik/vundle'</span><br><span class="line"></span><br><span class="line">" My Bundles here:</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" General</span><br><span class="line">""</span><br><span class="line">Bundle 'MarcWeber/vim-addon-mw-utils'</span><br><span class="line">Bundle 'tomtom/tlib_vim'</span><br><span class="line">if executable('ack-grep')</span><br><span class="line">    let g:ackprg="ack-grep -H --nocolor --nogroup --column"</span><br><span class="line">    Bundle 'mileszs/ack.vim'</span><br><span class="line">elseif executable('ack')</span><br><span class="line">    Bundle 'mileszs/ack.vim'</span><br><span class="line">elseif executable('ag')</span><br><span class="line">    Bundle 'mileszs/ack.vim'</span><br><span class="line">    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'</span><br><span class="line">endif</span><br><span class="line">Bundle 'scrooloose/nerdtree'</span><br><span class="line">Bundle 'jistr/vim-nerdtree-tabs'</span><br><span class="line">Bundle 'tpope/vim-surround'</span><br><span class="line">Bundle 'Raimondi/delimitMate'</span><br><span class="line">Bundle 'kien/ctrlp.vim'</span><br><span class="line">Bundle 'Lokaltog/vim-easymotion'</span><br><span class="line">Bundle 'godlygeek/csapprox'</span><br><span class="line">Bundle 'matchit.zip'</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Themes and Colors</span><br><span class="line">""</span><br><span class="line">Bundle 'flazz/vim-colorschemes'</span><br><span class="line">Bundle 'bling/vim-airline'</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Programming</span><br><span class="line">""</span><br><span class="line">Bundle 'scrooloose/syntastic'</span><br><span class="line">Bundle 'tpope/vim-fugitive'</span><br><span class="line">Bundle 'airblade/vim-gitgutter'</span><br><span class="line">Bundle 'mattn/webapi-vim'</span><br><span class="line">Bundle 'mattn/gist-vim'</span><br><span class="line">Bundle 'scrooloose/nerdcommenter'</span><br><span class="line">Bundle 'godlygeek/tabular'</span><br><span class="line">if executable('ctags')</span><br><span class="line">  Bundle 'majutsushi/tagbar'</span><br><span class="line">endif</span><br><span class="line">Bundle 'nathanaelkane/vim-indent-guides'</span><br><span class="line"></span><br><span class="line">" Python</span><br><span class="line">Bundle 'klen/python-mode'</span><br><span class="line">Bundle 'python.vim'</span><br><span class="line">Bundle 'python_match.vim'</span><br><span class="line">Bundle 'pythoncomplete'</span><br><span class="line">" Javascript</span><br><span class="line">Bundle 'elzr/vim-json'</span><br><span class="line">Bundle 'groenewege/vim-less'</span><br><span class="line">Bundle 'pangloss/vim-javascript'</span><br><span class="line">Bundle 'briancollins/vim-jst'</span><br><span class="line">Bundle 'kchmck/vim-coffee-script'</span><br><span class="line">" Java</span><br><span class="line">Bundle 'derekwyatt/vim-scala'</span><br><span class="line">Bundle 'derekwyatt/vim-sbt'</span><br><span class="line">" HTML</span><br><span class="line">Bundle 'amirh/HTML-AutoCloseTag'</span><br><span class="line">Bundle 'hail2u/vim-css3-syntax'</span><br><span class="line">Bundle 'tpope/vim-haml'</span><br><span class="line">Bundle 'mattn/zencoding-vim'</span><br><span class="line">Bundle 'chrisbra/color_highlight'</span><br><span class="line">" Ruby</span><br><span class="line">Bundle 'tpope/vim-rails'</span><br><span class="line">let g:rubycomplete_buffer_loading = 1</span><br><span class="line">Bundle 'tpope/vim-cucumber'</span><br><span class="line">Bundle 'quentindecock/vim-cucumber-align-pipes'</span><br><span class="line">Bundle 'vim-ruby/vim-ruby'</span><br><span class="line">" Markdown</span><br><span class="line">Bundle 'tpope/vim-markdown'</span><br><span class="line"></span><br><span class="line">" Snippets</span><br><span class="line">Bundle 'Shougo/neocomplcache'</span><br><span class="line">Bundle 'Shougo/neosnippet'</span><br><span class="line">Bundle 'honza/vim-snippets'</span><br><span class="line"></span><br><span class="line">filetype plugin indent on     " required!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">"" Settings</span><br><span class="line">let mapleader = ','</span><br><span class="line">set background=dark</span><br><span class="line">if filereadable(expand("~/.vim/bundle/vim-colorschemes/colors/ir_black.vim"))</span><br><span class="line">  colorscheme ir_black</span><br><span class="line">endif</span><br><span class="line">set history=700</span><br><span class="line">set nu</span><br><span class="line">syntax on</span><br><span class="line">set hidden</span><br><span class="line">set virtualedit=onemore</span><br><span class="line">set showmatch</span><br><span class="line">set cursorline</span><br><span class="line">highlight clear SignColumn</span><br><span class="line">set visualbell</span><br><span class="line">set mouse=a</span><br><span class="line">set mousehide</span><br><span class="line">set autochdir</span><br><span class="line">autocmd BufEnter * silent! lcd %:p:h</span><br><span class="line"></span><br><span class="line">" Remove restore_view, since mkview will break rails vim in mac</span><br><span class="line">" When editing a file, always jump to the last known cursor position.</span><br><span class="line">" Don't do it when the position is invalid or when inside an event handler</span><br><span class="line">" (happens when dropping a file on gvim).</span><br><span class="line">" Also don't do it when the mark is in the first line, that is the default</span><br><span class="line">" position when opening a file.</span><br><span class="line">autocmd BufReadPost *</span><br><span class="line">  \ if line("'\"") &gt; 1 &amp;&amp; line("'\"") &lt;= line("$") |</span><br><span class="line">  \   exe "normal! g`\"" |</span><br><span class="line">  \ endif</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" encoding</span><br><span class="line">""</span><br><span class="line">set encoding=utf-8</span><br><span class="line">set fileencodings=utf-8,gbk,cp936,latin-1</span><br><span class="line">set termencoding=utf-8</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Paste</span><br><span class="line">""</span><br><span class="line">if has ('x') &amp;&amp; has ('gui') " On Linux use + register for copy-paste</span><br><span class="line">  set clipboard=unnamedplus</span><br><span class="line">elseif has ('gui')          " On mac and Windows, use * register for copy-paste</span><br><span class="line">  set clipboard=unnamed</span><br><span class="line">endif</span><br><span class="line">set pastetoggle=&lt;F12&gt;</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Status line</span><br><span class="line">""</span><br><span class="line">set showmode</span><br><span class="line"></span><br><span class="line">if has('statusline')</span><br><span class="line">  set laststatus=2</span><br><span class="line"></span><br><span class="line">  " Broken down into easily includeable segments</span><br><span class="line">  set statusline=%&lt;%f\                     " Filename</span><br><span class="line">  set statusline+=%w%h%m%r                 " Options</span><br><span class="line">  set statusline+=%&#123;fugitive#statusline()&#125; " Git Hotness</span><br><span class="line">  set statusline+=\ [%&#123;&amp;ff&#125;/%Y]            " Filetype</span><br><span class="line">  set statusline+=\ [%&#123;getcwd()&#125;]          " Current dir</span><br><span class="line">  set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">if has('cmdline_info')</span><br><span class="line">    set ruler</span><br><span class="line">    set rulerformat=%30(%=\:buf%n%y%m%r%w\ %l,%c%V\ %P%)</span><br><span class="line">    set showcmd</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Backup</span><br><span class="line">""</span><br><span class="line">set nobackup</span><br><span class="line">set nowb</span><br><span class="line">set noswapfile</span><br><span class="line"></span><br><span class="line">if has('persistent_undo')</span><br><span class="line">    set undodir=~/.vim/undofiles</span><br><span class="line">    set undofile                " So is persistent undo ...</span><br><span class="line">    set undolevels=1000         " Maximum number of changes that can be undone</span><br><span class="line">    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Indent</span><br><span class="line">""</span><br><span class="line">set smartindent</span><br><span class="line">set autoindent</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Whitespace and Tab</span><br><span class="line">""</span><br><span class="line">set nowrap</span><br><span class="line">set smarttab</span><br><span class="line">set tabstop=2</span><br><span class="line">set shiftwidth=2</span><br><span class="line">set expandtab</span><br><span class="line">set backspace=indent,eol,start</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" List</span><br><span class="line">""</span><br><span class="line">set list</span><br><span class="line">set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Searching</span><br><span class="line">""</span><br><span class="line">set hlsearch    " highlight matches</span><br><span class="line">set incsearch   " incremental searching</span><br><span class="line">set ignorecase  " searches are case insensitive...</span><br><span class="line">set smartcase   " ... unless they contain at least one capital letter</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Wild settings</span><br><span class="line">""</span><br><span class="line">set wildmode=list:longest,full</span><br><span class="line">set wildmenu</span><br><span class="line">set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem</span><br><span class="line">set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz</span><br><span class="line">set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*</span><br><span class="line">set wildignore+=*.swp,*~,._*,*.bak</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Vundles settings</span><br><span class="line">""</span><br><span class="line"></span><br><span class="line">"" airline</span><br><span class="line">""</span><br><span class="line">set t_Co=256</span><br><span class="line">let g:airline_powerline_fonts=1</span><br><span class="line">let g:airline_theme='light'</span><br><span class="line">" unicode symbols</span><br><span class="line">let g:airline_left_sep = '»'</span><br><span class="line">let g:airline_left_sep = '▶'</span><br><span class="line">let g:airline_right_sep = '«'</span><br><span class="line">let g:airline_right_sep = '◀'</span><br><span class="line">let g:airline_linecolumn_prefix = '␊ '</span><br><span class="line">let g:airline_linecolumn_prefix = '␤ '</span><br><span class="line">let g:airline_linecolumn_prefix = '¶ '</span><br><span class="line">let g:airline_fugitive_prefix = '⎇ '</span><br><span class="line">let g:airline_paste_symbol = 'ρ'</span><br><span class="line">let g:airline_paste_symbol = 'Þ'</span><br><span class="line">let g:airline_paste_symbol = '∥'</span><br><span class="line"></span><br><span class="line">"" NerdTree</span><br><span class="line">""</span><br><span class="line">map &lt;C-e&gt; :NERDTreeToggle&lt;CR&gt;:NERDTreeMirror&lt;CR&gt;</span><br><span class="line">map &lt;leader&gt;e :NERDTreeFind&lt;CR&gt;</span><br><span class="line">nmap &lt;leader&gt;nt :NERDTreeFind&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">let NERDTreeShowBookmarks=1</span><br><span class="line">let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']</span><br><span class="line">let NERDTreeChDirMode=0</span><br><span class="line">let NERDTreeQuitOnOpen=1</span><br><span class="line">let NERDTreeMouseMode=2</span><br><span class="line">let NERDTreeShowHidden=1</span><br><span class="line">let NERDTreeKeepTreeInNewTab=1</span><br><span class="line">let g:nerdtree_tabs_open_on_gui_startup=0</span><br><span class="line"></span><br><span class="line">"" ctrlp</span><br><span class="line">""</span><br><span class="line">let g:ctrlp_working_path_mode = 'ra'</span><br><span class="line">nnoremap &lt;silent&gt; &lt;leader&gt;f :CtrlPBuffer&lt;CR&gt;</span><br><span class="line">let g:ctrlp_custom_ignore = &#123;</span><br><span class="line">      \ 'dir':  '\.git$\|\.hg$\|\.svn$',</span><br><span class="line">      \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' &#125;</span><br><span class="line"></span><br><span class="line">" On Windows use "dir" as fallback command.</span><br><span class="line">if has('win32') || has('win64')</span><br><span class="line">  let g:ctrlp_user_command = &#123;</span><br><span class="line">        \ 'types': &#123;</span><br><span class="line">        \ 1: ['.git', 'cd %s &amp;&amp; git ls-files . --cached --exclude-standard --others'],</span><br><span class="line">        \ 2: ['.hg', 'hg --cwd %s locate -I .'],</span><br><span class="line">        \ &#125;,</span><br><span class="line">        \ 'fallback': 'dir %s /-n /b /s /a-d'</span><br><span class="line">        \ &#125;</span><br><span class="line">else</span><br><span class="line">  let g:ctrlp_user_command = &#123;</span><br><span class="line">        \ 'types': &#123;</span><br><span class="line">        \ 1: ['.git', 'cd %s &amp;&amp; git ls-files . --cached --exclude-standard --others'],</span><br><span class="line">        \ 2: ['.hg', 'hg --cwd %s locate -I .'],</span><br><span class="line">        \ &#125;,</span><br><span class="line">        \ 'fallback': 'find %s -type f'</span><br><span class="line">        \ &#125;</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">"" TagBar</span><br><span class="line">""</span><br><span class="line">nnoremap &lt;silent&gt; &lt;leader&gt;tt :TagbarToggle&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">"" Indent guide</span><br><span class="line">""</span><br><span class="line">let g:indent_guides_start_level = 2</span><br><span class="line">let g:indent_guides_guide_size = 1</span><br><span class="line">let g:indent_guides_enable_on_vim_startup = 1</span><br><span class="line">let g:indent_guides_auto_colors = 1</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Color</span><br><span class="line">let g:colorizer_auto_color = 1</span><br><span class="line">let g:colorizer_auto_filetype='css,html'</span><br><span class="line">let g:colorizer_skip_comments = 1</span><br><span class="line">let g:colorizer_colornames = 0</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" OmniComplete</span><br><span class="line">if has("autocmd") &amp;&amp; exists("+omnifunc")</span><br><span class="line">  autocmd Filetype *</span><br><span class="line">        \if &amp;omnifunc == "" |</span><br><span class="line">        \setlocal omnifunc=syntaxcomplete#Complete |</span><br><span class="line">        \endif</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray</span><br><span class="line">hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE</span><br><span class="line">hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE</span><br><span class="line"></span><br><span class="line">au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif</span><br><span class="line">set completeopt=menu,preview,longest</span><br><span class="line"></span><br><span class="line">"" Neocomplcache</span><br><span class="line">""</span><br><span class="line">let g:acp_enableAtStartup = 0</span><br><span class="line">let g:neocomplcache_enable_at_startup = 1</span><br><span class="line">let g:neocomplcache_enable_smart_case = 1</span><br><span class="line">let g:neocomplcache_min_syntax_length = 3</span><br><span class="line"></span><br><span class="line">imap &lt;C-k&gt; &lt;Plug&gt;(neosnippet_expand_or_jump)</span><br><span class="line">smap &lt;C-k&gt; &lt;Plug&gt;(neosnippet_expand_or_jump)</span><br><span class="line">imap &lt;expr&gt;&lt;TAB&gt; neosnippet#jumpable() ? "\&lt;Plug&gt;(neosnippet_expand_or_jump)" : pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"</span><br><span class="line">smap &lt;expr&gt;&lt;TAB&gt; neosnippet#jumpable() ? "\&lt;Plug&gt;(neosnippet_expand_or_jump)" : "\&lt;TAB&gt;"</span><br><span class="line"></span><br><span class="line">" For snippet_complete marker.</span><br><span class="line">if has('conceal')</span><br><span class="line">  set conceallevel=2 concealcursor=i</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">" Define dictionary.</span><br><span class="line">let g:neocomplcache_dictionary_filetype_lists = &#123;</span><br><span class="line">            \ 'default' : '',</span><br><span class="line">            \ 'vimshell' : $HOME.'/.vimshell_hist',</span><br><span class="line">            \ 'scheme' : $HOME.'/.gosh_completions'</span><br><span class="line">            \ &#125;</span><br><span class="line"></span><br><span class="line">" Plugin key-mappings.</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-g&gt;     neocomplcache#undo_completion()</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-l&gt;     neocomplcache#complete_common_string()</span><br><span class="line"></span><br><span class="line">" Recommended key-mappings.</span><br><span class="line">" &lt;CR&gt;: close popup and save indent.</span><br><span class="line">inoremap &lt;silent&gt; &lt;CR&gt; &lt;C-r&gt;=&lt;SID&gt;my_cr_function()&lt;CR&gt;</span><br><span class="line">function! s:my_cr_function()</span><br><span class="line">  return neocomplcache#smart_close_popup() . "\&lt;CR&gt;"</span><br><span class="line">  " For no inserting &lt;CR&gt; key.</span><br><span class="line">  "return pumvisible() ? neocomplcache#close_popup() : "\&lt;CR&gt;"</span><br><span class="line">endfunction</span><br><span class="line">" &lt;TAB&gt;: completion.</span><br><span class="line">" inoremap &lt;expr&gt;&lt;TAB&gt;  pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"</span><br><span class="line">" &lt;C-h&gt;, &lt;BS&gt;: close popup and delete backword char.</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-h&gt; neocomplcache#smart_close_popup()."\&lt;C-h&gt;"</span><br><span class="line">inoremap &lt;expr&gt;&lt;BS&gt; neocomplcache#smart_close_popup()."\&lt;C-h&gt;"</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-y&gt;  neocomplcache#close_popup()</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-e&gt;  neocomplcache#cancel_popup()</span><br><span class="line"></span><br><span class="line">" Enable omni completion.</span><br><span class="line">autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS</span><br><span class="line">autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags</span><br><span class="line">autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS</span><br><span class="line">autocmd FileType python setlocal omnifunc=pythoncomplete#Complete</span><br><span class="line">autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags</span><br><span class="line">"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete</span><br><span class="line">autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc</span><br><span class="line"></span><br><span class="line">" Enable heavy omni completion.</span><br><span class="line">if !exists('g:neocomplcache_omni_patterns')</span><br><span class="line">    let g:neocomplcache_omni_patterns = &#123;&#125;</span><br><span class="line">endif</span><br><span class="line">let g:neocomplcache_omni_patterns.php = '[^. \t]-&gt;\h\w*\|\h\w*::'</span><br><span class="line">let g:neocomplcache_omni_patterns.perl = '\h\w*-&gt;\h\w*\|\h\w*::'</span><br><span class="line">let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|-&gt;\)'</span><br><span class="line">let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|-&gt;\)\|\h\w*::'</span><br><span class="line">let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'</span><br><span class="line"></span><br><span class="line">" Enable snipMate compatibility feature.</span><br><span class="line">let g:neosnippet#enable_snipmate_compatibility = 1</span><br><span class="line"></span><br><span class="line">" Tell Neosnippet about the other snippets</span><br><span class="line">let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'</span><br><span class="line"></span><br><span class="line">" Disable the neosnippet preview candidate window</span><br><span class="line">" When enabled, there can be too much visual noise</span><br><span class="line">" especially when splits are used.</span><br><span class="line">set completeopt-=preview</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Function</span><br><span class="line">""</span><br><span class="line">function! StripTrailingWhitespace()</span><br><span class="line">  let _s=@/</span><br><span class="line">  let l = line(".")</span><br><span class="line">  let c = col(".")</span><br><span class="line">  " do the business:</span><br><span class="line">  %s/\s\+$//e</span><br><span class="line">  " clean up: restore previous search history, and cursor position</span><br><span class="line">  let @/=_s</span><br><span class="line">  call cursor(l, c)</span><br><span class="line">endfunction</span><br><span class="line">autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre &lt;buffer&gt; call StripTrailingWhitespace()</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Key mapping</span><br><span class="line">""</span><br><span class="line">nmap &lt;leader&gt;jt &lt;Esc&gt;:%!python -m json.tool&lt;CR&gt;&lt;Esc&gt;:set filetype=json&lt;CR&gt;</span><br><span class="line">cmap w!! w !sudo tee % &gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/vim/">Vim</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-06-27-ruby-here-doc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/06/27/2013-06-27-ruby-here-doc/" class="article-date">
+  	<time datetime="2013-06-27T13:37:00.000Z" itemprop="datePublished">2013-06-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/06/27/2013-06-27-ruby-here-doc/">ruby 的 Heredocs</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>看 <a href="https://github.com/capistrano">Capistrano</a> 源码， 在 <code>capistrano / bin / capify</code> 下，发现<br><code>here doc</code> 的写法，</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unindent</span><span class="params">(string)</span></span></span><br><span class="line">  indentation = string[<span class="regexp">/\A\s*/</span>]</span><br><span class="line">  string.strip.gsub(<span class="regexp">/^<span class="subst">#&#123;indentation&#125;</span>/</span>, <span class="string">""</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"> <span class="string">"Capfile"</span> =&gt; unindent(&lt;&lt;-<span class="constant">FILE</span>),</span><br><span class="line"></span><br><span class="line">    load <span class="string">'deploy'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Uncomment if you are using Rails' asset pipeline</span></span><br><span class="line">    <span class="comment"># load 'deploy/assets'</span></span><br><span class="line"></span><br><span class="line">    load <span class="string">'config/deploy'</span> <span class="comment"># remove this line to skip loading any of the default tasks</span></span><br><span class="line">  <span class="constant">FILE</span></span><br></pre></td></tr></table></figure>
+<p>孤陋寡闻的我立马google 了一把找到篇好文，抄下来分享：</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/ruby/">ruby</a>
+	</div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a  href="/2013/06/27/2013-06-27-ruby-here-doc/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-06-26-shell-script-to-control-tomcat" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/06/26/2013-06-26-shell-script-to-control-tomcat/" class="article-date">
+  	<time datetime="2013-06-26T13:37:00.000Z" itemprop="datePublished">2013-06-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/06/26/2013-06-26-shell-script-to-control-tomcat/">能马上用起来的控制 tomcat 的脚本</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>难的在网上找到的能马上用起来的 shell 脚本，心情愉悦啊！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">export</span> BASE=/home/programs/jakarta-tomcat-<span class="number">5.0</span>.<span class="number">28</span>/bin</span><br><span class="line">prog=jakarta-tomcat-<span class="number">5.0</span>.<span class="number">28</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">stat</span></span>() &#123;</span><br><span class="line"><span class="keyword">if</span> [ `ps auxwwww|grep <span class="variable">$prog</span>|grep -v grep|wc <span class="operator">-l</span>` <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="built_in">echo</span> Tomcat is running.</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="built_in">echo</span> Tomcat is not running.</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">start)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ `ps auxwwww|grep <span class="variable">$prog</span>|grep -v grep|wc <span class="operator">-l</span>` <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="built_in">echo</span> Tomcat seems to be running. Use the restart option.</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="variable">$BASE</span>/startup.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">stat</span></span><br><span class="line">;;</span><br><span class="line">stop)</span><br><span class="line"><span class="variable">$BASE</span>/shutdown.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="keyword">if</span> [ `ps auxwwww|grep <span class="variable">$prog</span>|grep -v grep|wc <span class="operator">-l</span>` <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="keyword">for</span> pid <span class="keyword">in</span> `ps auxwww|grep <span class="variable">$prog</span>|grep -v grep|tr <span class="operator">-s</span> <span class="string">' '</span>|cut <span class="operator">-d</span> <span class="string">' '</span> <span class="operator">-f</span>2`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> <span class="variable">$pid</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">stat</span></span><br><span class="line">;;</span><br><span class="line">restart)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ `ps auxwwww|grep <span class="variable">$prog</span>|grep -v grep|wc <span class="operator">-l</span>` <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="keyword">for</span> pid <span class="keyword">in</span> `ps auxwww|grep <span class="variable">$prog</span>|grep -v grep|tr <span class="operator">-s</span> <span class="string">' '</span>|cut <span class="operator">-d</span> <span class="string">' '</span> <span class="operator">-f</span>2`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> <span class="variable">$pid</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="variable">$BASE</span>/startup.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="built_in">stat</span></span><br><span class="line">;;</span><br><span class="line">status)</span><br><span class="line"><span class="built_in">stat</span></span><br><span class="line">;;</span><br><span class="line">*)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Usage: tomcat start|stop|restart|status"</span></span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>参见 <a href="http://www.techpaste.com/2012/01/shell-script-control-stopstartrestartstatus-tomcat-application-server/" target="_blank" rel="external">http://www.techpaste.com/2012/01/shell-script-control-stopstartrestartstatus-tomcat-application-server/</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-05-12-wo-de-mu-qin" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/05/12/2013-05-12-wo-de-mu-qin/" class="article-date">
+  	<time datetime="2013-05-12T13:37:00.000Z" itemprop="datePublished">2013-05-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/05/12/2013-05-12-wo-de-mu-qin/">我的母亲</a>
     </h1>
   
 
@@ -288,11 +878,11 @@
      
 
   
-    <article id="post-2013-04-26-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2013-04-30-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2013-04-26-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+      <a href="/2013/04/30/2013-04-30-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu/" class="article-date">
+  	<time datetime="2013-04-30T13:37:00.000Z" itemprop="datePublished">2013-04-30</time>
 </a>
     </div>
   
@@ -305,7 +895,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-04-26-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu/">WebDriver 之测试失败自动截图</a>
+      <a class="article-title" href="/2013/04/30/2013-04-30-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu/">WebDriver 之测试失败自动截图</a>
     </h1>
   
 
@@ -425,11 +1015,11 @@
      
 
   
-    <article id="post-2015-08-26-yi-dong-ying-yong-zhi-wang-luo-ce-shi" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2015-08-26-yi-dong-ying-yong-zhi-wang-luo-ce-shi/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+      <a href="/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/" class="article-date">
+  	<time datetime="2013-04-29T13:37:00.000Z" itemprop="datePublished">2013-04-29</time>
 </a>
     </div>
   
@@ -442,7 +1032,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2015-08-26-yi-dong-ying-yong-zhi-wang-luo-ce-shi/">移动应用之网络测试</a>
+      <a class="article-title" href="/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/">Jmeter 兵器谱之 Xpath Extractor</a>
     </h1>
   
 
@@ -452,14 +1042,66 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>首先网络测试不是新概念。早在富客户端时代，网络已经是常规测试中不可或缺的一项了。由于PC端时代，<br>通常不存在弱网情况，所以大部分测试会聚焦在网络异常，即断网情况，如：</p>
+        <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extractor。</p>
+<h2 id="u9700_u6C42"><a href="#u9700_u6C42" class="headerlink" title="需求"></a>需求</h2><p>大家都知道，传统的表单登陆有几个特点：</p>
+<ol>
+<li>有一个特定的 action</li>
+<li>使用 Post 协议</li>
+<li>post 参数一般为用户名和密码</li>
+<li>有很多的 hidden input 随机值</li>
+</ol>
+<p>比如百度的登陆，就有相当多的 hidden input。这些 hidden input 的 value 在每次请求时，都会随机生成不同的值。所以你不得不把它提取出来，参数化。于是我们就用到了 XPATH Extractor。</p>
+<h2 id="u5B9E_u8DF5"><a href="#u5B9E_u8DF5" class="headerlink" title="实践"></a>实践</h2><p>假设我们有这样一个登陆的form：</p>
+<pre><code>&lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
+  &lt;input id=&quot;username&quot; name=&quot;username&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+  &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; value=&quot;&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;lt&quot; value=&quot;20120001&quot;&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;_eventId&quot; value=&quot;submit&quot;&gt;
+  &lt;input class=&quot;btn-submit&quot; name=&quot;submit&quot; value=&quot;Log In&quot; type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+</code></pre><p> 可以看到有两个 hidden input， 其中 lt 值是每次刷新页面时候，随机生成的值，另外一个是固定。那我们的策略是：</p>
+<ol>
+<li>第一次请求这个页面时候，获取随机生成的 lt 值。</li>
+<li>用这个获得的 lt 值，和用户名，密码一起做为 post 的参数，传递到后台去。</li>
+</ol>
+<p>所以在jmeter里面，先创建一个 HTTP 请求，这个请求的作用就是访问网站登录页面，并在这个请求填加后置处理器： XPATH Extractor，来提取请求返回的 html response 里面的 <strong>lt</strong> 的值。</p>
+<p><img src="https://jzycow.bn1.livefilestore.com/y1mkZeGi_ZuSphq77cecvcz5J1NwURw4cnG5JgR4Ar0pN2TjMfYVwjllWUY9LM-pWS-m92mtRx6lAvb1hLbYSUpa1Mh__u99xrNRP2-pIqWtum_W_dWGH_J6g/xpath.png?psid=1" alt="alt text"></p>
+<p>然后在 XPATH Extractor 里，将要提取 lt 的 XPATH query 填写正确， 如下</p>
+<p><img src="https://jzycow.bn1.livefilestore.com/y1mohY_XIe6MBQXnE3vqzOPbsjuuUc6HTUnImhsM8G6n2I5E1ry9mecSCxJuytZWlxGHIsgcNBtSQY-K4PYt1-9xQ9jvbT65BuUt_bRcZWo7tPWYLEq4ryryQ/query.png?psid=1" alt="alt text"></p>
+<p>在第一个 http 的请求中，我们取得了 lt 的值。接着我们创建第二个 http request， 这次要完成的就是将这些参数 post 到 form 制定的 action 中去。</p>
+<p><img src="https://jzycow.bn1.livefilestore.com/y1mktMNz2jyfvCicq9jS5QnbKT0wNVxDfq13v1MD1QboYPq78Jx8sLv8-YAGaB_waaCQ1c8lDNUISQ8eVIlnfDSVVyuvd6u4cLJE2E5jvnh36rQIymo7wOxLA/http.png?psid=1" alt="alt text" title="12"></p>
+<p>需要注意的是，这次的方法变成了 Post， 还有参数都要填写到参数列表中，注意那个 lt 值， jmeter 使用 ${} 获取参数的值。</p>
+<p>好，大功告成，试试看吧。</p>
+<hr>
+<h2 id="XPATH_Extractor__u8BE6_u8BF4"><a href="#XPATH_Extractor__u8BE6_u8BF4" class="headerlink" title="XPATH Extractor 详说"></a>XPATH Extractor 详说</h2><p>盗用下Apache上的图片：<br><img src="http://jmeter.apache.org/images/screenshots/xpath_extractor.png" alt="alt text"></p>
+<p>我们来一一解说下，这些图片上的属性，英语好的人可以直接移步 <a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath_Extractor" title="XPATH Extractor" target="_blank" rel="external">Apache Jmeter Xpath Extractor</a>。</p>
+<p><strong>Name</strong>： XPATH Extractor， 就是一个该节点的描述信息，你可以任意更改，会立刻反应在你的节点树上。<br><strong>Comments</strong>: 同样也是描述信息。<br><strong>Apply to</strong>：一般只针对于那些有子 sample 的 sample， apply to 有4种：</p>
 <ul>
-<li>异常信息</li>
-<li>容错机制</li>
-<li>超时机制</li>
-<li>重连机制</li>
+<li>Main sample only： 只对主 sample 起作用。</li>
+<li>Sub-samples only: 只对子 sample 起作用。</li>
+<li>Main sample and sub-samles: 两种都起作用。</li>
+<li>JMeter Varibale: 这个变量是用于 JMeter的assertion， assertion 会对这个变量的内容起作用。</li>
 </ul>
-<p>到了移动时代，网络的形态也不再是单一的有线连接。<code>2g/3g/edge/4g/wifi</code>，不同的协议，不同的制式，不同的速率。<br>场景也更加丰富，空旷的大街，拥挤的地铁，快速飞驰的汽车。<br>流量就是钱，凡是和钱相关的事情，就是大事。所以对于应用开发和测试都有不小的挑战。那从测试角度来说，需要关注的<br>就远不止断网情况了。</p>
+<p>XPATH的会对每一个被 <em>Apply to</em> 的 Sample 依次起作用， 并所有的匹配结果都会返回。</p>
+<p><strong>XPATH Parsing Options</strong></p>
+<p><strong>Use Tidy(tolerant parser)</strong>: 如果选择 Use Tidy， 就是解析response的时候将 HTML 转成 XHTML。</p>
+<ul>
+<li>对于所有的 HTML response， 我们应该选择 Use Tidy， 这样的 response 会被转为有效的 XHTML。</li>
+<li>对于所有的 XHTML 和 XML， 就不需要再选择使用 Use Tidy 了。</li>
+</ul>
+<p><strong>Quiet</strong>: tidy 的 quiet flag 设置， 选中了会抑制一些不必要的输出。<br><strong>Report error</strong>： 如果 Tidy 发生错误， 那么触发相应的 Assertion。<br><strong>Show warnings</strong>： 显示 Tidy Warning 信息的开关。</p>
+<p><strong>Use Namespaces</strong>， <strong>Validate XML</strong>，  <strong>Ignore Whitespace</strong>，  <strong>Fetch External DTDs</strong> 这四个只有在 Use Tidy 没有选中才会被激活。</p>
+<p><strong>Use Namespaces</strong>： 如果选中此选项，那么 XML 解析器会使用命名空间，我也不是很熟这一块，可以参考<br><a href="http://www.cnblogs.com/meng-meng/archive/2011/09/26/2192355.html" target="_blank" rel="external">XML解析中的namespace初探</a></p>
+<p> <strong>Validate XML</strong>： 验证 XML 是不是 well formed。</p>
+<p> <strong>Ignore Whitespace</strong>： 忽略空格字符</p>
+<p><strong>Fetch External DTDs</strong>： 获取外部的 DTD 文件</p>
+<p><strong>Return entire XPath fragment instead of text content?</strong>： 这个很简单，举个例子：</p>
+<p>html 片段是：</p>
+<pre><code>&lt;titile&gt;
+Apache JMeter
+&lt;/title&gt;
+</code></pre><p>那么，//title 会返回 “<code>&lt;title&gt;Apache JMeter&lt;/title&gt;</code>“ 而不是 “Apache JMeter”.</p>
+<p><strong>Reference Name</strong>： 就是用来存放 XPATH 提取出来的值。<br><strong>XPath Query</strong>： XPATH 的查询语句。<br><strong>Default Value</strong>： 默认值。</p>
 
       
     </div>
@@ -468,11 +1110,15 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/移动测试/">移动测试</a>
+	<a class="article-category-link" href="/categories/jmeter/">Jmeter</a>
 	</div>
 
 
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test-china-org/">test-china.org</a></li></ul>
+	</div>
+
       
       <div class="clearfix"></div>
     </div>
@@ -509,11 +1155,11 @@
      
 
   
-    <article id="post-2013-04-26-jmeter-bing-qi-pu-zhi-regular-expression-extractor" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2013-04-27-jmeter-bing-qi-pu-zhi-regular-expression-extractor" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-regular-expression-extractor/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+      <a href="/2013/04/27/2013-04-27-jmeter-bing-qi-pu-zhi-regular-expression-extractor/" class="article-date">
+  	<time datetime="2013-04-27T13:37:00.000Z" itemprop="datePublished">2013-04-27</time>
 </a>
     </div>
   
@@ -526,7 +1172,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-regular-expression-extractor/">Jmeter 兵器谱之 Regular Expression Extractor</a>
+      <a class="article-title" href="/2013/04/27/2013-04-27-jmeter-bing-qi-pu-zhi-regular-expression-extractor/">Jmeter 兵器谱之 Regular Expression Extractor</a>
     </h1>
   
 
@@ -571,583 +1217,6 @@
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test-china-org/">test-china.org</a></li></ul>
 	</div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-04-26-jmeter-bing-qi-pu-zhi-foreach-controller" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-foreach-controller/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-foreach-controller/">JMeter 兵器谱之 ForEach Controller</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>同样的，英文好的同学请移驾<a href="http://jmeter.apache.org/usermanual/component_reference.html#ForEach_Controller" target="_blank" rel="external">ForEach Controller</a></p>
-<p>ForEach controller 是用来遍历集合的，比如 XPATH Extractor 或者 正则表达式 Extractor 解析出来的集合。ForEach做的事情大致有2件，</p>
-<ol>
-<li>取得集合</li>
-<li>遍历集合，将每一个值应用到 ForEach 下面的 Smapler 或者 controller 中去。</li>
-</ol>
-<p>来看一个例子，我们要访问百度首页，取得首页所有的链接，然后访问这些链接。我们要做的是：</p>
-<ol>
-<li>用一个 http sample 访问 <a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a></li>
-<li>在这个 sample 下添加一个正则表达式提取器，使用 &lt;a href=”([^”]+)” 提取所有的 link 的 href 值。</li>
-<li>用 ForEach Controller 遍历第2步提取出来的 href 值，然后一一访问。</li>
-</ol>
-<p>JMeter 脚本结构大致如下，</p>
-<p><img src="http://jmeter.apache.org/images/screenshots/logic-controller/foreach-example.png" alt="alt text"></p>
-<p>先来看正则表达式提取器</p>
-<p><img src="https://ers1ja.bn1.livefilestore.com/y1pDLRMxvFylmW1qmUQUvGe1DJVuwh_KUusRReatQ3QtB4ZxbWAN1HCxgqqZJnl6b9yv1rFXc8mTxe5_1LS4ji1zK4fhsRC6DWr/regular.png?psid=1" alt="alt text"></p>
-<p>注意这个引用名称 <strong>inputVar</strong>， 提取出来的所有匹配值都会放在这个变量里，事实上 <strong>inputVar</strong> 相当于一个 set 了。然后我们在紧跟的 ForEach 里面使用这个变量。</p>
-<p><img src="https://ers1ja.bn1.livefilestore.com/y1p1K2BOBifU6X2D6r3Ij1cXIrT_D3mwqLArS24AiUmyiIzRzAc6vkXpldU7lxAkQhCWiMmqOoV07DiBMIxJKLyDa4vpJ72qPBp/foreach.png?psid=1" alt="alt text"></p>
-<p>可以看到，在 ForEach 里，我们将之前的 <strong>inputVar</strong> 设置为输入变量。然后用 <strong>returnVar</strong> 做为输出。 这其实就类似于 JAVA 里面的 ForEach。</p>
-<pre><code>for(Object returnVar : inputVar) {
-//process
-}
-</code></pre><p>这个 process 过程就是下图所示：<br><img src="https://ers1ja.bn1.livefilestore.com/y1pf_N1kVq04KkJwyA20UlawUiT_AmrnaudC6MyqCYrcnRyoer1rJXJEZM_lYgONZgC2IwH99dywgmKiVaFSUkXS3ktzbtHRZZ_/http%201.png?psid=1" alt="alt text"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/jmeter/">Jmeter</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test-china-org/">test-china.org</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-04-26-htmlunit-jie-shao" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2013-04-26-htmlunit-jie-shao/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2013-04-26-htmlunit-jie-shao/">HtmlUnit 介绍</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在 @Lily 的 <a href="http://test-china.org/topics/8" target="_blank" rel="external">Juint4 + WebDriver 入门篇</a> 中， Lily 问起了 HtmlUnit Driver。对 HtmlUnit Driver 我倒是没有接触太多， 所以特意去找了些文章看看。</p>
-<p>在 <a href="http://code.google.com/p/selenium/wiki/HtmlUnitDriver" target="_blank" rel="external">selenium 官方 wiki</a> 上说：</p>
-<blockquote>
-<p>This is currently the fastest and most lightweight implementation of WebDriver. As the name suggests, this is based on HtmlUnit.</p>
-</blockquote>
-<p>所以想要了解 HtmlUnit Driver， 就必先追根溯源地研究下 HtmlUnit。</p>
-<blockquote>
-<p>HtmlUnit is a “GUI-Less browser for Java programs”. It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc… just like you do in your “normal” browser.</p>
-</blockquote>
-<p>简单来说， HtmlUnit 就是没有界面的，你看不见的，但是却能做浏览器的活的 JAVA 版本的浏览器。需要说明的是，<strong>HtmlUnit 本身不是一个测试框架， 它真的只是一个模拟浏览器行为的程序。</strong> 所以需要和 Junit 或者 TestNG 等测试框架配合起来使用。同时，很多开源的工具也使用 HtmlUnit 来模拟浏览器行为，比如大名鼎鼎的 WebDriver。</p>
-<p>下面，搬抄一把 HtmlUnit 的入门指南：</p>
-<h2 id="u5EFA_u7ACB_u9879_u76EE"><a href="#u5EFA_u7ACB_u9879_u76EE" class="headerlink" title="建立项目"></a>建立项目</h2><p>使用 maven 创建一个 htmlunit 的试用项目</p>
-<pre><code>mvn archetype:generate -DgroupId=com.testchina -DartifactId=my-htmlunit-test -DinteractiveMode=false
-</code></pre><p>（不得不夸下 Maven， 构建的好工具啊。）</p>
-<p>修改 pom.xml， 加入 HtmlUnit 依赖， 升级 Junit 为4.10。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">project</span> <span class="attribute">xmlns</span>=<span class="value">"http://maven.apache.org/POM/4.0.0"</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">  <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="title">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>com.testchina<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>my-htmlunit-test<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="title">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>my-htmlunit-test<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>4.10<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="title">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>net.sourceforge.htmlunit<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>htmlunit<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.10<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后，执行：</p>
-<ol>
-<li><code>mvn install</code></li>
-<li><code>mvn eclipse:eclipse</code></li>
-</ol>
-<p>之后， 就可以在 eclipse 里导入项目。接着，我们来写第一个例子。</p>
-<h2 id="u8BD5_u7528"><a href="#u8BD5_u7528" class="headerlink" title="试用"></a>试用</h2><p><strong>第一个例子：</strong></p>
-<p>a. 访问 <a href="http://htmlunit.sourceforge.net" target="_blank" rel="external">http://htmlunit.sourceforge.net</a></p>
-<p>b. 验证网页的 titile</p>
-<p>c. 验证网页内容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.testchina;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> com.gargoylesoftware.htmlunit.WebClient;</span><br><span class="line"><span class="keyword">import</span> com.gargoylesoftware.htmlunit.html.HtmlPage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHtmlUnitTest</span> </span>&#123;</span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">homePage</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient(); <span class="comment">// 建立 WebClient。</span></span><br><span class="line">        <span class="keyword">final</span> HtmlPage page = webClient.getPage(<span class="string">"http://htmlunit.sourceforge.net"</span>); <span class="comment">// 访问网站，返回页面对象。</span></span><br><span class="line">        assertEquals(<span class="string">"HtmlUnit - Welcome to HtmlUnit"</span>, page.getTitleText()); <span class="comment">// 验证 title。</span></span><br><span class="line">        <span class="comment">/** 验证网页内容 */</span></span><br><span class="line">        <span class="keyword">final</span> String pageAsXml = page.asXml();</span><br><span class="line">        assertTrue(pageAsXml.contains(<span class="string">"&lt;body class=\"composite\"&gt;"</span>));</span><br><span class="line">        <span class="keyword">final</span> String pageAsText = page.asText();</span><br><span class="line">        assertTrue(pageAsText.contains(<span class="string">"Support for the HTTP and HTTPS protocols"</span>));</span><br><span class="line">        webClient.closeAllWindows();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>第二个例子: 指定浏览器</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">homePage_Firefox</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient(BrowserVersion.FIREFOX_10);</span><br><span class="line">    <span class="keyword">final</span> HtmlPage page = webClient</span><br><span class="line">            .getPage(<span class="string">"http://htmlunit.sourceforge.net"</span>);</span><br><span class="line">    assertEquals(<span class="string">"HtmlUnit - Welcome to HtmlUnit"</span>, page.getTitleText());</span><br><span class="line"></span><br><span class="line">    webClient.closeAllWindows();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>很简单，在初始化 WebClient 的时候，传入浏览器版本， 目前 2.10 里面支持：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Register plugins for the browser versions. */</span></span><br><span class="line">   <span class="keyword">static</span> &#123;</span><br><span class="line">       INTERNET_EXPLORER_6.initDefaultFeatures();</span><br><span class="line">       INTERNET_EXPLORER_7.initDefaultFeatures();</span><br><span class="line">       INTERNET_EXPLORER_8.initDefaultFeatures();</span><br><span class="line"></span><br><span class="line">       FIREFOX_3.initDefaultFeatures();</span><br><span class="line">       FIREFOX_3_6.initDefaultFeatures();</span><br><span class="line">       FIREFOX_10.initDefaultFeatures();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">final</span> PluginConfiguration flash = <span class="keyword">new</span> PluginConfiguration(<span class="string">"Shockwave Flash"</span>,</span><br><span class="line">           <span class="string">"Shockwave Flash 9.0 r31"</span>, <span class="string">"libflashplayer.so"</span>);</span><br><span class="line">       flash.getMimeTypes().add(<span class="keyword">new</span> PluginConfiguration.MimeType(<span class="string">"application/x-shockwave-flash"</span>,</span><br><span class="line">           <span class="string">"Shockwave Flash"</span>, <span class="string">"swf"</span>));</span><br><span class="line">       FIREFOX_3.getPlugins().add(flash);</span><br><span class="line">       FIREFOX_3_6.getPlugins().add(flash);</span><br><span class="line">       FIREFOX_10.getPlugins().add(flash);</span><br><span class="line"></span><br><span class="line">       CHROME_16.initDefaultFeatures();</span><br><span class="line">       CHROME_16.setApplicationCodeName(<span class="string">"Mozilla"</span>);</span><br><span class="line">       CHROME_16.setPlatform(<span class="string">"MacIntel"</span>);</span><br><span class="line">       CHROME_16.setCpuClass(<span class="keyword">null</span>);</span><br><span class="line">       CHROME_16.setBrowserLanguage(<span class="string">"undefined"</span>);</span><br><span class="line">       <span class="comment">// there are other issues with Chrome; a different productSub, etc.</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>第三个例子： 获取页面元素</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getElements</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient();</span><br><span class="line">    <span class="keyword">final</span> HtmlPage page = webClient.getPage(<span class="string">"http://htmlunit.sourceforge.net"</span>);</span><br><span class="line">    <span class="comment">//get list of all divs</span></span><br><span class="line">    <span class="keyword">final</span> List&lt;?&gt; divs = page.getByXPath(<span class="string">"//div"</span>); <span class="comment">// 返回所有的div</span></span><br><span class="line">    System.out.println(((HtmlDivision)divs.get(<span class="number">0</span>)).asText()); <span class="comment">// 得到第一个 Div 节点的内容。</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 返回所有的超链接， 并打印 name 属性*/</span></span><br><span class="line">    <span class="keyword">final</span> List&lt;HtmlAnchor&gt; anchors = page.getAnchors();</span><br><span class="line">    <span class="keyword">for</span> (HtmlAnchor anchor : anchors) &#123;</span><br><span class="line">        System.out.println(anchor.getAttribute(<span class="string">"name"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    webClient.closeAllWindows();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>第四个例子： 提交表单</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">submittingForm</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the first page</span></span><br><span class="line">    <span class="keyword">final</span> HtmlPage page1 = webClient.getPage(<span class="string">"http://some_url"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the form that we are dealing with and within that form,</span></span><br><span class="line">    <span class="comment">// find the submit button and the field that we want to change.</span></span><br><span class="line">    <span class="keyword">final</span> HtmlForm form = page1.getFormByName(<span class="string">"myform"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> HtmlSubmitInput button = form.getInputByName(<span class="string">"submitbutton"</span>);</span><br><span class="line">    <span class="keyword">final</span> HtmlTextInput textField = form.getInputByName(<span class="string">"userid"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Change the value of the text field</span></span><br><span class="line">    textField.setValueAttribute(<span class="string">"root"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Now submit the form by clicking the button and get back the second page.</span></span><br><span class="line">    <span class="keyword">final</span> HtmlPage page2 = button.click();</span><br><span class="line"></span><br><span class="line">    webClient.closeAllWindows();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>是不是很棒？ 所有浏览器能做的，它都能做，我们再来看下它的特性：</p>
-<ul>
-<li>支持 HTTP and HTTPS 协议</li>
-<li>支持 cookies</li>
-<li>支持 Post， Get， Head， Delete</li>
-<li>支持代理</li>
-<li>能分析 HTTP responses</li>
-<li>能自定义 HTTP request head</li>
-<li>支持 Javascript</li>
-</ul>
-<p>于是有<br><strong>第五个例子： 使用 javascript</strong></p>
-<p>这里的 Javascript 的意思，是指 HtmlUnit 可以通过 js 引擎执行 javascript 代码。</p>
-<blockquote>
-<p>HtmlUnit provides excellent JavaScript support, simulating the behavior of the configured browser (Firefox or Internet Explorer). It uses the Rhino JavaScript engine for the core language (plus workarounds for some Rhino bugs) and provides the implementation for the objects specific to execution in a browser.</p>
-</blockquote>
-<p>比如我们的页面有一个 alert 事件：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span><span class="tag">&lt;<span class="title">head</span>&gt;</span><span class="tag">&lt;<span class="title">title</span>&gt;</span>Alert sample<span class="tag">&lt;/<span class="title">title</span>&gt;</span><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">onload</span>=<span class="value">'alert("foo");'</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我们如何捕捉它呢？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">alerts</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> List collectedAlerts = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    webClient.setAlertHandler(<span class="keyword">new</span> CollectingAlertHandler(collectedAlerts));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Since we aren't actually manipulating the page, we don't assign</span></span><br><span class="line">    <span class="comment">// it to a variable - it's enough to know that it loaded.</span></span><br><span class="line">    webClient.getPage(<span class="string">"http://tciludev01/test.html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> List expectedAlerts = Collections.singletonList(<span class="string">"foo"</span>);</span><br><span class="line">    assertEquals(expectedAlerts, collectedAlerts);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>是不是很轻巧？ 像真正的浏览器一样， HtmlUnit 可以响应各种 Javascript 事件， 执行各种 Javascript 代码。</p>
-<hr>
-<p>对于 HtmlUnit， 我就初略看了看， 总的印象是轻，不用启动笨重的浏览器就能做到和浏览器一样的行为， 和 Junit4 很好的搭配，可以<br>写出轻巧优美的测试案例， 同时也能为测试省去不少时间。这在前期测试驱动开发的时候，特别是 Web 应用开发，可以节省去不少时间。</p>
-<p>参见:</p>
-<p><a href="http://htmlunit.sourceforge.net/" target="_blank" rel="external">http://htmlunit.sourceforge.net/</a></p>
-<p><a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" target="_blank" rel="external">http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html</a></p>
-<p><a href="http://code.google.com/p/selenium/wiki/HtmlUnitDriver" target="_blank" rel="external">http://code.google.com/p/selenium/wiki/HtmlUnitDriver</a></p>
-<p><a href="http://htmlunit.sourceforge.net/javascript-howto.html" target="_blank" rel="external">http://htmlunit.sourceforge.net/javascript-howto.html</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test-china-org/">test-china.org</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2012-03-07-learn-vim-1-post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2012-03-07-learn-vim-1-post/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2012-03-07-learn-vim-1-post/">vim学习 listchars</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><br>在ruby-china.org混，看到很多vimer，于是就请教了如何学习vim，@jinleileiking同学就给了建议，非常中用，他说：<br><div class="comment"><br><ul><br><li>vimcasts.org 类似railscasts</li><br><li>[学习vi和Vim编辑器(第7版)].(Learning.the.vi.and.Vim.Editors.7th.Edition).A.Robbins&amp;E.Hannah&amp;L.Lamb.文字版</li><br><li>[Hacking.Vim].[Hacking.Vim].[Hacking.Vim].Packt.Publishing.Hacking.Vim.May.2007</li><br><li>:help vim内置帮助</li><br></ul></div><br><br></p>
-
-<p><br>    先看vimcasts.org, 第一章：[显示不可视的字符] (<a href="http://vimcasts.org/episodes/show-invisibles/" target="_blank" rel="external">http://vimcasts.org/episodes/show-invisibles/</a>)<br><pre class="prettyprint"><br>“ 设置显示空格，tab的切换键<br>nmap &lt;leader&gt;l :set list!<cr><br><br>“ 设置tab用小三角加重复的空格显示，换行用横折符号显示。可以:help listchars<br>set listchars=tab:▸\ ,eol:¬<br></cr></pre><br></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/vim/">Vim</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2012-03-07-learn-vim-2-post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2012-03-07-learn-vim-2-post/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2012-03-07-learn-vim-2-post/">vim学习 shiftwidth, tabstop, softtabstop和expandtab</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><br></p><h6>1. shiftwidth</h6><br><p><br>这个是用于程序中自动缩进所使用的空白长度指示的。一般来说为了保持程序的美观，和下面的参数最好一致。同时它也是符号移位(&gt;&gt;)长度的制定者。<br></p><br><p></p>
-
-<p><br></p><h6>2. tabstop<br></h6><br><p><br>定义tab所等同的空格长度，一般来说最好设置成8，因为如果是其它值的话，可能引起文件在打印之类的场合中看起来很别扭。<br>除非你设置了 expandtab模式，也就是把tabs转换成空格，这样的话就不会一起混淆，不过毕竟制表符为8是最常用最普遍的设置，所以一般还是不要改。<br>(lz总是把它设置为4个空格)<br></p><br><p></p><br><p><br></p><h6>3. softtabstop</h6><br><p><br>如果我们希望改变程序中的缩进怎么办？shiftwidth和tabstop不一样的话，你会发现程序比较难看的。<br>这时候，softtabstop就起作用了。可以从vim的说明中看到，一旦设置了softtabstop的值时，你按下tab键，<br>插入的是空格和tab制表符的混合，具体如何混合取决于你设定的softtabstop，举个例子，如果设定softtabstop=8,<br>那么按下tab键，插入的就是正常的一个制表符;如果设定 softtabstop=16,那么插入的就是两个制表符；如果softtabstop=12,<br>那么插入的就是一个制表符加上4个空格；如果 softtabstop=4呢？那么一开始，插入的就是4个空格，此时一旦你再按下一次tab，<br>这次的四个空格就会和上次的四个空格组合起来变成一个制表符。<br>换句话说，softtabstop是“逢8空格进1制表符”,前提是你tabstop=8。<br></p><br><p></p><br><p><br></p><h6>4. expandtab</h6><br><p><br>因为tab的大小不一样，在多人一起开发项目时，为了使代码风格尽量保持一致，<br>一般不允许在代码使用TAB符，而以4个空格代之。<br></p><br><p></p>
-
-<p></p><p>一般的shiftwidth, tabstop, softtabstop和expandtab的配置</p><p></p>
-<pre class="prettyprint">
-set shiftwidth=4                " use indents of 4 spaces
-set tabstop=4                   " an indentation every four columns
-set softtabstop=4               " let backspace delete indent
-set expandtab                   " tabs are spaces, not tabs
-</pre>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/vim/">Vim</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2012-03-08-learn-vim-3-post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2012-03-08-learn-vim-3-post/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2012-03-08-learn-vim-3-post/">vim学习 jsctags</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><br>ctags不能非常胜任对现在的javascript代码的解析，尤其是遇到：<br><pre class="prettyprint"><br>Test.object.do = function(obj) {// …}<br>ajaxSetup: function( settings ) {//..}<br></pre><br>网上搜索了下，发现了doctorjs.git (以前叫jsctags), 号称被应用于Cloud9 IDE’s Ace online editor.<br><div class="comment"><br><ul><br>  <li>安装doctorjs需要nodejs环境，如何安装nodejs自己google去</li><br>  <li>安装ctags，brew也好macports也好。</li><br>  <li>git  clone <a href="https://github.com/mozilla/doctorjs.git" target="_blank" rel="external">https://github.com/mozilla/doctorjs.git</a> –recursive</li><br>  <li>make install</li><br>  <li>Add export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH to your .zshrc or .bashrc</li><br>  <li>然后就可以使用了，直接jsctags your_js_dir</li><br>  <li>配合vim的tagbar非常好用。</li><br></ul><br></div><br><br></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/vim/">Vim</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2012-04-06-webdriver-1-post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/16/2012-04-06-webdriver-1-post/" class="article-date">
-  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/16/2012-04-06-webdriver-1-post/">WebDriver 1: Set up WebDriver using Maven3</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><br></p><h3>1. Learn Maven3 first.</h3><br>  This is quite simple. Go through <a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" target="_blank" rel="external">Maven in 5 Minutes</a><br>  That’s quite enough.<br><p></p>
-
-<p><br></p><h3>2. Set up project</h3><br>Using the command in Maven in 5 Minutes to create a project using your own groupId and artifactId.<br><pre class="prettyprint"><br>mvn archetype:generate -DgroupId=com.ahchoo.automation -DartifactId=ahcoo -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false<br></pre><br><p></p>
-
-<p><br>Change the pom.xml to add Junit and WebDriver dependencies<br><pre class="prettyprint"><br>&lt;project&gt;<br>…<br>    &lt;dependencies&gt;<br>        &lt;dependency&gt;<br>            &lt;groupId&gt;junit&lt;/groupId&gt;<br>            &lt;artifactId&gt;junit&lt;/artifactId&gt;<br>            &lt;version&gt;4.10&lt;/version&gt;<br>            &lt;scope&gt;test&lt;/scope&gt;<br>        &lt;/dependency&gt;<br>        &lt;dependency&gt;<br>            &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;<br>            &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;<br>            &lt;version&gt;2.20.0&lt;/version&gt;<br>            &lt;/dependency&gt;<br>            &lt;/dependencies&gt;&lt;/scope&gt;&lt;/version&gt;&lt;/artifactId&gt;&lt;/groupId&gt;<br>        &lt;/dependency&gt;<br>    &lt;/dependencies&gt;<br>…<br>&lt;/project&gt;<br></pre><br>Then run <code class="cmd">mvn clean install</code><br></p>
-
-<p><br></p><h3>3. Using eclipse to import this project</h3><br>install <a href="http://eclipse.org/m2e/" target="_blank" rel="external">m2eclipse</a> and<br>run command in the project root directory:<br><pre class="prettyprint"><br>mvn eclipse:clean<br>mvn eclipse:eclipse<br></pre><br><br>open eclise, click File and choose Import:<br><p><br>    <img src="/photos/1.png"><br></p><br>Choose Existing Projects into Workspace<br><p><br>    <img src="/photos/2.png"><br></p>
-
-<p>After import, you will see the file tree in eclipse project explorer:</p>
-<p><br><img src="/photos/3.png"><br></p><br><p></p>
-
-<p>Thus the environment is set up.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
-	</div>
-
-
-      
       
       <div class="clearfix"></div>
     </div>
