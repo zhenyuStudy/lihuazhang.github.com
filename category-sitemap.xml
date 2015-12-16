@@ -14,21 +14,7 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/windows/</loc>
-        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://8atmyhouse.com/categories/mysql/</loc>
-        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/categories/jekyll/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -84,13 +70,6 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/vim/</loc>
-        <lastmod>2015-12-16T13:41:23.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://8atmyhouse.com/categories/jmeter/</loc>
         <lastmod>2015-12-16T13:43:16.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -98,22 +77,8 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/webdriver/</loc>
-        <lastmod>2015-12-16T13:43:59.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://8atmyhouse.com/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0/</loc>
         <lastmod>2015-12-16T13:44:32.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/categories/linux/</loc>
-        <lastmod>2015-12-16T13:44:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -142,6 +107,41 @@
     <url>
         <loc>http://8atmyhouse.com/categories/cucumber/</loc>
         <lastmod>2015-12-16T13:46:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/categories/jekyll/</loc>
+        <lastmod>2015-12-16T13:48:44.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/categories/linux/</loc>
+        <lastmod>2015-12-16T13:48:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/categories/vim/</loc>
+        <lastmod>2015-12-16T13:50:05.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/categories/windows/</loc>
+        <lastmod>2015-12-16T13:51:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/categories/webdriver/</loc>
+        <lastmod>2015-12-16T13:52:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

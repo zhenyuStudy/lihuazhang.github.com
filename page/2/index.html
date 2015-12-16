@@ -202,947 +202,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-2013-10-09-cron-jobs-and-random-times-within-giving-hours" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/10/09/2013-10-09-cron-jobs-and-random-times-within-giving-hours/" class="article-date">
-  	<time datetime="2013-10-09T13:37:00.000Z" itemprop="datePublished">2013-10-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/10/09/2013-10-09-cron-jobs-and-random-times-within-giving-hours/">Cron jobs and random times, within giving hours</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>最近给 <code>Dota 圣剑传说</code> 添加一个随机活动，每小时里在聊天室生成一个 <code>黄金巨龙来袭事件</code>。从 stackoverflow 找来一个方法如下：</p>
-<p><a href="http://stackoverflow.com/questions/9049460/cron-jobs-and-random-times-within-giving-hours" target="_blank" rel="external">http://stackoverflow.com/questions/9049460/cron-jobs-and-random-times-within-giving-hours</a></p>
-<p>If I understand what you’re looking for, you’ll need to do something a bit messy, like having a cron job that runs a bash script that randomizes the run times… Something like this:</p>
-<p>crontab:</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 9 <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> /path/to/bashscript</span><br></pre></td></tr></table></figure>
-<p>and in /path/to/bashscript:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line">maxdelay=$((<span class="number">14</span>*<span class="number">60</span>))  <span class="comment"># 14 hours from 9am to 11pm, converted to minutes</span></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">1</span>; i&lt;=<span class="number">20</span>; i++)); <span class="keyword">do</span></span><br><span class="line">    delay=$((<span class="variable">$RANDOM</span>%maxdelay)) <span class="comment"># pick an independent random delay for each of the 20 runs</span></span><br><span class="line">    (sleep $((delay*<span class="number">60</span>)); /path/to/phpscript.php) &amp; <span class="comment"># background a subshell to wait, then run the php script</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<p>A few notes: this approach it a little wasteful of resources, as it fires off 20 background processes at 9am, each of which waits around for a random number of minutes (up to 14 hours, i.e. 11pm), then launches the php script and exits. Also, since it uses a random number of minutes (not seconds), the start times aren’t quite as random as they could be. But $RANDOM only goes up to 32,767, and there are 50,400 seconds between 9am and 11pm, it’d be a little more complicated to randomize the seconds as well. Finally, since the start times are random and independent of each other, it’s possible (but not very likely) that two or more instances of the script will be started simultaneously.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-09-24-fluentwait-with-webelement" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/09/24/2013-09-24-fluentwait-with-webelement/" class="article-date">
-  	<time datetime="2013-09-24T13:37:00.000Z" itemprop="datePublished">2013-09-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/09/24/2013-09-24-fluentwait-with-webelement/">FluentWait with WebElement</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><em>原文-<a href="http://seleniumsimplified.com/2012/08/22/fluentwait-with-webelement/" target="_blank" rel="external">FluentWait with WebElement</a></em></p>
-<p>我在 WebDriver 上的同步策略一般都是围绕 WebDriverWait 和 自定义 ExpectedCondition 来做文章。当我第一眼看到 FluentWait，<br>我以为这是一个自定义化更多的一个 WebDriverWait。 但是当我仔细研究它的构造函数的时候，我注意到它使用了 Generics （范型）。<br>Generics 的使用意味着我不需要再传一个 WebDriver 了， 我可以使用 WebElement 或者 By 或者任何我想要的。 这样对于 Ajax 的应用，真是方便了不少。</p>
-<blockquote>
-<p>org.openqa.selenium.support.ui<br>Class FluentWait\<t\></t\></p>
-<p>java.lang.Object<br>org.openqa.selenium.support.ui.FluentWait\<t\></t\></p>
-<p>Type Parameters:<br>T - The input type for each condition used with this instance.</p>
-<p>All Implemented Interfaces:<br>Wait\<t\></t\></p>
-<p>Direct Known Subclasses:<br>WebDriverWait</p>
-</blockquote>
-<p>看下面这段代码， 我用了一个倒计时的计数器做例子。</p>
-<p>这段代码实现了：</p>
-<ol>
-<li>用一个 WebDriverWait 等待元素出现。</li>
-<li>看计数器是否倒数到 04.</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">WebElement countdown = driver.findElement(By.id(<span class="string">"javascript_countdown_time"</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> WebDriverWait(driver,<span class="number">10</span>).until(ExpectedConditions.visibilityOf(countdown));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> FluentWait&lt;WebElement&gt;(countdown).withTimeout(<span class="number">10</span>, TimeUnit.SECONDS).</span><br><span class="line">  pollingEvery(<span class="number">100</span>,TimeUnit.MILLISECONDS).</span><br><span class="line">    until(<span class="keyword">new</span> Function&lt;WebElement  , Boolean&gt;() &#123;</span><br><span class="line">      <span class="annotation">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> Boolean <span class="title">apply</span><span class="params">(WebElement element)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> element.getText().endsWith(<span class="string">"04"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>注意在上述代码中，我告诉 FluentWait, apply 方法里接收的将是一个 WebElement。FluentWait 可以接受一个 Predicate 或者 Function 做为 until 方法的参。<br>我用了 Function 并在 这个 Function 里面返回一个 Boolean。</p>
-<p>FluentWait 非常灵活，你可以很轻松的调整等待和轮询时间， 你也可以设置哪些 exceptions 可以忽略， 比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Waiting 30 seconds for an element to be present on the page, checking</span></span><br><span class="line">   <span class="comment">// for its presence once every 5 seconds.</span></span><br><span class="line">   Wait&lt;WebDriver&gt; wait = <span class="keyword">new</span> FluentWait&lt;WebDriver&gt;(driver)</span><br><span class="line">       .withTimeout(<span class="number">30</span>, SECONDS)</span><br><span class="line">       .pollingEvery(<span class="number">5</span>, SECONDS)</span><br><span class="line">       .ignoring(NoSuchElementException.class); <span class="comment">//  我们主动忽略了 NoSuchElementExceptions 的异常</span></span><br><span class="line"></span><br><span class="line">   WebElement foo = wait.until(<span class="keyword">new</span> Function&lt;WebDriver, WebElement&gt;() &#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> WebElement <span class="title">apply</span><span class="params">(WebDriver driver)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> driver.findElement(By.id(<span class="string">"foo"</span>));</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-<p>怎样，看上去是不是优雅多了？</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/webdriver/">webdriver</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/翻译/">翻译</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-09-14-gatling-shi-yong" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/09/14/2013-09-14-gatling-shi-yong/" class="article-date">
-  	<time datetime="2013-09-14T13:37:00.000Z" itemprop="datePublished">2013-09-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/09/14/2013-09-14-gatling-shi-yong/">Gatling 试用 1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h1><hr>
-<p>在微博上看到 <code>Gatling</code>，号称超越 <code>jmeter</code> 的性能测试工具。顿时手痒，想来个试用。</p>
-<p>Gatling <em>格林机关枪</em>，看名字就恨凶悍。</p>
-<p>Gatling 的动机是因为性能测试工具已经无法测试当今的应用了。</p>
-<p>比如：</p>
-<ol>
-<li>LoadRunner 太贵了。</li>
-<li>页面又改了，又要打开界面，重新录制。</li>
-<li>客户说用 <code>OpenSTA</code> ， 我们只能用 windows 的虚拟机。</li>
-<li>Jmeter 太弱了，并发的好假，还得建立集群，而且还不知道每个节点的信息能不能回收。。</li>
-<li>Grinder 又内存泄露了，苦逼的 python 开发。。。（不知道是哪个工具）</li>
-</ol>
-<p>看来业界对市场上的性能测试工具都恨之入骨。</p>
-<p>再来看下 Gatling：</p>
-<ol>
-<li><p>高效<br>Gatling 用了 actors 模型，真是一个好演员啊。</p>
-<blockquote>
-<p>Actor模型</p>
-<p>当一个请求来了之后， 则委派给一个Actor处理， 和事件驱动的区别是， 这些Actor之间不共享任何资源， 可进行并行处理， 事件驱动模型和Actor模型很容易被搞混淆， 如果事件驱动模型来一个请求则委派一个线程去处理并且这些线程之间不共享资源，不会出现锁的问题， 则可以认为这种事件驱动模型等价于Actor模型， Scala的Actor模型就是这么处理的， Actor会被代理到线程处理， 海量的Actor会被代理到一个JVM线程池处理，这样提升了很大的效率，而这种映射是scala帮你做好了； 而Erlang中Actor模型则更加彻底， 其实是OTP实现了操作系统中的线程的功能， 这些“线程”叫做process， 只不过这些process占用的资源很少， 也不共享任何资源， 这样每个actor可以跟process一一对应</p>
-</blockquote>
-</li>
-<li><p>Gatling 脚本是代码，而且优雅简洁</p>
-<p>其实就是 scala 和 scala 写的 DSL， 不觉得 scala 优雅啊。。。</p>
-</li>
-<li><p>Gatling 的报表很有意义。</p>
-</li>
-<li><p>Gatling 免费的，明显最重要的。</p>
-</li>
-</ol>
-<h1 id="u4E0A_u624B"><a href="#u4E0A_u624B" class="headerlink" title="上手"></a>上手</h1><hr>
-<p>略过下载安装之类的，实在要看，自己看 <a href="https://github.com/excilys/gatling/wiki/Getting-Started" target="_blank" rel="external">Getting-started</a> 吧。<br>我们按照 <a href="https://github.com/excilys/gatling/wiki/First-Steps-with-Gatling" target="_blank" rel="external">First Steps with Gatling</a> 走一遍。<br>这个 First Steps 就是测试一个 e-banking 的应用，很可惜这个应用放在 Cloud Foundry， 国内估计访问不了。</p>
-<p>这个应用的链接在：</p>
-<p><a href="http://excilysbank.gatling.cloudbees.net" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net</a></p>
-<p>主要实现了以下功能：</p>
-<blockquote>
-<ol>
-<li>Session management (login, logout)</li>
-<li>Accounts visualization</li>
-<li>Operations visualization by month</li>
-<li>Cards Operations visualization by month</li>
-<li>Transfers visualization and transfer performing</li>
-</ol>
-</blockquote>
-<h2 id="u6D4B_u8BD5_u8BA1_u5212"><a href="#u6D4B_u8BD5_u8BA1_u5212" class="headerlink" title="测试计划"></a>测试计划</h2><p>我们对一些具有代表性的场景进行性能测试，所以我们想象了下，用户会做的事情：</p>
-<ol>
-<li>用户访问应用</li>
-<li>用户获得认证并登陆</li>
-<li>用户访问具体的账号</li>
-<li>用户查看上个月的状况</li>
-<li>用户登出</li>
-</ol>
-<p>我们要用 Gatling 来录制这 5 个场景。</p>
-<h2 id="Gatling_Recorder"><a href="#Gatling_Recorder" class="headerlink" title="Gatling Recorder"></a>Gatling Recorder</h2><p>一般工具都提供 recorder 否则就弱爆了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="variable">$GATLING_HOME</span>/bin/recorder.sh</span><br></pre></td></tr></table></figure>
-<p>启动这个脚本之后，会跳出一个类似 jmeter 的界面，我们得配置下：</p>
-<ul>
-<li>package: com.excilys.ebi.bank.stress</li>
-<li>class name: MySimulation</li>
-<li>output folder: /Users/lihuazhang/Documents/Simulation</li>
-</ul>
-<p><img src="/photos/gatling_gui.png" alt="alt text"></p>
-<p>和 jmeter 一样， Gatling 的 recorder 一样也充当着浏览器和应用之间 proxy 的角色，从上图来看：</p>
-<ul>
-<li>http  8000</li>
-<li>https 8001</li>
-</ul>
-<p>所以必须在浏览器设置代理。然后在浏览器上的所有 request 都会被记录下来。当然 Gatling 也提供了 Filters 来过滤<br>无关信息：</p>
-<blockquote>
-<ul>
-<li>NONE: Doesn’t apply any filter one the requests, even if there are some declared;</li>
-<li>EXCEPT: Allows all requests to be logged except those which filters apply on the URI;</li>
-<li>ONLY: Allows only requests, which URI matches one of the filters, to be logged.</li>
-</ul>
-</blockquote>
-<p>更加具体的，不妨看下 <a href="https://github.com/excilys/gatling/wiki/Recorder#wiki-browser-config" target="_blank" rel="external">Recorder details</a></p>
-<h2 id="u5F00_u59CB_u5F55_u5236_u5427"><a href="#u5F00_u59CB_u5F55_u5236_u5427" class="headerlink" title="开始录制吧"></a>开始录制吧</h2><p>设置好代理之后，开始执行第一个场景：</p>
-<ol>
-<li><p>访问 <a href="http://excilysbank.gatling.cloudbees.net" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net</a></p>
-</li>
-<li><p>登陆</p>
-<p>username = user1</p>
-<p>password = password1</p>
-</li>
-<li><p>Click on PERSONNAL_CHECKING</p>
-</li>
-<li><p>Click on the previous month (for us it was November as we were in December)</p>
-</li>
-<li><p>Log out</p>
-</li>
-</ol>
-<p>然后点击 Recorder 上的 stop， 就会在之前设置的 output folder 里面生成 <code>MySimulation.scala</code> 文件。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.excilys.ebi.bank.stress</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.gatling.core.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.core.session.<span class="type">Expression</span></span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.jdbc.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Names</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Values</span>._</span><br><span class="line"><span class="keyword">import</span> scala.concurrent.duration._</span><br><span class="line"><span class="keyword">import</span> bootstrap._</span><br><span class="line"><span class="keyword">import</span> assertions._</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySimulation</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Simulation</span> &#123;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> httpProtocol = http</span><br><span class="line">    .baseURL(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span><br><span class="line">    .acceptHeader(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span><br><span class="line">    .acceptEncodingHeader(<span class="string">"gzip, deflate"</span>)</span><br><span class="line">    .acceptLanguageHeader(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span><br><span class="line">    .connection(<span class="string">"keep-alive"</span>)</span><br><span class="line">    .userAgentHeader(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">"""Cache-Control"""</span> -&gt; <span class="string">"""max-age=0"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""text/css,*/*;q=0.1"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""image/png,image/*;q=0.8,*/*;q=0.5"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""*/*"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">"""Content-Type"""</span> -&gt; <span class="string">"""application/x-www-form-urlencoded"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">"""Accept"""</span> -&gt; <span class="string">"""application/json, text/javascript, */*; q=0.01"""</span>,</span><br><span class="line">    <span class="string">"""X-Requested-With"""</span> -&gt; <span class="string">"""XMLHttpRequest"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">      .get(<span class="string">"""/"""</span>)</span><br><span class="line">      .headers(headers_1))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">      .get(<span class="string">"""/img/favicon.ico"""</span>))</span><br><span class="line">    .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">      .get(<span class="string">"""/gzip_N2030079394/bundles/all.css"""</span>)</span><br><span class="line">      .headers(headers_3))</span><br><span class="line">    .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb1024132465/img/background.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb4077127084/img/small_window_content.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">      .get(<span class="string">"""/gzip_N762261864/bundles/all.js"""</span>)</span><br><span class="line">      .headers(headers_6))</span><br><span class="line">    .pause(<span class="number">1</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb3761658453/img/sprite.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">30</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">      .post(<span class="string">"""/login"""</span>)</span><br><span class="line">      .headers(headers_8)</span><br><span class="line">      .param(<span class="string">"""username"""</span>, <span class="string">"""user1"""</span>)</span><br><span class="line">      .param(<span class="string">"""password"""</span>, <span class="string">"""password1"""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb2545837452/img/big_window_content.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">21</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/operations.html"""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">43</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/operations.html"""</span>))</span><br><span class="line">    .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">4</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">      .get(<span class="string">"""/logout"""</span>))</span><br><span class="line"></span><br><span class="line">  setUp(scn.inject(atOnce(<span class="number">1</span> user))).protocols(httpProtocol)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u4EE3_u7801_u5206_u6790"><a href="#u4EE3_u7801_u5206_u6790" class="headerlink" title="代码分析"></a>代码分析</h2><p>MySimulation class 可以分为 4 部分：</p>
-<ol>
-<li>The HTTP protocol configuration</li>
-<li>The headers definition</li>
-<li>The scenario definition</li>
-<li>The simulation definition</li>
-</ol>
-<p><em>The HTTP protocol configuration</em></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">val httpProtocol = http</span><br><span class="line">  .<span class="function"><span class="title">baseURL</span><span class="params">(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptHeader</span><span class="params">(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptEncodingHeader</span><span class="params">(<span class="string">"gzip, deflate"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptLanguageHeader</span><span class="params">(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">connection</span><span class="params">(<span class="string">"keep-alive"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">userAgentHeader</span><span class="params">(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span></span></span><br></pre></td></tr></table></figure>
-<p>除了设置 http 协议之外，最重要的就是指定了 baseUrl</p>
-<p><em>The headers definition</em></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">"""Cache-Control"""</span> -&gt; <span class="string">"""max-age=0"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""text/css,*/*;q=0.1"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""image/png,image/*;q=0.8,*/*;q=0.5"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""*/*"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">"""Content-Type"""</span> -&gt; <span class="string">"""application/x-www-form-urlencoded"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">"""Accept"""</span> -&gt; <span class="string">"""application/json, text/javascript, */*; q=0.01"""</span>,</span><br><span class="line">    <span class="string">"""X-Requested-With"""</span> -&gt; <span class="string">"""XMLHttpRequest"""</span>)</span><br></pre></td></tr></table></figure>
-<p>每一个 header 都是一个 scala 的 Map。</p>
-<blockquote>
-<p>这些通用的 header 信息看上去没用，其实这些信息也额外增加了负载，也不容忽视的。</p>
-</blockquote>
-<p><em>The scenario definition</em></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">    .get(<span class="string">"""/"""</span>)</span><br><span class="line">    .headers(headers_1))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">    .get(<span class="string">"""/img/favicon.ico"""</span>))</span><br><span class="line">  .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">    .get(<span class="string">"""/gzip_N2030079394/bundles/all.css"""</span>)</span><br><span class="line">    .headers(headers_3))</span><br><span class="line">  .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb1024132465/img/background.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb4077127084/img/small_window_content.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">    .get(<span class="string">"""/gzip_N762261864/bundles/all.js"""</span>)</span><br><span class="line">    .headers(headers_6))</span><br><span class="line">  .pause(<span class="number">1</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb3761658453/img/sprite.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">30</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">    .post(<span class="string">"""/login"""</span>)</span><br><span class="line">    .headers(headers_8)</span><br><span class="line">    .param(<span class="string">"""username"""</span>, <span class="string">"""user1"""</span>)</span><br><span class="line">    .param(<span class="string">"""password"""</span>, <span class="string">"""password1"""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb2545837452/img/big_window_content.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">21</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/operations.html"""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">43</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/operations.html"""</span>))</span><br><span class="line">  .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">4</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">    .get(<span class="string">"""/logout"""</span>))</span><br></pre></td></tr></table></figure>
-<p>一个simluation 里面可以定义一个或者多个 scenario， 每个 scenario 是一个 scala 对象，</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val scn = <span class="function"><span class="title">scenario</span><span class="params">(<span class="string">"Name of my Scenario"</span>)</span></span>...</span><br></pre></td></tr></table></figure>
-<p>scenario 有两个方法：</p>
-<ul>
-<li>exec  - describe an action, usually a request sent to the tested application</li>
-<li>pause - simulate the thinking time of the user between pages</li>
-</ul>
-<p>每个 scenario 里会发送很多个 request， 也会思考好多次。所以你看到上面的代码都是 exec http request 和 pause。</p>
-<p>HTTP requests 的定义包括 名字，post 或者 get 方法，headers， 还有参数 :</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">http</span><span class="params">(<span class="string">"request_3"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">post</span><span class="params">(<span class="string">"/login"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">headers</span><span class="params">(headers_3)</span></span></span><br><span class="line">  .<span class="function"><span class="title">param</span><span class="params">(<span class="string">"username"</span>, <span class="string">"user1"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">param</span><span class="params">(<span class="string">"password"</span>, <span class="string">"password1"</span>)</span></span></span><br></pre></td></tr></table></figure>
-<p>这段代码会发送一个 POST 请求：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST <span class="string">http:</span><span class="comment">//excilysbank.gatling.cloudbees.net/login</span></span><br><span class="line"><span class="string">Accept:</span> text<span class="regexp">/html,application/</span>xhtml+xml,application<span class="regexp">/xml;q=0.9,*/</span>*;q=<span class="number">0.8</span></span><br><span class="line">Accept-<span class="string">Charset:</span> ISO-<span class="number">8859</span>-<span class="number">1</span>,utf-<span class="number">8</span>;q=<span class="number">0.7</span>,*;q=<span class="number">0.7</span></span><br><span class="line">Accept-<span class="string">Encoding:</span> gzip,deflate</span><br><span class="line">Accept-<span class="string">Language:</span> fr,en-us;q=<span class="number">0.7</span>,en;q=<span class="number">0.3</span></span><br><span class="line"><span class="string">Host:</span> excilysbank.gatling.cloudbees.net</span><br><span class="line">Keep-<span class="string">Alive:</span> <span class="number">115</span></span><br><span class="line">User-<span class="string">Agent:</span> Mozilla<span class="regexp">/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.17) Gecko/</span><span class="number">20110422</span> Ubuntu<span class="regexp">/9.10 Firefox/</span><span class="number">3.6</span><span class="number">.17</span></span><br><span class="line">Content-<span class="string">Length:</span> <span class="number">33</span></span><br><span class="line">Content-<span class="string">Type:</span> application/x-www-form-urlencoded</span><br><span class="line"><span class="string">Referer:</span> <span class="string">http:</span><span class="comment">//excilysbank.gatling.cloudbees.net/public/login.html</span></span><br><span class="line"></span><br><span class="line">username=user1&amp;password=password1</span><br></pre></td></tr></table></figure>
-<p><em>The simulation definition</em></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setUp</span><span class="params">(scn.inject(atOnce(<span class="number">1</span> user)</span></span>)).<span class="function"><span class="title">protocols</span><span class="params">(httpProtocol)</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="u8FD0_u884C_u4E0B_u5427_uFF01"><a href="#u8FD0_u884C_u4E0B_u5427_uFF01" class="headerlink" title="运行下吧！"></a>运行下吧！</h2><p>首先我们要把这个 Simulation move 到 user-files/simulations/下。</p>
-<p>然后运行<code>$GATHING_HOME/bin/gatling.sh</code>, Gatling 会找到 MySimulation。</p>
-<p><img src="/photos/run.png" alt=""></p>
-<p>选择 MySimulation，一路回车，然后等待运行结束，生成 report：</p>
-<p><img src="/photos/report.png" alt=""></p>
-<h2 id="u5206_u6790_u62A5_u8868_u5427_uFF01"><a href="#u5206_u6790_u62A5_u8868_u5427_uFF01" class="headerlink" title="分析报表吧！"></a>分析报表吧！</h2><p>Gatling 生成的报表非常漂亮而且有意义。每个图表的具体含义可以参考 <a href="https://github.com/excilys/gatling/wiki/Reports" target="_blank" rel="external">Reports</a><br>这样子的报表几乎可以直接呈给领导，都不需要自己采集数据绘图了。</p>
-<p><img src="/photos/gatling_report.png" alt=""></p>
-<h1 id="u4E0B_u4E00_u8282"><a href="#u4E0B_u4E00_u8282" class="headerlink" title="下一节"></a>下一节</h1><p>到目前为止，我们都是照搬 Gatling wiki 来做的，其实就了解了下基本情况。下一节，应该搞个 project 试验下。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/gatling/">gatling</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-08-29-add-hover-event-to-capybara" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/08/29/2013-08-29-add-hover-event-to-capybara/" class="article-date">
-  	<time datetime="2013-08-29T13:37:00.000Z" itemprop="datePublished">2013-08-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/08/29/2013-08-29-add-hover-event-to-capybara/">add hover event to capybara</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Seems capybara has implemented the <code>hover</code> function</p>
-<p>check <em><code>capybara/selenium/node.rb</code></em></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Capybara::Selenium::Node</span> <span class="inheritance">&lt; <span class="parent">Capybara::Driver</span></span>::<span class="title">Node</span></span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hover</span></span></span><br><span class="line">    driver.browser.action.move_to(native).perform</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>But it’s only a selenium implementation. Not all the browsers implement <code>hover</code> function,<br>Capybara has not apply the method.</p>
-<p>check <em><code>capybara/session.rb</code></em></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="constant">NODE_METHODS</span> = [</span><br><span class="line">  <span class="symbol">:all</span>, <span class="symbol">:first</span>, <span class="symbol">:attach_file</span>, <span class="symbol">:text</span>, <span class="symbol">:check</span>, <span class="symbol">:choose</span>,</span><br><span class="line">  <span class="symbol">:click_link_or_button</span>, <span class="symbol">:click_button</span>, <span class="symbol">:click_link</span>, <span class="symbol">:field_labeled</span>,</span><br><span class="line">  <span class="symbol">:fill_in</span>, <span class="symbol">:find</span>, <span class="symbol">:find_button</span>, <span class="symbol">:find_by_id</span>, <span class="symbol">:find_field</span>, <span class="symbol">:find_link</span>,</span><br><span class="line">  <span class="symbol">:has_content?</span>, <span class="symbol">:has_text?</span>, <span class="symbol">:has_css?</span>, <span class="symbol">:has_no_content?</span>, <span class="symbol">:has_no_text?</span>,</span><br><span class="line">  <span class="symbol">:has_no_css?</span>, <span class="symbol">:has_no_xpath?</span>, <span class="symbol">:resolve</span>, <span class="symbol">:has_xpath?</span>, <span class="symbol">:select</span>, <span class="symbol">:uncheck</span>,</span><br><span class="line">  <span class="symbol">:has_link?</span>, <span class="symbol">:has_no_link?</span>, <span class="symbol">:has_button?</span>, <span class="symbol">:has_no_button?</span>, <span class="symbol">:has_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_field?</span>, <span class="symbol">:has_checked_field?</span>, <span class="symbol">:has_unchecked_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_table?</span>, <span class="symbol">:has_table?</span>, <span class="symbol">:unselect</span>, <span class="symbol">:has_select?</span>, <span class="symbol">:has_no_select?</span>,</span><br><span class="line">  <span class="symbol">:has_selector?</span>, <span class="symbol">:has_no_selector?</span>, <span class="symbol">:click_on</span>, <span class="symbol">:has_no_checked_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_unchecked_field?</span>, <span class="symbol">:query</span>, <span class="symbol">:assert_selector</span>, <span class="symbol">:assert_no_selector</span></span><br><span class="line">]</span><br><span class="line"><span class="constant">SESSION_METHODS</span> = [</span><br><span class="line">  <span class="symbol">:body</span>, <span class="symbol">:html</span>, <span class="symbol">:source</span>, <span class="symbol">:current_url</span>, <span class="symbol">:current_host</span>, <span class="symbol">:current_path</span>,</span><br><span class="line">  <span class="symbol">:execute_script</span>, <span class="symbol">:evaluate_script</span>, <span class="symbol">:visit</span>,</span><br><span class="line">  <span class="symbol">:within</span>, <span class="symbol">:within_fieldset</span>, <span class="symbol">:within_table</span>, <span class="symbol">:within_frame</span>, <span class="symbol">:within_window</span>,</span><br><span class="line">  <span class="symbol">:save_page</span>, <span class="symbol">:save_and_open_page</span>, <span class="symbol">:save_screenshot</span>,</span><br><span class="line">  <span class="symbol">:reset_session!</span>, <span class="symbol">:response_headers</span>, <span class="symbol">:status_code</span>,</span><br><span class="line">  <span class="symbol">:title</span>, <span class="symbol">:has_title?</span>, <span class="symbol">:has_no_title?</span>, <span class="symbol">:current_scope</span></span><br><span class="line">]</span><br><span class="line"><span class="constant">DSL_METHODS</span> = <span class="constant">NODE_METHODS</span> + <span class="constant">SESSION_METHODS</span></span><br></pre></td></tr></table></figure>
-<p>You have two ways to use the hover function:</p>
-<ol>
-<li><p>convert element to selenium element and call hover</p>
-<p><code>element.native.hover</code></p>
-</li>
-</ol>
-<ol>
-<li><p>Add the snippet below to <code>hook.rb</code> file under the support directory.</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># find("span.assign").hover</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">Capybara</span></span></span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">Node</span></span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Element</span></span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">hover</span></span></span><br><span class="line">        <span class="variable">@session</span>.driver.browser.action.move_to(<span class="keyword">self</span>.native).perform</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/capybara/">Capybara</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-08-25-du-lu-fan-yan-shi" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/08/25/2013-08-25-du-lu-fan-yan-shi/" class="article-date">
-  	<time datetime="2013-08-25T13:37:00.000Z" itemprop="datePublished">2013-08-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/08/25/2013-08-25-du-lu-fan-yan-shi/">读陆犯焉识</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <blockquote>
-<p>妻子悄悄问：“他回来了吗？” 丈夫于是明白了，她打听的是她一直在等的那个人，虽然她已经忘了他的名字叫陆焉识。 “回来了。”丈夫悄悄地回答她。 “还来得及吗？”妻子又问。 “来得及的。他已经在路上了。” “哦，路很远的。” 婉喻最后这句话是袒护她的焉识；就是焉识来不及赶到也不是他的错，是路太远。</p>
-</blockquote>
-<p>不得不说严歌苓写人物很厉害，行云流水间，<br>把人物的一颦一笑展现在读者眼前，有时浓郁，有时淡雅。小姨多鹤如此，陆犯焉识也如此。</p>
-<p>一口气把陆犯焉识读完，地铁上，马桶上，床上，然后不停的像身边人推荐，来读读看吧。<br>朋友会问有什么好的？ 说不上来，我不是一个擅长评价的人，特别是书籍电影之类的，<br>看完之后，常常就两个评价，好看。我一直以为一部好的作品，最大的作用就是加速无聊时间。<br>在地铁始发站，找个位置，然后开始读，没几章，目的地到了，心想还没看够呢。然后心满意足地继续看。</p>
-<p>这总归是一本幸福的书，人们看事情，总是看一个头看一个尾，开头是幸福的，结尾是幸福的，所以<br>全部都是幸福的。失败的人才会把过程拿出来说事。陆焉识从没觉得过不开心，他最多觉得不自在，这是知识分子的臭老九。<br>女人的离开，好友的翻脸，政治的迫害，对他而言就是人生的一种经历，经过了，就留下幸福的回忆。到最后，婉喻去了，就剩下<br>老几在回忆。</p>
-<p>这总归也是一本有关知识分子和政治的书。陆焉识的人生和政治碰撞交织融汇，知识分子的尊严碎了一地，自由的只有思维，<br>20 年的大西北出来了一个抖抖索索的老几，饶是如此，内心还是知识分子。给小孩们补课的时候，还不忘讽刺下毛主席。<br>谁对谁错呢？谁也不敢说，但我想陆焉识还是更适合美国。</p>
-<p>这当然也是一本关于爱情的书，三段爱情，一段异国恋，两段婚外恋，还有一段异地恋。这段异地恋持续了 20 年，并越来越浓烈。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/读书笔记/">读书笔记</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/陆犯焉识/">陆犯焉识</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/08/21/2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao/" class="article-date">
-  	<time datetime="2013-08-21T13:37:00.000Z" itemprop="datePublished">2013-08-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/08/21/2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao/">我的 nexus 7 2013 软件列表</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>首先感谢<a href="http://weibo.com/u/1868904263" target="_blank" rel="external">小郭</a>，感谢美帝，没有你们，我就不会有 nexus 7 2013。<br>其实我一直想要台 Android 的平板，早在 2011 年的时候，当时同办公室的同事做 google image 测试，发了台 moto 的 xoom 做测试机，我就眼红不已。<br>在 2012 年的时候，我让<a href="http://weibo.com/dantawangzi" target="_blank" rel="external">小立</a>给我带过一个 nexus 7 2012， 结果被同事很喜欢，就转给他了。</p>
-<p>可想而知： 一个人想得到一个平板，这其中需要无数的机缘巧合。</p>
-<p>这台<em>奶骑</em>（网上人都这么叫-_-!），我拿到手差不多一个礼拜，<green>新买粪坑三天香</green>的热情也退了。中间装过无数软件，也卸载过无数软件，<br>也发现了几个问题。于是想总结下，一来以后自己可以用到，二来也和大家分享下。</p>
-<p>###问题：</p>
-<ol>
-<li><p>外壳脆弱</p>
-<p> nexus 7 2013 很轻很薄，所以显得特别柔弱，用力捏下，可以听见塑料的声响。当然塑料也很嫩，磕一下就一个小坑。</p>
-</li>
-<li><p>触屏失灵</p>
-<p> 在国外网上看到的是，多点触摸有问题，会触发别的按键。这个我还没遇到，但是我遇到的是，触屏失灵，没有反应，在重新打开屏幕之后就恢复了。<br> 不确定是硬件还是软件的问题。</p>
-</li>
-<li><p>按钮生硬</p>
-<p> 无论是电源按钮还是音量按钮，都硬的很，没有手感可言。</p>
-</li>
-<li><p>应用太少</p>
-<p> HD 的应用实在太少了，相比苹果系列， Android 真是要加油啊！</p>
-</li>
-</ol>
-<p>其实做为第一批， google 和 asus 做的还算不错啦， 虽然网上都说 google + asus = bad quality。</p>
-<p>###应用：</p>
-<ul>
-<li><p>音乐视频：</p>
-<ul>
-<li>豆瓣FM</li>
-<li>虾米音乐</li>
-<li>MoboPlayer</li>
-<li>MXPlayer (有广告)</li>
-<li>快手看片</li>
-<li>哗哩哗哩动画</li>
-<li>PPTV HD</li>
-<li>QQ 音乐 (我用的时候音乐断断续续过一次)</li>
-</ul>
-</li>
-<li><p>阅读工具:</p>
-<ul>
-<li>多看阅读 (强烈推荐，买了好多书了。不过前面说到触屏失去反应也有可能是多看造成的。)</li>
-<li>布卡漫画 (强烈推荐，宅男腐女必备)</li>
-<li>Kindle</li>
-<li>Adobe Reader</li>
-<li>Flipboard</li>
-<li>鲜果网</li>
-<li>网易云阅读</li>
-</ul>
-</li>
-<li><p>聊天社交：</p>
-<ul>
-<li>QQ hd</li>
-<li>微信</li>
-<li>Skype</li>
-<li>豆果网</li>
-<li>大众点评</li>
-<li>weico 实在找不到好的微博的应用</li>
-</ul>
-</li>
-<li><p>工具类：</p>
-<ul>
-<li>ES 文件浏览器 (强烈推荐)</li>
-<li>爱壁纸 HD</li>
-<li>有道词典</li>
-<li>墨迹天气</li>
-<li>金山快盘</li>
-</ul>
-</li>
-<li><p>游戏：</p>
-<ul>
-<li>Doodle Fit2</li>
-</ul>
-</li>
-</ul>
-<p>以上应用如果不是指明 HD 的，基本就是矮子拔将军，但是效果不错哦！其实这些软件中有很多都有 HD 版本的，可惜都是一年半载不更新的那种，可惜了。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>对我而言，平板的主要用途就是看书，看视频，相对而言上面的这些应用也足够了。当然这也是我一家之言，我也到底没有把所有的应用都体验过一把，所以希望有好用的，<br>请大力推给我</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/android/">Android</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nexus-7-2013/">nexus 7 2013</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-08-16-vim-cha-jian-tui-jian" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/08/16/2013-08-16-vim-cha-jian-tui-jian/" class="article-date">
-  	<time datetime="2013-08-16T13:37:00.000Z" itemprop="datePublished">2013-08-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/08/16/2013-08-16-vim-cha-jian-tui-jian/">vim 插件推荐</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>早上起来逛 <a href="http://ruby-china.org" target="_blank" rel="external">ruby china</a>， 看到 <a href="http://ruby-china.org/topics/13350" target="_blank" rel="external">vim 插件推荐</a>，进去一看果然有料。</p>
-<ul>
-<li>vim-easy-align</li>
-<li>tcomment_vim</li>
-</ul>
-<p>果断把我的 tabular 和 nerdcommenter 替换掉。</p>
-<h3 id="vim-easy-align"><a href="#vim-easy-align" class="headerlink" title="vim-easy-align"></a>vim-easy-align</h3><p>地址： <a href="https://github.com/junegunn/vim-easy-align" target="_blank" rel="external">https://github.com/junegunn/vim-easy-align</a></p>
-<p><img src="/images/vim-easy-align.gif" alt=""></p>
-<p>比任何一个对齐插件都简单啊，不愧是 <em>easy</em></p>
-<h3 id="tcomment_vim"><a href="#tcomment_vim" class="headerlink" title="tcomment_vim"></a>tcomment_vim</h3><p>地址: <a href="https://github.com/tomtom/tcomment_vim" target="_blank" rel="external">https://github.com/tomtom/tcomment_vim</a></p>
-<p>直接看介绍吧， <a href="http://vimsomnia.blogspot.com/2010/11/tcomment-vim-plugin.html" target="_blank" rel="external">http://vimsomnia.blogspot.com/2010/11/tcomment-vim-plugin.html</a></p>
-<p>这是一个快速注释的插件，有自动识别文件类型(甚至是嵌套的类型)等的功能，感觉比 nerdcommenter 好很多</p>
-<p>默认的快捷键是 <code>gcc</code>， 其实我就用那么一个。。。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/vim/">vim</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-08-12-install-vim74-from-source" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/08/12/2013-08-12-install-vim74-from-source/" class="article-date">
-  	<time datetime="2013-08-12T13:37:00.000Z" itemprop="datePublished">2013-08-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/08/12/2013-08-12-install-vim74-from-source/">Install vim74 from source</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="Vim_7-4_released_21"><a href="#Vim_7-4_released_21" class="headerlink" title="Vim 7.4 released!"></a>Vim 7.4 released!</h2><p><img src="http://www.vim.org/images/vim_drill_small.JPG" alt=""></p>
-<p>What are you waiting for?</p>
-<hr>
-<h3 id="install_vim7-4_for_mac"><a href="#install_vim7-4_for_mac" class="headerlink" title="install vim7.4 for mac"></a>install vim7.4 for mac</h3><p>HomeBrew has update the vim formula to the latest 7.4! woo!</p>
-<p>See <a href="https://raw.github.com/mxcl/homebrew/master/Library/Formula/vim.rb" target="_blank" rel="external">vim.rb</a></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'formula'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vim</span> <span class="inheritance">&lt; <span class="parent">Formula</span></span></span></span><br><span class="line">  homepage <span class="string">'http://www.vim.org/'</span></span><br><span class="line">  <span class="comment"># Get the base 7.4 tarball from Vim.org. But once patches start again, go</span></span><br><span class="line">  <span class="comment"># back to tracking Debian unstable here:</span></span><br><span class="line">  <span class="comment"># http://ftp.de.debian.org/debian/pool/main/v/vim/</span></span><br><span class="line">  url <span class="string">'http://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2'</span></span><br><span class="line">  sha1 <span class="string">'601abf7cc2b5ab186f40d8790e542f86afca86b7'</span></span><br><span class="line"></span><br><span class="line">  head <span class="string">'https://vim.googlecode.com/hg/'</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># We only have special support for finding depends_on :python, but not yet for</span></span><br><span class="line">  <span class="comment"># :ruby, :perl etc., so we use the standard environment that leaves the</span></span><br><span class="line">  <span class="comment"># PATH as the user has set it right now.</span></span><br><span class="line">  env <span class="symbol">:std</span></span><br><span class="line"></span><br><span class="line">  <span class="constant">LANGUAGES</span>         = <span class="string">%w(lua mzscheme perl python tcl ruby)</span></span><br><span class="line">  <span class="constant">DEFAULT_LANGUAGES</span> = <span class="string">%w(ruby python)</span></span><br><span class="line"></span><br><span class="line">  option <span class="string">"override-system-vi"</span>, <span class="string">"Override system vi"</span></span><br><span class="line">  option <span class="string">"disable-nls"</span>, <span class="string">"Build vim without National Language Support (translated messages, keymaps)"</span></span><br><span class="line"></span><br><span class="line">  <span class="constant">LANGUAGES</span>.each <span class="keyword">do</span> |language|</span><br><span class="line">    option <span class="string">"with-<span class="subst">#&#123;language&#125;</span>"</span>, <span class="string">"Build vim with <span class="subst">#&#123;language&#125;</span> support"</span></span><br><span class="line">    option <span class="string">"without-<span class="subst">#&#123;language&#125;</span>"</span>, <span class="string">"Build vim without <span class="subst">#&#123;language&#125;</span> support"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  depends_on <span class="symbol">:hg</span> =&gt; <span class="symbol">:build</span> <span class="keyword">if</span> build.head?</span><br><span class="line">  depends_on <span class="symbol">:python</span> =&gt; <span class="symbol">:recommended</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">install</span></span></span><br><span class="line">    <span class="constant">ENV</span>[<span class="string">'LUA_PREFIX'</span>] = <span class="constant">HOMEBREW_PREFIX</span></span><br><span class="line"></span><br><span class="line">    language_opts = <span class="constant">LANGUAGES</span>.map <span class="keyword">do</span> |language|</span><br><span class="line">      <span class="keyword">if</span> <span class="constant">DEFAULT_LANGUAGES</span>.<span class="keyword">include</span>? language <span class="keyword">and</span> !build.<span class="keyword">include</span>? <span class="string">"without-<span class="subst">#&#123;language&#125;</span>"</span></span><br><span class="line">        <span class="string">"--enable-<span class="subst">#&#123;language&#125;</span>interp"</span></span><br><span class="line">      <span class="keyword">elsif</span> build.<span class="keyword">include</span>? <span class="string">"with-<span class="subst">#&#123;language&#125;</span>"</span></span><br><span class="line">        <span class="string">"--enable-<span class="subst">#&#123;language&#125;</span>interp"</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span>.compact</span><br><span class="line"></span><br><span class="line">    opts = language_opts</span><br><span class="line">    opts &lt;&lt; <span class="string">"--disable-nls"</span> <span class="keyword">if</span> build.<span class="keyword">include</span>? <span class="string">"disable-nls"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Avoid that vim always links System's Python even if configure tells us</span></span><br><span class="line">    <span class="comment"># it has found a brewed Python. Verify with `otool -L`.</span></span><br><span class="line">    <span class="keyword">if</span> python &amp;&amp; python.brewed?</span><br><span class="line">      <span class="constant">ENV</span>.prepend <span class="string">'LDFLAGS'</span>, <span class="string">"-F<span class="subst">#&#123;python.framework&#125;</span>"</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># <span class="doctag">XXX:</span> Please do not submit a pull request that hardcodes the path</span></span><br><span class="line">    <span class="comment"># to ruby: vim can be compiled against 1.8.x or 1.9.3-p385 and up.</span></span><br><span class="line">    <span class="comment"># If you have problems with vim because of ruby, ensure a compatible</span></span><br><span class="line">    <span class="comment"># version is first in your PATH when building vim.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># We specify HOMEBREW_PREFIX as the prefix to make vim look in the</span></span><br><span class="line">    <span class="comment"># the right place (HOMEBREW_PREFIX/share/vim/&#123;vimrc,vimfiles&#125;) for</span></span><br><span class="line">    <span class="comment"># system vimscript files. We specify the normal installation prefix</span></span><br><span class="line">    <span class="comment"># when calling "make install".</span></span><br><span class="line">    system <span class="string">"./configure"</span>, <span class="string">"--prefix=<span class="subst">#&#123;<span class="constant">HOMEBREW_PREFIX</span>&#125;</span>"</span>,</span><br><span class="line">                          <span class="string">"--mandir=<span class="subst">#&#123;man&#125;</span>"</span>,</span><br><span class="line">                          <span class="string">"--enable-gui=no"</span>,</span><br><span class="line">                          <span class="string">"--without-x"</span>,</span><br><span class="line">                          <span class="string">"--enable-multibyte"</span>,</span><br><span class="line">                          <span class="string">"--with-tlib=ncurses"</span>,</span><br><span class="line">                          <span class="string">"--enable-cscope"</span>,</span><br><span class="line">                          <span class="string">"--with-features=huge"</span>,</span><br><span class="line">                          <span class="string">"--with-compiledby=Homebrew"</span>,</span><br><span class="line">                          *opts</span><br><span class="line">    system <span class="string">"make"</span></span><br><span class="line">    <span class="comment"># If stripping the binaries is not enabled, vim will segfault with</span></span><br><span class="line">    <span class="comment"># statically-linked interpreters like ruby</span></span><br><span class="line">    <span class="comment"># http://code.google.com/p/vim/issues/detail?id=114&amp;thanks=114&amp;ts=1361483471</span></span><br><span class="line">    system <span class="string">"make"</span>, <span class="string">"install"</span>, <span class="string">"prefix=<span class="subst">#&#123;prefix&#125;</span>"</span>, <span class="string">"STRIP=/usr/bin/true"</span></span><br><span class="line">    ln_s bin+<span class="string">'vim'</span>, bin+<span class="string">'vi'</span> <span class="keyword">if</span> build.<span class="keyword">include</span>? <span class="string">'override-system-vi'</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>Just use</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install vim --with-python --with-ruby --with-perl --with-lua --with-tcl</span><br></pre></td></tr></table></figure>
-<p>Wait or take a coffee break! And enjoy vim 7.4.</p>
-<p>By the way, when you want to update brew but failed because of some formula you’ve editted which results in merge…</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> `brew --prefix`</span><br><span class="line">git checkout .</span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="install_vim7-4_for_ubuntu"><a href="#install_vim7-4_for_ubuntu" class="headerlink" title="install vim7.4 for ubuntu"></a>install vim7.4 for ubuntu</h3><p>A little complex but very easy!</p>
-<ul>
-<li>install the dependencies</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \</span><br><span class="line">libgtk2.<span class="number">0</span>-dev libatk1.<span class="number">0</span>-dev libbonoboui2-dev \</span><br><span class="line">libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev libperl-dev</span><br></pre></td></tr></table></figure>
-<p>Note. I’m not very clear about the dependencies but <code>python-dev</code> <code>ruby-dev</code> <code>libperl-dev</code> are for python, ruby, perl interp.<br>For me, that’s enough.</p>
-<ul>
-<li>remove the old vim</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove vim vim-runtime gvim  vim-tiny vim-common vim-gui-common</span><br></pre></td></tr></table></figure>
-<ul>
-<li>download the source and compile to install</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">wget http://ftp.vim.org/pub/vim/unix/vim-<span class="number">7.4</span>.tar.bz2</span><br><span class="line">tar xvf vim-<span class="number">7.4</span>.tar.bz2</span><br><span class="line"><span class="built_in">cd</span> vim</span><br><span class="line"></span><br><span class="line">./configure \</span><br><span class="line">    --prefix=/usr \</span><br><span class="line">    --enable-perlinterp=dynamic \</span><br><span class="line">    --enable-pythoninterp \</span><br><span class="line">    --enable-rubyinterp \</span><br><span class="line">    --enable-luainterp=dynamic \</span><br><span class="line">    --enable-cscope \</span><br><span class="line">    --enable-gui=auto \</span><br><span class="line">    --enable-gtk2-check \</span><br><span class="line">    --enable-gnome-check \</span><br><span class="line">    --enable-multibyte \</span><br><span class="line">    --enable-fontset \</span><br><span class="line">    --with-features=huge \</span><br><span class="line">    --with-x \</span><br><span class="line">    --with-ruby-command=/usr/bin/ruby \</span><br><span class="line">    --with-compiledby=<span class="string">"Lihuazhang &lt;lihuazhang@hotmail.com&gt;"</span> \</span><br><span class="line">    --with-python-config-dir=/usr/lib/python2.<span class="number">7</span>/config-x86_64-linux-gnu \</span><br><span class="line"></span><br><span class="line"><span class="comment"># --with-python3-config-dir=/usr/lib/python3.3/config-3.3m-x86_64-linux-gnu</span></span><br></pre></td></tr></table></figure>
-<p>Wait for a seconds and <code>sudo make install</code> once the configure is compelted.</p>
-<ul>
-<li>set your vim  as your default editor</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The prefix=/usr should be specified!</span></span><br><span class="line">sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim <span class="number">1</span></span><br><span class="line">sudo update-alternatives --set editor /usr/bin/vim</span><br><span class="line">sudo update-alternatives --install /usr/bin/vi vi /usr/bin/vim <span class="number">1</span></span><br><span class="line">sudo update-alternatives --set vi /usr/bin/vim</span><br></pre></td></tr></table></figure>
-<p>Then done. Enjoy vim7.4.</p>
-<hr>
-<p>I have personally tested both installation.</p>
-<p>If you have any question, please ping me. Or</p>
-<p>Refer:</p>
-<ol>
-<li><a href="http://vim.wikia.com/wiki/Building_Vim" target="_blank" rel="external">http://vim.wikia.com/wiki/Building_Vim</a></li>
-<li><a href="https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source" target="_blank" rel="external">https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source</a></li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/vim/">vim</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
     <article id="post-2013-08-08-cucumberhe-capybaraxia-de-pageobject" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1381,6 +440,773 @@
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cucumber/">cucumber</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pageobject/">pageobject</a></li></ul>
 	</div>
 
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-08-06-git-revert" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/08/06/2013-08-06-git-revert/" class="article-date">
+  	<time datetime="2013-08-06T13:37:00.000Z" itemprop="datePublished">2013-08-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/08/06/2013-08-06-git-revert/">git revert</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>最近一直在 github 上提交代码，所以总会遇到提交的代码 broken 了之前的 function。</p>
+<blockquote>
+<p>Perhaps you didn’t have enough coffee that morning, or it was just before lunch.</p>
+</blockquote>
+<p>其实这还无关紧要，再提交一个修复下就可以了。 但是也会遇到比较头疼的， 比如：</p>
+<p><img src="/photos/git_graph_error.jpg" alt=""></p>
+<p>注意蓝色这条线的 merge 那个点，开发同学因为粗心忘记把自动 merge 的代码提交了。<br>黑色这条线的同学，如果 pull 下来，就会发现一部分代码回到了蓝线的起点时候的状态。<br>然后呢，黑线这边的 merge 就会导致部分代码 rollback 了。很悲催吧。这个时候呢，提交修复也不太可能，最好的办法就是 <code>revert</code> 了。</p>
+<h3 id="u6982_u5FF5"><a href="#u6982_u5FF5" class="headerlink" title="概念"></a>概念</h3><p><code>git revert</code> 命令撤销一个 commit。它的做法是提交一个新的 commit， 这个 commit 里面将你要回滚的 commit 的修改全部撤销。<br>所以它不会破坏你的历史。如图所示：提交一个新的 commit （蓝球）， 撤销灰球修改。</p>
+<p><img src="/photos/git-tutorial_changes-revert.png" alt=""></p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p><a href="http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html" target="_blank" rel="external">http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html</a></p>
+<p>假设我们有这样一个 git 历史：</p>
+<p><img src="/photos/revert1.png" alt=""></p>
+<p>我们来一次 revert</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD</span><br><span class="line">Finished one revert.</span><br><span class="line">[master]: created <span class="number">1</span>e689e2:</span><br><span class="line">  <span class="string">"Revert "</span>Updated to Rails <span class="number">2.3</span>.<span class="number">2</span> and edge hoptoad_notifier<span class="string">""</span></span><br></pre></td></tr></table></figure>
+<p>revert 命令会自动帮你 commit， 并为你生成 commit 信息: Revert + 被回滚的 commit 的信息。<br>这里就是 “Revert “Updated to Rails 2.3.2 and edge hoptoad_notifier””</p>
+<p>再来看下 revert 后的历史图：</p>
+<p><img src="/photos/revert2.png" alt=""></p>
+<p>可以看到 revert 的在最前面添加了一个 commit。</p>
+<blockquote>
+<p>By default using this command will bring up your $EDITOR so you can modify the commit message of the revert.<br>Use this to explain why the changes are being backed out!<br>If for some reason you don’t want to edit the commit message, tacking on <code>--no-edit</code> will allow you do so.</p>
+</blockquote>
+<p>另外如果你不想 commit 的话，还可以用 <code>-n</code> 参数</p>
+<blockquote>
+<p>Another helpful option is the -n or –no-commit flag.<br>This will simply leave the reverted changes in your working directory and not automatically commit them.<br>If you need to edit files further to complete the revert or possibly revert more than one commit, try out this option.</p>
+</blockquote>
+<p>接着，我们是试试看 revert 一个 merge 的 commit</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD~<span class="number">1</span></span><br><span class="line">fatal: Commit <span class="number">137</span>ea95 is a merge but no -m option was given.</span><br></pre></td></tr></table></figure>
+<p>它告诉你 commit 137ea95 是一个 merge， 需要你指定一个 -m 的option。</p>
+<blockquote>
+<p>-m parent-number, –mainline parent-number<br>Usually you cannot revert a merge because you do not know which side of the merge should be considered the mainline.<br>This option specifies the parent number (starting from 1) of the mainline and allows revert to reverse the change relative to the specified parent.</p>
+</blockquote>
+<p>意思是，你需要指定一个 parent number （从1开始），然后 revert 会将基于这个 parent number 的改变都回滚。</p>
+<p>再来看下 merge commit 的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> HEAD~<span class="number">1</span> -<span class="number">1</span></span><br><span class="line">commit <span class="number">137</span>ea95c911633d3e908f6906e3adf6372cfb0ad</span><br><span class="line">Merge: <span class="number">5</span>f576a9... <span class="number">62</span>db4af...</span><br><span class="line">Author: Nick Quaranto &lt;nick@quaran.to&gt;</span><br><span class="line">Date:   Mon Mar <span class="number">16</span> <span class="number">16</span>:<span class="number">22</span>:<span class="number">37</span> <span class="number">2009</span> -<span class="number">0400</span></span><br><span class="line"></span><br><span class="line">    Merging <span class="keyword">in</span> rails-<span class="number">2.3</span> branch</span><br></pre></td></tr></table></figure>
+<p>可以看到 <code>5f576a9</code> 和 <code>62db4af</code> 被 merge 了。</p>
+<p>所以</p>
+<ol>
+<li><code>git revert HEAD~1 -m 1</code> 就会 revert 基于 <code>5f576a9</code> 所发生的变化</li>
+<li><code>git revert HEAD~1 -m 2</code> 就会 revert 基于 <code>62db4af</code> 所发生的变化  </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD~<span class="number">1</span> --no-edit --mainline <span class="number">2</span></span><br><span class="line">Finished one revert.</span><br><span class="line">[master]: created <span class="number">526</span>b346: <span class="string">"Revert "</span>Merging <span class="keyword">in</span> rails-<span class="number">2.3</span> branch<span class="string">""</span></span><br><span class="line"></span><br><span class="line">$ git <span class="built_in">log</span> -<span class="number">1</span></span><br><span class="line">commit d64d3983845dfa18a5d935c7ac5a4855c125e474</span><br><span class="line">Author: Nick Quaranto &lt;nick@quaran.to&gt;</span><br><span class="line">Date:   Mon Mar <span class="number">16</span> <span class="number">19</span>:<span class="number">24</span>:<span class="number">45</span> <span class="number">2009</span> -<span class="number">0400</span></span><br><span class="line"></span><br><span class="line">    Revert <span class="string">"Merging in rails-2.3 branch"</span></span><br><span class="line"></span><br><span class="line">    This reverts commit <span class="number">137</span>ea95c911633d3e908f6906e3adf6372cfb0ad, reversing</span><br><span class="line">    changes made to <span class="number">62</span>db4af8c77852d2cc9c19efc6dfb97e0d0067f5.</span><br></pre></td></tr></table></figure>
+<p>很明确的告诉你， 这个 revert 提交了一个 commit： 137ea95c911633d3e908f6906e3adf6372cfb0ad，这个 commit 把 merge 操作对 62db4af8c77852d2cc9c19efc6dfb97e0d0067f5 发生的改变都回滚了。</p>
+<h3 id="u901A_u4FD7_u8BF4_u6CD5"><a href="#u901A_u4FD7_u8BF4_u6CD5" class="headerlink" title="通俗说法"></a>通俗说法</h3><ol>
+<li>普通的 revert： 比如桌上有一碗饭， 我吃完了，然后我又把这碗饭填满，像没吃一样， 填满的动作就是 revert。 看上去桌上的饭没有动过，但是事情其实发生了，就是历史没有被改变。</li>
+<li>merge 的 revert：桌上有一碗饭，A 加了一道菜， B 加了一碗汤， merge 之后就是有饭有菜有汤。 现在在有饭有菜有汤的情况下去掉汤， 就是 <code>git revert &quot;commit of merge&quot; -m 菜</code>。</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/git/">git</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/08/02/2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi/" class="article-date">
+  	<time datetime="2013-08-02T13:37:00.000Z" itemprop="datePublished">2013-08-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/08/02/2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi/">8-02-工作琐事</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="Xpath_//_Trap"><a href="#Xpath_//_Trap" class="headerlink" title="Xpath // Trap"></a>Xpath // Trap</h3><p>I am trying to loacte a attr element in a label context using capybara. The html looks like:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"post"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"post_name"</span>&gt;</span></span><br><span class="line">      Name<span class="tag">&lt;<span class="title">attr</span> <span class="attribute">title</span>=<span class="value">"required"</span>&gt;</span>*<span class="tag">&lt;/<span class="title">attr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>And I use the code like:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">within <span class="string">"div.post"</span></span><br><span class="line"></span><br><span class="line">  label = page.find <span class="string">"label"</span>, <span class="string">"Name"</span></span><br><span class="line">  label.find <span class="symbol">:xpath</span>, <span class="string">"//attr[@title=\"required\"]"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>As usual, I’m pretty sure that the find will work like:</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//label//attr</span></span><br></pre></td></tr></table></figure>
+<p>the find search the xpath in label context and find it.</p>
+<p>Quite easy but I’m wrong.</p>
+<p>In XPath the expression // means something very specific, and it might not be what you think.<br>Contrary to common belief, // means <red>anywhere in the document</red> not <red>anywhere in the current context</red>.<br>As an example:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page.find(<span class="symbol">:xpath</span>, <span class="string">'//body'</span>).all(<span class="symbol">:xpath</span>, <span class="string">'//script'</span>)</span><br></pre></td></tr></table></figure>
+<p>You might expect this to find all script tags in the body,<br>but actually, it finds all script tags in the entire document,<br>not only those in the body! What you’re looking for is the .// expression which means “any descendant of the current node”:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">page.find(<span class="symbol">:xpath</span>, <span class="string">'//body'</span>).all(<span class="symbol">:xpath</span>, <span class="string">'.//script'</span>)</span><br></pre></td></tr></table></figure>
+<p>The same thing goes for within:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">within(<span class="symbol">:xpath</span>, <span class="string">'//body'</span>) <span class="keyword">do</span></span><br><span class="line">  page.find(<span class="symbol">:xpath</span>, <span class="string">'.//script'</span>)</span><br><span class="line">  within(<span class="symbol">:xpath</span>, <span class="string">'.//table/tbody'</span>) <span class="keyword">do</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>You can refer to <a href="https://github.com/jnicklas/capybara" target="_blank" rel="external">capybara document</a></p>
+<p>And also there is a great post: <a href="http://www.bennadel.com/blog/2142-Using-And-Expressions-In-XPath-XML-Search-Directives-In-ColdFusion.htm" target="_blank" rel="external">Using “//“ And “.//“ Expressions In XPath XML Search Directives In ColdFusion</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/workdiary/">WorkDiary</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/capybara/">capybara</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xpath/">xpath</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-07-30-gong-zuo-ri-ji-7-31" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/07/30/2013-07-30-gong-zuo-ri-ji-7-31/" class="article-date">
+  	<time datetime="2013-07-30T01:56:00.000Z" itemprop="datePublished">2013-07-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/30/2013-07-30-gong-zuo-ri-ji-7-31/">7-31-工作琐事</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="1-_Get_a_mail_from_a_colleague_this_morning"><a href="#1-_Get_a_mail_from_a_colleague_this_morning" class="headerlink" title="1. Get a mail from a colleague this morning"></a>1. Get a mail from a colleague this morning</h2><p>When you commit code, make sure you do it with your real name, and a proper email address (your scilearn address). You can set your name like this, in the repo:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config user.name <span class="string">"Hot Day"</span></span><br><span class="line">$ git config user.email <span class="string">"hday@hotday.com.cn"</span></span><br></pre></td></tr></table></figure>
+<p> You can also do it globally, for all repos:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"Hot Day"</span></span><br><span class="line">$ git config --global user.email <span class="string">"hday@hotday.com.cn"</span></span><br></pre></td></tr></table></figure>
+<p> and check the current name and email of a repo:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --get user.name</span><br><span class="line">$ git config --get user.email</span><br></pre></td></tr></table></figure>
+<p>Thanks!</p>
+<hr>
+<h2 id="2-_factory_girl_and_mysql"><a href="#2-_factory_girl_and_mysql" class="headerlink" title="2. factory_girl and mysql"></a>2. factory_girl and mysql</h2><p>用 <code>truncate</code> 清空的表 <code>id</code> 会从新记录, 而 <code>delete</code> 清空的表则不会从新记录 会继续原数据记录,当然这里 <code>id</code> 为自增长。</p>
+<p>When I am writing the cucucmber features for our new project, we meet an issue:</p>
+<p>the snippet below will not work.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Given the following posts exist&#10;      | id | name   | description    | user_id |&#10;      | 1  | a post | This is a post | 1       |</span><br></pre></td></tr></table></figure>
+<p>If everything is ok, the Given will find the step in <code>pickle_step.rb</code>:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create models from a table</span></span><br><span class="line"><span class="constant">Given</span>(<span class="regexp">/^the following <span class="subst">#&#123;capture_plural_factory&#125;</span> exists?:?$/</span>) <span class="keyword">do</span> |plural_factory, table|</span><br><span class="line">  create_models_from_table(plural_factory, table)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>And the code will call the factory which defined before using factory_girl.<br>Then it will save a post in database sure enough.</p>
+<p>But it says</p>
+<blockquote>
+<p>Mysql2::Error: Cannot add or update a child row: a foreign key constraint fails</p>
+</blockquote>
+<p>Obviously, we have something wrong with the user_id field. And more obviously, we have not generate a user.</p>
+<p>I thought before the factory_girl will take care of the association object if there is no record in database.<br>Actually, if we feed the factory attributes, factory_girl will take these values and create a post object rather than create a association record.</p>
+<p>So here, it won’t create a user with id 1. The Given will be interpreted to a sql at last:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`posts`</span> ( <span class="string">`created_at`</span>, <span class="string">`description`</span>, <span class="string">`id`</span>, <span class="string">`name`</span>,  <span class="string">`updated_at`</span>, <span class="string">`user_id`</span>) <span class="keyword">VALUES</span> (<span class="string">'2013-07-31 06:12:41'</span>, <span class="string">'This is a post'</span>, <span class="number">1</span>, <span class="string">'a post'</span>, <span class="number">1</span>, <span class="string">'2013-07-31 06:12:41'</span>, <span class="number">1</span>)</span></span><br></pre></td></tr></table></figure>
+<p>And we have a foreign key constraint on user_id, of course it will fail.</p>
+<p>###Solutions:</p>
+<ol>
+<li>Given a user with name: “Test”</li>
+<li>Prepare a user before test.</li>
+<li>If the user does not matter, just remove user_id, let factory_girl take care of user.</li>
+</ol>
+<h2 id="3-_Capybara_get_the_native_css_value"><a href="#3-_Capybara_get_the_native_css_value" class="headerlink" title="3. Capybara get the native css value"></a>3. Capybara get the native css value</h2><p><code>element.native.css_value(&quot;text-overflow&quot;)</code></p>
+<ol>
+<li>element is the capybara element</li>
+<li>native is used to get the selenium-webdriver element</li>
+<li>css_value is used to get the computed style.</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/workdiary/">WorkDiary</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/capybara/">capybara</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/factory-gril/">factory_gril</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-07-11-wo-de-vimrc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/07/11/2013-07-11-wo-de-vimrc/" class="article-date">
+  	<time datetime="2013-07-11T15:25:00.000Z" itemprop="datePublished">2013-07-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/11/2013-07-11-wo-de-vimrc/">我的 vimrc</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>##Update##</p>
+<p><em>1. 删除restore_view， 使用以下片段代替</em></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" Remove restore_view, since mkview will break rails vim in mac</span><br><span class="line"></span><span class="string">" When editing a file, always jump to the last known cursor position.</span><br><span class="line"></span><span class="string">" Don't do it when the position is invalid or when inside an event handler</span><br><span class="line"></span><span class="string">" (happens when dropping a file on gvim).</span><br><span class="line"></span><span class="string">" Also don't do it when the mark is in the first line, that is the default</span><br><span class="line"></span><span class="string">" position when opening a file.</span><br><span class="line"></span><span class="keyword">autocmd</span> BufReadPost *</span><br><span class="line">  \ <span class="keyword">if</span> <span class="built_in">line</span>(<span class="string">"'\""</span>) &gt; <span class="number">1</span> &amp;&amp; <span class="built_in">line</span>(<span class="string">"'\""</span>) &lt;= <span class="built_in">line</span>(<span class="string">"$"</span>) |</span><br><span class="line">  \   <span class="keyword">exe</span> <span class="string">"normal! g`\""</span> |</span><br><span class="line">  \ <span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+<p>理由见：<a href="https://github.com/tpope/vim-rails/issues/25" target="_blank" rel="external">tpope/vim-rails#25</a>,  restore_view (mkview) 导致 rails.vim 一直报错： E345: Can’t find file “xxx” in path。</p>
+<p><em>2. 加入 <a href="https://github.com/terryma/vim-multiple-cursors" target="_blank" rel="external">terryma/vim-multiple-cursors</a></em></p>
+<blockquote>
+<p>There have been many attempts at bringing Sublime Text’s awesome multiple selection feature into Vim,<br>but none so far have been in my opinion a faithful port that is simplistic to use,<br>yet powerful and intuitive enough for an existing Vim user. vim-multiple-cursors is yet another attempt at that.</p>
+</blockquote>
+<hr>
+<p><a href="http://spf13.com/project/spf13-vim" target="_blank" rel="external">spf13</a></p>
+<p><a href="https://github.com/carlhuda/janus" target="_blank" rel="external">Janus</a></p>
+<p><a href="https://github.com/lihuazhang/vim" target="_blank" rel="external">我的vim</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br></pre></td><td class="code"><pre><span class="line">set nocompatible               " be iMproved</span><br><span class="line">filetype off                   " required!</span><br><span class="line"></span><br><span class="line">set rtp+=~/.vim/bundle/vundle/</span><br><span class="line">call vundle#rc()</span><br><span class="line"></span><br><span class="line">" let Vundle manage Vundle</span><br><span class="line">" required! </span><br><span class="line">Bundle 'gmarik/vundle'</span><br><span class="line"></span><br><span class="line">" My Bundles here:</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" General</span><br><span class="line">""</span><br><span class="line">Bundle 'MarcWeber/vim-addon-mw-utils'</span><br><span class="line">Bundle 'tomtom/tlib_vim'</span><br><span class="line">if executable('ack-grep')</span><br><span class="line">    let g:ackprg="ack-grep -H --nocolor --nogroup --column"</span><br><span class="line">    Bundle 'mileszs/ack.vim'</span><br><span class="line">elseif executable('ack')</span><br><span class="line">    Bundle 'mileszs/ack.vim'</span><br><span class="line">elseif executable('ag')</span><br><span class="line">    Bundle 'mileszs/ack.vim'</span><br><span class="line">    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'</span><br><span class="line">endif</span><br><span class="line">Bundle 'scrooloose/nerdtree'</span><br><span class="line">Bundle 'jistr/vim-nerdtree-tabs'</span><br><span class="line">Bundle 'tpope/vim-surround'</span><br><span class="line">Bundle 'Raimondi/delimitMate'</span><br><span class="line">Bundle 'kien/ctrlp.vim'</span><br><span class="line">Bundle 'Lokaltog/vim-easymotion'</span><br><span class="line">Bundle 'godlygeek/csapprox'</span><br><span class="line">Bundle 'matchit.zip'</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Themes and Colors</span><br><span class="line">""</span><br><span class="line">Bundle 'flazz/vim-colorschemes'</span><br><span class="line">Bundle 'bling/vim-airline'</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Programming</span><br><span class="line">""</span><br><span class="line">Bundle 'scrooloose/syntastic'</span><br><span class="line">Bundle 'tpope/vim-fugitive'</span><br><span class="line">Bundle 'airblade/vim-gitgutter'</span><br><span class="line">Bundle 'mattn/webapi-vim'</span><br><span class="line">Bundle 'mattn/gist-vim'</span><br><span class="line">Bundle 'scrooloose/nerdcommenter'</span><br><span class="line">Bundle 'godlygeek/tabular'</span><br><span class="line">if executable('ctags')</span><br><span class="line">  Bundle 'majutsushi/tagbar'</span><br><span class="line">endif</span><br><span class="line">Bundle 'nathanaelkane/vim-indent-guides'</span><br><span class="line"></span><br><span class="line">" Python</span><br><span class="line">Bundle 'klen/python-mode'</span><br><span class="line">Bundle 'python.vim'</span><br><span class="line">Bundle 'python_match.vim'</span><br><span class="line">Bundle 'pythoncomplete'</span><br><span class="line">" Javascript</span><br><span class="line">Bundle 'elzr/vim-json'</span><br><span class="line">Bundle 'groenewege/vim-less'</span><br><span class="line">Bundle 'pangloss/vim-javascript'</span><br><span class="line">Bundle 'briancollins/vim-jst'</span><br><span class="line">Bundle 'kchmck/vim-coffee-script'</span><br><span class="line">" Java</span><br><span class="line">Bundle 'derekwyatt/vim-scala'</span><br><span class="line">Bundle 'derekwyatt/vim-sbt'</span><br><span class="line">" HTML</span><br><span class="line">Bundle 'amirh/HTML-AutoCloseTag'</span><br><span class="line">Bundle 'hail2u/vim-css3-syntax'</span><br><span class="line">Bundle 'tpope/vim-haml'</span><br><span class="line">Bundle 'mattn/zencoding-vim'</span><br><span class="line">Bundle 'chrisbra/color_highlight'</span><br><span class="line">" Ruby</span><br><span class="line">Bundle 'tpope/vim-rails'</span><br><span class="line">let g:rubycomplete_buffer_loading = 1</span><br><span class="line">Bundle 'tpope/vim-cucumber'</span><br><span class="line">Bundle 'quentindecock/vim-cucumber-align-pipes'</span><br><span class="line">Bundle 'vim-ruby/vim-ruby'</span><br><span class="line">" Markdown</span><br><span class="line">Bundle 'tpope/vim-markdown'</span><br><span class="line"></span><br><span class="line">" Snippets</span><br><span class="line">Bundle 'Shougo/neocomplcache'</span><br><span class="line">Bundle 'Shougo/neosnippet'</span><br><span class="line">Bundle 'honza/vim-snippets'</span><br><span class="line"></span><br><span class="line">filetype plugin indent on     " required!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">"" Settings</span><br><span class="line">let mapleader = ','</span><br><span class="line">set background=dark</span><br><span class="line">if filereadable(expand("~/.vim/bundle/vim-colorschemes/colors/ir_black.vim"))</span><br><span class="line">  colorscheme ir_black</span><br><span class="line">endif</span><br><span class="line">set history=700</span><br><span class="line">set nu</span><br><span class="line">syntax on</span><br><span class="line">set hidden</span><br><span class="line">set virtualedit=onemore</span><br><span class="line">set showmatch</span><br><span class="line">set cursorline</span><br><span class="line">highlight clear SignColumn</span><br><span class="line">set visualbell</span><br><span class="line">set mouse=a</span><br><span class="line">set mousehide</span><br><span class="line">set autochdir</span><br><span class="line">autocmd BufEnter * silent! lcd %:p:h</span><br><span class="line"></span><br><span class="line">" Remove restore_view, since mkview will break rails vim in mac</span><br><span class="line">" When editing a file, always jump to the last known cursor position.</span><br><span class="line">" Don't do it when the position is invalid or when inside an event handler</span><br><span class="line">" (happens when dropping a file on gvim).</span><br><span class="line">" Also don't do it when the mark is in the first line, that is the default</span><br><span class="line">" position when opening a file.</span><br><span class="line">autocmd BufReadPost *</span><br><span class="line">  \ if line("'\"") &gt; 1 &amp;&amp; line("'\"") &lt;= line("$") |</span><br><span class="line">  \   exe "normal! g`\"" |</span><br><span class="line">  \ endif</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" encoding</span><br><span class="line">""</span><br><span class="line">set encoding=utf-8</span><br><span class="line">set fileencodings=utf-8,gbk,cp936,latin-1</span><br><span class="line">set termencoding=utf-8</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Paste</span><br><span class="line">""</span><br><span class="line">if has ('x') &amp;&amp; has ('gui') " On Linux use + register for copy-paste</span><br><span class="line">  set clipboard=unnamedplus</span><br><span class="line">elseif has ('gui')          " On mac and Windows, use * register for copy-paste</span><br><span class="line">  set clipboard=unnamed</span><br><span class="line">endif</span><br><span class="line">set pastetoggle=&lt;F12&gt;</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Status line</span><br><span class="line">""</span><br><span class="line">set showmode</span><br><span class="line"></span><br><span class="line">if has('statusline')</span><br><span class="line">  set laststatus=2</span><br><span class="line"></span><br><span class="line">  " Broken down into easily includeable segments</span><br><span class="line">  set statusline=%&lt;%f\                     " Filename</span><br><span class="line">  set statusline+=%w%h%m%r                 " Options</span><br><span class="line">  set statusline+=%&#123;fugitive#statusline()&#125; " Git Hotness</span><br><span class="line">  set statusline+=\ [%&#123;&amp;ff&#125;/%Y]            " Filetype</span><br><span class="line">  set statusline+=\ [%&#123;getcwd()&#125;]          " Current dir</span><br><span class="line">  set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">if has('cmdline_info')</span><br><span class="line">    set ruler</span><br><span class="line">    set rulerformat=%30(%=\:buf%n%y%m%r%w\ %l,%c%V\ %P%)</span><br><span class="line">    set showcmd</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Backup</span><br><span class="line">""</span><br><span class="line">set nobackup</span><br><span class="line">set nowb</span><br><span class="line">set noswapfile</span><br><span class="line"></span><br><span class="line">if has('persistent_undo')</span><br><span class="line">    set undodir=~/.vim/undofiles</span><br><span class="line">    set undofile                " So is persistent undo ...</span><br><span class="line">    set undolevels=1000         " Maximum number of changes that can be undone</span><br><span class="line">    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Indent</span><br><span class="line">""</span><br><span class="line">set smartindent</span><br><span class="line">set autoindent</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Whitespace and Tab</span><br><span class="line">""</span><br><span class="line">set nowrap</span><br><span class="line">set smarttab</span><br><span class="line">set tabstop=2</span><br><span class="line">set shiftwidth=2</span><br><span class="line">set expandtab</span><br><span class="line">set backspace=indent,eol,start</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" List</span><br><span class="line">""</span><br><span class="line">set list</span><br><span class="line">set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Searching</span><br><span class="line">""</span><br><span class="line">set hlsearch    " highlight matches</span><br><span class="line">set incsearch   " incremental searching</span><br><span class="line">set ignorecase  " searches are case insensitive...</span><br><span class="line">set smartcase   " ... unless they contain at least one capital letter</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Wild settings</span><br><span class="line">""</span><br><span class="line">set wildmode=list:longest,full</span><br><span class="line">set wildmenu</span><br><span class="line">set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem</span><br><span class="line">set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz</span><br><span class="line">set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*</span><br><span class="line">set wildignore+=*.swp,*~,._*,*.bak</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Vundles settings</span><br><span class="line">""</span><br><span class="line"></span><br><span class="line">"" airline</span><br><span class="line">""</span><br><span class="line">set t_Co=256</span><br><span class="line">let g:airline_powerline_fonts=1</span><br><span class="line">let g:airline_theme='light'</span><br><span class="line">" unicode symbols</span><br><span class="line">let g:airline_left_sep = '»'</span><br><span class="line">let g:airline_left_sep = '▶'</span><br><span class="line">let g:airline_right_sep = '«'</span><br><span class="line">let g:airline_right_sep = '◀'</span><br><span class="line">let g:airline_linecolumn_prefix = '␊ '</span><br><span class="line">let g:airline_linecolumn_prefix = '␤ '</span><br><span class="line">let g:airline_linecolumn_prefix = '¶ '</span><br><span class="line">let g:airline_fugitive_prefix = '⎇ '</span><br><span class="line">let g:airline_paste_symbol = 'ρ'</span><br><span class="line">let g:airline_paste_symbol = 'Þ'</span><br><span class="line">let g:airline_paste_symbol = '∥'</span><br><span class="line"></span><br><span class="line">"" NerdTree</span><br><span class="line">""</span><br><span class="line">map &lt;C-e&gt; :NERDTreeToggle&lt;CR&gt;:NERDTreeMirror&lt;CR&gt;</span><br><span class="line">map &lt;leader&gt;e :NERDTreeFind&lt;CR&gt;</span><br><span class="line">nmap &lt;leader&gt;nt :NERDTreeFind&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">let NERDTreeShowBookmarks=1</span><br><span class="line">let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']</span><br><span class="line">let NERDTreeChDirMode=0</span><br><span class="line">let NERDTreeQuitOnOpen=1</span><br><span class="line">let NERDTreeMouseMode=2</span><br><span class="line">let NERDTreeShowHidden=1</span><br><span class="line">let NERDTreeKeepTreeInNewTab=1</span><br><span class="line">let g:nerdtree_tabs_open_on_gui_startup=0</span><br><span class="line"></span><br><span class="line">"" ctrlp</span><br><span class="line">""</span><br><span class="line">let g:ctrlp_working_path_mode = 'ra'</span><br><span class="line">nnoremap &lt;silent&gt; &lt;leader&gt;f :CtrlPBuffer&lt;CR&gt;</span><br><span class="line">let g:ctrlp_custom_ignore = &#123;</span><br><span class="line">      \ 'dir':  '\.git$\|\.hg$\|\.svn$',</span><br><span class="line">      \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' &#125;</span><br><span class="line"></span><br><span class="line">" On Windows use "dir" as fallback command.</span><br><span class="line">if has('win32') || has('win64')</span><br><span class="line">  let g:ctrlp_user_command = &#123;</span><br><span class="line">        \ 'types': &#123;</span><br><span class="line">        \ 1: ['.git', 'cd %s &amp;&amp; git ls-files . --cached --exclude-standard --others'],</span><br><span class="line">        \ 2: ['.hg', 'hg --cwd %s locate -I .'],</span><br><span class="line">        \ &#125;,</span><br><span class="line">        \ 'fallback': 'dir %s /-n /b /s /a-d'</span><br><span class="line">        \ &#125;</span><br><span class="line">else</span><br><span class="line">  let g:ctrlp_user_command = &#123;</span><br><span class="line">        \ 'types': &#123;</span><br><span class="line">        \ 1: ['.git', 'cd %s &amp;&amp; git ls-files . --cached --exclude-standard --others'],</span><br><span class="line">        \ 2: ['.hg', 'hg --cwd %s locate -I .'],</span><br><span class="line">        \ &#125;,</span><br><span class="line">        \ 'fallback': 'find %s -type f'</span><br><span class="line">        \ &#125;</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">"" TagBar</span><br><span class="line">""</span><br><span class="line">nnoremap &lt;silent&gt; &lt;leader&gt;tt :TagbarToggle&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">"" Indent guide</span><br><span class="line">""</span><br><span class="line">let g:indent_guides_start_level = 2</span><br><span class="line">let g:indent_guides_guide_size = 1</span><br><span class="line">let g:indent_guides_enable_on_vim_startup = 1</span><br><span class="line">let g:indent_guides_auto_colors = 1</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Color</span><br><span class="line">let g:colorizer_auto_color = 1</span><br><span class="line">let g:colorizer_auto_filetype='css,html'</span><br><span class="line">let g:colorizer_skip_comments = 1</span><br><span class="line">let g:colorizer_colornames = 0</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" OmniComplete</span><br><span class="line">if has("autocmd") &amp;&amp; exists("+omnifunc")</span><br><span class="line">  autocmd Filetype *</span><br><span class="line">        \if &amp;omnifunc == "" |</span><br><span class="line">        \setlocal omnifunc=syntaxcomplete#Complete |</span><br><span class="line">        \endif</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray</span><br><span class="line">hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE</span><br><span class="line">hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE</span><br><span class="line"></span><br><span class="line">au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif</span><br><span class="line">set completeopt=menu,preview,longest</span><br><span class="line"></span><br><span class="line">"" Neocomplcache</span><br><span class="line">""</span><br><span class="line">let g:acp_enableAtStartup = 0</span><br><span class="line">let g:neocomplcache_enable_at_startup = 1</span><br><span class="line">let g:neocomplcache_enable_smart_case = 1</span><br><span class="line">let g:neocomplcache_min_syntax_length = 3</span><br><span class="line"></span><br><span class="line">imap &lt;C-k&gt; &lt;Plug&gt;(neosnippet_expand_or_jump)</span><br><span class="line">smap &lt;C-k&gt; &lt;Plug&gt;(neosnippet_expand_or_jump)</span><br><span class="line">imap &lt;expr&gt;&lt;TAB&gt; neosnippet#jumpable() ? "\&lt;Plug&gt;(neosnippet_expand_or_jump)" : pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"</span><br><span class="line">smap &lt;expr&gt;&lt;TAB&gt; neosnippet#jumpable() ? "\&lt;Plug&gt;(neosnippet_expand_or_jump)" : "\&lt;TAB&gt;"</span><br><span class="line"></span><br><span class="line">" For snippet_complete marker.</span><br><span class="line">if has('conceal')</span><br><span class="line">  set conceallevel=2 concealcursor=i</span><br><span class="line">endif</span><br><span class="line"></span><br><span class="line">" Define dictionary.</span><br><span class="line">let g:neocomplcache_dictionary_filetype_lists = &#123;</span><br><span class="line">            \ 'default' : '',</span><br><span class="line">            \ 'vimshell' : $HOME.'/.vimshell_hist',</span><br><span class="line">            \ 'scheme' : $HOME.'/.gosh_completions'</span><br><span class="line">            \ &#125;</span><br><span class="line"></span><br><span class="line">" Plugin key-mappings.</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-g&gt;     neocomplcache#undo_completion()</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-l&gt;     neocomplcache#complete_common_string()</span><br><span class="line"></span><br><span class="line">" Recommended key-mappings.</span><br><span class="line">" &lt;CR&gt;: close popup and save indent.</span><br><span class="line">inoremap &lt;silent&gt; &lt;CR&gt; &lt;C-r&gt;=&lt;SID&gt;my_cr_function()&lt;CR&gt;</span><br><span class="line">function! s:my_cr_function()</span><br><span class="line">  return neocomplcache#smart_close_popup() . "\&lt;CR&gt;"</span><br><span class="line">  " For no inserting &lt;CR&gt; key.</span><br><span class="line">  "return pumvisible() ? neocomplcache#close_popup() : "\&lt;CR&gt;"</span><br><span class="line">endfunction</span><br><span class="line">" &lt;TAB&gt;: completion.</span><br><span class="line">" inoremap &lt;expr&gt;&lt;TAB&gt;  pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"</span><br><span class="line">" &lt;C-h&gt;, &lt;BS&gt;: close popup and delete backword char.</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-h&gt; neocomplcache#smart_close_popup()."\&lt;C-h&gt;"</span><br><span class="line">inoremap &lt;expr&gt;&lt;BS&gt; neocomplcache#smart_close_popup()."\&lt;C-h&gt;"</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-y&gt;  neocomplcache#close_popup()</span><br><span class="line">inoremap &lt;expr&gt;&lt;C-e&gt;  neocomplcache#cancel_popup()</span><br><span class="line"></span><br><span class="line">" Enable omni completion.</span><br><span class="line">autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS</span><br><span class="line">autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags</span><br><span class="line">autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS</span><br><span class="line">autocmd FileType python setlocal omnifunc=pythoncomplete#Complete</span><br><span class="line">autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags</span><br><span class="line">"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete</span><br><span class="line">autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc</span><br><span class="line"></span><br><span class="line">" Enable heavy omni completion.</span><br><span class="line">if !exists('g:neocomplcache_omni_patterns')</span><br><span class="line">    let g:neocomplcache_omni_patterns = &#123;&#125;</span><br><span class="line">endif</span><br><span class="line">let g:neocomplcache_omni_patterns.php = '[^. \t]-&gt;\h\w*\|\h\w*::'</span><br><span class="line">let g:neocomplcache_omni_patterns.perl = '\h\w*-&gt;\h\w*\|\h\w*::'</span><br><span class="line">let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|-&gt;\)'</span><br><span class="line">let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|-&gt;\)\|\h\w*::'</span><br><span class="line">let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'</span><br><span class="line"></span><br><span class="line">" Enable snipMate compatibility feature.</span><br><span class="line">let g:neosnippet#enable_snipmate_compatibility = 1</span><br><span class="line"></span><br><span class="line">" Tell Neosnippet about the other snippets</span><br><span class="line">let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'</span><br><span class="line"></span><br><span class="line">" Disable the neosnippet preview candidate window</span><br><span class="line">" When enabled, there can be too much visual noise</span><br><span class="line">" especially when splits are used.</span><br><span class="line">set completeopt-=preview</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Function</span><br><span class="line">""</span><br><span class="line">function! StripTrailingWhitespace()</span><br><span class="line">  let _s=@/</span><br><span class="line">  let l = line(".")</span><br><span class="line">  let c = col(".")</span><br><span class="line">  " do the business:</span><br><span class="line">  %s/\s\+$//e</span><br><span class="line">  " clean up: restore previous search history, and cursor position</span><br><span class="line">  let @/=_s</span><br><span class="line">  call cursor(l, c)</span><br><span class="line">endfunction</span><br><span class="line">autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre &lt;buffer&gt; call StripTrailingWhitespace()</span><br><span class="line"></span><br><span class="line">""</span><br><span class="line">"" Key mapping</span><br><span class="line">""</span><br><span class="line">nmap &lt;leader&gt;jt &lt;Esc&gt;:%!python -m json.tool&lt;CR&gt;&lt;Esc&gt;:set filetype=json&lt;CR&gt;</span><br><span class="line">cmap w!! w !sudo tee % &gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/vim/">Vim</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-06-27-ruby-here-doc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/06/27/2013-06-27-ruby-here-doc/" class="article-date">
+  	<time datetime="2013-06-27T13:37:00.000Z" itemprop="datePublished">2013-06-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/06/27/2013-06-27-ruby-here-doc/">ruby 的 Heredocs</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>看 <a href="https://github.com/capistrano">Capistrano</a> 源码， 在 <code>capistrano / bin / capify</code> 下，发现<br><code>here doc</code> 的写法，</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unindent</span><span class="params">(string)</span></span></span><br><span class="line">  indentation = string[<span class="regexp">/\A\s*/</span>]</span><br><span class="line">  string.strip.gsub(<span class="regexp">/^<span class="subst">#&#123;indentation&#125;</span>/</span>, <span class="string">""</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"> <span class="string">"Capfile"</span> =&gt; unindent(&lt;&lt;-<span class="constant">FILE</span>),</span><br><span class="line"></span><br><span class="line">    load <span class="string">'deploy'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Uncomment if you are using Rails' asset pipeline</span></span><br><span class="line">    <span class="comment"># load 'deploy/assets'</span></span><br><span class="line"></span><br><span class="line">    load <span class="string">'config/deploy'</span> <span class="comment"># remove this line to skip loading any of the default tasks</span></span><br><span class="line">  <span class="constant">FILE</span></span><br></pre></td></tr></table></figure>
+<p>孤陋寡闻的我立马google 了一把找到篇好文，抄下来分享：</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/ruby/">ruby</a>
+	</div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a  href="/2013/06/27/2013-06-27-ruby-here-doc/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-06-26-shell-script-to-control-tomcat" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/06/26/2013-06-26-shell-script-to-control-tomcat/" class="article-date">
+  	<time datetime="2013-06-26T13:37:00.000Z" itemprop="datePublished">2013-06-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/06/26/2013-06-26-shell-script-to-control-tomcat/">能马上用起来的控制 tomcat 的脚本</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>难的在网上找到的能马上用起来的 shell 脚本，心情愉悦啊！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">export</span> BASE=/home/programs/jakarta-tomcat-<span class="number">5.0</span>.<span class="number">28</span>/bin</span><br><span class="line">prog=jakarta-tomcat-<span class="number">5.0</span>.<span class="number">28</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">stat</span></span>() &#123;</span><br><span class="line"><span class="keyword">if</span> [ `ps auxwwww|grep <span class="variable">$prog</span>|grep -v grep|wc <span class="operator">-l</span>` <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="built_in">echo</span> Tomcat is running.</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="built_in">echo</span> Tomcat is not running.</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">start)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ `ps auxwwww|grep <span class="variable">$prog</span>|grep -v grep|wc <span class="operator">-l</span>` <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="built_in">echo</span> Tomcat seems to be running. Use the restart option.</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="variable">$BASE</span>/startup.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">stat</span></span><br><span class="line">;;</span><br><span class="line">stop)</span><br><span class="line"><span class="variable">$BASE</span>/shutdown.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="keyword">if</span> [ `ps auxwwww|grep <span class="variable">$prog</span>|grep -v grep|wc <span class="operator">-l</span>` <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="keyword">for</span> pid <span class="keyword">in</span> `ps auxwww|grep <span class="variable">$prog</span>|grep -v grep|tr <span class="operator">-s</span> <span class="string">' '</span>|cut <span class="operator">-d</span> <span class="string">' '</span> <span class="operator">-f</span>2`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> <span class="variable">$pid</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">stat</span></span><br><span class="line">;;</span><br><span class="line">restart)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ `ps auxwwww|grep <span class="variable">$prog</span>|grep -v grep|wc <span class="operator">-l</span>` <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="keyword">for</span> pid <span class="keyword">in</span> `ps auxwww|grep <span class="variable">$prog</span>|grep -v grep|tr <span class="operator">-s</span> <span class="string">' '</span>|cut <span class="operator">-d</span> <span class="string">' '</span> <span class="operator">-f</span>2`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span> <span class="variable">$pid</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="variable">$BASE</span>/startup.sh <span class="number">2</span>&gt;&amp;<span class="number">1</span> &gt; /dev/null</span><br><span class="line"><span class="built_in">stat</span></span><br><span class="line">;;</span><br><span class="line">status)</span><br><span class="line"><span class="built_in">stat</span></span><br><span class="line">;;</span><br><span class="line">*)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Usage: tomcat start|stop|restart|status"</span></span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>参见 <a href="http://www.techpaste.com/2012/01/shell-script-control-stopstartrestartstatus-tomcat-application-server/" target="_blank" rel="external">http://www.techpaste.com/2012/01/shell-script-control-stopstartrestartstatus-tomcat-application-server/</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/linux/">linux</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/05/26/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/" class="article-date">
+  	<time datetime="2013-05-26T13:37:00.000Z" itemprop="datePublished">2013-05-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/05/26/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/">在WebDriver里使用Sizzle.js</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>##XPATH vs CSS</p>
+<p>2008年的时候， 开始使用 Selenium RC 来写 Web 自动化测试，用的是 XPATH 定位，在 Firefox 上工作的很好，可惜在 IE 上跑不起来。<br>因为后来转去做开发工作，对此问题也没深究。时隔5年，09年时候转测试，已经4年多了。Selenium RC 都变成了 WebDriver， 从2013 GTAC 来看，<br>WebDriver 逐渐成为 Web 自动化的主流框架。</p>
+<p>WebDriver 同样使用 XPATH 和 CSS locator。孰优孰劣，google 一下，一大把，不过目前风向偏向 CSS， 理由如下</p>
+<ol>
+<li>更快(尤其在 IE 上)</li>
+<li>更简单</li>
+<li>更加可读</li>
+<li>符合 Jquery 定位逻辑</li>
+<li>XPATH 在不同浏览器上的实现可能不太一样，也许在 Firefox 工作，在 IE 上就不一定了。</li>
+<li>CSS 可以引入第三方的 Javascript 库来更好的定位元素， 比如马上要说的 Sizzle.js</li>
+</ol>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
+	</div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a  href="/2013/05/26/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2013-05-12-wo-de-mu-qin" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/05/12/2013-05-12-wo-de-mu-qin/" class="article-date">
+  	<time datetime="2013-05-12T13:37:00.000Z" itemprop="datePublished">2013-05-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/05/12/2013-05-12-wo-de-mu-qin/">我的母亲</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>有一次，和妻逛超市，谈起了龙应台的目送里其中一个描述母亲的片段，“母亲是搭错了时光机，再也回不来的人。” 后来回到家后，又把书翻出来，重新看了一遍并又和妻说了一遍。我说我妈大概也会变成那样吧。妻说怎会呢，然后想了下，我妈才会呢。</p>
+<p>于是突然就很想说说我的母亲。虽然她现在还没有老到糊涂，但是她也藏不住白头发，牙齿也掉了几颗，化妆品也修不好皱纹。时光像一个油画大师，把浓郁的岁月，刻画在她的身上。</p>
+<p>每天，她会在那里抱怨，腰酸背痛啊，骨刺啊，颈椎病啊。但饶是如此，却阻止不了她的大嗓门，每个清晨，每个晚上，家里永远是她的声音。而一旦她出门在外，家里就瞬间安静。很久以前，我的外婆也是大嗓门，外婆喊我回家吃饭的声音隔了那么多年，还常常在我耳边回响，即使她已经故去。</p>
+<p>母亲年轻的时候，总是抱怨外婆的大嗓门，却不知自己慢慢也成为她抱怨的那种人。外婆说，哪一天我声音轻了，我就死了。后来她真的去了，一点声音都没。</p>
+<p>我也常抱怨母亲的大嗓门，有时候实在受不了的时候，就会责怪她，说轻点，会死么？她就会突然不说话，然后把外婆的话说一遍，等我轻的时候，就是我死的时候。</p>
+<p>很多人觉得母亲不好，也会和妻说母亲很烦，妻也善解人意，笑笑而已。我想说，其实年轻时候，母亲倒是不烦人的。家里有男人顶着，什么事情也不用管，虽然生活不殷实，也无忧无虑。但是如果儿子五岁丧夫，儿子读大学第二任丈夫又重病缠身至今，哪个女人会不成为祥林嫂？在两次都本应该幸福的时候，总是祸不单行。</p>
+<p>母亲进入更年期后，便再也没有出来过。加之父亲重病，家就成了蜗牛壳，母亲一个人背着，还得向前走。于是所有的外交都成了母亲的活，生病之后，父亲变成了一个怕事怕麻烦的人。所以，不行，不好，不准成就了母亲的黑脸，而父亲就成了老好人。家里的房客有事相求的时候，总是偷偷和父亲说，末了还加一句，别给阿姨知道。</p>
+<p>家里没有男人顶粱的时候，总是有人欺负。所以不把得以把自己变成男人。所有的人都成了敌人。而父亲病后，家里经济也出现了问题，除了照顾父亲之外还要拼命工作。而在异地上大学的我却依然浑浑噩噩，生活费一分不少的往家里要，课也照样挂。家那头的母亲在通宵为父亲挂号，在严夏烈日下，在狂风嫉雨中，工作挣生计。</p>
+<p>这样的生活，直到我大学毕业，慢慢在工作上有所长进，才有所起色。父亲的病也日趋稳定，可以洗洗刷刷。而我开始成家立业。所有人都慢慢的起色起来。只有母亲，依然活在那段困苦的日子里出不来，她依旧大嗓门，依旧黑脸，依旧固执地对所有人都有所戒备。但她依然是我的母亲。</p>
+<p>生活在一起的时候，总是讨厌她的啰嗦，她的大嗓门念叨，也从心里不喜欢她的世界观。但是也许很多年后，一定还是会和妻说起，或者和我的孩子说起，母亲就是那个会在你睡着以后，还把你叫醒，告诉你要睡觉的人。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/生活杂记/">生活杂记</a>
+	</div>
+
+
+      
       
       <div class="clearfix"></div>
     </div>

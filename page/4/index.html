@@ -202,679 +202,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-2013-04-28-jmeter-bing-qi-pu-zhi-foreach-controller" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/04/27/2013-04-28-jmeter-bing-qi-pu-zhi-foreach-controller/" class="article-date">
-  	<time datetime="2013-04-27T13:37:00.000Z" itemprop="datePublished">2013-04-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/04/27/2013-04-28-jmeter-bing-qi-pu-zhi-foreach-controller/">JMeter 兵器谱之 ForEach Controller</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>同样的，英文好的同学请移驾<a href="http://jmeter.apache.org/usermanual/component_reference.html#ForEach_Controller" target="_blank" rel="external">ForEach Controller</a></p>
-<p>ForEach controller 是用来遍历集合的，比如 XPATH Extractor 或者 正则表达式 Extractor 解析出来的集合。ForEach做的事情大致有2件，</p>
-<ol>
-<li>取得集合</li>
-<li>遍历集合，将每一个值应用到 ForEach 下面的 Smapler 或者 controller 中去。</li>
-</ol>
-<p>来看一个例子，我们要访问百度首页，取得首页所有的链接，然后访问这些链接。我们要做的是：</p>
-<ol>
-<li>用一个 http sample 访问 <a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a></li>
-<li>在这个 sample 下添加一个正则表达式提取器，使用 &lt;a href=”([^”]+)” 提取所有的 link 的 href 值。</li>
-<li>用 ForEach Controller 遍历第2步提取出来的 href 值，然后一一访问。</li>
-</ol>
-<p>JMeter 脚本结构大致如下，</p>
-<p><img src="http://jmeter.apache.org/images/screenshots/logic-controller/foreach-example.png" alt="alt text"></p>
-<p>先来看正则表达式提取器</p>
-<p><img src="https://ers1ja.bn1.livefilestore.com/y1pDLRMxvFylmW1qmUQUvGe1DJVuwh_KUusRReatQ3QtB4ZxbWAN1HCxgqqZJnl6b9yv1rFXc8mTxe5_1LS4ji1zK4fhsRC6DWr/regular.png?psid=1" alt="alt text"></p>
-<p>注意这个引用名称 <strong>inputVar</strong>， 提取出来的所有匹配值都会放在这个变量里，事实上 <strong>inputVar</strong> 相当于一个 set 了。然后我们在紧跟的 ForEach 里面使用这个变量。</p>
-<p><img src="https://ers1ja.bn1.livefilestore.com/y1p1K2BOBifU6X2D6r3Ij1cXIrT_D3mwqLArS24AiUmyiIzRzAc6vkXpldU7lxAkQhCWiMmqOoV07DiBMIxJKLyDa4vpJ72qPBp/foreach.png?psid=1" alt="alt text"></p>
-<p>可以看到，在 ForEach 里，我们将之前的 <strong>inputVar</strong> 设置为输入变量。然后用 <strong>returnVar</strong> 做为输出。 这其实就类似于 JAVA 里面的 ForEach。</p>
-<pre><code>for(Object returnVar : inputVar) {
-//process
-}
-</code></pre><p>这个 process 过程就是下图所示：<br><img src="https://ers1ja.bn1.livefilestore.com/y1pf_N1kVq04KkJwyA20UlawUiT_AmrnaudC6MyqCYrcnRyoer1rJXJEZM_lYgONZgC2IwH99dywgmKiVaFSUkXS3ktzbtHRZZ_/http%201.png?psid=1" alt="alt text"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/jmeter/">Jmeter</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test-china-org/">test-china.org</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-04-26-htmlunit-jie-shao" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/04/26/2013-04-26-htmlunit-jie-shao/" class="article-date">
-  	<time datetime="2013-04-26T13:37:00.000Z" itemprop="datePublished">2013-04-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/04/26/2013-04-26-htmlunit-jie-shao/">HtmlUnit 介绍</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在 @Lily 的 <a href="http://test-china.org/topics/8" target="_blank" rel="external">Juint4 + WebDriver 入门篇</a> 中， Lily 问起了 HtmlUnit Driver。对 HtmlUnit Driver 我倒是没有接触太多， 所以特意去找了些文章看看。</p>
-<p>在 <a href="http://code.google.com/p/selenium/wiki/HtmlUnitDriver" target="_blank" rel="external">selenium 官方 wiki</a> 上说：</p>
-<blockquote>
-<p>This is currently the fastest and most lightweight implementation of WebDriver. As the name suggests, this is based on HtmlUnit.</p>
-</blockquote>
-<p>所以想要了解 HtmlUnit Driver， 就必先追根溯源地研究下 HtmlUnit。</p>
-<blockquote>
-<p>HtmlUnit is a “GUI-Less browser for Java programs”. It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc… just like you do in your “normal” browser.</p>
-</blockquote>
-<p>简单来说， HtmlUnit 就是没有界面的，你看不见的，但是却能做浏览器的活的 JAVA 版本的浏览器。需要说明的是，<strong>HtmlUnit 本身不是一个测试框架， 它真的只是一个模拟浏览器行为的程序。</strong> 所以需要和 Junit 或者 TestNG 等测试框架配合起来使用。同时，很多开源的工具也使用 HtmlUnit 来模拟浏览器行为，比如大名鼎鼎的 WebDriver。</p>
-<p>下面，搬抄一把 HtmlUnit 的入门指南：</p>
-<h2 id="u5EFA_u7ACB_u9879_u76EE"><a href="#u5EFA_u7ACB_u9879_u76EE" class="headerlink" title="建立项目"></a>建立项目</h2><p>使用 maven 创建一个 htmlunit 的试用项目</p>
-<pre><code>mvn archetype:generate -DgroupId=com.testchina -DartifactId=my-htmlunit-test -DinteractiveMode=false
-</code></pre><p>（不得不夸下 Maven， 构建的好工具啊。）</p>
-<p>修改 pom.xml， 加入 HtmlUnit 依赖， 升级 Junit 为4.10。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">project</span> <span class="attribute">xmlns</span>=<span class="value">"http://maven.apache.org/POM/4.0.0"</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">  <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="title">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>com.testchina<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>my-htmlunit-test<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="title">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>my-htmlunit-test<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="title">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>4.10<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="title">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>net.sourceforge.htmlunit<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>htmlunit<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.10<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后，执行：</p>
-<ol>
-<li><code>mvn install</code></li>
-<li><code>mvn eclipse:eclipse</code></li>
-</ol>
-<p>之后， 就可以在 eclipse 里导入项目。接着，我们来写第一个例子。</p>
-<h2 id="u8BD5_u7528"><a href="#u8BD5_u7528" class="headerlink" title="试用"></a>试用</h2><p><strong>第一个例子：</strong></p>
-<p>a. 访问 <a href="http://htmlunit.sourceforge.net" target="_blank" rel="external">http://htmlunit.sourceforge.net</a></p>
-<p>b. 验证网页的 titile</p>
-<p>c. 验证网页内容</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.testchina;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> com.gargoylesoftware.htmlunit.WebClient;</span><br><span class="line"><span class="keyword">import</span> com.gargoylesoftware.htmlunit.html.HtmlPage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHtmlUnitTest</span> </span>&#123;</span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">homePage</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient(); <span class="comment">// 建立 WebClient。</span></span><br><span class="line">        <span class="keyword">final</span> HtmlPage page = webClient.getPage(<span class="string">"http://htmlunit.sourceforge.net"</span>); <span class="comment">// 访问网站，返回页面对象。</span></span><br><span class="line">        assertEquals(<span class="string">"HtmlUnit - Welcome to HtmlUnit"</span>, page.getTitleText()); <span class="comment">// 验证 title。</span></span><br><span class="line">        <span class="comment">/** 验证网页内容 */</span></span><br><span class="line">        <span class="keyword">final</span> String pageAsXml = page.asXml();</span><br><span class="line">        assertTrue(pageAsXml.contains(<span class="string">"&lt;body class=\"composite\"&gt;"</span>));</span><br><span class="line">        <span class="keyword">final</span> String pageAsText = page.asText();</span><br><span class="line">        assertTrue(pageAsText.contains(<span class="string">"Support for the HTTP and HTTPS protocols"</span>));</span><br><span class="line">        webClient.closeAllWindows();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>第二个例子: 指定浏览器</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">homePage_Firefox</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient(BrowserVersion.FIREFOX_10);</span><br><span class="line">    <span class="keyword">final</span> HtmlPage page = webClient</span><br><span class="line">            .getPage(<span class="string">"http://htmlunit.sourceforge.net"</span>);</span><br><span class="line">    assertEquals(<span class="string">"HtmlUnit - Welcome to HtmlUnit"</span>, page.getTitleText());</span><br><span class="line"></span><br><span class="line">    webClient.closeAllWindows();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>很简单，在初始化 WebClient 的时候，传入浏览器版本， 目前 2.10 里面支持：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Register plugins for the browser versions. */</span></span><br><span class="line">   <span class="keyword">static</span> &#123;</span><br><span class="line">       INTERNET_EXPLORER_6.initDefaultFeatures();</span><br><span class="line">       INTERNET_EXPLORER_7.initDefaultFeatures();</span><br><span class="line">       INTERNET_EXPLORER_8.initDefaultFeatures();</span><br><span class="line"></span><br><span class="line">       FIREFOX_3.initDefaultFeatures();</span><br><span class="line">       FIREFOX_3_6.initDefaultFeatures();</span><br><span class="line">       FIREFOX_10.initDefaultFeatures();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">final</span> PluginConfiguration flash = <span class="keyword">new</span> PluginConfiguration(<span class="string">"Shockwave Flash"</span>,</span><br><span class="line">           <span class="string">"Shockwave Flash 9.0 r31"</span>, <span class="string">"libflashplayer.so"</span>);</span><br><span class="line">       flash.getMimeTypes().add(<span class="keyword">new</span> PluginConfiguration.MimeType(<span class="string">"application/x-shockwave-flash"</span>,</span><br><span class="line">           <span class="string">"Shockwave Flash"</span>, <span class="string">"swf"</span>));</span><br><span class="line">       FIREFOX_3.getPlugins().add(flash);</span><br><span class="line">       FIREFOX_3_6.getPlugins().add(flash);</span><br><span class="line">       FIREFOX_10.getPlugins().add(flash);</span><br><span class="line"></span><br><span class="line">       CHROME_16.initDefaultFeatures();</span><br><span class="line">       CHROME_16.setApplicationCodeName(<span class="string">"Mozilla"</span>);</span><br><span class="line">       CHROME_16.setPlatform(<span class="string">"MacIntel"</span>);</span><br><span class="line">       CHROME_16.setCpuClass(<span class="keyword">null</span>);</span><br><span class="line">       CHROME_16.setBrowserLanguage(<span class="string">"undefined"</span>);</span><br><span class="line">       <span class="comment">// there are other issues with Chrome; a different productSub, etc.</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>第三个例子： 获取页面元素</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getElements</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient();</span><br><span class="line">    <span class="keyword">final</span> HtmlPage page = webClient.getPage(<span class="string">"http://htmlunit.sourceforge.net"</span>);</span><br><span class="line">    <span class="comment">//get list of all divs</span></span><br><span class="line">    <span class="keyword">final</span> List&lt;?&gt; divs = page.getByXPath(<span class="string">"//div"</span>); <span class="comment">// 返回所有的div</span></span><br><span class="line">    System.out.println(((HtmlDivision)divs.get(<span class="number">0</span>)).asText()); <span class="comment">// 得到第一个 Div 节点的内容。</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 返回所有的超链接， 并打印 name 属性*/</span></span><br><span class="line">    <span class="keyword">final</span> List&lt;HtmlAnchor&gt; anchors = page.getAnchors();</span><br><span class="line">    <span class="keyword">for</span> (HtmlAnchor anchor : anchors) &#123;</span><br><span class="line">        System.out.println(anchor.getAttribute(<span class="string">"name"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    webClient.closeAllWindows();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>第四个例子： 提交表单</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">submittingForm</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the first page</span></span><br><span class="line">    <span class="keyword">final</span> HtmlPage page1 = webClient.getPage(<span class="string">"http://some_url"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get the form that we are dealing with and within that form,</span></span><br><span class="line">    <span class="comment">// find the submit button and the field that we want to change.</span></span><br><span class="line">    <span class="keyword">final</span> HtmlForm form = page1.getFormByName(<span class="string">"myform"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> HtmlSubmitInput button = form.getInputByName(<span class="string">"submitbutton"</span>);</span><br><span class="line">    <span class="keyword">final</span> HtmlTextInput textField = form.getInputByName(<span class="string">"userid"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Change the value of the text field</span></span><br><span class="line">    textField.setValueAttribute(<span class="string">"root"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Now submit the form by clicking the button and get back the second page.</span></span><br><span class="line">    <span class="keyword">final</span> HtmlPage page2 = button.click();</span><br><span class="line"></span><br><span class="line">    webClient.closeAllWindows();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>是不是很棒？ 所有浏览器能做的，它都能做，我们再来看下它的特性：</p>
-<ul>
-<li>支持 HTTP and HTTPS 协议</li>
-<li>支持 cookies</li>
-<li>支持 Post， Get， Head， Delete</li>
-<li>支持代理</li>
-<li>能分析 HTTP responses</li>
-<li>能自定义 HTTP request head</li>
-<li>支持 Javascript</li>
-</ul>
-<p>于是有<br><strong>第五个例子： 使用 javascript</strong></p>
-<p>这里的 Javascript 的意思，是指 HtmlUnit 可以通过 js 引擎执行 javascript 代码。</p>
-<blockquote>
-<p>HtmlUnit provides excellent JavaScript support, simulating the behavior of the configured browser (Firefox or Internet Explorer). It uses the Rhino JavaScript engine for the core language (plus workarounds for some Rhino bugs) and provides the implementation for the objects specific to execution in a browser.</p>
-</blockquote>
-<p>比如我们的页面有一个 alert 事件：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span><span class="tag">&lt;<span class="title">head</span>&gt;</span><span class="tag">&lt;<span class="title">title</span>&gt;</span>Alert sample<span class="tag">&lt;/<span class="title">title</span>&gt;</span><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span> <span class="attribute">onload</span>=<span class="value">'alert("foo");'</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我们如何捕捉它呢？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">alerts</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> WebClient webClient = <span class="keyword">new</span> WebClient();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> List collectedAlerts = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    webClient.setAlertHandler(<span class="keyword">new</span> CollectingAlertHandler(collectedAlerts));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Since we aren't actually manipulating the page, we don't assign</span></span><br><span class="line">    <span class="comment">// it to a variable - it's enough to know that it loaded.</span></span><br><span class="line">    webClient.getPage(<span class="string">"http://tciludev01/test.html"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> List expectedAlerts = Collections.singletonList(<span class="string">"foo"</span>);</span><br><span class="line">    assertEquals(expectedAlerts, collectedAlerts);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>是不是很轻巧？ 像真正的浏览器一样， HtmlUnit 可以响应各种 Javascript 事件， 执行各种 Javascript 代码。</p>
-<hr>
-<p>对于 HtmlUnit， 我就初略看了看， 总的印象是轻，不用启动笨重的浏览器就能做到和浏览器一样的行为， 和 Junit4 很好的搭配，可以<br>写出轻巧优美的测试案例， 同时也能为测试省去不少时间。这在前期测试驱动开发的时候，特别是 Web 应用开发，可以节省去不少时间。</p>
-<p>参见:</p>
-<p><a href="http://htmlunit.sourceforge.net/" target="_blank" rel="external">http://htmlunit.sourceforge.net/</a></p>
-<p><a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" target="_blank" rel="external">http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html</a></p>
-<p><a href="http://code.google.com/p/selenium/wiki/HtmlUnitDriver" target="_blank" rel="external">http://code.google.com/p/selenium/wiki/HtmlUnitDriver</a></p>
-<p><a href="http://htmlunit.sourceforge.net/javascript-howto.html" target="_blank" rel="external">http://htmlunit.sourceforge.net/javascript-howto.html</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test-china-org/">test-china.org</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-03-21-windowsxia-cha-zhao-zhan-yong-duan-kou-de-jin-cheng" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/03/21/2013-03-21-windowsxia-cha-zhao-zhan-yong-duan-kou-de-jin-cheng/" class="article-date">
-  	<time datetime="2013-03-21T13:02:00.000Z" itemprop="datePublished">2013-03-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/03/21/2013-03-21-windowsxia-cha-zhao-zhan-yong-duan-kou-de-jin-cheng/">windows 下查找占用端口的进程</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>一直只知道 *nux 下的命令，对 windows 知之甚少，其实 windows 下也有很多强大的命令。</p>
-<p>比如在 linux 下查看一个 mysql 的端口，</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">➜  octopress git:(source) ✗ netstat -an | grep <span class="number">3306</span> <span class="preprocessor"># mac 下的命令没有 linux 下来的丰富啊，没有 p 选项。</span></span><br><span class="line">tcp4       <span class="number">0</span>      <span class="number">0</span>  *<span class="number">.3306</span>                 *.*                    LISTEN</span><br><span class="line"></span><br><span class="line">root@li493-<span class="number">58</span>:~<span class="preprocessor"># netstat -anp | grep <span class="number">3306</span> # 这是 ubuntu 下面的。</span></span><br><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">3306</span>            <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:*               LISTEN      <span class="number">2509</span>/mysqld</span><br></pre></td></tr></table></figure>
-<p>很方便吧。那么如果在 windows 下呢？</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">netstat -ano | findstr <span class="number">3306</span> <span class="preprocessor"># 这里会把 pid 告诉你，比如 pid 是 <span class="number">1278</span></span></span><br><span class="line"></span><br><span class="line">tasklist /fi <span class="string">"pid eq 1278"</span> <span class="preprocessor"># 这样就找到了 <span class="number">1278</span> 对应的进程</span></span><br></pre></td></tr></table></figure>
-<p>也是很简单的吧！</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/windows/">windows</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-03-15-8atmyhouse" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/03/15/2013-03-15-8atmyhouse/" class="article-date">
-  	<time datetime="2013-03-15T14:18:00.000Z" itemprop="datePublished">2013-03-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/03/15/2013-03-15-8atmyhouse/">8atmyHouse</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>我工作 6 年。 2 年徐汇， 2 年 黄浦， 2 年 浦东。我住宝山区。我从一开始的愿望就是能踏着晨光上班，踩着夕阳下班。<br>从来或者很少实现。有几次生病的下午，实在顶不住，请假回家，当地铁从地下穿入高空的时候，晴脆的阳光撒进车厢，我就想<br>什么时候我可以不用朝九晚六。</p>
-<p>8 at my house 说起来有段历史。2009 年，我在 DE 项目工作，8atmyHouse 就是这个项目的一个公用密码，很忙，每个人都希望<br>晚上八点能到家。不知道别人怎样，反正我能刚刚好，想起来在 google 上海的那段时间算得上是我职业生涯最快活的一段了。</p>
-<p>离开之后，去了更远的张江集电港的 AMD， 每天 6 点出门，晚上 9 点到家。早上刮的干净的脸庞，晚上已胡子拉渣。除了感叹上海之大之外，<br>也恨宝山怎么没有高科技。三个月之后实在受不了，投了几份简历之后，有幸去了稍微近一点的浦东南路的智涌。上班一个小半时，下班一个半小时，<br>每天在跨越整个上海，从浦西到浦东，放在过去，就是每天去上海上班。</p>
-<p>我到智涌后，也沿袭了 8atmyHouse 做密码的习惯。同事总会问， 为什么用这个密码，我说希望八点能在家坐在沙发上看看电视看看书。他们又会问，<br>能行么？我说看运气，如果永远踩着点，不落下任何一班车，那晚上8点半的时候，我可以坐在家里的电脑前。否则那八成还在回家的路上。同事问的多了，<br>后来连老板也调侃我，比如最近夏令时了，是不是应该改成 7atmyHouse 。我其实想说这不是都靠老板你了么？</p>
-<p>八点在家，说起来是多么容易的事情啊，这 6 年却有几次？也许再有猎头找我的时候，我一定告诉他，我要求不高，8 at my home!</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/生活杂记/">生活杂记</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-02-12-shi-yong-capybara-deng-lu-bai-du" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/02/12/2013-02-12-shi-yong-capybara-deng-lu-bai-du/" class="article-date">
-  	<time datetime="2013-02-12T09:14:00.000Z" itemprop="datePublished">2013-02-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/02/12/2013-02-12-shi-yong-capybara-deng-lu-bai-du/">使用 capybara 登陆百度</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>ShiLongLu 问你有什么办法测试百度的登录窗口呢？这是差不多2个月前的问题了，我一直忙于 Dota 圣剑传说。恰巧春节有时间看了下。</p>
-<p>百度登陆的时候是弹出一个对话框，如图：</p>
-<p><img src="/photos/baidulogin.png" alt=""></p>
-<p>但是这个对话框是用 iframe 实现的。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">height</span>=<span class="value">"100%"</span> <span class="attribute">frameborder</span>=<span class="value">"0"</span> <span class="attribute">width</span>=<span class="value">"100%"</span> <span class="attribute">scrolling</span>=<span class="value">"no"</span> <span class="attribute">src</span>=<span class="value">"http://www.baidu.com/cache/user/html/login-1.2.html"</span> <span class="attribute">marginheight</span>=<span class="value">"0"</span> <span class="attribute">marginwidth</span>=<span class="value">"0"</span> <span class="attribute">id</span>=<span class="value">"login_iframe"</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>所以在填写用户名和密码的时候，需要先 switch 到这个 frame 上去， </p>
-<blockquote>
-<p>When working inside a frame, you should use Capybara’s within_frame method.</p>
-<ul>
-<li>(Object) within_frame(frame_id)</li>
-</ul>
-<p>Execute the given block within the given iframe given the id of that iframe. Only works on some drivers (e.g. Selenium)</p>
-<p>Parameters:<br>frame_id (String) — Id of the frame</p>
-</blockquote>
-<p>所以我们的实现基本如下：</p>
-<p>baidu.feature:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Given</span> <span class="constant">I</span> am on baidu.com</span><br><span class="line"><span class="constant">When</span> <span class="constant">I</span>  click <span class="string">"登录"</span></span><br><span class="line"><span class="constant">And</span> <span class="constant">I</span> switch to login form</span><br><span class="line"><span class="constant">And</span> <span class="constant">I</span> enter <span class="string">"lihuazhang@hotmail.com"</span> <span class="keyword">for</span> <span class="string">"帐号"</span></span><br><span class="line"><span class="constant">And</span> <span class="constant">I</span> enter <span class="string">"204646"</span> <span class="keyword">for</span> <span class="string">"密码"</span></span><br><span class="line"><span class="constant">And</span> <span class="constant">I</span> click <span class="string">"登录"</span> button</span><br><span class="line"><span class="constant">Then</span> <span class="constant">I</span> should see <span class="string">"zhangzuichi"</span></span><br></pre></td></tr></table></figure>
-<p>step_definition.rb:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">When</span> /^<span class="constant">I</span> enter <span class="string">"(.*?)"</span> <span class="keyword">for</span> <span class="string">"(.*?)"</span><span class="variable">$/</span> <span class="keyword">do</span> |value, key|</span><br><span class="line">  <span class="keyword">if</span> key == <span class="string">"帐号"</span></span><br><span class="line">    within_frame <span class="string">'login_iframe'</span> <span class="keyword">do</span></span><br><span class="line">      fill_in <span class="string">'pass_login_username_0'</span>, <span class="symbol">:with</span> =&gt; value</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">     within_frame <span class="string">'login_iframe'</span> <span class="keyword">do</span></span><br><span class="line">      fill_in <span class="string">'pass_login_password_0'</span>, <span class="symbol">:with</span> =&gt; value</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="constant">When</span> /^<span class="constant">I</span> click <span class="string">"(.*?)"</span> button<span class="variable">$/</span> <span class="keyword">do</span> |arg1|</span><br><span class="line">  within_frame <span class="string">'login_iframe'</span> <span class="keyword">do</span></span><br><span class="line">    click_button <span class="string">'pass_login_input_submit_0'</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>大致如此，在 firefox 下测试通过。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/capybara/">Capybara</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2013-02-12-gao-bie-2012" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/02/12/2013-02-12-gao-bie-2012/" class="article-date">
-  	<time datetime="2013-02-12T02:57:00.000Z" itemprop="datePublished">2013-02-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/02/12/2013-02-12-gao-bie-2012/">告别2012</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>2011年6月我离开AMD，进入现在这家公司，转眼2年快过去了。现在每次和同事聊起来，都觉得其实现在的这家公司很亏。<br>我们几乎所有的员工在这里都完成了各自人生的大事。比如结婚，比如生子，比如怀孕。到了我这种年纪的人事业慢慢靠边站，<br>婚姻家庭走上舞台。这或多或少的对公司总会有点影响。</p>
-<p>2012年9月中旬，和小顾去香港兜了一圈。<br>2012年10月1日，我在家里操办了婚宴。之后和小顾开始了两人生活。<br>2012年11月，报名练车。<br>2012年12月，练车。<br>2013年1月，去北京兜了一圈。加练车。<br>2013年2月，小顾小路过了。我还没考。过春节。  </p>
-<p>公司比起2011年来更加不景气，美国裁员之后，真正做事的都走了，剩下一些开会和管事的人。上海部门和美国的沟通也越发的困难，我们从本来的一个研发部门变成了一个信息孤岛，彻底成了美国总部的一个外包。大家抱怨的声音也越来越大，头儿们也不知道如何安慰。春节房间前， Jacky 提出了离职，大家唏嘘不已。</p>
-<p>业余时间做的游戏不好不坏，在这里打个广告，<a href="http://dota.baicaisi.net" target="_blank" rel="external">Doat 圣剑传说</a>, android 和 ios 同步发布。</p>
-<p><img src="http://dota.baicaisi.net/images/screenshots/2.png" alt=""></p>
-<p>瞧着不错吧！欢迎大家试玩，也希望大家能帮忙宣传下，我们不会做营销，只有口口相传的用户。当然口碑不错。</p>
-<p>2012年，过得不好不坏，咋一想，啥也回忆不起来，唯有那次在北京滑雪，从山顶一冲而下的光景。</p>
-<p><img src="/photos/huaxue.jpg" alt=""></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/生活杂记/">生活杂记</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
-    <article id="post-2012-08-06-ying-she-windows-cmdke-yi-du-qu-de-ci-pan-qu-dong" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2012/08/06/2012-08-06-ying-she-windows-cmdke-yi-du-qu-de-ci-pan-qu-dong/" class="article-date">
-  	<time datetime="2012-08-06T13:58:00.000Z" itemprop="datePublished">2012-08-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2012/08/06/2012-08-06-ying-she-windows-cmdke-yi-du-qu-de-ci-pan-qu-dong/">映射 Windows cmd 可以读取的磁盘驱动</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在 windows 下， 通常我们映射一个网路驱动到本地的时候， 会在本地生成一个文件夹与之映射。<br>然后我们就可以通过这个文件夹访问和操作资源（当然你得有权限），好像操作本地文件一样。但是这样，<br>似乎就不能通过命令行访问。（不知道为什么，但是最近遇到这个问题）</p>
-<p>贴出解决方法：</p>
-<p><em>1.</em> 进入命令行窗口。</p>
-<blockquote>
-<p>使用 Alt + F2， 然后输入 cmd， 回车。 或者从开始菜单，运行那里输入cmd，回车。</p>
-</blockquote>
-<p><em>2.</em> 输入<code>net use X: \\path\to\share</code>， X 是你要映射的盘符， \path\to\share 就是你的网络驱动地址。</p>
-<p><em>3.</em> 回车，然后成功~</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/windows/">windows</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-     
-
-  
     <article id="post-2012-08-05-surround-dot-vim" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -944,6 +271,101 @@
       
         <p class="article-more-link">
           <a  href="/2012/08/05/2012-08-05-surround-dot-vim/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-08-01-xiao-qing-xin-outlookshi-yong-ji" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/08/01/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/" class="article-date">
+  	<time datetime="2012-08-01T12:52:00.000Z" itemprop="datePublished">2012-08-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/01/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/">小清新 Outlook 试用记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>我不得不说，outlook 不错。Metro 风格像清新的风让人觉得惬意。目前 outlook 提供从 hotmail 升级和注册新用户两种方式。</p>
+<p>登入<a href="http://www.hotmail.com">Hotmail</a>，</p>
+<p><img src="/photos/hotmail.png"></img></p>
+<p>点击<strong>了解详情</strong>， 进入<strong>Outlook 预览</strong>页面</p>
+<p><img src="/photos/outlookpreview.png"></img></p>
+<p>点击<strong>试用 Outlook</strong>进入注册页面，在这个页面你可以试用原先的 hotmail 邮箱，也可以注册一个新的 outlook 的邮箱。</p>
+<p><img src="/photos/register.png"></img></p>
+<p>我将我的 hotmail 升级了一把。然后登陆 outlook， 登陆之后的界面：</p>
+<p><img src="/photos/main.png"></img></p>
+<p>很棒吧！ 干净清爽！</p>
+<p>用半小时粗略的试用了 outlook 的各种功能。为之倾倒，不吝言辞，我来说几句。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/windows/">windows</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metro/">Metro</a></li></ul>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2012/08/01/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -1147,6 +569,623 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-04-23-mysql5-qing-kong-rootmi-ma" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/04/23/2012-04-23-mysql5-qing-kong-rootmi-ma/" class="article-date">
+  	<time datetime="2012-04-23T13:27:00.000Z" itemprop="datePublished">2012-04-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/04/23/2012-04-23-mysql5-qing-kong-rootmi-ma/">mysql5 清空root密码</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>最近在windows用mysql，在root上设置了密码，很不方便，于是就想去清空它，网上找了下教程，总结了下。肯定好用。</p>
+<ul>
+<li><p>停止MySQL的服务。 </p>
+</li>
+<li><p>用mysqld.exe –skip-grant-tables &amp; (会占用一个dos控制台窗口)</p>
+</li>
+<li><p>重新打开一个dos控制台窗口，进入mysql </p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot</span><br><span class="line">use mysql</span><br><span class="line">update user <span class="built_in">set</span> password=password(<span class="string">""</span>) <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">flush privileges；</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>关闭MySQL的控制台窗口，用正常模式启动Mysql </p>
+</li>
+<li><p>你可以用新的密码链接到Mysql了。 </p>
+</li>
+</ul>
+<p>Note:</p>
+<p>Please specify the defaults file when you find the above instructions do not have effects.</p>
+<ul>
+<li>用mysqld.exe –defaults-file=”C:\ProgramData\MySQL\MySQL Server 5.5\my.ini” –skip-grant-tables &amp; (会占用一个dos控制台窗口)</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/mysql/">mysql</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-04-21-webdriver-3-more-pageobjects" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/04/21/2012-04-21-webdriver-3-more-pageobjects/" class="article-date">
+  	<time datetime="2012-04-21T02:36:00.000Z" itemprop="datePublished">2012-04-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/04/21/2012-04-21-webdriver-3-more-pageobjects/">WebDriver 3: more PageObjects - PageFactory</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在上篇中，大致介绍了PageObjects。其实为了对PageObjects更好的支持，webdriver中还有一个<br><a href="http://code.google.com/p/selenium/wiki/PageFactory" target="_blank" rel="external">PageFactory</a>的概念。</p>
+<blockquote>
+<p>There is a PageFactory in the support package that provides support for this pattern, and helps to remove some boiler-plate code from your Page Objects at the same time.</p>
+</blockquote>
+<p>来看下,上篇中的百度搜索例子, 用PageFactory该如何实现。</p>
+<ul>
+<li>首先修改BaiduIndexPage</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ahchoo.automation.page;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.FindBy;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.How;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaiduIndexPage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebDriver driver;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String url = <span class="string">"http://www.baidu.com"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaiduIndexPage</span><span class="params">(WebDriver driver)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.driver = driver;</span><br><span class="line">        driver.get(url);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@FindBy</span>(how = How.ID, using = <span class="string">"kw"</span>)</span><br><span class="line">    <span class="keyword">private</span> WebElement searchField;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SearchResultPage <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// We continue using the element just as before</span></span><br><span class="line">        searchField.sendKeys(text);</span><br><span class="line">        searchField.submit();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SearchResultPage(driver);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到这里使用了注释@FindBy， 这是一个注释类，我们来看下它的定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="annotation">@interface</span> FindBy &#123;</span><br><span class="line">  <span class="function">How <span class="title">how</span><span class="params">()</span> <span class="keyword">default</span> How.ID</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">using</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">id</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">className</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">css</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">tagName</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">linkText</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">partialLinkText</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">String <span class="title">xpath</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以知道其实FindBy注释就是实现了<code>driver.findElement(By)</code>,用FindBy可以从无数findElement方法中解脱出来(如果你页面有很多元素的时候)。</p>
+<ul>
+<li>然后要用工厂模式生成BaiduIndexPage对象</li>
+</ul>
+<p>在SearchTest.java 里<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BaiduIndexPage home = PageFactory.initElements(driver, BaiduIndexPage.class);</span><br><span class="line"><span class="comment">// BaiduIndexPage home = new BaiduIndexPage(driver);</span></span><br></pre></td></tr></table></figure></p>
+<p>将WebDriver实例和BaiduIndexPage.class传给initElements方法，该方法会更具反射生成BaiduIndexPage实例，必须注意的是，使用PageFactory，我们的页面对象必须有<br>一个带有WebDriver类型参数的构造方法。</p>
+<blockquote>
+<p>This method will attempt to instantiate the class given to it, preferably using a constructor<br>which takes a WebDriver instance as its only argument or falling back on a no-arg constructor.</p>
+</blockquote>
+<p>PageFactory基本需要关注的就是：</p>
+<pre><code>1. Findby注释
+2. PageFactory.initElements
+</code></pre><p>我们继续改造，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ahchoo.automation.page;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.FindBy;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.How;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.PageFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaiduIndexPage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebDriver driver;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String url = <span class="string">"http://www.baidu.com"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaiduIndexPage</span><span class="params">(WebDriver driver)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.driver = driver;</span><br><span class="line">        driver.get(url);</span><br><span class="line">        PageFactory.initElements(driver, <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@FindBy</span>(how = How.ID, using = <span class="string">"kw"</span>)</span><br><span class="line">    <span class="keyword">private</span> WebElement searchField;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@FindBy</span>(how = How.ID, using = <span class="string">"lg"</span>)</span><br><span class="line">    <span class="keyword">private</span> WebElement logo;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@FindBy</span>(how = How.CLASS_NAME, using = <span class="string">"s_btn"</span>)</span><br><span class="line">    <span class="keyword">private</span> WebElement baidYiXiauButton;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> SearchResultPage <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// We continue using the element just as before</span></span><br><span class="line">        searchField.sendKeys(text);</span><br><span class="line">        searchField.submit();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SearchResultPage(driver);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">idLogoDisplay</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> logo.isDisplayed();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasBaidYiXiauButton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> baidYiXiauButton.isDisplayed();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们将<code>PageFactory.initElements(driver, this);</code>放在页面类的构造函数里，这样就不需要将PageFactory暴露到TestCase中去。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.ahchoo.automation.page;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.FindBy;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.How;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.PageFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchResultPage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebDriver driver;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 推广链接所在位置 */</span></span><br><span class="line">    <span class="annotation">@FindBy</span>(how=How.ID, using=<span class="string">"ec_im_container"</span>)</span><br><span class="line">    <span class="keyword">private</span> WebElement adDiv;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SearchResultPage</span><span class="params">(WebDriver driver)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.driver = driver;</span><br><span class="line">        PageFactory.initElements(driver, <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> driver.getTitle();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getContent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> driver.getPageSource();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAdDivDisplayed</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> adDiv.isDisplayed();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是测试用例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.ahchoo.automation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertTrue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.After;</span><br><span class="line"><span class="keyword">import</span> org.junit.Before;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.firefox.FirefoxDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.PageFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.ahchoo.automation.page.BaiduIndexPage;</span><br><span class="line"><span class="keyword">import</span> com.ahchoo.automation.page.SearchResultPage;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Unit test for simple App.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> WebDriver driver;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        driver = <span class="keyword">new</span> FirefoxDriver();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@After</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tearDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        driver.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BaiduIndexPage home = <span class="keyword">new</span> BaiduIndexPage(driver);</span><br><span class="line">        assertTrue(home.hasBaidYiXiauButton());</span><br><span class="line">        assertTrue(home.idLogoDisplay());</span><br><span class="line">        SearchResultPage searchResult = home.searchFor(<span class="string">"pizza"</span>);</span><br><span class="line">        assertTrue(searchResult.isAdDivDisplayed());</span><br><span class="line">        assertTrue(searchResult.getTitle().contains(<span class="string">"pizza"</span>));</span><br><span class="line">        assertTrue(searchResult.getContent().contains(<span class="string">"pizza"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改造完毕，我可以保证这个Testcase能运行的很欢。</p>
+<p>######总结<br>可以看到使用PageFactory可以使页面类代码更加清晰，维护也相对简单许多。如果你也使用PageObjects的话，<br>不妨试试看。如果你想多了解PageFactory的话，请移步<a href="http://code.google.com/p/selenium/wiki/PageFactor" target="_blank" rel="external">PageFactory</a>，<br>一定能让你受益匪浅。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-04-20-webdriver2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/04/20/2012-04-20-webdriver2/" class="article-date">
+  	<time datetime="2012-04-20T11:07:00.000Z" itemprop="datePublished">2012-04-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/04/20/2012-04-20-webdriver2/">WebDriver 2: PageObject</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在上篇中，已经搭建好了环境。假设我们已经有这样一个环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">── pom.xml</span><br><span class="line">── src</span><br><span class="line">   ├── main</span><br><span class="line">   │   └── java</span><br><span class="line">   │       └── com</span><br><span class="line">   │           └── ahchoo</span><br><span class="line">   │               └── automation</span><br><span class="line">   │                   └── App.java</span><br><span class="line">   └── <span class="built_in">test</span></span><br><span class="line">       └── java</span><br><span class="line">           └── com</span><br><span class="line">               └── ahchoo</span><br><span class="line">                   └── automation</span><br><span class="line">                       └── AppTest.java</span><br></pre></td></tr></table></figure>
+<p>在这个基础上，我们要实现一个访问百度，查询一个关键字之后，跳转到结果界面。</p>
+<ul>
+<li>开始之前，我们先想想传统的WebDriver代码应该怎么写？</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ahchoo.automation;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.After;</span><br><span class="line"><span class="keyword">import</span> org.junit.Before;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.firefox.FirefoxDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> WebDriver driver;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        driver = <span class="keyword">new</span> FirefoxDriver();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@After</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tearDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        driver.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        driver.get(<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line">        WebElement input = driver.findElement(By.id(<span class="string">"kw"</span>));</span><br><span class="line">        input.clear();</span><br><span class="line">        input.sendKeys(<span class="string">"Pizza"</span>);</span><br><span class="line">        input.submit();</span><br><span class="line">        assertTrue(driver.getTitle().contains(<span class="string">"Pizza"</span>));</span><br><span class="line">        assertTrue(driver.getContent().contains(<span class="string">"Pizza"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果只有一个测试用例，这样写也很清爽，但是如果有许许多多这样的测试用例，如果input的id发生变化了，就要把<br>所有的用到这个input的用例找出来，一一修改，这无疑是个大工程。</p>
+<ul>
+<li><p>让我们再来看看PageObjects，首先，我们要创建页面对象， 整个过程涉及2个页面</p>
+<ol>
+<li>百度首页</li>
+<li>search结果页</li>
+</ol>
+</li>
+</ul>
+<p>所以我们也就有两个pageobjects， 将pageobjects class放在main source下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.ahchoo.automation.page;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaiduIndexPage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebDriver driver;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String url = <span class="string">"http://www.baidu.com"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaiduIndexPage</span><span class="params">(WebDriver driver)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.driver = driver;</span><br><span class="line">        driver.get(url);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SearchResultPage <span class="title">searchFor</span><span class="params">(String term)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Baidu search input id is "kw"</span></span><br><span class="line">        WebElement searchField = driver.findElement(By.id(<span class="string">"kw"</span>));</span><br><span class="line">        searchField.clear();</span><br><span class="line">        searchField.sendKeys(term);</span><br><span class="line">        searchField.submit();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SearchResultPage(driver);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.ahchoo.automation.page;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchResultPage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> WebDriver driver;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SearchResultPage</span><span class="params">(WebDriver driver)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.driver = driver;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> driver.getTitle();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getContent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> driver.getPageSource();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>接着创建testcase，把测试用例放在test source目录下</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.ahchoo.automation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.After;</span><br><span class="line"><span class="keyword">import</span> org.junit.Before;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.firefox.FirefoxDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.ahchoo.automation.page.BaiduIndexPage;</span><br><span class="line"><span class="keyword">import</span> com.ahchoo.automation.page.SearchResultPage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> WebDriver driver;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        driver = <span class="keyword">new</span> FirefoxDriver();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@After</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tearDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        driver.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BaiduIndexPage home = <span class="keyword">new</span> BaiduIndexPage(driver);</span><br><span class="line">        SearchResultPage searchResult = home.searchFor(<span class="string">"pizza"</span>);</span><br><span class="line">        assertTrue(searchResult.getTitle().contains(<span class="string">"pizza"</span>));</span><br><span class="line">        assertTrue(searchResult.getContent().contains(<span class="string">"pizza"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们运行下看看</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">➜  ahcoo  mvn test</span><br><span class="line">[INFO] Scanning <span class="keyword">for</span> projects...</span><br><span class="line">[INFO]                                                                         </span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Building ahcoo <span class="number">1.0</span>-SNAPSHOT</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-resources-<span class="string">plugin:</span><span class="number">2.4</span><span class="number">.3</span>:resources (<span class="keyword">default</span>-resources) @ ahcoo ---</span><br><span class="line">[WARNING] Using platform encoding (EUC_CN actually) to copy filtered resources, i.e. build is platform dependent!</span><br><span class="line">[INFO] skip non existing resourceDirectory <span class="regexp">/Volumes/</span>MacBackUp<span class="regexp">/ahcoo/</span>src<span class="regexp">/main/</span>resources</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-compiler-<span class="string">plugin:</span><span class="number">2.3</span><span class="number">.2</span>:compile (<span class="keyword">default</span>-compile) @ ahcoo ---</span><br><span class="line">[INFO] Nothing to compile - all classes are up to date</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-resources-<span class="string">plugin:</span><span class="number">2.4</span><span class="number">.3</span>:testResources (<span class="keyword">default</span>-testResources) @ ahcoo ---</span><br><span class="line">[WARNING] Using platform encoding (EUC_CN actually) to copy filtered resources, i.e. build is platform dependent!</span><br><span class="line">[INFO] skip non existing resourceDirectory <span class="regexp">/Volumes/</span>MacBackUp<span class="regexp">/ahcoo/</span>src<span class="regexp">/test/</span>resources</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-compiler-<span class="string">plugin:</span><span class="number">2.3</span><span class="number">.2</span>:testCompile (<span class="keyword">default</span>-testCompile) @ ahcoo ---</span><br><span class="line">[INFO] Nothing to compile - all classes are up to date</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-surefire-<span class="string">plugin:</span><span class="number">2.7</span><span class="number">.2</span>:test (<span class="keyword">default</span>-test) @ ahcoo ---</span><br><span class="line">[INFO] Surefire report <span class="string">directory:</span> <span class="regexp">/Volumes/</span>MacBackUp<span class="regexp">/ahcoo/</span>target/surefire-reports</span><br><span class="line"></span><br><span class="line">-------------------------------------------------------</span><br><span class="line"> T E S T S</span><br><span class="line">-------------------------------------------------------</span><br><span class="line">Running com.ahchoo.automation.SearchTest</span><br><span class="line">Tests <span class="string">run:</span> <span class="number">1</span>, <span class="string">Failures:</span> <span class="number">0</span>, <span class="string">Errors:</span> <span class="number">0</span>, <span class="string">Skipped:</span> <span class="number">0</span>, Time <span class="string">elapsed:</span> <span class="number">21.474</span> sec</span><br><span class="line"></span><br><span class="line"><span class="string">Results :</span></span><br><span class="line"></span><br><span class="line">Tests <span class="string">run:</span> <span class="number">1</span>, <span class="string">Failures:</span> <span class="number">0</span>, <span class="string">Errors:</span> <span class="number">0</span>, <span class="string">Skipped:</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total <span class="string">time:</span> <span class="number">25.953</span>s</span><br><span class="line">[INFO] Finished <span class="string">at:</span> Fri Apr <span class="number">20</span> <span class="number">21</span>:<span class="number">53</span>:<span class="number">03</span> CST <span class="number">2012</span></span><br><span class="line">[INFO] Final <span class="string">Memory:</span> <span class="number">5</span>M/<span class="number">81</span>M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p>Pass！</p>
+<p>这就是当下流行的pageobjects，将页面固有的属性和逻辑抽象成类。然后在测试代码里面调用，这样有一个很大的好处，<br>如果页面变动了，只需要变动页面对象，不需要去无数测试用例里去寻找并更改。</p>
+<p><blockquote></blockquote></p>
+<p></p><p>Within your web app’s UI there are areas that your tests interact with. A Page Object simply models these as objects within the test code. This reduces the amount of duplicated code and means that if the UI changes, the fix need only be applied in one place.<br></p><br><small><br> simon.m.stewart  <a href="http://code.google.com/p/selenium/wiki/PageObjects" target="_blank" rel="external">PageObject</a><br></small><br><p></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/04/19/2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia/" class="article-date">
+  	<time datetime="2012-04-19T13:13:00.000Z" itemprop="datePublished">2012-04-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/04/19/2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia/">使用 Capybara， Cucumber 和 WebDriver 实现自动化测试</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>我面试的时候，BOSS对我说，我们是要求自动化的。我想这我会啊。BOSS又说，我们也有一套自动化的框架。我想那更好。然后等我入职之后，发现毛框架也没有，只有四个完全不会代码的测试攻城狮。</p>
+<p>老板说要自动化，我说自动化啊？我花了几天的时间温习了我熟悉的<code>JAVA+Junit+SeleniumRC</code>，否定了这个框架，一来语言太重，二来都不会coding。我很苦恼地向BOSS抱怨了，他说用脚本语言吧，于是我就想要不就用<code>python+pyunit+webdriver</code>，在google打工的时候，接触的就是这个框架。BOSS想了想，说用ruby吧。原因在他是ruby的超级粉丝。</p>
+<p>于是我找到了<code>cucumber+capybara+webdriver</code>，这也是我第一次接触ruby，第一次接触BDD。而我选用这个框架的原因如下：</p>
+<pre><code>1. cucumber有一套自己的DSL，任何会写测试用例的人都会写。
+2. 对于这套框架要学的ruby知识，学起来相对容易。
+3. 公司文化。
+</code></pre><p>前面都是废话，下面开始进入正题。</p>
+<p>##功于善其事，必先利其器</p>
+<ul>
+<li>首先搭建环境，确定有ruby的环境。安装必要的gem<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gem install cucumber </span><br><span class="line">gem install capybara</span><br><span class="line">gem ins tall selenium-webdriver</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><em><a href="http://cukes.info/" target="_blank" rel="external">Cucumber</a> <a href="https://github.com/jnicklas/capybara" target="_blank" rel="external">Capybara</a> <a href="http://code.google.com/p/selenium/" target="_blank" rel="external">WebDriver</a></em></p>
+<ul>
+<li>建立个空项目，将gem加入gemfile</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source <span class="string">"http://ruby.taobao.org/"</span></span><br><span class="line">gem <span class="string">'cucumber'</span>, <span class="string">'&gt;= 1.1.9'</span></span><br><span class="line">gem <span class="string">"capybara"</span>, <span class="string">"~&gt; 1.1.2"</span></span><br><span class="line">gem <span class="string">'selenium-webdriver'</span>, <span class="string">'&gt;= 2.20.0'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>先简单介绍一下cucumber</li>
+</ul>
+<p>我们在这个空项目下运行<code>cucumber</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zhangmatoMacBook-Pro:<span class="built_in">test</span> lihuazhang$ cucumber</span><br><span class="line">You don<span class="string">'t have a '</span>features<span class="string">' directory.  Please create one to get started.</span><br><span class="line">See http://cukes.info/ for more information.</span></span><br></pre></td></tr></table></figure>
+<p>可以看出cucumber会去寻找<code>features</code>目录，先创建一个features目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">zhangmatoMacBook-Pro:<span class="built_in">test</span> lihuazhang$ mkdir features</span><br><span class="line">zhangmatoMacBook-Pro:<span class="built_in">test</span> lihuazhang$ ls</span><br><span class="line">features</span><br><span class="line">zhangmatoMacBook-Pro:<span class="built_in">test</span> lihuazhang$ cucumber</span><br><span class="line"><span class="number">0</span> scenarios</span><br><span class="line"><span class="number">0</span> steps</span><br><span class="line"><span class="number">0</span>m0.<span class="number">000</span>s</span><br></pre></td></tr></table></figure>
+<p>因为在features下面什么都没有，所以运行结果都是零。</p>
+<p>那我们创建一个feature，cucumber把feature都命名为xxx.feature, 而每个feature有多个scenario。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Feature</span><span class="symbol">:</span> <span class="constant">Adding</span></span><br><span class="line"></span><br><span class="line">    <span class="constant">Scenario</span><span class="symbol">:</span> <span class="constant">Add</span> two numbers</span><br><span class="line">        <span class="constant">Given</span> the input <span class="string">"2+2"</span></span><br><span class="line">        <span class="constant">When</span> the calculator is run</span><br><span class="line">        <span class="constant">Then</span> the output should be <span class="string">"4"</span></span><br><span class="line">    <span class="constant">Scenario</span><span class="symbol">:</span> <span class="constant">Minus</span> two numbers</span><br><span class="line">        <span class="constant">Given</span> the input <span class="string">"2-1"</span></span><br><span class="line">        <span class="constant">When</span> the calculator is run</span><br><span class="line">        <span class="constant">Then</span> the output should be <span class="string">"0"</span></span><br></pre></td></tr></table></figure>
+<p>cucumber使用<code>Given/When/Then</code>这种叫做<a href="https://github.com/cucumber/cucumber/wiki/Gherkin" target="_blank" rel="external">gherkin</a>的可描述性语言(DSL)。</p>
+<p>feature文件中的每个Given/When/Then步骤在Step文件中都有对应的Ruby执行代码，两类文件通过正则表达式相关联。后面马上讲到。</p>
+<p>让我们再来运行一遍</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zhangmatoMacBook-<span class="constant">Pro</span><span class="symbol">:test</span> lihuazhang<span class="variable">$ </span>cucumber </span><br><span class="line"><span class="constant">Feature</span><span class="symbol">:</span> <span class="constant">Adding</span></span><br><span class="line"></span><br><span class="line">  <span class="constant">Scenario</span><span class="symbol">:</span> <span class="constant">Add</span> two numbers       <span class="comment"># features/test.feature:3</span></span><br><span class="line">    <span class="constant">Given</span> the input <span class="string">"2+2"</span>         <span class="comment"># features/test.feature:4</span></span><br><span class="line">    <span class="constant">When</span> the calculator is run    <span class="comment"># features/test.feature:5</span></span><br><span class="line">    <span class="constant">Then</span> the output should be <span class="string">"4"</span> <span class="comment"># features/test.feature:6</span></span><br><span class="line"></span><br><span class="line">  <span class="constant">Scenario</span><span class="symbol">:</span> <span class="constant">Minus</span> two numbers     <span class="comment"># features/test.feature:7</span></span><br><span class="line">    <span class="constant">Given</span> the input <span class="string">"2-1"</span>         <span class="comment"># features/test.feature:8</span></span><br><span class="line">    <span class="constant">When</span> the calculator is run    <span class="comment"># features/test.feature:9</span></span><br><span class="line">    <span class="constant">Then</span> the output should be <span class="string">"0"</span> <span class="comment"># features/test.feature:10</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span> scenarios (<span class="number">2</span> undefined)</span><br><span class="line"><span class="number">6</span> steps (<span class="number">6</span> undefined)</span><br><span class="line">0m<span class="number">0</span>.<span class="number">005</span>s</span><br><span class="line"></span><br><span class="line"><span class="constant">You</span> can implement step definitions <span class="keyword">for</span> undefined steps with these <span class="symbol">snippets:</span></span><br><span class="line"></span><br><span class="line"><span class="constant">Given</span> /^the input <span class="string">"([^"</span>]*)<span class="string">"$/ do |arg1|</span><br><span class="line">  pending # express the regexp above with the code you wish you had</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">When /^the calculator is run$/ do</span><br><span class="line">  pending # express the regexp above with the code you wish you had</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">Then /^the output should be "</span>([^<span class="string">"]*)"</span><span class="variable">$/</span> <span class="keyword">do</span> |arg1|</span><br><span class="line">  pending <span class="comment"># express the regexp above with the code you wish you had</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="constant">If</span> you want snippets <span class="keyword">in</span> a different programming language,</span><br><span class="line">just make sure a file with the appropriate file extension</span><br><span class="line">exists where cucumber looks <span class="keyword">for</span> step definitions.</span><br></pre></td></tr></table></figure>
+<p>可以看到我们运行了2个scenarios,6个steps，都没有定义，于是cucumber仁慈的告诉了我们如何实现。于是我们就要开始写step了。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#小小作弊下，就不写的漂亮了。</span></span><br><span class="line"><span class="constant">Given</span> /^the input <span class="string">"([^"</span>]*)<span class="string">"$/ do |statement|</span><br><span class="line">    @answer = eval statement</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">When /^the calculator is run$/ do</span><br><span class="line">    puts "</span><span class="constant">Run</span>~<span class="string">"</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">Then /^the output should be "</span>([^<span class="string">"]*)"</span><span class="variable">$/</span> <span class="keyword">do</span> |answer|</span><br><span class="line">    <span class="variable">@answer</span> == answer</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>我们再来运行一遍</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">zhangmatoMacBook-<span class="constant">Pro</span><span class="symbol">:test</span> lihuazhang<span class="variable">$ </span>cucumber </span><br><span class="line"><span class="constant">Feature</span><span class="symbol">:</span> <span class="constant">Adding</span></span><br><span class="line"></span><br><span class="line">  <span class="constant">Scenario</span><span class="symbol">:</span> <span class="constant">Add</span> two numbers       <span class="comment"># features/test.feature:3</span></span><br><span class="line">    <span class="constant">Given</span> the input <span class="string">"2+2"</span>         <span class="comment"># features/step_definitions/test_step.rb:1</span></span><br><span class="line">    <span class="constant">When</span> the calculator is run    <span class="comment"># features/step_definitions/test_step.rb:5</span></span><br><span class="line">      <span class="constant">Run</span>~</span><br><span class="line">    <span class="constant">Then</span> the output should be <span class="string">"4"</span> <span class="comment"># features/step_definitions/test_step.rb:9</span></span><br><span class="line"></span><br><span class="line">  <span class="constant">Scenario</span><span class="symbol">:</span> <span class="constant">Minus</span> two numbers     <span class="comment"># features/test.feature:7</span></span><br><span class="line">    <span class="constant">Given</span> the input <span class="string">"2-1"</span>         <span class="comment"># features/step_definitions/test_step.rb:1</span></span><br><span class="line">    <span class="constant">When</span> the calculator is run    <span class="comment"># features/step_definitions/test_step.rb:5</span></span><br><span class="line">      <span class="constant">Run</span>~</span><br><span class="line">    <span class="constant">Then</span> the output should be <span class="string">"0"</span> <span class="comment"># features/step_definitions/test_step.rb:9</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span> scenarios (<span class="number">2</span> passed)</span><br><span class="line"><span class="number">6</span> steps (<span class="number">6</span> passed)</span><br><span class="line">0m<span class="number">0</span>.<span class="number">005</span>s</span><br></pre></td></tr></table></figure>
+<p>哇，恭喜都通过了。</p>
+<p>好，关于cucumber的介绍就到这里，具体可以去看看<a href="http://www.cnblogs.com/CloudTeng/articles/2214293.html" target="_blank" rel="external">Cucumber的目录结构和执行过程</a></p>
+<ul>
+<li>在简单介绍下Capybara</li>
+</ul>
+<p>Capybara是水豚的意思，在水豚之前有一个老鼠，叫做webrat，你如果在google上搜索<code>capybara webrat</code>的话，会发现一大推类似</p>
+<blockquote><br>Cucumber: Switching from Webrat to Capybara - cakebaker<br>cakebaker.42dh.com/…/cucumber-switching-from… - 网页快照 - 翻译此页<br>19 Sep 2010 – Fortunately, there is an alternative working with both Rails versions: Capybara. And so I decided to make the switch from Webrat to Capybara.<br></blockquote>
+
+<p>Webrat逐渐被Capybara取代，就像selenium逐渐被webdriver取代。</p>
+<p>Capybara主要是用来测试rails和Rack应用的。官网上说</p>
+<blockquote><br>Capybara helps you test Rails and Rack applications by simulating how a real user would interact with your app. It is agnostic about the driver running your tests and comes with Rack::Test and Selenium support built in. WebKit is supported through an external gem.<br></blockquote>
+
+<p>我们主要用Capybara和Webdriver结合起来进行网页自动化测试。（注意：Capybara不支持selenium rc）</p>
+<p>详细请见<a href="https://github.com/jnicklas/capybara" target="_blank" rel="external">Capybara</a>,里面讲的非常详细了。</p>
+<p>##小试牛刀<br>在了解了cucumber和capybara之后，我们可以正式开始写点东西。 在空项目底下，建立类似的目录结构</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">├── features</span><br><span class="line">    ├── example</span><br><span class="line">       ├── example.feature</span><br><span class="line">       ├── step_definitions</span><br><span class="line">       │   └── example_steps.rb</span><br><span class="line">       └── support</span><br><span class="line">           └── env.rb</span><br></pre></td></tr></table></figure>
+<p>我们这个例子是访问百度</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="constant">Feature</span><span class="symbol">:</span> <span class="constant">Using</span> baidu</span><br><span class="line"></span><br><span class="line"><span class="constant">Scenario</span><span class="symbol">:</span> <span class="constant">Searching</span> <span class="keyword">for</span> a term</span><br><span class="line"></span><br><span class="line"><span class="constant">Given</span> <span class="constant">I</span> am on baidu.com</span><br><span class="line"><span class="constant">When</span> <span class="constant">I</span> enter <span class="string">"pizza"</span></span><br><span class="line"><span class="constant">And</span> <span class="constant">I</span> press <span class="string">"百度一下"</span></span><br><span class="line"><span class="constant">Then</span> <span class="constant">I</span> should see <span class="string">"pizza_百度百科"</span></span><br></pre></td></tr></table></figure>
+<p>Given/When/And/Then很明了的告诉我们，打开百度，输入pizza，然后点击百度一下，然后就能看到pizza_百度百科。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Given</span> /^<span class="constant">I</span> am on baidu\.com<span class="variable">$/</span> <span class="keyword">do</span></span><br><span class="line">  <span class="constant">Capybara</span>.app_host = <span class="string">"http://www.baidu.com"</span></span><br><span class="line">  visit(<span class="string">'/'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="constant">When</span> /^<span class="constant">I</span> enter <span class="string">"([^"</span>]*)<span class="string">"$/ do |term|</span><br><span class="line">  fill_in('wd',:with =&gt; term)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">When /^(?:|I )press "</span>([^<span class="string">"]*)"</span><span class="variable">$/</span> <span class="keyword">do</span> |button|</span><br><span class="line">  puts button</span><br><span class="line">  click_button(button)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="constant">Then</span> /^(?<span class="symbol">:|I</span> )should see <span class="string">"([^"</span>]*)<span class="string">"$/ do |text|</span><br><span class="line">  if page.respond_to? :should</span><br><span class="line">    page.should have_content(text)</span><br><span class="line">  else</span><br><span class="line">    assert page.has_content?(text)</span><br><span class="line">  end</span><br><span class="line">end</span></span><br></pre></td></tr></table></figure>
+<p>接着就是值得一提的env.rb，这是cucumber的环境配置文件。</p>
+<blockquote><br>The file features/support/env.rb is always the very first file to be loaded when Cucumber starts a test run. You use it to prepare the environment for the rest of your support and step definition code to operate.<br></blockquote>
+
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'capybara'</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'capybara/cucumber'</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'capybara/dsl'</span></span><br><span class="line"></span><br><span class="line"><span class="constant">Capybara</span>.app_host = <span class="string">"http://www.baidu.com"</span></span><br><span class="line"><span class="constant">Capybara</span>.default_driver = <span class="symbol">:selenium</span></span><br></pre></td></tr></table></figure>
+<p>让我们来运行一下</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">zhangmatoMacBook-<span class="constant">Pro</span><span class="symbol">:features</span> lihuazhang<span class="variable">$ </span>cucumber example/example.feature </span><br><span class="line"><span class="constant">Feature</span><span class="symbol">:</span> <span class="constant">Using</span> baidu</span><br><span class="line"></span><br><span class="line">  <span class="constant">Scenario</span><span class="symbol">:</span> <span class="constant">Searching</span> <span class="keyword">for</span> a term   <span class="comment"># example/example.feature:4</span></span><br><span class="line">    <span class="constant">Given</span> <span class="constant">I</span> am on baidu.com        <span class="comment"># example/step_definitions/example_steps.rb:1</span></span><br><span class="line">    <span class="constant">When</span> <span class="constant">I</span> enter <span class="string">"pizza"</span>           <span class="comment"># example/step_definitions/example_steps.rb:6</span></span><br><span class="line">    <span class="constant">And</span> <span class="constant">I</span> press <span class="string">"百度一下"</span>             <span class="comment"># example/step_definitions/example_steps.rb:10</span></span><br><span class="line">      百度一下</span><br><span class="line">    <span class="constant">Then</span> <span class="constant">I</span> should see <span class="string">"pizza_百度百科"</span> <span class="comment"># example/step_definitions/example_steps.rb:15</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span> scenario (<span class="number">1</span> passed)</span><br><span class="line"><span class="number">4</span> steps (<span class="number">4</span> passed)</span><br><span class="line">0m9.<span class="number">184</span>s</span><br></pre></td></tr></table></figure>
+<p>Nice!</p>
+<p>至此，基本的框架搭好了。至于如何配置不同的浏览器，以及如何和page object配合，我们以后再讲。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/capybara/">Capybara</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/capybara/">capybara</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cucumber/">cucumber</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-04-06-webdriver-1-post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/04/06/2012-04-06-webdriver-1-post/" class="article-date">
+  	<time datetime="2012-04-06T10:18:00.000Z" itemprop="datePublished">2012-04-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/04/06/2012-04-06-webdriver-1-post/">WebDriver 1: Set up WebDriver using Maven3</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><br></p><h3>1. Learn Maven3 first.</h3><br>  This is quite simple. Go through <a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" target="_blank" rel="external">Maven in 5 Minutes</a><br>  That’s quite enough.<br><p></p>
+
+<p><br></p><h3>2. Set up project</h3><br>Using the command in Maven in 5 Minutes to create a project using your own groupId and artifactId.<br><pre class="prettyprint"><br>mvn archetype:generate -DgroupId=com.ahchoo.automation -DartifactId=ahcoo -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false<br></pre><br><p></p>
+
+<p><br>Change the pom.xml to add Junit and WebDriver dependencies<br><pre class="prettyprint"><br>&lt;project&gt;<br>…<br>    &lt;dependencies&gt;<br>        &lt;dependency&gt;<br>            &lt;groupId&gt;junit&lt;/groupId&gt;<br>            &lt;artifactId&gt;junit&lt;/artifactId&gt;<br>            &lt;version&gt;4.10&lt;/version&gt;<br>            &lt;scope&gt;test&lt;/scope&gt;<br>        &lt;/dependency&gt;<br>        &lt;dependency&gt;<br>            &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;<br>            &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;<br>            &lt;version&gt;2.20.0&lt;/version&gt;<br>            &lt;/dependency&gt;<br>            &lt;/dependencies&gt;&lt;/scope&gt;&lt;/version&gt;&lt;/artifactId&gt;&lt;/groupId&gt;<br>        &lt;/dependency&gt;<br>    &lt;/dependencies&gt;<br>…<br>&lt;/project&gt;<br></pre><br>Then run <code class="cmd">mvn clean install</code><br></p>
+
+<p><br></p><h3>3. Using eclipse to import this project</h3><br>install <a href="http://eclipse.org/m2e/" target="_blank" rel="external">m2eclipse</a> and<br>run command in the project root directory:<br><pre class="prettyprint"><br>mvn eclipse:clean<br>mvn eclipse:eclipse<br></pre><br><br>open eclise, click File and choose Import:<br><p><br>    <img src="/photos/1.png"><br></p><br>Choose Existing Projects into Workspace<br><p><br>    <img src="/photos/2.png"><br></p>
+
+<p>After import, you will see the file tree in eclipse project explorer:</p>
+<p><br><img src="/photos/3.png"><br></p><br><p></p>
+
+<p>Thus the environment is set up.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/webdriver/">WebDriver</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+
+  
+    <article id="post-2012-03-08-learn-vim-3-post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/03/08/2012-03-08-learn-vim-3-post/" class="article-date">
+  	<time datetime="2012-03-08T10:18:00.000Z" itemprop="datePublished">2012-03-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/03/08/2012-03-08-learn-vim-3-post/">vim学习 jsctags</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><br>ctags不能非常胜任对现在的javascript代码的解析，尤其是遇到：<br><pre class="prettyprint"><br>Test.object.do = function(obj) {// …}<br>ajaxSetup: function( settings ) {//..}<br></pre><br>网上搜索了下，发现了doctorjs.git (以前叫jsctags), 号称被应用于Cloud9 IDE’s Ace online editor.<br><div class="comment"><br><ul><br>  <li>安装doctorjs需要nodejs环境，如何安装nodejs自己google去</li><br>  <li>安装ctags，brew也好macports也好。</li><br>  <li>git  clone <a href="https://github.com/mozilla/doctorjs.git" target="_blank" rel="external">https://github.com/mozilla/doctorjs.git</a> –recursive</li><br>  <li>make install</li><br>  <li>Add export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH to your .zshrc or .bashrc</li><br>  <li>然后就可以使用了，直接jsctags your_js_dir</li><br>  <li>配合vim的tagbar非常好用。</li><br></ul><br></div><br><br></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/vim/">vim</a>
 	</div>
 
 

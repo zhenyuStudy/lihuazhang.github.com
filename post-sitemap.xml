@@ -7,6 +7,78 @@
     </url>
 
     <url>
+        <loc>http://8atmyhouse.com/2013/05/26/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/</loc>
+        <lastmod>2015-12-16T13:52:17.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/08/01/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/</loc>
+        <lastmod>2015-12-16T13:51:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/04/06/2012-04-06-webdriver-1-post/</loc>
+        <lastmod>2015-12-16T13:50:20.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/03/08/2012-03-08-learn-vim-3-post/</loc>
+        <lastmod>2015-12-16T13:50:05.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/03/07/2012-03-07-learn-vim-2-post/</loc>
+        <lastmod>2015-12-16T13:49:55.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/03/07/2012-03-07-learn-vim-1-post/</loc>
+        <lastmod>2015-12-16T13:49:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/03/04/2012-03-04-zsh-config-post/</loc>
+        <lastmod>2015-12-16T13:48:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/02/19/2012-02-19-add-google-pretty-code-post/</loc>
+        <lastmod>2015-12-16T13:48:44.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/02/23/2012-02-23-use-spf13-vim-config-post/</loc>
+        <lastmod>2015-12-16T13:48:39.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://8atmyhouse.com/2013/08/08/2013-08-08-cucumberhe-capybaraxia-de-pageobject/</loc>
         <lastmod>2015-12-16T13:46:07.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -183,46 +255,6 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/2015/12/16/2012-03-08-learn-vim-3-post/</loc>
-        <lastmod>2015-12-16T13:37:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/2015/12/16/2012-03-07-learn-vim-2-post/</loc>
-        <lastmod>2015-12-16T13:37:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/2015/12/16/2012-03-07-learn-vim-1-post/</loc>
-        <lastmod>2015-12-16T13:37:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/2015/12/16/2012-02-23-use-spf13-vim-config-post/</loc>
-        <lastmod>2015-12-16T13:37:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/2015/12/16/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/</loc>
-        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://8atmyhouse.com/2012/04/25/2012-04-25-webdriver-4-jia-shang-xie-zi/</loc>
         <lastmod>2014-08-05T08:15:49.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -248,14 +280,6 @@
 
     <url>
         <loc>http://8atmyhouse.com/2012/04/19/2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia/</loc>
-        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/2015/12/16/2012-04-06-webdriver-1-post/</loc>
         <lastmod>2014-08-05T08:15:49.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -327,14 +351,6 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/2015/12/16/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/</loc>
-        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://8atmyhouse.com/2012/04/24/2012-04-24-sauce-ondemandshi-yong/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -344,22 +360,6 @@
 
     <url>
         <loc>http://8atmyhouse.com/2012/04/23/2012-04-23-mysql5-qing-kong-rootmi-ma/</loc>
-        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/2015/12/16/2012-03-04-zsh-config-post/</loc>
-        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://8atmyhouse.com/2012/04/19/2012-02-19-add-google-pretty-code-post/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
