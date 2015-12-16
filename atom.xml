@@ -30,7 +30,7 @@
     <![CDATA[<p>一直用vi，也没仔细研究过，也不会配置，在网上发现<a href="http://spf13.com/project/spf13-vim" target="_blank" rel="external"><strong> spf13-vim </strong></a>,安装配]]>
     </summary>
     
-      <category term="Vim" scheme="http://8atmyhouse.com/categories/Vim/"/>
+      <category term="Vim" scheme="http://8atmyhouse.com/categories/vim/"/>
     
   </entry>
   
@@ -107,7 +107,7 @@ Apache JMeter
     
       <category term="test-china.org" scheme="http://8atmyhouse.com/tags/test-china-org/"/>
     
-      <category term="Jmeter" scheme="http://8atmyhouse.com/categories/Jmeter/"/>
+      <category term="Jmeter" scheme="http://8atmyhouse.com/categories/jmeter/"/>
     
   </entry>
   
@@ -375,7 +375,7 @@ Apache JMeter
 <figure c]]>
     </summary>
     
-      <category term="Capybara" scheme="http://8atmyhouse.com/categories/Capybara/"/>
+      <category term="Capybara" scheme="http://8atmyhouse.com/categories/capybara/"/>
     
   </entry>
   
@@ -489,7 +489,7 @@ Apache JMeter
     
       <category term="nexus 7 2013" scheme="http://8atmyhouse.com/tags/nexus-7-2013/"/>
     
-      <category term="Android" scheme="http://8atmyhouse.com/categories/Android/"/>
+      <category term="Android" scheme="http://8atmyhouse.com/categories/android/"/>
     
   </entry>
   
@@ -832,7 +832,7 @@ Apache JMeter
     
       <category term="xpath" scheme="http://8atmyhouse.com/tags/xpath/"/>
     
-      <category term="WorkDiary" scheme="http://8atmyhouse.com/categories/WorkDiary/"/>
+      <category term="WorkDiary" scheme="http://8atmyhouse.com/categories/workdiary/"/>
     
   </entry>
   
@@ -1015,7 +1015,7 @@ Apache JMeter
     
     </summary>
     
-      <category term="WebDriver" scheme="http://8atmyhouse.com/categories/WebDriver/"/>
+      <category term="WebDriver" scheme="http://8atmyhouse.com/categories/webdriver/"/>
     
   </entry>
   

@@ -42,7 +42,7 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/Android/</loc>
+        <loc>http://8atmyhouse.com/categories/android/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -70,14 +70,14 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/WorkDiary/</loc>
+        <loc>http://8atmyhouse.com/categories/workdiary/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/Vim/</loc>
+        <loc>http://8atmyhouse.com/categories/vim/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -98,7 +98,7 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/Jmeter/</loc>
+        <loc>http://8atmyhouse.com/categories/jmeter/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -119,21 +119,21 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/Jekyll/</loc>
+        <loc>http://8atmyhouse.com/categories/jekyll/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/Capybara/</loc>
+        <loc>http://8atmyhouse.com/categories/capybara/</loc>
         <lastmod>2014-08-05T08:15:49.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/WebDriver/</loc>
+        <loc>http://8atmyhouse.com/categories/webdriver/</loc>
         <lastmod>2014-08-05T08:15:49.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
