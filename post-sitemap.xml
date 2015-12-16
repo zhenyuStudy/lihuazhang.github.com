@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://8atmyhouse.com</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/hello-world/</loc>
+        <lastmod>2015-12-16T11:16:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2015-08-26-yi-dong-ying-yong-zhi-wang-luo-ce-shi/</loc>
+        <lastmod>2015-08-26T16:24:55.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/</loc>
+        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-04-26-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu/</loc>
+        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/04/25/2012-04-25-webdriver-4-jia-shang-xie-zi/</loc>
+        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/04/21/2012-04-21-webdriver-3-more-pageobjects/</loc>
+        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/04/20/2012-04-20-webdriver2/</loc>
+        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/04/19/2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia/</loc>
+        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2012-04-06-webdriver-1-post/</loc>
+        <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-12-26-fan-yi-android-and-ios-support/</loc>
+        <lastmod>2013-12-26T08:14:19.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-10-15-you-xi-kai-fa-chang-yong-gai-nian/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-10-09-cron-jobs-and-random-times-within-giving-hours/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-09-24-fluentwait-with-webelement/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-09-14-gatling-shi-yong/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-29-add-hover-event-to-capybara/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-25-du-lu-fan-yan-shi/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-16-vim-cha-jian-tui-jian/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-12-install-vim74-from-source/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-08-cucumberhe-capybaraxia-de-pageobject/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-07-step-defintionshi-kong/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-06-git-revert/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2013/07/30/2013-07-30-gong-zuo-ri-ji-7-31/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2013/07/11/2013-07-11-wo-de-vimrc/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-06-27-ruby-here-doc/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-06-26-shell-script-to-control-tomcat/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-05-12-wo-de-mu-qin/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-xpath-extractor/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-regular-expression-extractor/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-04-26-jmeter-bing-qi-pu-zhi-foreach-controller/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2013-04-26-htmlunit-jie-shao/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2013/03/21/2013-03-21-windowsxia-cha-zhao-zhan-yong-duan-kou-de-jin-cheng/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2013/03/15/2013-03-15-8atmyhouse/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2013/02/12/2013-02-12-shi-yong-capybara-deng-lu-bai-du/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2013/02/12/2013-02-12-gao-bie-2012/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/08/06/2012-08-06-ying-she-windows-cmdke-yi-du-qu-de-ci-pan-qu-dong/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/08/05/2012-08-05-surround-dot-vim/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/04/24/2012-04-24-sauce-ondemandshi-yong/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/04/23/2012-04-23-mysql5-qing-kong-rootmi-ma/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2012-03-08-learn-vim-3-post/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2012-03-07-learn-vim-2-post/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2012-03-07-learn-vim-1-post/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2012-03-04-zsh-config-post/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2015/12/16/2012-02-23-use-spf13-vim-config-post/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/2012/04/19/2012-02-19-add-google-pretty-code-post/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

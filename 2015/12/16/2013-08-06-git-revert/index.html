@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git revert | 八点下班</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近一直在 github 上提交代码，所以总会遇到提交的代码 broken 了之前的 function。
+
+Perhaps you didn’t have enough coffee that morning, or it was just before lunch. 
+
+其实这还无关紧要，再提交一个修复下就可以了。 但是也会遇到比较头疼的， 比如：
+
+注意蓝色这条线的 merge 那个点，开发同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git revert">
+<meta property="og:url" content="http://8atmyhouse.com/2015/12/16/2013-08-06-git-revert/index.html">
+<meta property="og:site_name" content="八点下班">
+<meta property="og:description" content="最近一直在 github 上提交代码，所以总会遇到提交的代码 broken 了之前的 function。
+
+Perhaps you didn’t have enough coffee that morning, or it was just before lunch. 
+
+其实这还无关紧要，再提交一个修复下就可以了。 但是也会遇到比较头疼的， 比如：
+
+注意蓝色这条线的 merge 那个点，开发同">
+<meta property="og:image" content="http://8atmyhouse.com/photos/git_graph_error.jpg">
+<meta property="og:image" content="http://8atmyhouse.com/photos/git-tutorial_changes-revert.png">
+<meta property="og:image" content="http://8atmyhouse.com/photos/revert1.png">
+<meta property="og:image" content="http://8atmyhouse.com/photos/revert2.png">
+<meta property="og:updated_time" content="2013-11-24T05:45:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git revert">
+<meta name="twitter:description" content="最近一直在 github 上提交代码，所以总会遇到提交的代码 broken 了之前的 function。
+
+Perhaps you didn’t have enough coffee that morning, or it was just before lunch. 
+
+其实这还无关紧要，再提交一个修复下就可以了。 但是也会遇到比较头疼的， 比如：
+
+注意蓝色这条线的 merge 那个点，开发同">
+  
+    <link rel="alternative" href="/atom.xml" title="八点下班" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">恒温</a></h1>
+		</hgroup>
+
+		
+				
+
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives/">所有文章</a></li>
+				        
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/about/">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="mailto:lihuazhang@hotmail.com" title="Email"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/lihuazhang" title="GitHub"></a></li>
+					        
+								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+					        
+								<li id="Twitter"><a class="Twitter" target="_blank" href="https://twitter.com/lihuazhang" title="Twitter"></a></li>
+					        
+						</ul>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">专注于前端</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">恒温</a></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<a href="/" class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</a>
+			<hgroup>
+			  <h1 class="header-author"><a href="/" title="回到主页">恒温</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives/">所有文章</a></li>
+		        
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/about/">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="mailto:lihuazhang@hotmail.com" title="Email"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/lihuazhang" title="GitHub"></a></li>
+					        
+								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+					        
+								<li id="Twitter"><a class="Twitter" target="_blank" href="https://twitter.com/lihuazhang" title="Twitter"></a></li>
+					        
+						</ul>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2013-08-06-git-revert" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/16/2013-08-06-git-revert/" class="article-date">
+  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git revert
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/git/">git</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>最近一直在 github 上提交代码，所以总会遇到提交的代码 broken 了之前的 function。</p>
+<blockquote>
+<p>Perhaps you didn’t have enough coffee that morning, or it was just before lunch. </p>
+</blockquote>
+<p>其实这还无关紧要，再提交一个修复下就可以了。 但是也会遇到比较头疼的， 比如：</p>
+<p><img src="/photos/git_graph_error.jpg" alt=""></p>
+<p>注意蓝色这条线的 merge 那个点，开发同学因为粗心忘记把自动 merge 的代码提交了。<br>黑色这条线的同学，如果 pull 下来，就会发现一部分代码回到了蓝线的起点时候的状态。<br>然后呢，黑线这边的 merge 就会导致部分代码 rollback 了。很悲催吧。这个时候呢，提交修复也不太可能，最好的办法就是 <code>revert</code> 了。</p>
+<h3 id="u6982_u5FF5"><a href="#u6982_u5FF5" class="headerlink" title="概念"></a>概念</h3><p><code>git revert</code> 命令撤销一个 commit。它的做法是提交一个新的 commit， 这个 commit 里面将你要回滚的 commit 的修改全部撤销。<br>所以它不会破坏你的历史。如图所示：提交一个新的 commit （蓝球）， 撤销灰球修改。</p>
+<p><img src="/photos/git-tutorial_changes-revert.png" alt=""></p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p><a href="http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html" target="_blank" rel="external">http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html</a></p>
+<p>假设我们有这样一个 git 历史：</p>
+<p><img src="/photos/revert1.png" alt=""></p>
+<p>我们来一次 revert</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD</span><br><span class="line">Finished one revert.</span><br><span class="line">[master]: created <span class="number">1</span>e689e2: </span><br><span class="line">  <span class="string">"Revert "</span>Updated to Rails <span class="number">2.3</span>.<span class="number">2</span> and edge hoptoad_notifier<span class="string">""</span></span><br></pre></td></tr></table></figure>
+<p>revert 命令会自动帮你 commit， 并为你生成 commit 信息: Revert + 被回滚的 commit 的信息。<br>这里就是 “Revert “Updated to Rails 2.3.2 and edge hoptoad_notifier””</p>
+<p>再来看下 revert 后的历史图：</p>
+<p><img src="/photos/revert2.png" alt=""></p>
+<p>可以看到 revert 的在最前面添加了一个 commit。</p>
+<blockquote>
+<p>By default using this command will bring up your $EDITOR so you can modify the commit message of the revert.<br>Use this to explain why the changes are being backed out!<br>If for some reason you don’t want to edit the commit message, tacking on <code>--no-edit</code> will allow you do so.</p>
+</blockquote>
+<p>另外如果你不想 commit 的话，还可以用 <code>-n</code> 参数</p>
+<blockquote>
+<p>Another helpful option is the -n or –no-commit flag.<br>This will simply leave the reverted changes in your working directory and not automatically commit them.<br>If you need to edit files further to complete the revert or possibly revert more than one commit, try out this option.</p>
+</blockquote>
+<p>接着，我们是试试看 revert 一个 merge 的 commit</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD~<span class="number">1</span></span><br><span class="line">fatal: Commit <span class="number">137</span>ea95 is a merge but no -m option was given.</span><br></pre></td></tr></table></figure>
+<p>它告诉你 commit 137ea95 是一个 merge， 需要你指定一个 -m 的option。 </p>
+<blockquote>
+<p>-m parent-number, –mainline parent-number<br>Usually you cannot revert a merge because you do not know which side of the merge should be considered the mainline.<br>This option specifies the parent number (starting from 1) of the mainline and allows revert to reverse the change relative to the specified parent.</p>
+</blockquote>
+<p>意思是，你需要指定一个 parent number （从1开始），然后 revert 会将基于这个 parent number 的改变都回滚。</p>
+<p>再来看下 merge commit 的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> HEAD~<span class="number">1</span> -<span class="number">1</span></span><br><span class="line">commit <span class="number">137</span>ea95c911633d3e908f6906e3adf6372cfb0ad</span><br><span class="line">Merge: <span class="number">5</span>f576a9... <span class="number">62</span>db4af...</span><br><span class="line">Author: Nick Quaranto &lt;nick@quaran.to&gt;</span><br><span class="line">Date:   Mon Mar <span class="number">16</span> <span class="number">16</span>:<span class="number">22</span>:<span class="number">37</span> <span class="number">2009</span> -<span class="number">0400</span></span><br><span class="line"></span><br><span class="line">    Merging <span class="keyword">in</span> rails-<span class="number">2.3</span> branch</span><br></pre></td></tr></table></figure>
+<p>可以看到 <code>5f576a9</code> 和 <code>62db4af</code> 被 merge 了。</p>
+<p>所以</p>
+<ol>
+<li><code>git revert HEAD~1 -m 1</code> 就会 revert 基于 <code>5f576a9</code> 所发生的变化 </li>
+<li><code>git revert HEAD~1 -m 2</code> 就会 revert 基于 <code>62db4af</code> 所发生的变化  </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git revert HEAD~<span class="number">1</span> --no-edit --mainline <span class="number">2</span></span><br><span class="line">Finished one revert.</span><br><span class="line">[master]: created <span class="number">526</span>b346: <span class="string">"Revert "</span>Merging <span class="keyword">in</span> rails-<span class="number">2.3</span> branch<span class="string">""</span></span><br><span class="line"></span><br><span class="line">$ git <span class="built_in">log</span> -<span class="number">1</span></span><br><span class="line">commit d64d3983845dfa18a5d935c7ac5a4855c125e474</span><br><span class="line">Author: Nick Quaranto &lt;nick@quaran.to&gt;</span><br><span class="line">Date:   Mon Mar <span class="number">16</span> <span class="number">19</span>:<span class="number">24</span>:<span class="number">45</span> <span class="number">2009</span> -<span class="number">0400</span></span><br><span class="line"></span><br><span class="line">    Revert <span class="string">"Merging in rails-2.3 branch"</span></span><br><span class="line"></span><br><span class="line">    This reverts commit <span class="number">137</span>ea95c911633d3e908f6906e3adf6372cfb0ad, reversing</span><br><span class="line">    changes made to <span class="number">62</span>db4af8c77852d2cc9c19efc6dfb97e0d0067f5.</span><br></pre></td></tr></table></figure>
+<p>很明确的告诉你， 这个 revert 提交了一个 commit： 137ea95c911633d3e908f6906e3adf6372cfb0ad，这个 commit 把 merge 操作对 62db4af8c77852d2cc9c19efc6dfb97e0d0067f5 发生的改变都回滚了。</p>
+<h3 id="u901A_u4FD7_u8BF4_u6CD5"><a href="#u901A_u4FD7_u8BF4_u6CD5" class="headerlink" title="通俗说法"></a>通俗说法</h3><ol>
+<li>普通的 revert： 比如桌上有一碗饭， 我吃完了，然后我又把这碗饭填满，像没吃一样， 填满的动作就是 revert。 看上去桌上的饭没有动过，但是事情其实发生了，就是历史没有被改变。</li>
+<li>merge 的 revert：桌上有一碗饭，A 加了一道菜， B 加了一碗汤， merge 之后就是有饭有菜有汤。 现在在有饭有菜有汤的情况下去掉汤， 就是 <code>git revert &quot;commit of merge&quot; -m 菜</code>。</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<div class="copyright">
+  <p><span>本文标题:</span><a href="/2015/12/16/2013-08-06-git-revert/">git revert</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 恒温 的个人博客">恒温</a></p>
+  <p><span>发布时间:</span>2015年12月16日 - 19时37分</p>
+  <p><span>最后更新:</span>2013年11月24日 - 13时45分</p>
+  <p>
+    <span>原始链接:</span><a class="post-url" href="/2015/12/16/2013-08-06-git-revert/" title="git revert">http://8atmyhouse.com/2015/12/16/2013-08-06-git-revert/</a>
+    <span class="copy-path" data-clipboard-text="原文: http://8atmyhouse.com/2015/12/16/2013-08-06-git-revert/　　作者: 恒温" title="点击复制文章链接">
+        <i class="fa fa-clipboard"></i>
+    </span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
+  <script src="/js/clipboard.min.js"></script>
+  <script> var clipboard = new Clipboard('.copy-path'); </script>
+</div>
+
+
+
+
+<nav id="article-nav">
+  
+    <div id="article-nav-newer" class="article-nav-title">
+      <a href="/2015/12/16/2013-08-07-step-defintionshi-kong/">
+        由 step definition 失控引发的讨论和思考
+      </a>
+    </div>
+  
+  
+    <div id="article-nav-older" class="article-nav-title">
+      <a href="/2015/12/16/2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi/">
+        8-02-工作琐事
+      </a>
+    </div>
+  
+</nav>
+
+  
+</article>
+
+<!-- 默认显示文章目录，在文章---前输入toc: false关闭目录 -->
+<!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
+<div id="toc" class="toc-article">
+<strong class="toc-title">文章目录</strong>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6982_u5FF5"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-number">2.</span> <span class="toc-text">Usage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">3.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u901A_u4FD7_u8BF4_u6CD5"><span class="toc-number">4.</span> <span class="toc-text">通俗说法</span></a></li></ol>
+</div>
+<style type="text/css">
+  .left-col .switch-btn {
+    display: none;
+  }
+  .left-col .switch-area {
+    display: none;
+  }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script type="text/javascript">
+  var toc_button= document.getElementById("tocButton");
+  var toc_div= document.getElementById("toc");
+  /* Show or hide toc when click on tocButton.
+  通过点击设置的按钮显示或者隐藏文章目录.*/
+  toc_button.onclick=function(){
+  if(toc_div.style.display=="none"){
+  toc_div.style.display="block";
+  toc_button.value="隐藏目录";
+  document.getElementById("switch-btn").style.display="none";
+  document.getElementById("switch-area").style.display="none";
+  }
+  else{
+  toc_div.style.display="none";
+  toc_button.value="显示目录";
+  document.getElementById("switch-btn").style.display="block";
+  document.getElementById("switch-area").style.display="block";
+  }
+  }
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+  if ($(".toc").length < 1) {
+    $("#toc").css("display","none");
+    $("#tocButton").css("display","none");
+    $(".switch-btn").css("display","block");
+    $(".switch-area").css("display","block");
+  }
+</script>
+
+
+<div class="share">
+	<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+	<a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+	<a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+	</div>
+	<script>
+	window._bd_share_config={
+		"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+</div>
+
+
+
+  <div class="duoshuo" id="comments">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/12/16/2013-08-06-git-revert/" data-title="git revert" data-url="http://8atmyhouse.com/2015/12/16/2013-08-06-git-revert/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jinhengwen"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+    <style type="text/css">
+    #scroll {
+      display: none;
+    }
+    </style>
+    <div class="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    </div>
+
+
+  
+  
+    
+    <div  class="post-nav-button">
+    <a href="/2015/12/16/2013-08-07-step-defintionshi-kong/" title="上一篇: 由 step definition 失控引发的讨论和思考">
+    <i class="fa fa-angle-left"></i>
+    </a>
+    <a href="/2015/12/16/2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi/" title="下一篇: 8-02-工作琐事">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    </div>
+  
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2015 恒温
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+        </div>
+    </div>
+    <div class="visit">
+      <span id="busuanzi_container_site_pv" style='display:none'>
+        <span id="site-visit" >本站到访数: 
+        <span id="busuanzi_value_site_uv"></span>
+        </span>
+      </span>
+      <span id="busuanzi_container_page_pv" style='display:none'>
+        <span id="page-visit">, 本页阅读量: 
+        <span id="busuanzi_value_page_pv"></span>
+        </span>
+      </span>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+<script>
+  var backgroundnum = 5;
+  var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+
+  $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+<a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+<a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

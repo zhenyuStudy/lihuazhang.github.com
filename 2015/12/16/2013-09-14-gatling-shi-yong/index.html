@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Gatling 试用 1 | 八点下班</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍
+在微博上看到 Gatling，号称超越 jmeter 的性能测试工具。顿时手痒，想来个试用。
+Gatling 格林机关枪，看名字就恨凶悍。
+Gatling 的动机是因为性能测试工具已经无法测试当今的应用了。
+比如：
+
+LoadRunner 太贵了。
+页面又改了，又要打开界面，重新录制。
+客户说用 OpenSTA ， 我们只能用 windows 的虚拟机。
+Jmeter 太弱了，并发的好假，还">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gatling 试用 1">
+<meta property="og:url" content="http://8atmyhouse.com/2015/12/16/2013-09-14-gatling-shi-yong/index.html">
+<meta property="og:site_name" content="八点下班">
+<meta property="og:description" content="介绍
+在微博上看到 Gatling，号称超越 jmeter 的性能测试工具。顿时手痒，想来个试用。
+Gatling 格林机关枪，看名字就恨凶悍。
+Gatling 的动机是因为性能测试工具已经无法测试当今的应用了。
+比如：
+
+LoadRunner 太贵了。
+页面又改了，又要打开界面，重新录制。
+客户说用 OpenSTA ， 我们只能用 windows 的虚拟机。
+Jmeter 太弱了，并发的好假，还">
+<meta property="og:image" content="http://8atmyhouse.com/photos/gatling_gui.png">
+<meta property="og:image" content="http://8atmyhouse.com/photos/run.png">
+<meta property="og:image" content="http://8atmyhouse.com/photos/report.png">
+<meta property="og:image" content="http://8atmyhouse.com/photos/gatling_report.png">
+<meta property="og:updated_time" content="2013-11-24T05:45:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gatling 试用 1">
+<meta name="twitter:description" content="介绍
+在微博上看到 Gatling，号称超越 jmeter 的性能测试工具。顿时手痒，想来个试用。
+Gatling 格林机关枪，看名字就恨凶悍。
+Gatling 的动机是因为性能测试工具已经无法测试当今的应用了。
+比如：
+
+LoadRunner 太贵了。
+页面又改了，又要打开界面，重新录制。
+客户说用 OpenSTA ， 我们只能用 windows 的虚拟机。
+Jmeter 太弱了，并发的好假，还">
+  
+    <link rel="alternative" href="/atom.xml" title="八点下班" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">恒温</a></h1>
+		</hgroup>
+
+		
+				
+
+
+		
+			<div id="switch-btn" class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div id="switch-area" class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives/">所有文章</a></li>
+				        
+							<li><a href="/tags/">标签云</a></li>
+				        
+							<li><a href="/about/">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="mailto:lihuazhang@hotmail.com" title="Email"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/lihuazhang" title="GitHub"></a></li>
+					        
+								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+					        
+								<li id="Twitter"><a class="Twitter" target="_blank" href="https://twitter.com/lihuazhang" title="Twitter"></a></li>
+					        
+						</ul>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">专注于前端</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">恒温</a></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<a href="/" class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</a>
+			<hgroup>
+			  <h1 class="header-author"><a href="/" title="回到主页">恒温</a></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives/">所有文章</a></li>
+		        
+					<li><a href="/tags/">标签云</a></li>
+		        
+					<li><a href="/about/">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+						<ul class="social">
+							
+								<li id="Email"><a class="Email" target="_blank" href="mailto:lihuazhang@hotmail.com" title="Email"></a></li>
+					        
+								<li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/lihuazhang" title="GitHub"></a></li>
+					        
+								<li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+					        
+								<li id="Twitter"><a class="Twitter" target="_blank" href="https://twitter.com/lihuazhang" title="Twitter"></a></li>
+					        
+						</ul>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2013-09-14-gatling-shi-yong" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/16/2013-09-14-gatling-shi-yong/" class="article-date">
+  	<time datetime="2015-12-16T11:37:46.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Gatling 试用 1
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/gatling/">gatling</a>
+	</div>
+
+
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能测试/">性能测试</a></li></ul>
+	</div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h1><hr>
+<p>在微博上看到 <code>Gatling</code>，号称超越 <code>jmeter</code> 的性能测试工具。顿时手痒，想来个试用。</p>
+<p>Gatling <em>格林机关枪</em>，看名字就恨凶悍。</p>
+<p>Gatling 的动机是因为性能测试工具已经无法测试当今的应用了。</p>
+<p>比如：</p>
+<ol>
+<li>LoadRunner 太贵了。</li>
+<li>页面又改了，又要打开界面，重新录制。</li>
+<li>客户说用 <code>OpenSTA</code> ， 我们只能用 windows 的虚拟机。</li>
+<li>Jmeter 太弱了，并发的好假，还得建立集群，而且还不知道每个节点的信息能不能回收。。</li>
+<li>Grinder 又内存泄露了，苦逼的 python 开发。。。（不知道是哪个工具）</li>
+</ol>
+<p>看来业界对市场上的性能测试工具都恨之入骨。</p>
+<p>再来看下 Gatling：</p>
+<ol>
+<li><p>高效<br>Gatling 用了 actors 模型，真是一个好演员啊。</p>
+<blockquote>
+<p>Actor模型</p>
+<p>当一个请求来了之后， 则委派给一个Actor处理， 和事件驱动的区别是， 这些Actor之间不共享任何资源， 可进行并行处理， 事件驱动模型和Actor模型很容易被搞混淆， 如果事件驱动模型来一个请求则委派一个线程去处理并且这些线程之间不共享资源，不会出现锁的问题， 则可以认为这种事件驱动模型等价于Actor模型， Scala的Actor模型就是这么处理的， Actor会被代理到线程处理， 海量的Actor会被代理到一个JVM线程池处理，这样提升了很大的效率，而这种映射是scala帮你做好了； 而Erlang中Actor模型则更加彻底， 其实是OTP实现了操作系统中的线程的功能， 这些“线程”叫做process， 只不过这些process占用的资源很少， 也不共享任何资源， 这样每个actor可以跟process一一对应</p>
+</blockquote>
+</li>
+<li><p>Gatling 脚本是代码，而且优雅简洁</p>
+<p>其实就是 scala 和 scala 写的 DSL， 不觉得 scala 优雅啊。。。</p>
+</li>
+<li><p>Gatling 的报表很有意义。</p>
+</li>
+<li><p>Gatling 免费的，明显最重要的。</p>
+</li>
+</ol>
+<h1 id="u4E0A_u624B"><a href="#u4E0A_u624B" class="headerlink" title="上手"></a>上手</h1><hr>
+<p>略过下载安装之类的，实在要看，自己看 <a href="https://github.com/excilys/gatling/wiki/Getting-Started" target="_blank" rel="external">Getting-started</a> 吧。<br>我们按照 <a href="https://github.com/excilys/gatling/wiki/First-Steps-with-Gatling" target="_blank" rel="external">First Steps with Gatling</a> 走一遍。<br>这个 First Steps 就是测试一个 e-banking 的应用，很可惜这个应用放在 Cloud Foundry， 国内估计访问不了。</p>
+<p>这个应用的链接在：</p>
+<p><a href="http://excilysbank.gatling.cloudbees.net" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net</a></p>
+<p>主要实现了以下功能：</p>
+<blockquote>
+<ol>
+<li>Session management (login, logout)</li>
+<li>Accounts visualization</li>
+<li>Operations visualization by month</li>
+<li>Cards Operations visualization by month</li>
+<li>Transfers visualization and transfer performing</li>
+</ol>
+</blockquote>
+<h2 id="u6D4B_u8BD5_u8BA1_u5212"><a href="#u6D4B_u8BD5_u8BA1_u5212" class="headerlink" title="测试计划"></a>测试计划</h2><p>我们对一些具有代表性的场景进行性能测试，所以我们想象了下，用户会做的事情：</p>
+<ol>
+<li>用户访问应用</li>
+<li>用户获得认证并登陆</li>
+<li>用户访问具体的账号</li>
+<li>用户查看上个月的状况</li>
+<li>用户登出</li>
+</ol>
+<p>我们要用 Gatling 来录制这 5 个场景。</p>
+<h2 id="Gatling_Recorder"><a href="#Gatling_Recorder" class="headerlink" title="Gatling Recorder"></a>Gatling Recorder</h2><p>一般工具都提供 recorder 否则就弱爆了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="variable">$GATLING_HOME</span>/bin/recorder.sh</span><br></pre></td></tr></table></figure>
+<p>启动这个脚本之后，会跳出一个类似 jmeter 的界面，我们得配置下：</p>
+<ul>
+<li>package: com.excilys.ebi.bank.stress</li>
+<li>class name: MySimulation</li>
+<li>output folder: /Users/lihuazhang/Documents/Simulation</li>
+</ul>
+<p><img src="/photos/gatling_gui.png" alt="alt text"></p>
+<p>和 jmeter 一样， Gatling 的 recorder 一样也充当着浏览器和应用之间 proxy 的角色，从上图来看：</p>
+<ul>
+<li>http  8000</li>
+<li>https 8001</li>
+</ul>
+<p>所以必须在浏览器设置代理。然后在浏览器上的所有 request 都会被记录下来。当然 Gatling 也提供了 Filters 来过滤<br>无关信息：</p>
+<blockquote>
+<ul>
+<li>NONE: Doesn’t apply any filter one the requests, even if there are some declared;</li>
+<li>EXCEPT: Allows all requests to be logged except those which filters apply on the URI;</li>
+<li>ONLY: Allows only requests, which URI matches one of the filters, to be logged.</li>
+</ul>
+</blockquote>
+<p>更加具体的，不妨看下 <a href="https://github.com/excilys/gatling/wiki/Recorder#wiki-browser-config" target="_blank" rel="external">Recorder details</a></p>
+<h2 id="u5F00_u59CB_u5F55_u5236_u5427"><a href="#u5F00_u59CB_u5F55_u5236_u5427" class="headerlink" title="开始录制吧"></a>开始录制吧</h2><p>设置好代理之后，开始执行第一个场景：</p>
+<ol>
+<li><p>访问 <a href="http://excilysbank.gatling.cloudbees.net" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net</a></p>
+</li>
+<li><p>登陆</p>
+<p>username = user1</p>
+<p>password = password1</p>
+</li>
+<li><p>Click on PERSONNAL_CHECKING</p>
+</li>
+<li><p>Click on the previous month (for us it was November as we were in December)</p>
+</li>
+<li><p>Log out</p>
+</li>
+</ol>
+<p>然后点击 Recorder 上的 stop， 就会在之前设置的 output folder 里面生成 <code>MySimulation.scala</code> 文件。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.excilys.ebi.bank.stress</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.gatling.core.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.core.session.<span class="type">Expression</span></span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.jdbc.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Names</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Values</span>._</span><br><span class="line"><span class="keyword">import</span> scala.concurrent.duration._</span><br><span class="line"><span class="keyword">import</span> bootstrap._</span><br><span class="line"><span class="keyword">import</span> assertions._</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySimulation</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Simulation</span> &#123;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> httpProtocol = http</span><br><span class="line">    .baseURL(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span><br><span class="line">    .acceptHeader(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span><br><span class="line">    .acceptEncodingHeader(<span class="string">"gzip, deflate"</span>)</span><br><span class="line">    .acceptLanguageHeader(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span><br><span class="line">    .connection(<span class="string">"keep-alive"</span>)</span><br><span class="line">    .userAgentHeader(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">"""Cache-Control"""</span> -&gt; <span class="string">"""max-age=0"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""text/css,*/*;q=0.1"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""image/png,image/*;q=0.8,*/*;q=0.5"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""*/*"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">"""Content-Type"""</span> -&gt; <span class="string">"""application/x-www-form-urlencoded"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">"""Accept"""</span> -&gt; <span class="string">"""application/json, text/javascript, */*; q=0.01"""</span>,</span><br><span class="line">    <span class="string">"""X-Requested-With"""</span> -&gt; <span class="string">"""XMLHttpRequest"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">      .get(<span class="string">"""/"""</span>)</span><br><span class="line">      .headers(headers_1))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">      .get(<span class="string">"""/img/favicon.ico"""</span>))</span><br><span class="line">    .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">      .get(<span class="string">"""/gzip_N2030079394/bundles/all.css"""</span>)</span><br><span class="line">      .headers(headers_3))</span><br><span class="line">    .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb1024132465/img/background.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb4077127084/img/small_window_content.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">      .get(<span class="string">"""/gzip_N762261864/bundles/all.js"""</span>)</span><br><span class="line">      .headers(headers_6))</span><br><span class="line">    .pause(<span class="number">1</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb3761658453/img/sprite.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">30</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">      .post(<span class="string">"""/login"""</span>)</span><br><span class="line">      .headers(headers_8)</span><br><span class="line">      .param(<span class="string">"""username"""</span>, <span class="string">"""user1"""</span>)</span><br><span class="line">      .param(<span class="string">"""password"""</span>, <span class="string">"""password1"""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb2545837452/img/big_window_content.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">21</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/operations.html"""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">43</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/operations.html"""</span>))</span><br><span class="line">    .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">4</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">      .get(<span class="string">"""/logout"""</span>))</span><br><span class="line"></span><br><span class="line">  setUp(scn.inject(atOnce(<span class="number">1</span> user))).protocols(httpProtocol)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u4EE3_u7801_u5206_u6790"><a href="#u4EE3_u7801_u5206_u6790" class="headerlink" title="代码分析"></a>代码分析</h2><p>MySimulation class 可以分为 4 部分：</p>
+<ol>
+<li>The HTTP protocol configuration</li>
+<li>The headers definition</li>
+<li>The scenario definition</li>
+<li>The simulation definition</li>
+</ol>
+<p><em>The HTTP protocol configuration</em></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">val httpProtocol = http</span><br><span class="line">  .<span class="function"><span class="title">baseURL</span><span class="params">(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptHeader</span><span class="params">(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptEncodingHeader</span><span class="params">(<span class="string">"gzip, deflate"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptLanguageHeader</span><span class="params">(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">connection</span><span class="params">(<span class="string">"keep-alive"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">userAgentHeader</span><span class="params">(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>除了设置 http 协议之外，最重要的就是指定了 baseUrl</p>
+<p><em>The headers definition</em></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">"""Cache-Control"""</span> -&gt; <span class="string">"""max-age=0"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""text/css,*/*;q=0.1"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""image/png,image/*;q=0.8,*/*;q=0.5"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""*/*"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">"""Content-Type"""</span> -&gt; <span class="string">"""application/x-www-form-urlencoded"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">"""Accept"""</span> -&gt; <span class="string">"""application/json, text/javascript, */*; q=0.01"""</span>,</span><br><span class="line">    <span class="string">"""X-Requested-With"""</span> -&gt; <span class="string">"""XMLHttpRequest"""</span>)</span><br></pre></td></tr></table></figure>
+<p>每一个 header 都是一个 scala 的 Map。</p>
+<blockquote>
+<p>这些通用的 header 信息看上去没用，其实这些信息也额外增加了负载，也不容忽视的。</p>
+</blockquote>
+<p><em>The scenario definition</em></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">    .get(<span class="string">"""/"""</span>)</span><br><span class="line">    .headers(headers_1))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">    .get(<span class="string">"""/img/favicon.ico"""</span>))</span><br><span class="line">  .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">    .get(<span class="string">"""/gzip_N2030079394/bundles/all.css"""</span>)</span><br><span class="line">    .headers(headers_3))</span><br><span class="line">  .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb1024132465/img/background.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb4077127084/img/small_window_content.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">    .get(<span class="string">"""/gzip_N762261864/bundles/all.js"""</span>)</span><br><span class="line">    .headers(headers_6))</span><br><span class="line">  .pause(<span class="number">1</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb3761658453/img/sprite.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">30</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">    .post(<span class="string">"""/login"""</span>)</span><br><span class="line">    .headers(headers_8)</span><br><span class="line">    .param(<span class="string">"""username"""</span>, <span class="string">"""user1"""</span>)</span><br><span class="line">    .param(<span class="string">"""password"""</span>, <span class="string">"""password1"""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb2545837452/img/big_window_content.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">21</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/operations.html"""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">43</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/operations.html"""</span>))</span><br><span class="line">  .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">4</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">    .get(<span class="string">"""/logout"""</span>))</span><br></pre></td></tr></table></figure>
+<p>一个simluation 里面可以定义一个或者多个 scenario， 每个 scenario 是一个 scala 对象，</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">val scn = scenario(<span class="string">"Name of my Scenario"</span>)...</span><br><span class="line">``` </span><br><span class="line">scenario 有两个方法：</span><br><span class="line"></span><br><span class="line">* exec  - describe <span class="operator">an</span> action, usually <span class="operator">a</span> request sent <span class="built_in">to</span> <span class="operator">the</span> tested application</span><br><span class="line">* pause - simulate <span class="operator">the</span> thinking <span class="built_in">time</span> <span class="operator">of</span> <span class="operator">the</span> user between pages</span><br><span class="line"></span><br><span class="line">每个 scenario 里会发送很多个 request， 也会思考好多次。所以你看到上面的代码都是 exec <span class="keyword">http</span> request 和 pause。</span><br><span class="line"></span><br><span class="line">HTTP requests 的定义包括 名字，<span class="built_in">post</span> 或者 <span class="built_in">get</span> 方法，headers， 还有参数 :</span><br></pre></td></tr></table></figure>
+<p>  http(“request_3”)<br>    .post(“/login”)<br>    .headers(headers_3)<br>    .param(“username”, “user1”)<br>    .param(“password”, “password1”)<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这段代码会发送一个 <span class="keyword">POST</span> 请求：</span><br></pre></td></tr></table></figure></p>
+<p>POST <a href="http://excilysbank.gatling.cloudbees.net/login" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net/login</a><br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8<br>Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7<br>Accept-Encoding: gzip,deflate<br>Accept-Language: fr,en-us;q=0.7,en;q=0.3<br>Host: excilysbank.gatling.cloudbees.net<br>Keep-Alive: 115<br>User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.17) Gecko/20110422 Ubuntu/9.10 Firefox/3.6.17<br>Content-Length: 33<br>Content-Type: application/x-www-form-urlencoded<br>Referer: <a href="http://excilysbank.gatling.cloudbees.net/public/login.html" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net/public/login.html</a></p>
+<p>username=user1&amp;password=password1</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">*</span>The simulation definition<span class="keyword">*</span></span><br></pre></td></tr></table></figure>
+<p>setUp(scn.inject(atOnce(1 user))).protocols(httpProtocol)<br>```</p>
+<h2 id="u8FD0_u884C_u4E0B_u5427_uFF01"><a href="#u8FD0_u884C_u4E0B_u5427_uFF01" class="headerlink" title="运行下吧！"></a>运行下吧！</h2><p>首先我们要把这个 Simulation move 到 user-files/simulations/下。</p>
+<p>然后运行<code>$GATHING_HOME/bin/gatling.sh</code>, Gatling 会找到 MySimulation。    </p>
+<p><img src="/photos/run.png" alt=""></p>
+<p>选择 MySimulation，一路回车，然后等待运行结束，生成 report：</p>
+<p><img src="/photos/report.png" alt=""></p>
+<h2 id="u5206_u6790_u62A5_u8868_u5427_uFF01"><a href="#u5206_u6790_u62A5_u8868_u5427_uFF01" class="headerlink" title="分析报表吧！"></a>分析报表吧！</h2><p>Gatling 生成的报表非常漂亮而且有意义。每个图表的具体含义可以参考 <a href="https://github.com/excilys/gatling/wiki/Reports" target="_blank" rel="external">Reports</a><br>这样子的报表几乎可以直接呈给领导，都不需要自己采集数据绘图了。</p>
+<p><img src="/photos/gatling_report.png" alt=""></p>
+<h1 id="u4E0B_u4E00_u8282"><a href="#u4E0B_u4E00_u8282" class="headerlink" title="下一节"></a>下一节</h1><p>到目前为止，我们都是照搬 Gatling wiki 来做的，其实就了解了下基本情况。下一节，应该搞个 project 试验下。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<div class="copyright">
+  <p><span>本文标题:</span><a href="/2015/12/16/2013-09-14-gatling-shi-yong/">Gatling 试用 1</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 恒温 的个人博客">恒温</a></p>
+  <p><span>发布时间:</span>2015年12月16日 - 19时37分</p>
+  <p><span>最后更新:</span>2013年11月24日 - 13时45分</p>
+  <p>
+    <span>原始链接:</span><a class="post-url" href="/2015/12/16/2013-09-14-gatling-shi-yong/" title="Gatling 试用 1">http://8atmyhouse.com/2015/12/16/2013-09-14-gatling-shi-yong/</a>
+    <span class="copy-path" data-clipboard-text="原文: http://8atmyhouse.com/2015/12/16/2013-09-14-gatling-shi-yong/　　作者: 恒温" title="点击复制文章链接">
+        <i class="fa fa-clipboard"></i>
+    </span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。</p>
+  <script src="/js/clipboard.min.js"></script>
+  <script> var clipboard = new Clipboard('.copy-path'); </script>
+</div>
+
+
+
+
+<nav id="article-nav">
+  
+    <div id="article-nav-newer" class="article-nav-title">
+      <a href="/2015/12/16/2013-09-24-fluentwait-with-webelement/">
+        FluentWait with WebElement
+      </a>
+    </div>
+  
+  
+    <div id="article-nav-older" class="article-nav-title">
+      <a href="/2015/12/16/2013-08-29-add-hover-event-to-capybara/">
+        add hover event to capybara
+      </a>
+    </div>
+  
+</nav>
+
+  
+</article>
+
+<!-- 默认显示文章目录，在文章---前输入toc: false关闭目录 -->
+<!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
+<div id="toc" class="toc-article">
+<strong class="toc-title">文章目录</strong>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#u4ECB_u7ECD"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#u4E0A_u624B"><span class="toc-number">2.</span> <span class="toc-text">上手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D4B_u8BD5_u8BA1_u5212"><span class="toc-number">2.1.</span> <span class="toc-text">测试计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gatling_Recorder"><span class="toc-number">2.2.</span> <span class="toc-text">Gatling Recorder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5F00_u59CB_u5F55_u5236_u5427"><span class="toc-number">2.3.</span> <span class="toc-text">开始录制吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4EE3_u7801_u5206_u6790"><span class="toc-number">2.4.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FD0_u884C_u4E0B_u5427_uFF01"><span class="toc-number">2.5.</span> <span class="toc-text">运行下吧！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5206_u6790_u62A5_u8868_u5427_uFF01"><span class="toc-number">2.6.</span> <span class="toc-text">分析报表吧！</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#u4E0B_u4E00_u8282"><span class="toc-number">3.</span> <span class="toc-text">下一节</span></a></li></ol>
+</div>
+<style type="text/css">
+  .left-col .switch-btn {
+    display: none;
+  }
+  .left-col .switch-area {
+    display: none;
+  }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script type="text/javascript">
+  var toc_button= document.getElementById("tocButton");
+  var toc_div= document.getElementById("toc");
+  /* Show or hide toc when click on tocButton.
+  通过点击设置的按钮显示或者隐藏文章目录.*/
+  toc_button.onclick=function(){
+  if(toc_div.style.display=="none"){
+  toc_div.style.display="block";
+  toc_button.value="隐藏目录";
+  document.getElementById("switch-btn").style.display="none";
+  document.getElementById("switch-area").style.display="none";
+  }
+  else{
+  toc_div.style.display="none";
+  toc_button.value="显示目录";
+  document.getElementById("switch-btn").style.display="block";
+  document.getElementById("switch-area").style.display="block";
+  }
+  }
+</script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+  if ($(".toc").length < 1) {
+    $("#toc").css("display","none");
+    $("#tocButton").css("display","none");
+    $(".switch-btn").css("display","block");
+    $(".switch-area").css("display","block");
+  }
+</script>
+
+
+<div class="share">
+	<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+	<a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+	<a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+	</div>
+	<script>
+	window._bd_share_config={
+		"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+</div>
+
+
+
+  <div class="duoshuo" id="comments">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/12/16/2013-09-14-gatling-shi-yong/" data-title="Gatling 试用 1" data-url="http://8atmyhouse.com/2015/12/16/2013-09-14-gatling-shi-yong/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jinhengwen"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+    <style type="text/css">
+    #scroll {
+      display: none;
+    }
+    </style>
+    <div class="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    </div>
+
+
+  
+  
+    
+    <div  class="post-nav-button">
+    <a href="/2015/12/16/2013-09-24-fluentwait-with-webelement/" title="上一篇: FluentWait with WebElement">
+    <i class="fa fa-angle-left"></i>
+    </a>
+    <a href="/2015/12/16/2013-08-29-add-hover-event-to-capybara/" title="下一篇: add hover event to capybara">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    </div>
+  
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+     
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2015 恒温
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+        </div>
+    </div>
+    <div class="visit">
+      <span id="busuanzi_container_site_pv" style='display:none'>
+        <span id="site-visit" >本站到访数: 
+        <span id="busuanzi_value_site_uv"></span>
+        </span>
+      </span>
+      <span id="busuanzi_container_page_pv" style='display:none'>
+        <span id="page-visit">, 本页阅读量: 
+        <span id="busuanzi_value_page_pv"></span>
+        </span>
+      </span>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+<script>
+  var backgroundnum = 5;
+  var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+
+  $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+</script>
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+<a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+<a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
