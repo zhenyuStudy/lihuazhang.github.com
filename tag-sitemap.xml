@@ -51,13 +51,6 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/tags/test-china-org/</loc>
-        <lastmod>2015-12-16T13:43:59.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://8atmyhouse.com/tags/xpath/</loc>
         <lastmod>2015-12-16T13:45:31.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -95,6 +88,13 @@
     <url>
         <loc>http://8atmyhouse.com/tags/metro/</loc>
         <lastmod>2015-12-16T13:51:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://8atmyhouse.com/tags/test-china-org/</loc>
+        <lastmod>2015-12-16T13:56:43.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
