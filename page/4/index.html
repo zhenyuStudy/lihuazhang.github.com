@@ -126,7 +126,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
 					</div>
 				</section>
 				
@@ -203,6 +203,91 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-2012-08-06-ying-she-windows-cmdke-yi-du-qu-de-ci-pan-qu-dong" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/08/06/2012-08-06-ying-she-windows-cmdke-yi-du-qu-de-ci-pan-qu-dong/" class="article-date">
+  	<time datetime="2012-08-06T13:58:00.000Z" itemprop="datePublished">2012-08-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/08/06/2012-08-06-ying-she-windows-cmdke-yi-du-qu-de-ci-pan-qu-dong/">映射 Windows cmd 可以读取的磁盘驱动</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在 windows 下， 通常我们映射一个网路驱动到本地的时候， 会在本地生成一个文件夹与之映射。<br>然后我们就可以通过这个文件夹访问和操作资源（当然你得有权限），好像操作本地文件一样。但是这样，<br>似乎就不能通过命令行访问。（不知道为什么，但是最近遇到这个问题）</p>
+<p>贴出解决方法：</p>
+<p><em>1.</em> 进入命令行窗口。</p>
+<blockquote>
+<p>使用 Alt + F2， 然后输入 cmd， 回车。 或者从开始菜单，运行那里输入cmd，回车。</p>
+</blockquote>
+<p><em>2.</em> 输入<code>net use X: \\path\to\share</code>， X 是你要映射的盘符， \path\to\share 就是你的网络驱动地址。</p>
+<p><em>3.</em> 回车，然后成功~</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/windows/">windows</a>
+	</div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+    
+
+
   
     <article id="post-2012-08-05-surround-dot-vim" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1160,84 +1245,6 @@
 
 
   
-    <article id="post-2012-03-08-learn-vim-3-post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2012/03/08/2012-03-08-learn-vim-3-post/" class="article-date">
-  	<time datetime="2012-03-08T10:18:00.000Z" itemprop="datePublished">2012-03-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2012/03/08/2012-03-08-learn-vim-3-post/">vim学习 jsctags</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><br>ctags不能非常胜任对现在的javascript代码的解析，尤其是遇到：<br><pre class="prettyprint"><br>Test.object.do = function(obj) {// …}<br>ajaxSetup: function( settings ) {//..}<br></pre><br>网上搜索了下，发现了doctorjs.git (以前叫jsctags), 号称被应用于Cloud9 IDE’s Ace online editor.<br><div class="comment"><br><ul><br>  <li>安装doctorjs需要nodejs环境，如何安装nodejs自己google去</li><br>  <li>安装ctags，brew也好macports也好。</li><br>  <li>git  clone <a href="https://github.com/mozilla/doctorjs.git" target="_blank" rel="external">https://github.com/mozilla/doctorjs.git</a> –recursive</li><br>  <li>make install</li><br>  <li>Add export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH to your .zshrc or .bashrc</li><br>  <li>然后就可以使用了，直接jsctags your_js_dir</li><br>  <li>配合vim的tagbar非常好用。</li><br></ul><br></div><br><br></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/vim/">vim</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-    
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1248,7 +1255,7 @@
   <div class="outer">
     <div id="footer-info">
       <div class="footer-left">
-        &copy; 2015 恒温
+        &copy; 2016 恒温
       </div>
         <div class="footer-right">
           <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
