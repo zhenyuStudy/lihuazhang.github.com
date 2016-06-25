@@ -20,7 +20,7 @@
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
@@ -126,7 +126,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
 					</div>
 				</section>
 				
@@ -204,7 +204,153 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="title-南京之行" class="article article-type-title" itemscope itemprop="blogPost">
+    <article id="post-webdriveragent-简介" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/14/webdriveragent-简介/" class="article-date">
+  	<time datetime="2016-05-14T10:49:52.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/14/webdriveragent-简介/">WebDriverAgent 简介</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="WebDriverAgent-是什么"><a href="#WebDriverAgent-是什么" class="headerlink" title="WebDriverAgent 是什么"></a>WebDriverAgent 是什么</h1><p><img src="https://testerhome.com/photo/2016/0b2b5ddb75af0e237e6f41765d5c475e.png" alt=""></p>
+<p>去年的 SeleniumConf 上，Facebook 推出了一款新的iOS移动测试框架 —— WebDriverAgent，当时的推文上，写的还只支持模拟器。半年过过去了，如今在看官方github —— <a href="https://github.com/facebook/WebDriverAgent，已经宣称支持真机测试了（亲测的确支持）。我把它的" target="_blank" rel="external">https://github.com/facebook/WebDriverAgent，已经宣称支持真机测试了（亲测的确支持）。我把它的</a> ReadMe 搬运过来：</p>
+<blockquote>
+<p>WebDriverAgent 在 iOS 端实现了一个 <a href="https://w3c.github.io/webdriver/webdriver-spec.html" target="_blank" rel="external">WebDriver server</a> ，借助这个 server 我们可以远程控制 iOS 设备。你可以启动、杀死应用，点击、滚动视图，或者确定页面展示是否正确。This makes it a perfect tool for application end-to-end testing or general purpose device automation.（它说它是iOS上一个完美的e2e的自动化解决方案） It works by linking <code>XCTest.framework</code> and calling Apple’s API to execute commands directly on a device.（链接<code>XCTest.framework</code>调用苹果的API直接在设备上执行命令） WebDriverAgent is developed and used at Facebook for end-to-end testing and is successfully adopted by <a href="http://appium.io/" target="_blank" rel="external">Appium</a>. （Appium封装工作正在进行中，如果一旦封装好，那么以后就可以直接用Appium提供的binding了。）It is currently maintained by <a href="https://github.com/marekcirkos" target="_blank" rel="external">Marek Cirkos</a> and <a href="https://github.com/mmmulani" target="_blank" rel="external">Mehdi Mulani</a>.</p>
+</blockquote>
+<h3 id="它有如下特性："><a href="#它有如下特性：" class="headerlink" title="它有如下特性："></a>它有如下特性：</h3><ul>
+<li>真机和模拟器都支持</li>
+<li>实现了大部分的 <a href="https://w3c.github.io/webdriver/webdriver-spec.html" target="_blank" rel="external">WebDriver spec</a></li>
+<li><a href="https://github.com/facebook/WebDriverAgent/wiki/USB-support" target="_blank" rel="external">USB support</a> for devices，所谓的usb支持，指的是设备不需要上网，目前client binding 还没有。</li>
+<li>提供了一个 Inspector</li>
+<li>Easy development cycle as it can be launched &amp; debugged directly via Xcode</li>
+<li>Unsupported yet, but works with tvOS &amp; OSX</li>
+</ul>
+<p><img src="https://testerhome.com/photo/2016/4ec84edc2288aaad14c28574f09c0eb1.gif" alt=""></p>
+<h1 id="WebDriverAgent-的使用"><a href="#WebDriverAgent-的使用" class="headerlink" title="WebDriverAgent 的使用"></a>WebDriverAgent 的使用</h1><p>To get the project set up just run bootstrap script:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Scripts/bootstrap.sh</span><br></pre></td></tr></table></figure>
+<p>It will:</p>
+<ul>
+<li>fetch all dependencies with <a href="https://github.com/Carthage/Carthage" target="_blank" rel="external">Carthage</a></li>
+<li>build Inspector bundle using <a href="https://www.npmjs.com/" target="_blank" rel="external">npm</a></li>
+</ul>
+<p>After it is finished you can simply open <code>WebDriverAgent.xcodeproj</code> and start <code>WebDriverAgentRunner</code> test and start sending <a href="https://github.com/facebook/WebDriverAgent/wiki/Queries" target="_blank" rel="external">requests</a>.</p>
+<p>More about how to start WebDriverAgent <a href="https://github.com/facebook/WebDriverAgent/wiki/Starting-WebDriverAgent" target="_blank" rel="external">here</a>.</p>
+<p>官方的文档讲的很清晰，基本没有什么坑。Carthage 是用来解决 xcode project 依赖的，大家可能知道 <a href="https://cocoapods.org/" target="_blank" rel="external">cocoapod</a>，那你就把 Carthage 理解成和 cocoapod 一样的东西就可以了，可以通过 <code>brew install carthage</code> 安装。npm 是用来构建 Inspector， Inspector 是一个 react 的应用，通过往 WebDriverAgent 发 HTTP 请求，返回页面的结构。</p>
+<p>下面是我运行 ./Scripts/bootstrap.sh 的结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">➜  WebDriverAgent git:(master) ./Scripts/bootstrap.sh</span><br><span class="line">Fetching dependencies</span><br><span class="line">*** Checking out KissXML at <span class="string">"5.0.3"</span></span><br><span class="line">*** Checking out peertalk at <span class="string">"5a0495a7b7d81b68e25ea1933c755b677cb040da"</span></span><br><span class="line">*** Checking out RoutingHTTPServer at <span class="string">"v1.0.0"</span></span><br><span class="line">*** Downloading ocmock.framework binary at <span class="string">"OCMock 3.2.2"</span></span><br><span class="line">*** Checking out ocmock at <span class="string">"v3.2.2"</span></span><br><span class="line">*** xcodebuild output can be found <span class="keyword">in</span> /var/folders/11/wh7ypz2s7q17lxxjphxd4z6h0000gn/T/carthage-xcodebuild.XhkH5T.log</span><br><span class="line">*** Building scheme <span class="string">"OCMock iOS"</span> <span class="keyword">in</span> OCMock.xcodeproj</span><br><span class="line">2016-05-14 17:45:36.012 xcodebuild[14231:270807] [MT] DVTPlugInManager: Required plug-in compatibility UUID ACA8656B-FEA8-4B6D-8E4A-93F4C95C362C <span class="keyword">for</span> KSImageNamed.ideplugin (com.ksuther.KSImageNamed) not present</span><br><span class="line">2016-05-14 17:45:36.159 xcodebuild[14231:270807] [MT] PluginLoading: Required plug-in compatibility UUID ACA8656B-FEA8-4B6D-8E4A-93F4C95C362C <span class="keyword">for</span> plug-in at path <span class="string">'~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/UncrustifyPlugin.xcplugin'</span> not present <span class="keyword">in</span> DVTPlugInCompatibilityUUIDs</span><br><span class="line">2016-05-14 17:45:36.160 xcodebuild[14231:270807] [MT] PluginLoading: Required plug-in compatibility UUID ACA8656B-FEA8-4B6D-8E4A-93F4C95C362C <span class="keyword">for</span> plug-in at path <span class="string">'~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin'</span> not present <span class="keyword">in</span> DVTPlugInCompatibilityUUIDs</span><br><span class="line">2016-05-14 17:45:46.318 xcodebuild[14494:271598] [MT] DVTPlugInManager: Required plug-in compatibility UUID ACA8656B-FEA8-4B6D-8E4A-93F4C95C362C <span class="keyword">for</span> KSImageNamed.ideplugin (com.ksuther.KSImageNamed) not present</span><br><span class="line">2016-05-14 17:45:46.376 xcodebuild[14494:271598] [MT] PluginLoading: Required plug-in compatibility UUID ACA8656B-FEA8-4B6D-8E4A-93F4C95C362C <span class="keyword">for</span> plug-in at path <span class="string">'~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/UncrustifyPlugin.xcplugin'</span> not present <span class="keyword">in</span> DVTPlugInCompatibilityUUIDs</span><br><span class="line">2016-05-14 17:45:46.377 xcodebuild[14494:271598] [MT] PluginLoading: Required plug-in compatibility UUID ACA8656B-FEA8-4B6D-8E4A-93F4C95C362C <span class="keyword">for</span> plug-in at path <span class="string">'~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin'</span> not present <span class="keyword">in</span> DVTPlugInCompatibilityUUIDs</span><br><span class="line">Building Inspector</span><br><span class="line">Creating bundle directory...</span><br><span class="line">Building inspector.js...</span><br><span class="line"></span><br><span class="line">&gt; web-driver-inspector@1.0.0 build /Users/lihuazhang/code/WebDriverAgent/Inspector</span><br><span class="line">&gt; webpack --progress --colors</span><br><span class="line"></span><br><span class="line">Hash: 536587fce0cad79f8558</span><br><span class="line">Version: webpack 1.12.2</span><br><span class="line">Time: 2794ms</span><br><span class="line">       Asset    Size  Chunks             Chunk Names</span><br><span class="line">inspector.js  706 kB       0  [emitted]  main</span><br><span class="line">   [0] multi main 28 bytes &#123;0&#125; [built]</span><br><span class="line">    + 182 hidden modules</span><br><span class="line">Done</span><br><span class="line">➜  WebDriverAgent git:(master)</span><br></pre></td></tr></table></figure>
+<p>build 好之后就是启动 WebDriverAgent，官方提供了四种方式：</p>
+<ol>
+<li><p>使用 XCode</p>
+</li>
+<li><p>用 xcodebuild</p>
+</li>
+<li><p>Using fbsimctl from FBSimulatorControl framework</p>
+</li>
+<li><p>Using FBSimulatorControl framework directly</p>
+</li>
+</ol>
+<p>我使用 XCode (如果自动化的话，可以使用 xcodebuild)，打开 WebDriverAgent.xcodeproj，IDE 的显示是这样的：</p>
+<p><img src="https://testerhome.com/photo/2016/44dcfc909b7851c9d0a85fec55206469.png" alt=""></p>
+<p>先不要纠结其他，我们只看 <code>UITestingUITests.m</code>，这是一个 XCTestCase 的实现类，我们直接运行，真机或者模拟器都可以。我用的模拟器，运行之后，会在模拟器安装一个 WebDriverAgentRunner 的应用。我们看下运行的日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">2016-05-15 01:19:43.019 XCTRunner[29300:524372] Running tests...</span><br><span class="line">01:19:43.218 XCTRunner[29300:524495] _XCT_<span class="built_in">test</span>BundleReadyWithProtocolVersion:minimumVersion: reply received</span><br><span class="line">01:19:43.228 XCTRunner[29300:524495] _IDE_startExecutingTestPlanWithProtocolVersion:16</span><br><span class="line">2016-05-15 01:19:44.732 XCTRunner[29300:524372] Continuing to run tests <span class="keyword">in</span> the background with task ID 1</span><br><span class="line">Test Suite <span class="string">'Selected tests'</span> started at 2016-05-15 01:19:45.319</span><br><span class="line">Test Suite <span class="string">'UITestingUITests'</span> started at 2016-05-15 01:19:45.322</span><br><span class="line">Test Case <span class="string">'-[UITestingUITests testRunner]'</span> started.</span><br><span class="line">2016-05-15 01:19:45.323 XCTRunner[29300:524372] -[_XCTestDriverTestObserver <span class="built_in">test</span>CaseWillStart:] UITestingUITests <span class="built_in">test</span>Runner</span><br><span class="line">    t =     0.00s     Start Test</span><br><span class="line">2016-05-15 01:19:45.324 XCTRunner[29300:524372] -[UITestingUITests <span class="built_in">test</span>Runner] started activity &lt;XCActivityRecord: 0x7f8acb721660&gt; 2016-05-14 17:19:45 +0000: Start Test</span><br><span class="line">2016-05-15 01:19:45.327 XCTRunner[29300:524372] -[UITestingUITests <span class="built_in">test</span>Runner] finished activity &lt;XCActivityRecord: 0x7f8acb721660&gt; 2016-05-14 17:19:45 +0000: Start Test (0.00271106s)</span><br><span class="line">    t =     0.01s     Set Up</span><br><span class="line">2016-05-15 01:19:45.328 XCTRunner[29300:524372] -[UITestingUITests <span class="built_in">test</span>Runner] started activity &lt;XCActivityRecord: 0x7f8acb7219e0&gt; 2016-05-14 17:19:45 +0000: Set Up</span><br><span class="line">2016-05-15 01:19:45.330 XCTRunner[29300:524372] -[UITestingUITests <span class="built_in">test</span>Runner] finished activity &lt;XCActivityRecord: 0x7f8acb7219e0&gt; 2016-05-14 17:19:45 +0000: Set Up (0.00130302s)</span><br><span class="line">2016-05-15 01:19:45.331 XCTRunner[29300:524372] Built at May 15 2016 01:19:32</span><br><span class="line">2016-05-15 01:19:45.386 XCTRunner[29300:524372] ServerURLHere-&gt;http://192.168.0.105:8100&lt;-ServerURLHere</span><br><span class="line">2016-05-15 01:19:45.386 XCTRunner[29300:524372] Listening on USB</span><br></pre></td></tr></table></figure>
+<p>关键字是：</p>
+<p><strong>2016-05-15 01:19:45.386 XCTRunner[29300:524372] ServerURLHere-&gt;<a href="http://192.168.0.105:8100" target="_blank" rel="external">http://192.168.0.105:8100</a>&lt;-ServerURLHere</strong></p>
+<p>这个意思是告诉我们，设备中起了一个服务器，我们可以用 <code>http://192.168.0.105:8100</code> 访问到。下面就是在浏览器打开返回的内容：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">value: "Unhandled endpoint: / -- http://192.168.0.105:8100/ with parameters &#123; wildcards = ( "" ); &#125;",</span><br><span class="line">sessionId: null,</span><br><span class="line">status: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通道找到了，接下来就是看如何造请求了。官方问题提供了文档：<a href="https://github.com/facebook/WebDriverAgent/wiki/Queries。最简单的`status`，http://192.168.0.105:8100/status，" target="_blank" rel="external">https://github.com/facebook/WebDriverAgent/wiki/Queries。最简单的`status`，http://192.168.0.105:8100/status，</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">value: &#123;</span><br><span class="line">state: "success",</span><br><span class="line">os: &#123;</span><br><span class="line">name: "iPhone OS",</span><br><span class="line">version: "9.3"</span><br><span class="line">&#125;,</span><br><span class="line">ios: &#123;</span><br><span class="line">simulatorVersion: "9.3"</span><br><span class="line">&#125;,</span><br><span class="line">build: &#123;</span><br><span class="line">time: "May 15 2016 01:19:33"</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">sessionId: null,</span><br><span class="line">status: 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其他的 API 有兴趣的人可以直接看文档。</p>
+<p>服务端有了，就剩下客户端了，但是目前为止没有一个官方的客户端binding，Facebook 的同学没有放出来，看这个issue——<a href="https://github.com/facebook/WebDriverAgent/issues/115" target="_blank" rel="external">https://github.com/facebook/WebDriverAgent/issues/115</a></p>
+<p><img src="https://testerhome.com/photo/2016/250fe86d690bd3d70ce6ae97cbc11c5b.png" alt=""></p>
+<p>所以目前为止如果要使用 WebDriverAgent 就要自己实现一套客户端代码。</p>
+<h2 id="WebDriverAgent-Inspector-的使用"><a href="#WebDriverAgent-Inspector-的使用" class="headerlink" title="WebDriverAgent Inspector 的使用"></a>WebDriverAgent Inspector 的使用</h2><p>直接在浏览器端打开 <a href="http://192.168.0.105:8100/inspector，就可以看见如下界面：" target="_blank" rel="external">http://192.168.0.105:8100/inspector，就可以看见如下界面：</a></p>
+<p><img src="https://testerhome.com/photo/2016/7187dc2d1ce51566a03769fc55e823d4.png" alt=""></p>
+<p>inspector 不是很强大，无法实现交互，不过大致能帮大家定位元素。</p>
+<h2 id="WebDriverAgent-简单原理"><a href="#WebDriverAgent-简单原理" class="headerlink" title="WebDriverAgent 简单原理"></a>WebDriverAgent 简单原理</h2><p><img src="https://testerhome.com/photo/2016/01f1f5fa3e36f4ce4c1b4af186b76bfe.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>WebDriverAgent 取代 UIAutomation 或者 XCUITesting 做为 Appium 底部驱动看来是时间问题了。原因如下：</p>
+<ol>
+<li><p>支持真机和模拟器</p>
+</li>
+<li><p>不受 instruments 单实例的限制</p>
+</li>
+<li><p>Facebook 出品</p>
+<p>​</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/移动测试/">移动测试</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动测试/">移动测试</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+    
+
+
+  
+    <article id="post-南京之行" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/12/29/南京之行/" class="article-date">
@@ -269,7 +415,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -356,7 +502,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -444,7 +590,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -537,7 +683,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -586,9 +732,9 @@
 <p><a href="http://stackoverflow.com/questions/9049460/cron-jobs-and-random-times-within-giving-hours" target="_blank" rel="external">http://stackoverflow.com/questions/9049460/cron-jobs-and-random-times-within-giving-hours</a></p>
 <p>If I understand what you’re looking for, you’ll need to do something a bit messy, like having a cron job that runs a bash script that randomizes the run times… Something like this:</p>
 <p>crontab:</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 9 <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> /path/to/bashscript</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 9 * * * /path/to/bashscript</span><br></pre></td></tr></table></figure>
 <p>and in /path/to/bashscript:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line">maxdelay=$((<span class="number">14</span>*<span class="number">60</span>))  <span class="comment"># 14 hours from 9am to 11pm, converted to minutes</span></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">1</span>; i&lt;=<span class="number">20</span>; i++)); <span class="keyword">do</span></span><br><span class="line">    delay=$((<span class="variable">$RANDOM</span>%maxdelay)) <span class="comment"># pick an independent random delay for each of the 20 runs</span></span><br><span class="line">    (sleep $((delay*<span class="number">60</span>)); /path/to/phpscript.php) &amp; <span class="comment"># background a subshell to wait, then run the php script</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">maxdelay=$((14*60))  # 14 hours from 9am to 11pm, converted to minutes</span><br><span class="line">for ((i=1; i&lt;=20; i++)); do</span><br><span class="line">    delay=$(($RANDOM%maxdelay)) # pick an independent random delay for each of the 20 runs</span><br><span class="line">    (sleep $((delay*60)); /path/to/phpscript.php) &amp; # background a subshell to wait, then run the php script</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>A few notes: this approach it a little wasteful of resources, as it fires off 20 background processes at 9am, each of which waits around for a random number of minutes (up to 14 hours, i.e. 11pm), then launches the php script and exits. Also, since it uses a random number of minutes (not seconds), the start times aren’t quite as random as they could be. But $RANDOM only goes up to 32,767, and there are 50,400 seconds between 9am and 11pm, it’d be a little more complicated to randomize the seconds as well. Finally, since the start times are random and independent of each other, it’s possible (but not very likely) that two or more instances of the script will be started simultaneously.</p>
 
       
@@ -622,7 +768,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -682,7 +828,7 @@
 <li>用一个 WebDriverWait 等待元素出现。</li>
 <li>看计数器是否倒数到 04.</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">WebElement countdown = driver.findElement(By.id(<span class="string">"javascript_countdown_time"</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> WebDriverWait(driver,<span class="number">10</span>).until(ExpectedConditions.visibilityOf(countdown));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> FluentWait&lt;WebElement&gt;(countdown).withTimeout(<span class="number">10</span>, TimeUnit.SECONDS).</span><br><span class="line">  pollingEvery(<span class="number">100</span>,TimeUnit.MILLISECONDS).</span><br><span class="line">    until(<span class="keyword">new</span> Function&lt;WebElement  , Boolean&gt;() &#123;</span><br><span class="line">      <span class="annotation">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> Boolean <span class="title">apply</span><span class="params">(WebElement element)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> element.getText().endsWith(<span class="string">"04"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">WebElement countdown = driver.findElement(By.id(<span class="string">"javascript_countdown_time"</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> WebDriverWait(driver,<span class="number">10</span>).until(ExpectedConditions.visibilityOf(countdown));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> FluentWait&lt;WebElement&gt;(countdown).withTimeout(<span class="number">10</span>, TimeUnit.SECONDS).</span><br><span class="line">  pollingEvery(<span class="number">100</span>,TimeUnit.MILLISECONDS).</span><br><span class="line">    until(<span class="keyword">new</span> Function&lt;WebElement  , Boolean&gt;() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> Boolean <span class="title">apply</span><span class="params">(WebElement element)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> element.getText().endsWith(<span class="string">"04"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>注意在上述代码中，我告诉 FluentWait, apply 方法里接收的将是一个 WebElement。FluentWait 可以接受一个 Predicate 或者 Function 做为 until 方法的参。<br>我用了 Function 并在 这个 Function 里面返回一个 Boolean。</p>
 <p>FluentWait 非常灵活，你可以很轻松的调整等待和轮询时间， 你也可以设置哪些 exceptions 可以忽略， 比如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Waiting 30 seconds for an element to be present on the page, checking</span></span><br><span class="line">   <span class="comment">// for its presence once every 5 seconds.</span></span><br><span class="line">   Wait&lt;WebDriver&gt; wait = <span class="keyword">new</span> FluentWait&lt;WebDriver&gt;(driver)</span><br><span class="line">       .withTimeout(<span class="number">30</span>, SECONDS)</span><br><span class="line">       .pollingEvery(<span class="number">5</span>, SECONDS)</span><br><span class="line">       .ignoring(NoSuchElementException.class); <span class="comment">//  我们主动忽略了 NoSuchElementExceptions 的异常</span></span><br><span class="line"></span><br><span class="line">   WebElement foo = wait.until(<span class="keyword">new</span> Function&lt;WebDriver, WebElement&gt;() &#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> WebElement <span class="title">apply</span><span class="params">(WebDriver driver)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> driver.findElement(By.id(<span class="string">"foo"</span>));</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
@@ -723,7 +869,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -768,7 +914,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h1><hr>
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><hr>
 <p>在微博上看到 <code>Gatling</code>，号称超越 <code>jmeter</code> 的性能测试工具。顿时手痒，想来个试用。</p>
 <p>Gatling <em>格林机关枪</em>，看名字就恨凶悍。</p>
 <p>Gatling 的动机是因为性能测试工具已经无法测试当今的应用了。</p>
@@ -797,7 +943,7 @@
 <li><p>Gatling 免费的，明显最重要的。</p>
 </li>
 </ol>
-<h1 id="u4E0A_u624B"><a href="#u4E0A_u624B" class="headerlink" title="上手"></a>上手</h1><hr>
+<h1 id="上手"><a href="#上手" class="headerlink" title="上手"></a>上手</h1><hr>
 <p>略过下载安装之类的，实在要看，自己看 <a href="https://github.com/excilys/gatling/wiki/Getting-Started" target="_blank" rel="external">Getting-started</a> 吧。<br>我们按照 <a href="https://github.com/excilys/gatling/wiki/First-Steps-with-Gatling" target="_blank" rel="external">First Steps with Gatling</a> 走一遍。<br>这个 First Steps 就是测试一个 e-banking 的应用，很可惜这个应用放在 Cloud Foundry， 国内估计访问不了。</p>
 <p>这个应用的链接在：</p>
 <p><a href="http://excilysbank.gatling.cloudbees.net" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net</a></p>
@@ -811,7 +957,7 @@
 <li>Transfers visualization and transfer performing</li>
 </ol>
 </blockquote>
-<h2 id="u6D4B_u8BD5_u8BA1_u5212"><a href="#u6D4B_u8BD5_u8BA1_u5212" class="headerlink" title="测试计划"></a>测试计划</h2><p>我们对一些具有代表性的场景进行性能测试，所以我们想象了下，用户会做的事情：</p>
+<h2 id="测试计划"><a href="#测试计划" class="headerlink" title="测试计划"></a>测试计划</h2><p>我们对一些具有代表性的场景进行性能测试，所以我们想象了下，用户会做的事情：</p>
 <ol>
 <li>用户访问应用</li>
 <li>用户获得认证并登陆</li>
@@ -820,7 +966,7 @@
 <li>用户登出</li>
 </ol>
 <p>我们要用 Gatling 来录制这 5 个场景。</p>
-<h2 id="Gatling_Recorder"><a href="#Gatling_Recorder" class="headerlink" title="Gatling Recorder"></a>Gatling Recorder</h2><p>一般工具都提供 recorder 否则就弱爆了。</p>
+<h2 id="Gatling-Recorder"><a href="#Gatling-Recorder" class="headerlink" title="Gatling Recorder"></a>Gatling Recorder</h2><p>一般工具都提供 recorder 否则就弱爆了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="variable">$GATLING_HOME</span>/bin/recorder.sh</span><br></pre></td></tr></table></figure>
 <p>启动这个脚本之后，会跳出一个类似 jmeter 的界面，我们得配置下：</p>
 <ul>
@@ -843,7 +989,7 @@
 </ul>
 </blockquote>
 <p>更加具体的，不妨看下 <a href="https://github.com/excilys/gatling/wiki/Recorder#wiki-browser-config" target="_blank" rel="external">Recorder details</a></p>
-<h2 id="u5F00_u59CB_u5F55_u5236_u5427"><a href="#u5F00_u59CB_u5F55_u5236_u5427" class="headerlink" title="开始录制吧"></a>开始录制吧</h2><p>设置好代理之后，开始执行第一个场景：</p>
+<h2 id="开始录制吧"><a href="#开始录制吧" class="headerlink" title="开始录制吧"></a>开始录制吧</h2><p>设置好代理之后，开始执行第一个场景：</p>
 <ol>
 <li><p>访问 <a href="http://excilysbank.gatling.cloudbees.net" target="_blank" rel="external">http://excilysbank.gatling.cloudbees.net</a></p>
 </li>
@@ -859,8 +1005,8 @@
 </li>
 </ol>
 <p>然后点击 Recorder 上的 stop， 就会在之前设置的 output folder 里面生成 <code>MySimulation.scala</code> 文件。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.excilys.ebi.bank.stress</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.gatling.core.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.core.session.<span class="type">Expression</span></span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.jdbc.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Names</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Values</span>._</span><br><span class="line"><span class="keyword">import</span> scala.concurrent.duration._</span><br><span class="line"><span class="keyword">import</span> bootstrap._</span><br><span class="line"><span class="keyword">import</span> assertions._</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySimulation</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Simulation</span> &#123;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> httpProtocol = http</span><br><span class="line">    .baseURL(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span><br><span class="line">    .acceptHeader(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span><br><span class="line">    .acceptEncodingHeader(<span class="string">"gzip, deflate"</span>)</span><br><span class="line">    .acceptLanguageHeader(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span><br><span class="line">    .connection(<span class="string">"keep-alive"</span>)</span><br><span class="line">    .userAgentHeader(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">"""Cache-Control"""</span> -&gt; <span class="string">"""max-age=0"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""text/css,*/*;q=0.1"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""image/png,image/*;q=0.8,*/*;q=0.5"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""*/*"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">"""Content-Type"""</span> -&gt; <span class="string">"""application/x-www-form-urlencoded"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">"""Accept"""</span> -&gt; <span class="string">"""application/json, text/javascript, */*; q=0.01"""</span>,</span><br><span class="line">    <span class="string">"""X-Requested-With"""</span> -&gt; <span class="string">"""XMLHttpRequest"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">      .get(<span class="string">"""/"""</span>)</span><br><span class="line">      .headers(headers_1))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">      .get(<span class="string">"""/img/favicon.ico"""</span>))</span><br><span class="line">    .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">      .get(<span class="string">"""/gzip_N2030079394/bundles/all.css"""</span>)</span><br><span class="line">      .headers(headers_3))</span><br><span class="line">    .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb1024132465/img/background.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb4077127084/img/small_window_content.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">      .get(<span class="string">"""/gzip_N762261864/bundles/all.js"""</span>)</span><br><span class="line">      .headers(headers_6))</span><br><span class="line">    .pause(<span class="number">1</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb3761658453/img/sprite.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">30</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">      .post(<span class="string">"""/login"""</span>)</span><br><span class="line">      .headers(headers_8)</span><br><span class="line">      .param(<span class="string">"""username"""</span>, <span class="string">"""user1"""</span>)</span><br><span class="line">      .param(<span class="string">"""password"""</span>, <span class="string">"""password1"""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">      .get(<span class="string">"""/cb2545837452/img/big_window_content.png"""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">21</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/operations.html"""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">43</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/operations.html"""</span>))</span><br><span class="line">    .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">      .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">4</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">      .get(<span class="string">"""/logout"""</span>))</span><br><span class="line"></span><br><span class="line">  setUp(scn.inject(atOnce(<span class="number">1</span> user))).protocols(httpProtocol)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u4EE3_u7801_u5206_u6790"><a href="#u4EE3_u7801_u5206_u6790" class="headerlink" title="代码分析"></a>代码分析</h2><p>MySimulation class 可以分为 4 部分：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.excilys.ebi.bank.stress</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.gatling.core.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.core.session.<span class="type">Expression</span></span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.jdbc.<span class="type">Predef</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Names</span>._</span><br><span class="line"><span class="keyword">import</span> io.gatling.http.<span class="type">Headers</span>.<span class="type">Values</span>._</span><br><span class="line"><span class="keyword">import</span> scala.concurrent.duration._</span><br><span class="line"><span class="keyword">import</span> bootstrap._</span><br><span class="line"><span class="keyword">import</span> assertions._</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySimulation</span> <span class="keyword">extends</span> <span class="title">Simulation</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> httpProtocol = http</span><br><span class="line">    .baseURL(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span><br><span class="line">    .acceptHeader(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span><br><span class="line">    .acceptEncodingHeader(<span class="string">"gzip, deflate"</span>)</span><br><span class="line">    .acceptLanguageHeader(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span><br><span class="line">    .connection(<span class="string">"keep-alive"</span>)</span><br><span class="line">    .userAgentHeader(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Cache-Control"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"max-age=0"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Accept"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"text/css,*/*;q=0.1"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Accept"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"image/png,image/*;q=0.8,*/*;q=0.5"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Accept"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"*/*"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Content-Type"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"application/x-www-form-urlencoded"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">""</span><span class="string">"Accept"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"application/json, text/javascript, */*; q=0.01"</span><span class="string">""</span>,</span><br><span class="line">    <span class="string">""</span><span class="string">"X-Requested-With"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"XMLHttpRequest"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_1))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/img/favicon.ico"</span><span class="string">""</span>))</span><br><span class="line">    .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/gzip_N2030079394/bundles/all.css"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_3))</span><br><span class="line">    .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/cb1024132465/img/background.png"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/cb4077127084/img/small_window_content.png"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">2</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/gzip_N762261864/bundles/all.js"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_6))</span><br><span class="line">    .pause(<span class="number">1</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/cb3761658453/img/sprite.png"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">30</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">      .post(<span class="string">""</span><span class="string">"/login"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_8)</span><br><span class="line">      .param(<span class="string">""</span><span class="string">"username"</span><span class="string">""</span>, <span class="string">""</span><span class="string">"user1"</span><span class="string">""</span>)</span><br><span class="line">      .param(<span class="string">""</span><span class="string">"password"</span><span class="string">""</span>, <span class="string">""</span><span class="string">"password1"</span><span class="string">""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/cb2545837452/img/big_window_content.png"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_4))</span><br><span class="line">    .pause(<span class="number">21</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/private/bank/account/ACC1/operations.html"</span><span class="string">""</span>))</span><br><span class="line">    .pause(<span class="number">3</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">43</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/private/bank/account/ACC1/year/2012/month/3/operations.html"</span><span class="string">""</span>))</span><br><span class="line">    .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">    .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"</span><span class="string">""</span>)</span><br><span class="line">      .headers(headers_11))</span><br><span class="line">    .pause(<span class="number">4</span>)</span><br><span class="line">    .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">      .get(<span class="string">""</span><span class="string">"/logout"</span><span class="string">""</span>))</span><br><span class="line"></span><br><span class="line">  setUp(scn.inject(atOnce(<span class="number">1</span> user))).protocols(httpProtocol)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>MySimulation class 可以分为 4 部分：</p>
 <ol>
 <li>The HTTP protocol configuration</li>
 <li>The headers definition</li>
@@ -868,18 +1014,18 @@
 <li>The simulation definition</li>
 </ol>
 <p><em>The HTTP protocol configuration</em></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">val httpProtocol = http</span><br><span class="line">  .<span class="function"><span class="title">baseURL</span><span class="params">(<span class="string">"http://excilysbank.gatling.cloudbees.net"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptHeader</span><span class="params">(<span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptEncodingHeader</span><span class="params">(<span class="string">"gzip, deflate"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">acceptLanguageHeader</span><span class="params">(<span class="string">"zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">connection</span><span class="params">(<span class="string">"keep-alive"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">userAgentHeader</span><span class="params">(<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">val httpProtocol = http</span><br><span class="line">  .baseURL(&quot;http://excilysbank.gatling.cloudbees.net&quot;)</span><br><span class="line">  .acceptHeader(&quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;)</span><br><span class="line">  .acceptEncodingHeader(&quot;gzip, deflate&quot;)</span><br><span class="line">  .acceptLanguageHeader(&quot;zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3&quot;)</span><br><span class="line">  .connection(&quot;keep-alive&quot;)</span><br><span class="line">  .userAgentHeader(&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:23.0) Gecko/20100101 Firefox/23.0&quot;)</span><br></pre></td></tr></table></figure>
 <p>除了设置 http 协议之外，最重要的就是指定了 baseUrl</p>
 <p><em>The headers definition</em></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">"""Cache-Control"""</span> -&gt; <span class="string">"""max-age=0"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""text/css,*/*;q=0.1"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""image/png,image/*;q=0.8,*/*;q=0.5"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">"""Accept"""</span> -&gt; <span class="string">"""*/*"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">"""Content-Type"""</span> -&gt; <span class="string">"""application/x-www-form-urlencoded"""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">"""Accept"""</span> -&gt; <span class="string">"""application/json, text/javascript, */*; q=0.01"""</span>,</span><br><span class="line">    <span class="string">"""X-Requested-With"""</span> -&gt; <span class="string">"""XMLHttpRequest"""</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> headers_1 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Cache-Control"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"max-age=0"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_3 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Accept"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"text/css,*/*;q=0.1"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_4 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Accept"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"image/png,image/*;q=0.8,*/*;q=0.5"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_6 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Accept"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"*/*"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_8 = <span class="type">Map</span>(<span class="string">""</span><span class="string">"Content-Type"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"application/x-www-form-urlencoded"</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> headers_11 = <span class="type">Map</span>(</span><br><span class="line">    <span class="string">""</span><span class="string">"Accept"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"application/json, text/javascript, */*; q=0.01"</span><span class="string">""</span>,</span><br><span class="line">    <span class="string">""</span><span class="string">"X-Requested-With"</span><span class="string">""</span> -&gt; <span class="string">""</span><span class="string">"XMLHttpRequest"</span><span class="string">""</span>)</span><br></pre></td></tr></table></figure>
 <p>每一个 header 都是一个 scala 的 Map。</p>
 <blockquote>
 <p>这些通用的 header 信息看上去没用，其实这些信息也额外增加了负载，也不容忽视的。</p>
 </blockquote>
 <p><em>The scenario definition</em></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">    .get(<span class="string">"""/"""</span>)</span><br><span class="line">    .headers(headers_1))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">    .get(<span class="string">"""/img/favicon.ico"""</span>))</span><br><span class="line">  .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">    .get(<span class="string">"""/gzip_N2030079394/bundles/all.css"""</span>)</span><br><span class="line">    .headers(headers_3))</span><br><span class="line">  .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb1024132465/img/background.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb4077127084/img/small_window_content.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">    .get(<span class="string">"""/gzip_N762261864/bundles/all.js"""</span>)</span><br><span class="line">    .headers(headers_6))</span><br><span class="line">  .pause(<span class="number">1</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb3761658453/img/sprite.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">30</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">    .post(<span class="string">"""/login"""</span>)</span><br><span class="line">    .headers(headers_8)</span><br><span class="line">    .param(<span class="string">"""username"""</span>, <span class="string">"""user1"""</span>)</span><br><span class="line">    .param(<span class="string">"""password"""</span>, <span class="string">"""password1"""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">    .get(<span class="string">"""/cb2545837452/img/big_window_content.png"""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">21</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/operations.html"""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">43</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/operations.html"""</span>))</span><br><span class="line">  .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">    .get(<span class="string">"""/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">4</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">    .get(<span class="string">"""/logout"""</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> scn = scenario(<span class="string">"Scenario Name"</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_1"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_1))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_2"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/img/favicon.ico"</span><span class="string">""</span>))</span><br><span class="line">  .pause(<span class="number">648</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_3"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/gzip_N2030079394/bundles/all.css"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_3))</span><br><span class="line">  .pause(<span class="number">819</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_4"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/cb1024132465/img/background.png"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">23</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_5"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/cb4077127084/img/small_window_content.png"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">2</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_6"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/gzip_N762261864/bundles/all.js"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_6))</span><br><span class="line">  .pause(<span class="number">1</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_7"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/cb3761658453/img/sprite.png"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">30</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_8"</span>)</span><br><span class="line">    .post(<span class="string">""</span><span class="string">"/login"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_8)</span><br><span class="line">    .param(<span class="string">""</span><span class="string">"username"</span><span class="string">""</span>, <span class="string">""</span><span class="string">"user1"</span><span class="string">""</span>)</span><br><span class="line">    .param(<span class="string">""</span><span class="string">"password"</span><span class="string">""</span>, <span class="string">""</span><span class="string">"password1"</span><span class="string">""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_9"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/cb2545837452/img/big_window_content.png"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_4))</span><br><span class="line">  .pause(<span class="number">21</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_10"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/private/bank/account/ACC1/operations.html"</span><span class="string">""</span>))</span><br><span class="line">  .pause(<span class="number">3</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_11"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/private/bank/account/ACC1/year/2012/month/4/page/0/operations.json"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">43</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_12"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/private/bank/account/ACC1/year/2012/month/3/operations.html"</span><span class="string">""</span>))</span><br><span class="line">  .pause(<span class="number">663</span> milliseconds)</span><br><span class="line">  .exec(http(<span class="string">"request_13"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/private/bank/account/ACC1/year/2012/month/3/page/0/operations.json"</span><span class="string">""</span>)</span><br><span class="line">    .headers(headers_11))</span><br><span class="line">  .pause(<span class="number">4</span>)</span><br><span class="line">  .exec(http(<span class="string">"request_14"</span>)</span><br><span class="line">    .get(<span class="string">""</span><span class="string">"/logout"</span><span class="string">""</span>))</span><br></pre></td></tr></table></figure>
 <p>一个simluation 里面可以定义一个或者多个 scenario， 每个 scenario 是一个 scala 对象，</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val scn = <span class="function"><span class="title">scenario</span><span class="params">(<span class="string">"Name of my Scenario"</span>)</span></span>...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val scn = scenario(&quot;Name of my Scenario&quot;)...</span><br></pre></td></tr></table></figure>
 <p>scenario 有两个方法：</p>
 <ul>
 <li>exec  - describe an action, usually a request sent to the tested application</li>
@@ -887,19 +1033,19 @@
 </ul>
 <p>每个 scenario 里会发送很多个 request， 也会思考好多次。所以你看到上面的代码都是 exec http request 和 pause。</p>
 <p>HTTP requests 的定义包括 名字，post 或者 get 方法，headers， 还有参数 :</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">http</span><span class="params">(<span class="string">"request_3"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">post</span><span class="params">(<span class="string">"/login"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">headers</span><span class="params">(headers_3)</span></span></span><br><span class="line">  .<span class="function"><span class="title">param</span><span class="params">(<span class="string">"username"</span>, <span class="string">"user1"</span>)</span></span></span><br><span class="line">  .<span class="function"><span class="title">param</span><span class="params">(<span class="string">"password"</span>, <span class="string">"password1"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http(&quot;request_3&quot;)</span><br><span class="line">  .post(&quot;/login&quot;)</span><br><span class="line">  .headers(headers_3)</span><br><span class="line">  .param(&quot;username&quot;, &quot;user1&quot;)</span><br><span class="line">  .param(&quot;password&quot;, &quot;password1&quot;)</span><br></pre></td></tr></table></figure>
 <p>这段代码会发送一个 POST 请求：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST <span class="string">http:</span><span class="comment">//excilysbank.gatling.cloudbees.net/login</span></span><br><span class="line"><span class="string">Accept:</span> text<span class="regexp">/html,application/</span>xhtml+xml,application<span class="regexp">/xml;q=0.9,*/</span>*;q=<span class="number">0.8</span></span><br><span class="line">Accept-<span class="string">Charset:</span> ISO-<span class="number">8859</span>-<span class="number">1</span>,utf-<span class="number">8</span>;q=<span class="number">0.7</span>,*;q=<span class="number">0.7</span></span><br><span class="line">Accept-<span class="string">Encoding:</span> gzip,deflate</span><br><span class="line">Accept-<span class="string">Language:</span> fr,en-us;q=<span class="number">0.7</span>,en;q=<span class="number">0.3</span></span><br><span class="line"><span class="string">Host:</span> excilysbank.gatling.cloudbees.net</span><br><span class="line">Keep-<span class="string">Alive:</span> <span class="number">115</span></span><br><span class="line">User-<span class="string">Agent:</span> Mozilla<span class="regexp">/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.17) Gecko/</span><span class="number">20110422</span> Ubuntu<span class="regexp">/9.10 Firefox/</span><span class="number">3.6</span><span class="number">.17</span></span><br><span class="line">Content-<span class="string">Length:</span> <span class="number">33</span></span><br><span class="line">Content-<span class="string">Type:</span> application/x-www-form-urlencoded</span><br><span class="line"><span class="string">Referer:</span> <span class="string">http:</span><span class="comment">//excilysbank.gatling.cloudbees.net/public/login.html</span></span><br><span class="line"></span><br><span class="line">username=user1&amp;password=password1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST http://excilysbank.gatling.cloudbees.net/login</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7</span><br><span class="line">Accept-Encoding: gzip,deflate</span><br><span class="line">Accept-Language: fr,en-us;q=0.7,en;q=0.3</span><br><span class="line">Host: excilysbank.gatling.cloudbees.net</span><br><span class="line">Keep-Alive: 115</span><br><span class="line">User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.17) Gecko/20110422 Ubuntu/9.10 Firefox/3.6.17</span><br><span class="line">Content-Length: 33</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Referer: http://excilysbank.gatling.cloudbees.net/public/login.html</span><br><span class="line"></span><br><span class="line">username=user1&amp;password=password1</span><br></pre></td></tr></table></figure>
 <p><em>The simulation definition</em></p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">setUp</span><span class="params">(scn.inject(atOnce(<span class="number">1</span> user)</span></span>)).<span class="function"><span class="title">protocols</span><span class="params">(httpProtocol)</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="u8FD0_u884C_u4E0B_u5427_uFF01"><a href="#u8FD0_u884C_u4E0B_u5427_uFF01" class="headerlink" title="运行下吧！"></a>运行下吧！</h2><p>首先我们要把这个 Simulation move 到 user-files/simulations/下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setUp(scn.inject(atOnce(1 user))).protocols(httpProtocol)</span><br></pre></td></tr></table></figure>
+<h2 id="运行下吧！"><a href="#运行下吧！" class="headerlink" title="运行下吧！"></a>运行下吧！</h2><p>首先我们要把这个 Simulation move 到 user-files/simulations/下。</p>
 <p>然后运行<code>$GATHING_HOME/bin/gatling.sh</code>, Gatling 会找到 MySimulation。</p>
 <p><img src="/photos/run.png" alt=""></p>
 <p>选择 MySimulation，一路回车，然后等待运行结束，生成 report：</p>
 <p><img src="/photos/report.png" alt=""></p>
-<h2 id="u5206_u6790_u62A5_u8868_u5427_uFF01"><a href="#u5206_u6790_u62A5_u8868_u5427_uFF01" class="headerlink" title="分析报表吧！"></a>分析报表吧！</h2><p>Gatling 生成的报表非常漂亮而且有意义。每个图表的具体含义可以参考 <a href="https://github.com/excilys/gatling/wiki/Reports" target="_blank" rel="external">Reports</a><br>这样子的报表几乎可以直接呈给领导，都不需要自己采集数据绘图了。</p>
+<h2 id="分析报表吧！"><a href="#分析报表吧！" class="headerlink" title="分析报表吧！"></a>分析报表吧！</h2><p>Gatling 生成的报表非常漂亮而且有意义。每个图表的具体含义可以参考 <a href="https://github.com/excilys/gatling/wiki/Reports" target="_blank" rel="external">Reports</a><br>这样子的报表几乎可以直接呈给领导，都不需要自己采集数据绘图了。</p>
 <p><img src="/photos/gatling_report.png" alt=""></p>
-<h1 id="u4E0B_u4E00_u8282"><a href="#u4E0B_u4E00_u8282" class="headerlink" title="下一节"></a>下一节</h1><p>到目前为止，我们都是照搬 Gatling wiki 来做的，其实就了解了下基本情况。下一节，应该搞个 project 试验下。</p>
+<h1 id="下一节"><a href="#下一节" class="headerlink" title="下一节"></a>下一节</h1><p>到目前为止，我们都是照搬 Gatling wiki 来做的，其实就了解了下基本情况。下一节，应该搞个 project 试验下。</p>
 
       
     </div>
@@ -936,7 +1082,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -983,10 +1129,10 @@
           
         <p>Seems capybara has implemented the <code>hover</code> function</p>
 <p>check <em><code>capybara/selenium/node.rb</code></em></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Capybara::Selenium::Node</span> <span class="inheritance">&lt; <span class="parent">Capybara::Driver</span></span>::<span class="title">Node</span></span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hover</span></span></span><br><span class="line">    driver.browser.action.move_to(native).perform</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Capybara::Selenium::Node</span> &lt; Capybara::Driver::<span class="title">Node</span></span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hover</span></span></span><br><span class="line">    driver.browser.action.move_to(native).perform</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p>But it’s only a selenium implementation. Not all the browsers implement <code>hover</code> function,<br>Capybara has not apply the method.</p>
 <p>check <em><code>capybara/session.rb</code></em></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="constant">NODE_METHODS</span> = [</span><br><span class="line">  <span class="symbol">:all</span>, <span class="symbol">:first</span>, <span class="symbol">:attach_file</span>, <span class="symbol">:text</span>, <span class="symbol">:check</span>, <span class="symbol">:choose</span>,</span><br><span class="line">  <span class="symbol">:click_link_or_button</span>, <span class="symbol">:click_button</span>, <span class="symbol">:click_link</span>, <span class="symbol">:field_labeled</span>,</span><br><span class="line">  <span class="symbol">:fill_in</span>, <span class="symbol">:find</span>, <span class="symbol">:find_button</span>, <span class="symbol">:find_by_id</span>, <span class="symbol">:find_field</span>, <span class="symbol">:find_link</span>,</span><br><span class="line">  <span class="symbol">:has_content?</span>, <span class="symbol">:has_text?</span>, <span class="symbol">:has_css?</span>, <span class="symbol">:has_no_content?</span>, <span class="symbol">:has_no_text?</span>,</span><br><span class="line">  <span class="symbol">:has_no_css?</span>, <span class="symbol">:has_no_xpath?</span>, <span class="symbol">:resolve</span>, <span class="symbol">:has_xpath?</span>, <span class="symbol">:select</span>, <span class="symbol">:uncheck</span>,</span><br><span class="line">  <span class="symbol">:has_link?</span>, <span class="symbol">:has_no_link?</span>, <span class="symbol">:has_button?</span>, <span class="symbol">:has_no_button?</span>, <span class="symbol">:has_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_field?</span>, <span class="symbol">:has_checked_field?</span>, <span class="symbol">:has_unchecked_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_table?</span>, <span class="symbol">:has_table?</span>, <span class="symbol">:unselect</span>, <span class="symbol">:has_select?</span>, <span class="symbol">:has_no_select?</span>,</span><br><span class="line">  <span class="symbol">:has_selector?</span>, <span class="symbol">:has_no_selector?</span>, <span class="symbol">:click_on</span>, <span class="symbol">:has_no_checked_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_unchecked_field?</span>, <span class="symbol">:query</span>, <span class="symbol">:assert_selector</span>, <span class="symbol">:assert_no_selector</span></span><br><span class="line">]</span><br><span class="line"><span class="constant">SESSION_METHODS</span> = [</span><br><span class="line">  <span class="symbol">:body</span>, <span class="symbol">:html</span>, <span class="symbol">:source</span>, <span class="symbol">:current_url</span>, <span class="symbol">:current_host</span>, <span class="symbol">:current_path</span>,</span><br><span class="line">  <span class="symbol">:execute_script</span>, <span class="symbol">:evaluate_script</span>, <span class="symbol">:visit</span>,</span><br><span class="line">  <span class="symbol">:within</span>, <span class="symbol">:within_fieldset</span>, <span class="symbol">:within_table</span>, <span class="symbol">:within_frame</span>, <span class="symbol">:within_window</span>,</span><br><span class="line">  <span class="symbol">:save_page</span>, <span class="symbol">:save_and_open_page</span>, <span class="symbol">:save_screenshot</span>,</span><br><span class="line">  <span class="symbol">:reset_session!</span>, <span class="symbol">:response_headers</span>, <span class="symbol">:status_code</span>,</span><br><span class="line">  <span class="symbol">:title</span>, <span class="symbol">:has_title?</span>, <span class="symbol">:has_no_title?</span>, <span class="symbol">:current_scope</span></span><br><span class="line">]</span><br><span class="line"><span class="constant">DSL_METHODS</span> = <span class="constant">NODE_METHODS</span> + <span class="constant">SESSION_METHODS</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">NODE_METHODS = [</span><br><span class="line">  <span class="symbol">:all</span>, <span class="symbol">:first</span>, <span class="symbol">:attach_file</span>, <span class="symbol">:text</span>, <span class="symbol">:check</span>, <span class="symbol">:choose</span>,</span><br><span class="line">  <span class="symbol">:click_link_or_button</span>, <span class="symbol">:click_button</span>, <span class="symbol">:click_link</span>, <span class="symbol">:field_labeled</span>,</span><br><span class="line">  <span class="symbol">:fill_in</span>, <span class="symbol">:find</span>, <span class="symbol">:find_button</span>, <span class="symbol">:find_by_id</span>, <span class="symbol">:find_field</span>, <span class="symbol">:find_link</span>,</span><br><span class="line">  <span class="symbol">:has_content?</span>, <span class="symbol">:has_text?</span>, <span class="symbol">:has_css?</span>, <span class="symbol">:has_no_content?</span>, <span class="symbol">:has_no_text?</span>,</span><br><span class="line">  <span class="symbol">:has_no_css?</span>, <span class="symbol">:has_no_xpath?</span>, <span class="symbol">:resolve</span>, <span class="symbol">:has_xpath?</span>, <span class="symbol">:select</span>, <span class="symbol">:uncheck</span>,</span><br><span class="line">  <span class="symbol">:has_link?</span>, <span class="symbol">:has_no_link?</span>, <span class="symbol">:has_button?</span>, <span class="symbol">:has_no_button?</span>, <span class="symbol">:has_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_field?</span>, <span class="symbol">:has_checked_field?</span>, <span class="symbol">:has_unchecked_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_table?</span>, <span class="symbol">:has_table?</span>, <span class="symbol">:unselect</span>, <span class="symbol">:has_select?</span>, <span class="symbol">:has_no_select?</span>,</span><br><span class="line">  <span class="symbol">:has_selector?</span>, <span class="symbol">:has_no_selector?</span>, <span class="symbol">:click_on</span>, <span class="symbol">:has_no_checked_field?</span>,</span><br><span class="line">  <span class="symbol">:has_no_unchecked_field?</span>, <span class="symbol">:query</span>, <span class="symbol">:assert_selector</span>, <span class="symbol">:assert_no_selector</span></span><br><span class="line">]</span><br><span class="line">SESSION_METHODS = [</span><br><span class="line">  <span class="symbol">:body</span>, <span class="symbol">:html</span>, <span class="symbol">:source</span>, <span class="symbol">:current_url</span>, <span class="symbol">:current_host</span>, <span class="symbol">:current_path</span>,</span><br><span class="line">  <span class="symbol">:execute_script</span>, <span class="symbol">:evaluate_script</span>, <span class="symbol">:visit</span>,</span><br><span class="line">  <span class="symbol">:within</span>, <span class="symbol">:within_fieldset</span>, <span class="symbol">:within_table</span>, <span class="symbol">:within_frame</span>, <span class="symbol">:within_window</span>,</span><br><span class="line">  <span class="symbol">:save_page</span>, <span class="symbol">:save_and_open_page</span>, <span class="symbol">:save_screenshot</span>,</span><br><span class="line">  <span class="symbol">:reset_session!</span>, <span class="symbol">:response_headers</span>, <span class="symbol">:status_code</span>,</span><br><span class="line">  <span class="symbol">:title</span>, <span class="symbol">:has_title?</span>, <span class="symbol">:has_no_title?</span>, <span class="symbol">:current_scope</span></span><br><span class="line">]</span><br><span class="line">DSL_METHODS = NODE_METHODS + SESSION_METHODS</span><br></pre></td></tr></table></figure>
 <p>You have two ways to use the hover function:</p>
 <ol>
 <li><p>convert element to selenium element and call hover</p>
@@ -995,7 +1141,7 @@
 </ol>
 <ol>
 <li><p>Add the snippet below to <code>hook.rb</code> file under the support directory.</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># find("span.assign").hover</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">Capybara</span></span></span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">Node</span></span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Element</span></span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">hover</span></span></span><br><span class="line">        <span class="variable">@session</span>.driver.browser.action.move_to(<span class="keyword">self</span>.native).perform</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># find("span.assign").hover</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">Capybara</span></span></span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">Node</span></span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Element</span></span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">hover</span></span></span><br><span class="line">        @session.driver.browser.action.move_to(<span class="keyword">self</span>.native).perform</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -1030,7 +1176,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -1119,159 +1265,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-    
-
-
-  
-    <article id="post-2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/08/21/2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao/" class="article-date">
-  	<time datetime="2013-08-21T13:37:00.000Z" itemprop="datePublished">2013-08-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/08/21/2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao/">我的 nexus 7 2013 软件列表</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>首先感谢<a href="http://weibo.com/u/1868904263" target="_blank" rel="external">小郭</a>，感谢美帝，没有你们，我就不会有 nexus 7 2013。<br>其实我一直想要台 Android 的平板，早在 2011 年的时候，当时同办公室的同事做 google image 测试，发了台 moto 的 xoom 做测试机，我就眼红不已。<br>在 2012 年的时候，我让<a href="http://weibo.com/dantawangzi" target="_blank" rel="external">小立</a>给我带过一个 nexus 7 2012， 结果被同事很喜欢，就转给他了。</p>
-<p>可想而知： 一个人想得到一个平板，这其中需要无数的机缘巧合。</p>
-<p>这台<em>奶骑</em>（网上人都这么叫-_-!），我拿到手差不多一个礼拜，<green>新买粪坑三天香</green>的热情也退了。中间装过无数软件，也卸载过无数软件，<br>也发现了几个问题。于是想总结下，一来以后自己可以用到，二来也和大家分享下。</p>
-<p>###问题：</p>
-<ol>
-<li><p>外壳脆弱</p>
-<p> nexus 7 2013 很轻很薄，所以显得特别柔弱，用力捏下，可以听见塑料的声响。当然塑料也很嫩，磕一下就一个小坑。</p>
-</li>
-<li><p>触屏失灵</p>
-<p> 在国外网上看到的是，多点触摸有问题，会触发别的按键。这个我还没遇到，但是我遇到的是，触屏失灵，没有反应，在重新打开屏幕之后就恢复了。<br> 不确定是硬件还是软件的问题。</p>
-</li>
-<li><p>按钮生硬</p>
-<p> 无论是电源按钮还是音量按钮，都硬的很，没有手感可言。</p>
-</li>
-<li><p>应用太少</p>
-<p> HD 的应用实在太少了，相比苹果系列， Android 真是要加油啊！</p>
-</li>
-</ol>
-<p>其实做为第一批， google 和 asus 做的还算不错啦， 虽然网上都说 google + asus = bad quality。</p>
-<p>###应用：</p>
-<ul>
-<li><p>音乐视频：</p>
-<ul>
-<li>豆瓣FM</li>
-<li>虾米音乐</li>
-<li>MoboPlayer</li>
-<li>MXPlayer (有广告)</li>
-<li>快手看片</li>
-<li>哗哩哗哩动画</li>
-<li>PPTV HD</li>
-<li>QQ 音乐 (我用的时候音乐断断续续过一次)</li>
-</ul>
-</li>
-<li><p>阅读工具:</p>
-<ul>
-<li>多看阅读 (强烈推荐，买了好多书了。不过前面说到触屏失去反应也有可能是多看造成的。)</li>
-<li>布卡漫画 (强烈推荐，宅男腐女必备)</li>
-<li>Kindle</li>
-<li>Adobe Reader</li>
-<li>Flipboard</li>
-<li>鲜果网</li>
-<li>网易云阅读</li>
-</ul>
-</li>
-<li><p>聊天社交：</p>
-<ul>
-<li>QQ hd</li>
-<li>微信</li>
-<li>Skype</li>
-<li>豆果网</li>
-<li>大众点评</li>
-<li>weico 实在找不到好的微博的应用</li>
-</ul>
-</li>
-<li><p>工具类：</p>
-<ul>
-<li>ES 文件浏览器 (强烈推荐)</li>
-<li>爱壁纸 HD</li>
-<li>有道词典</li>
-<li>墨迹天气</li>
-<li>金山快盘</li>
-</ul>
-</li>
-<li><p>游戏：</p>
-<ul>
-<li>Doodle Fit2</li>
-</ul>
-</li>
-</ul>
-<p>以上应用如果不是指明 HD 的，基本就是矮子拔将军，但是效果不错哦！其实这些软件中有很多都有 HD 版本的，可惜都是一年半载不更新的那种，可惜了。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>对我而言，平板的主要用途就是看书，看视频，相对而言上面的这些应用也足够了。当然这也是我一家之言，我也到底没有把所有的应用都体验过一把，所以希望有好用的，<br>请大力推给我</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/android/">Android</a>
-	</div>
-
-
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nexus-7-2013/">nexus 7 2013</a></li></ul>
-	</div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -1336,8 +1330,8 @@
 	</script>
 
 
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script>
   var backgroundnum = 5;

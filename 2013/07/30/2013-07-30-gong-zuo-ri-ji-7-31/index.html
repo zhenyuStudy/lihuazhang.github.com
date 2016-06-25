@@ -21,7 +21,7 @@
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
@@ -124,7 +124,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
 					</div>
 				</section>
 				
@@ -242,7 +242,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="1-_Get_a_mail_from_a_colleague_this_morning"><a href="#1-_Get_a_mail_from_a_colleague_this_morning" class="headerlink" title="1. Get a mail from a colleague this morning"></a>1. Get a mail from a colleague this morning</h2><p>When you commit code, make sure you do it with your real name, and a proper email address (your scilearn address). You can set your name like this, in the repo:</p>
+        <h2 id="1-Get-a-mail-from-a-colleague-this-morning"><a href="#1-Get-a-mail-from-a-colleague-this-morning" class="headerlink" title="1. Get a mail from a colleague this morning"></a>1. Get a mail from a colleague this morning</h2><p>When you commit code, make sure you do it with your real name, and a proper email address (your scilearn address). You can set your name like this, in the repo:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config user.name <span class="string">"Hot Day"</span></span><br><span class="line">$ git config user.email <span class="string">"hday@hotday.com.cn"</span></span><br></pre></td></tr></table></figure>
 <p> You can also do it globally, for all repos:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"Hot Day"</span></span><br><span class="line">$ git config --global user.email <span class="string">"hday@hotday.com.cn"</span></span><br></pre></td></tr></table></figure>
@@ -250,12 +250,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --get user.name</span><br><span class="line">$ git config --get user.email</span><br></pre></td></tr></table></figure>
 <p>Thanks!</p>
 <hr>
-<h2 id="2-_factory_girl_and_mysql"><a href="#2-_factory_girl_and_mysql" class="headerlink" title="2. factory_girl and mysql"></a>2. factory_girl and mysql</h2><p>用 <code>truncate</code> 清空的表 <code>id</code> 会从新记录, 而 <code>delete</code> 清空的表则不会从新记录 会继续原数据记录,当然这里 <code>id</code> 为自增长。</p>
+<h2 id="2-factory-girl-and-mysql"><a href="#2-factory-girl-and-mysql" class="headerlink" title="2. factory_girl and mysql"></a>2. factory_girl and mysql</h2><p>用 <code>truncate</code> 清空的表 <code>id</code> 会从新记录, 而 <code>delete</code> 清空的表则不会从新记录 会继续原数据记录,当然这里 <code>id</code> 为自增长。</p>
 <p>When I am writing the cucucmber features for our new project, we meet an issue:</p>
 <p>the snippet below will not work.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Given the following posts exist&#10;      | id | name   | description    | user_id |&#10;      | 1  | a post | This is a post | 1       |</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Given the following posts exist</span><br><span class="line">      | id | name   | description    | user_id |</span><br><span class="line">      | 1  | a post | This is a post | 1       |</span><br></pre></td></tr></table></figure>
 <p>If everything is ok, the Given will find the step in <code>pickle_step.rb</code>:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create models from a table</span></span><br><span class="line"><span class="constant">Given</span>(<span class="regexp">/^the following <span class="subst">#&#123;capture_plural_factory&#125;</span> exists?:?$/</span>) <span class="keyword">do</span> |plural_factory, table|</span><br><span class="line">  create_models_from_table(plural_factory, table)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create models from a table</span></span><br><span class="line">Given(<span class="regexp">/^the following <span class="subst">#&#123;capture_plural_factory&#125;</span> exists?:?$/</span>) <span class="keyword">do</span> <span class="params">|plural_factory, table|</span></span><br><span class="line">  create_models_from_table(plural_factory, table)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p>And the code will call the factory which defined before using factory_girl.<br>Then it will save a post in database sure enough.</p>
 <p>But it says</p>
 <blockquote>
@@ -264,7 +264,7 @@
 <p>Obviously, we have something wrong with the user_id field. And more obviously, we have not generate a user.</p>
 <p>I thought before the factory_girl will take care of the association object if there is no record in database.<br>Actually, if we feed the factory attributes, factory_girl will take these values and create a post object rather than create a association record.</p>
 <p>So here, it won’t create a user with id 1. The Given will be interpreted to a sql at last:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`posts`</span> ( <span class="string">`created_at`</span>, <span class="string">`description`</span>, <span class="string">`id`</span>, <span class="string">`name`</span>,  <span class="string">`updated_at`</span>, <span class="string">`user_id`</span>) <span class="keyword">VALUES</span> (<span class="string">'2013-07-31 06:12:41'</span>, <span class="string">'This is a post'</span>, <span class="number">1</span>, <span class="string">'a post'</span>, <span class="number">1</span>, <span class="string">'2013-07-31 06:12:41'</span>, <span class="number">1</span>)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`posts`</span> ( <span class="string">`created_at`</span>, <span class="string">`description`</span>, <span class="string">`id`</span>, <span class="string">`name`</span>,  <span class="string">`updated_at`</span>, <span class="string">`user_id`</span>) <span class="keyword">VALUES</span> (<span class="string">'2013-07-31 06:12:41'</span>, <span class="string">'This is a post'</span>, <span class="number">1</span>, <span class="string">'a post'</span>, <span class="number">1</span>, <span class="string">'2013-07-31 06:12:41'</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <p>And we have a foreign key constraint on user_id, of course it will fail.</p>
 <p>###Solutions:</p>
 <ol>
@@ -272,7 +272,7 @@
 <li>Prepare a user before test.</li>
 <li>If the user does not matter, just remove user_id, let factory_girl take care of user.</li>
 </ol>
-<h2 id="3-_Capybara_get_the_native_css_value"><a href="#3-_Capybara_get_the_native_css_value" class="headerlink" title="3. Capybara get the native css value"></a>3. Capybara get the native css value</h2><p><code>element.native.css_value(&quot;text-overflow&quot;)</code></p>
+<h2 id="3-Capybara-get-the-native-css-value"><a href="#3-Capybara-get-the-native-css-value" class="headerlink" title="3. Capybara get the native css value"></a>3. Capybara get the native css value</h2><p><code>element.native.css_value(&quot;text-overflow&quot;)</code></p>
 <ol>
 <li>element is the capybara element</li>
 <li>native is used to get the selenium-webdriver element</li>
@@ -328,7 +328,7 @@
 <!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
 <div id="toc" class="toc-article">
 <strong class="toc-title">文章目录</strong>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_Get_a_mail_from_a_colleague_this_morning"><span class="toc-number">1.</span> <span class="toc-text">1. Get a mail from a colleague this morning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_factory_girl_and_mysql"><span class="toc-number">2.</span> <span class="toc-text">2. factory_girl and mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_Capybara_get_the_native_css_value"><span class="toc-number">3.</span> <span class="toc-text">3. Capybara get the native css value</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Get-a-mail-from-a-colleague-this-morning"><span class="toc-number">1.</span> <span class="toc-text">1. Get a mail from a colleague this morning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-factory-girl-and-mysql"><span class="toc-number">2.</span> <span class="toc-text">2. factory_girl and mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Capybara-get-the-native-css-value"><span class="toc-number">3.</span> <span class="toc-text">3. Capybara get the native css value</span></a></li></ol>
 </div>
 <style type="text/css">
   .left-col .switch-btn {
@@ -441,7 +441,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -485,8 +485,8 @@
     </div>
     
 
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script>
   var backgroundnum = 5;

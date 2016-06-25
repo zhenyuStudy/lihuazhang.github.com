@@ -19,13 +19,14 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jmeter 兵器谱之 Xpath Extractor">
 <meta name="twitter:description" content="前言这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extracto">
+<meta name="twitter:image" content="https://jzycow.bn1.livefilestore.com/y1mkZeGi_ZuSphq77cecvcz5J1NwURw4cnG5JgR4Ar0pN2TjMfYVwjllWUY9LM-pWS-m92mtRx6lAvb1hLbYSUpa1Mh__u99xrNRP2-pIqWtum_W_dWGH_J6g/xpath.png?psid=1">
   
     <link rel="alternative" href="/atom.xml" title="八点下班" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
@@ -128,7 +129,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
 					</div>
 				</section>
 				
@@ -246,8 +247,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extractor。</p>
-<h2 id="u9700_u6C42"><a href="#u9700_u6C42" class="headerlink" title="需求"></a>需求</h2><p>大家都知道，传统的表单登陆有几个特点：</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extractor。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>大家都知道，传统的表单登陆有几个特点：</p>
 <ol>
 <li>有一个特定的 action</li>
 <li>使用 Post 协议</li>
@@ -255,7 +256,7 @@
 <li>有很多的 hidden input 随机值</li>
 </ol>
 <p>比如百度的登陆，就有相当多的 hidden input。这些 hidden input 的 value 在每次请求时，都会随机生成不同的值。所以你不得不把它提取出来，参数化。于是我们就用到了 XPATH Extractor。</p>
-<h2 id="u5B9E_u8DF5"><a href="#u5B9E_u8DF5" class="headerlink" title="实践"></a>实践</h2><p>假设我们有这样一个登陆的form：</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>假设我们有这样一个登陆的form：</p>
 <pre><code>&lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
   &lt;input id=&quot;username&quot; name=&quot;username&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
   &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; value=&quot;&quot;&gt;
@@ -277,7 +278,7 @@
 <p>需要注意的是，这次的方法变成了 Post， 还有参数都要填写到参数列表中，注意那个 lt 值， jmeter 使用 ${} 获取参数的值。</p>
 <p>好，大功告成，试试看吧。</p>
 <hr>
-<h2 id="XPATH_Extractor__u8BE6_u8BF4"><a href="#XPATH_Extractor__u8BE6_u8BF4" class="headerlink" title="XPATH Extractor 详说"></a>XPATH Extractor 详说</h2><p>盗用下Apache上的图片：<br><img src="http://jmeter.apache.org/images/screenshots/xpath_extractor.png" alt="alt text"></p>
+<h2 id="XPATH-Extractor-详说"><a href="#XPATH-Extractor-详说" class="headerlink" title="XPATH Extractor 详说"></a>XPATH Extractor 详说</h2><p>盗用下Apache上的图片：<br><img src="http://jmeter.apache.org/images/screenshots/xpath_extractor.png" alt="alt text"></p>
 <p>我们来一一解说下，这些图片上的属性，英语好的人可以直接移步 <a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath_Extractor" title="XPATH Extractor" target="_blank" rel="external">Apache Jmeter Xpath Extractor</a>。</p>
 <p><strong>Name</strong>： XPATH Extractor， 就是一个该节点的描述信息，你可以任意更改，会立刻反应在你的节点树上。<br><strong>Comments</strong>: 同样也是描述信息。<br><strong>Apply to</strong>：一般只针对于那些有子 sample 的 sample， apply to 有4种：</p>
 <ul>
@@ -356,7 +357,7 @@ Apache JMeter
 <!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
 <div id="toc" class="toc-article">
 <strong class="toc-title">文章目录</strong>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u524D_u8A00"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u9700_u6C42"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B9E_u8DF5"><span class="toc-number">3.</span> <span class="toc-text">实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XPATH_Extractor__u8BE6_u8BF4"><span class="toc-number">4.</span> <span class="toc-text">XPATH Extractor 详说</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实践"><span class="toc-number">3.</span> <span class="toc-text">实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XPATH-Extractor-详说"><span class="toc-number">4.</span> <span class="toc-text">XPATH Extractor 详说</span></a></li></ol>
 </div>
 <style type="text/css">
   .left-col .switch-btn {
@@ -469,7 +470,7 @@ Apache JMeter
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -513,8 +514,8 @@ Apache JMeter
     </div>
     
 
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script>
   var backgroundnum = 5;

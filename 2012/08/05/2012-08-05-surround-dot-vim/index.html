@@ -24,13 +24,14 @@ Surround.vim is all about “surroundings”: parentheses, bracke">
 <meta name="twitter:description" content="一般写东西的时候，总会遇到比如写了一长串文字后，突然想给这串文字头尾加个括号，或者引号。其实很多编辑器都提供这种功能，选中，然后输入括号。但是一直用 Vim，也没发现有这种功能， 也只能怪自己没有研究。 后来网上找了一圈， 发现了原来有这个插件： surround.vim。
 
 Surround.vim is all about “surroundings”: parentheses, bracke">
+<meta name="twitter:image" content="http://8atmyhouse.com/photos/allkey.png">
   
     <link rel="alternative" href="/atom.xml" title="八点下班" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
@@ -133,7 +134,7 @@ Surround.vim is all about “surroundings”: parentheses, bracke">
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
 					</div>
 				</section>
 				
@@ -277,7 +278,7 @@ Surround.vim is all about “surroundings”: parentheses, bracke">
 
 <p>除了和单个字符打交道外， 我们还处理单词， 句子还有段落， 这些在 Vim 中就是<strong>文本对象</strong>。<br>Vim 中纯文本和常见编程语言都有文本对象。也可以利用 Vim 脚本自定义新的文本对象。</p>
 <p>Vim 中，编辑命令有如下结构：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">number</span>&gt;&lt;<span class="keyword">command</span>&gt;&lt;text object <span class="built_in">or</span> motion&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">&lt;number&gt;</span><span class="symbol">&lt;command&gt;</span>&lt;text object <span class="built_in">or</span> motion&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>number</strong> 用于将命令使用于多个文本对象或移动，如，向后移动三个单词、向前移动两个段落。 number 是可选项，且可以出现在命令的前面或后面。</p>
 <p><strong>command</strong> 是一个操作，如，修改、删除(剪切)，或复制。 command 也是可选的，但如果没有，就只是移动命令，而不是编辑命令。</p>
 <p><strong>text object</strong> 或 motion 可以是一个文本结构，如单词、句子、段落或移动， 如，向前移行，向后一页，行尾。</p>
@@ -486,7 +487,7 @@ Surround.vim is all about “surroundings”: parentheses, bracke">
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -530,8 +531,8 @@ Surround.vim is all about “surroundings”: parentheses, bracke">
     </div>
     
 
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script>
   var backgroundnum = 5;

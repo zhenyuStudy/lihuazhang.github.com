@@ -7,13 +7,6 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/vim/</loc>
-        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://8atmyhouse.com/categories/mysql/</loc>
         <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -21,8 +14,8 @@
     </url>
 
     <url>
-        <loc>http://8atmyhouse.com/categories/%E7%A7%BB%E5%8A%A8%E6%B5%8B%E8%AF%95/</loc>
-        <lastmod>2015-12-16T13:38:49.000Z</lastmod>
+        <loc>http://8atmyhouse.com/categories/vim/</loc>
+        <lastmod>2013-11-24T05:45:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -140,8 +133,15 @@
     </url>
 
     <url>
+        <loc>http://8atmyhouse.com/categories/%E7%A7%BB%E5%8A%A8%E6%B5%8B%E8%AF%95/</loc>
+        <lastmod>2016-06-25T13:24:10.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://8atmyhouse.com/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0/</loc>
-        <lastmod>2015-12-29T15:28:14.000Z</lastmod>
+        <lastmod>2016-06-25T13:25:10.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

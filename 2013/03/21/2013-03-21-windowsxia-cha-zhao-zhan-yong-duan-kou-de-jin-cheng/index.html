@@ -27,7 +27,7 @@
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
@@ -130,7 +130,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
 					</div>
 				</section>
 				
@@ -246,9 +246,9 @@
           
         <p>一直只知道 *nux 下的命令，对 windows 知之甚少，其实 windows 下也有很多强大的命令。</p>
 <p>比如在 linux 下查看一个 mysql 的端口，</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">➜  octopress git:(source) ✗ netstat -an | grep <span class="number">3306</span> <span class="preprocessor"># mac 下的命令没有 linux 下来的丰富啊，没有 p 选项。</span></span><br><span class="line">tcp4       <span class="number">0</span>      <span class="number">0</span>  *<span class="number">.3306</span>                 *.*                    LISTEN</span><br><span class="line"></span><br><span class="line">root@li493-<span class="number">58</span>:~<span class="preprocessor"># netstat -anp | grep <span class="number">3306</span> # 这是 ubuntu 下面的。</span></span><br><span class="line">tcp        <span class="number">0</span>      <span class="number">0</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">3306</span>            <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:*               LISTEN      <span class="number">2509</span>/mysqld</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">➜  octopress git:(source) ✗ netstat -an | grep 3306 # mac 下的命令没有 linux 下来的丰富啊，没有 p 选项。</span><br><span class="line">tcp4       0      0  *.3306                 *.*                    LISTEN</span><br><span class="line"></span><br><span class="line">root@li493-58:~# netstat -anp | grep 3306 # 这是 ubuntu 下面的。</span><br><span class="line">tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      2509/mysqld</span><br></pre></td></tr></table></figure>
 <p>很方便吧。那么如果在 windows 下呢？</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">netstat -ano | findstr <span class="number">3306</span> <span class="preprocessor"># 这里会把 pid 告诉你，比如 pid 是 <span class="number">1278</span></span></span><br><span class="line"></span><br><span class="line">tasklist /fi <span class="string">"pid eq 1278"</span> <span class="preprocessor"># 这样就找到了 <span class="number">1278</span> 对应的进程</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">netstat -ano | findstr 3306 # 这里会把 pid 告诉你，比如 pid 是 1278</span><br><span class="line"></span><br><span class="line">tasklist /fi &quot;pid eq 1278&quot; # 这样就找到了 1278 对应的进程</span><br></pre></td></tr></table></figure>
 <p>也是很简单的吧！</p>
 
       
@@ -413,7 +413,7 @@
 
 
     
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
         <script>
         var yiliaConfig = {
         fancybox: true,
@@ -457,8 +457,8 @@
     </div>
     
 
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
 <script>
   var backgroundnum = 5;

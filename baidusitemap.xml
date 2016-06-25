@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2015/12/29/%E5%8D%97%E4%BA%AC%E4%B9%8B%E8%A1%8C/</loc>
+    <lastmod>2016-06-25T13:25:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>南京之行</title>
+        <pubTime>2015-12-29T14:55:37.000Z</pubTime>
+        
+        <tag>南京</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活杂记" url="http://8atmyhouse.com/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2016/05/14/webdriveragent-%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2016-06-25T13:24:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>WebDriverAgent 简介</title>
+        <pubTime>2016-05-14T10:49:52.000Z</pubTime>
+        
+        <tag>移动测试</tag>
+         
+         
+           
+             
+              <breadCrumb title="移动测试" url="http://8atmyhouse.com/categories/%E7%A7%BB%E5%8A%A8%E6%B5%8B%E8%AF%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2015/12/17/2013-03-15-8atmyhouse/</loc>
+    <lastmod>2015-12-17T08:50:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>8atmyHouse</title>
+        <pubTime>2015-12-17T06:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="生活杂记" url="http://8atmyhouse.com/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/04/28/2013-04-28-jmeter-bing-qi-pu-zhi-foreach-controller/</loc>
+    <lastmod>2015-12-16T13:56:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>JMeter 兵器谱之 ForEach Controller</title>
+        <pubTime>2013-04-28T13:37:00.000Z</pubTime>
+        
+        <tag>test-china.org</tag>
+         
+         
+           
+             
+              <breadCrumb title="Jmeter" url="http://8atmyhouse.com/categories/jmeter/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/05/26/2013-05-26-zai-webdriverli-shi-yong-sizzle-dot-js/</loc>
+    <lastmod>2015-12-16T13:52:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>在WebDriver里使用Sizzle.js</title>
+        <pubTime>2013-05-26T13:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WebDriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/08/01/2012-08-01-xiao-qing-xin-outlookshi-yong-ji/</loc>
+    <lastmod>2015-12-16T13:51:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>小清新 Outlook 试用记</title>
+        <pubTime>2012-08-01T12:52:00.000Z</pubTime>
+        
+        <tag>Metro</tag>
+         
+         
+           
+             
+              <breadCrumb title="windows" url="http://8atmyhouse.com/categories/windows/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/04/06/2012-04-06-webdriver-1-post/</loc>
+    <lastmod>2015-12-16T13:50:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>WebDriver 1: Set up WebDriver using Maven3</title>
+        <pubTime>2012-04-06T10:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WebDriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/03/08/2012-03-08-learn-vim-3-post/</loc>
+    <lastmod>2015-12-16T13:50:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>vim学习 jsctags</title>
+        <pubTime>2012-03-08T10:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="vim" url="http://8atmyhouse.com/categories/vim/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/03/07/2012-03-07-learn-vim-2-post/</loc>
+    <lastmod>2015-12-16T13:49:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>vim学习 shiftwidth, tabstop, softtabstop和expandtab</title>
+        <pubTime>2012-03-07T11:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="vim" url="http://8atmyhouse.com/categories/vim/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/03/07/2012-03-07-learn-vim-1-post/</loc>
+    <lastmod>2015-12-16T13:49:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>vim学习 listchars</title>
+        <pubTime>2012-03-07T10:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="vim" url="http://8atmyhouse.com/categories/vim/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/03/04/2012-03-04-zsh-config-post/</loc>
+    <lastmod>2015-12-16T13:48:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>oh my zsh</title>
+        <pubTime>2012-03-04T10:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="linux" url="http://8atmyhouse.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/02/19/2012-02-19-add-google-pretty-code-post/</loc>
+    <lastmod>2015-12-16T13:48:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>Add google pretty code support</title>
+        <pubTime>2012-02-19T10:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Jekyll" url="http://8atmyhouse.com/categories/jekyll/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/02/23/2012-02-23-use-spf13-vim-config-post/</loc>
+    <lastmod>2015-12-16T13:48:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>vim配置</title>
+        <pubTime>2012-02-23T10:18:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="vim" url="http://8atmyhouse.com/categories/vim/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/08/2013-08-08-cucumberhe-capybaraxia-de-pageobject/</loc>
+    <lastmod>2015-12-16T13:46:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>Cucumber 和 Capybara 下的 PageObject</title>
+        <pubTime>2013-08-08T13:37:00.000Z</pubTime>
+        
+        <tag>cucumber</tag>
+         
+        <tag>capybara</tag>
+         
+        <tag>pageobject</tag>
+         
+         
+           
+             
+              <breadCrumb title="cucumber" url="http://8atmyhouse.com/categories/cucumber/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/07/2013-08-07-step-defintionshi-kong/</loc>
+    <lastmod>2015-12-16T13:45:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>由 step definition 失控引发的讨论和思考</title>
+        <pubTime>2013-08-07T13:37:00.000Z</pubTime>
+        
+        <tag>cucumber</tag>
+         
+        <tag>pageobject</tag>
+         
+         
+           
+             
+              <breadCrumb title="cucumber" url="http://8atmyhouse.com/categories/cucumber/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/06/2013-08-06-git-revert/</loc>
+    <lastmod>2015-12-16T13:45:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>git revert</title>
+        <pubTime>2013-08-06T13:37:00.000Z</pubTime>
+        
+        <tag>git</tag>
+         
+         
+           
+             
+              <breadCrumb title="git" url="http://8atmyhouse.com/categories/git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/02/2013-08-02-ba-yue-er-ri-gong-zuo-suo-shi/</loc>
+    <lastmod>2015-12-16T13:45:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>8-02-工作琐事</title>
+        <pubTime>2013-08-02T13:37:00.000Z</pubTime>
+        
+        <tag>capybara</tag>
+         
+        <tag>xpath</tag>
+         
+         
+           
+             
+              <breadCrumb title="WorkDiary" url="http://8atmyhouse.com/categories/workdiary/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/06/27/2013-06-27-ruby-here-doc/</loc>
+    <lastmod>2015-12-16T13:45:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>ruby 的 Heredocs</title>
+        <pubTime>2013-06-27T13:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="ruby" url="http://8atmyhouse.com/categories/ruby/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/06/26/2013-06-26-shell-script-to-control-tomcat/</loc>
+    <lastmod>2015-12-16T13:44:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>能马上用起来的控制 tomcat 的脚本</title>
+        <pubTime>2013-06-26T13:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="linux" url="http://8atmyhouse.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/05/12/2013-05-12-wo-de-mu-qin/</loc>
+    <lastmod>2015-12-16T13:44:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>我的母亲</title>
+        <pubTime>2013-05-12T13:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="生活杂记" url="http://8atmyhouse.com/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/04/30/2013-04-30-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu/</loc>
+    <lastmod>2015-12-16T13:43:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>WebDriver 之测试失败自动截图</title>
+        <pubTime>2013-04-30T13:37:00.000Z</pubTime>
+        
+        <tag>test-china.org</tag>
+         
+         
+           
+             
+              <breadCrumb title="WebDriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/04/27/2013-04-27-jmeter-bing-qi-pu-zhi-regular-expression-extractor/</loc>
+    <lastmod>2015-12-16T13:43:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>Jmeter 兵器谱之 Regular Expression Extractor</title>
+        <pubTime>2013-04-27T13:37:00.000Z</pubTime>
+        
+        <tag>test-china.org</tag>
+         
+         
+           
+             
+              <breadCrumb title="Jmeter" url="http://8atmyhouse.com/categories/jmeter/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/</loc>
+    <lastmod>2015-12-16T13:42:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>Jmeter 兵器谱之 Xpath Extractor</title>
+        <pubTime>2013-04-29T13:37:00.000Z</pubTime>
+        
+        <tag>test-china.org</tag>
+         
+         
+           
+             
+              <breadCrumb title="Jmeter" url="http://8atmyhouse.com/categories/jmeter/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/04/26/2013-04-26-htmlunit-jie-shao/</loc>
+    <lastmod>2015-12-16T13:41:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>HtmlUnit 介绍</title>
+        <pubTime>2013-04-26T13:37:00.000Z</pubTime>
+        
+        <tag>test-china.org</tag>
+         
+         
+           
+             
+              <breadCrumb title="WebDriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/12/2013-08-12-install-vim74-from-source/</loc>
+    <lastmod>2015-12-16T13:41:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Install vim74 from source</title>
+        <pubTime>2013-08-12T13:37:00.000Z</pubTime>
+        
+        <tag>vim</tag>
+         
+         
+           
+             
+              <breadCrumb title="vim" url="http://8atmyhouse.com/categories/vim/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/16/2013-08-16-vim-cha-jian-tui-jian/</loc>
+    <lastmod>2015-12-16T13:41:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>vim 插件推荐</title>
+        <pubTime>2013-08-16T13:37:00.000Z</pubTime>
+        
+        <tag>vim</tag>
+         
+         
+           
+             
+              <breadCrumb title="vim" url="http://8atmyhouse.com/categories/vim/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/21/2013-08-21-wo-de-nexus-7-ruan-jian-lie-biao/</loc>
+    <lastmod>2015-12-16T13:40:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>我的 nexus 7 2013 软件列表</title>
+        <pubTime>2013-08-21T13:37:00.000Z</pubTime>
+        
+        <tag>nexus 7 2013</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://8atmyhouse.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/25/2013-08-25-du-lu-fan-yan-shi/</loc>
+    <lastmod>2015-12-16T13:40:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>读陆犯焉识</title>
+        <pubTime>2013-08-25T13:37:00.000Z</pubTime>
+        
+        <tag>陆犯焉识</tag>
+         
+         
+           
+             
+              <breadCrumb title="读书笔记" url="http://8atmyhouse.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/08/29/2013-08-29-add-hover-event-to-capybara/</loc>
+    <lastmod>2015-12-16T13:40:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>add hover event to capybara</title>
+        <pubTime>2013-08-29T13:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Capybara" url="http://8atmyhouse.com/categories/capybara/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/09/14/2013-09-14-gatling-shi-yong/</loc>
+    <lastmod>2015-12-16T13:40:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gatling 试用 1</title>
+        <pubTime>2013-09-14T13:37:00.000Z</pubTime>
+        
+        <tag>性能测试</tag>
+         
+         
+           
+             
+              <breadCrumb title="gatling" url="http://8atmyhouse.com/categories/gatling/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/09/24/2013-09-24-fluentwait-with-webelement/</loc>
+    <lastmod>2015-12-16T13:39:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>FluentWait with WebElement</title>
+        <pubTime>2013-09-24T13:37:00.000Z</pubTime>
+        
+        <tag>翻译</tag>
+         
+         
+           
+             
+              <breadCrumb title="webdriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/10/09/2013-10-09-cron-jobs-and-random-times-within-giving-hours/</loc>
+    <lastmod>2015-12-16T13:39:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>Cron jobs and random times, within giving hours</title>
+        <pubTime>2013-10-09T13:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="linux" url="http://8atmyhouse.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/10/15/2013-10-15-you-xi-kai-fa-chang-yong-gai-nian/</loc>
+    <lastmod>2015-12-16T13:39:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>游戏开发常用概念</title>
+        <pubTime>2013-10-15T13:37:00.000Z</pubTime>
+        
+        <tag>游戏开发</tag>
+         
+         
+           
+             
+              <breadCrumb title="cocos2d-x" url="http://8atmyhouse.com/categories/cocos2d-x/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/12/26/2013-12-26-fan-yi-android-and-ios-support/</loc>
+    <lastmod>2015-12-16T13:38:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>[翻译]Android and iOS Support</title>
+        <pubTime>2013-12-26T13:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="移动测试" url="http://8atmyhouse.com/categories/%E7%A7%BB%E5%8A%A8%E6%B5%8B%E8%AF%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/04/25/2012-04-25-webdriver-4-jia-shang-xie-zi/</loc>
+    <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>WebDriver 4: 加上叶子</title>
+        <pubTime>2012-04-25T12:52:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WebDriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/04/19/2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia/</loc>
+    <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 Capybara， Cucumber 和 WebDriver 实现自动化测试</title>
+        <pubTime>2012-04-19T13:13:00.000Z</pubTime>
+        
+        <tag>cucumber</tag>
+         
+        <tag>capybara</tag>
+         
+         
+           
+             
+              <breadCrumb title="Capybara" url="http://8atmyhouse.com/categories/capybara/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/04/20/2012-04-20-webdriver2/</loc>
+    <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>WebDriver 2: PageObject</title>
+        <pubTime>2012-04-20T11:07:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WebDriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/04/21/2012-04-21-webdriver-3-more-pageobjects/</loc>
+    <lastmod>2014-08-05T08:15:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>WebDriver 3: more PageObjects - PageFactory</title>
+        <pubTime>2012-04-21T02:36:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WebDriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/08/06/2012-08-06-ying-she-windows-cmdke-yi-du-qu-de-ci-pan-qu-dong/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>映射 Windows cmd 可以读取的磁盘驱动</title>
+        <pubTime>2012-08-06T13:58:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="windows" url="http://8atmyhouse.com/categories/windows/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/02/12/2013-02-12-gao-bie-2012/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>告别2012</title>
+        <pubTime>2013-02-12T02:57:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="生活杂记" url="http://8atmyhouse.com/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/02/12/2013-02-12-shi-yong-capybara-deng-lu-bai-du/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用 capybara 登陆百度</title>
+        <pubTime>2013-02-12T09:14:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Capybara" url="http://8atmyhouse.com/categories/capybara/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/07/30/2013-07-30-gong-zuo-ri-ji-7-31/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>7-31-工作琐事</title>
+        <pubTime>2013-07-30T01:56:00.000Z</pubTime>
+        
+        <tag>capybara</tag>
+         
+        <tag>git</tag>
+         
+        <tag>factory_gril</tag>
+         
+         
+           
+             
+              <breadCrumb title="WorkDiary" url="http://8atmyhouse.com/categories/workdiary/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/03/21/2013-03-21-windowsxia-cha-zhao-zhan-yong-duan-kou-de-jin-cheng/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>windows 下查找占用端口的进程</title>
+        <pubTime>2013-03-21T13:02:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="windows" url="http://8atmyhouse.com/categories/windows/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/08/05/2012-08-05-surround-dot-vim/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>surround.vim</title>
+        <pubTime>2012-08-05T01:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Vim" url="http://8atmyhouse.com/categories/vim/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/04/23/2012-04-23-mysql5-qing-kong-rootmi-ma/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>mysql5 清空root密码</title>
+        <pubTime>2012-04-23T13:27:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="mysql" url="http://8atmyhouse.com/categories/mysql/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2012/04/24/2012-04-24-sauce-ondemandshi-yong/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>Sauce OnDemand试用</title>
+        <pubTime>2012-04-24T13:37:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="WebDriver" url="http://8atmyhouse.com/categories/webdriver/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://8atmyhouse.com/2013/07/11/2013-07-11-wo-de-vimrc/</loc>
+    <lastmod>2013-11-24T05:45:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>我的 vimrc</title>
+        <pubTime>2013-07-11T15:25:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Vim" url="http://8atmyhouse.com/categories/vim/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
