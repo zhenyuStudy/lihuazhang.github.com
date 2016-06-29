@@ -126,7 +126,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
 					</div>
 				</section>
 				
@@ -203,6 +203,150 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2012/04/19/2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia/" class="article-date">
+  	<time datetime="2012-04-19T13:13:00.000Z" itemprop="datePublished">2012-04-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2012/04/19/2012-04-19-capybara-plus-cucumber-plus-webdriverzi-dong-hua-ce-shi-kuang-jia/">使用 Capybara， Cucumber 和 WebDriver 实现自动化测试</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>我面试的时候，BOSS对我说，我们是要求自动化的。我想这我会啊。BOSS又说，我们也有一套自动化的框架。我想那更好。然后等我入职之后，发现毛框架也没有，只有四个完全不会代码的测试攻城狮。</p>
+<p>老板说要自动化，我说自动化啊？我花了几天的时间温习了我熟悉的<code>JAVA+Junit+SeleniumRC</code>，否定了这个框架，一来语言太重，二来都不会coding。我很苦恼地向BOSS抱怨了，他说用脚本语言吧，于是我就想要不就用<code>python+pyunit+webdriver</code>，在google打工的时候，接触的就是这个框架。BOSS想了想，说用ruby吧。原因在他是ruby的超级粉丝。</p>
+<p>于是我找到了<code>cucumber+capybara+webdriver</code>，这也是我第一次接触ruby，第一次接触BDD。而我选用这个框架的原因如下：</p>
+<pre><code>1. cucumber有一套自己的DSL，任何会写测试用例的人都会写。
+2. 对于这套框架要学的ruby知识，学起来相对容易。
+3. 公司文化。
+</code></pre><p>前面都是废话，下面开始进入正题。</p>
+<p>##功于善其事，必先利其器</p>
+<ul>
+<li>首先搭建环境，确定有ruby的环境。安装必要的gem<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gem install cucumber </span><br><span class="line">gem install capybara</span><br><span class="line">gem ins tall selenium-webdriver</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><em><a href="http://cukes.info/" target="_blank" rel="external">Cucumber</a> <a href="https://github.com/jnicklas/capybara" target="_blank" rel="external">Capybara</a> <a href="http://code.google.com/p/selenium/" target="_blank" rel="external">WebDriver</a></em></p>
+<ul>
+<li>建立个空项目，将gem加入gemfile</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source <span class="string">"http://ruby.taobao.org/"</span></span><br><span class="line">gem <span class="string">'cucumber'</span>, <span class="string">'&gt;= 1.1.9'</span></span><br><span class="line">gem <span class="string">"capybara"</span>, <span class="string">"~&gt; 1.1.2"</span></span><br><span class="line">gem <span class="string">'selenium-webdriver'</span>, <span class="string">'&gt;= 2.20.0'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>先简单介绍一下cucumber</li>
+</ul>
+<p>我们在这个空项目下运行<code>cucumber</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zhangmatoMacBook-Pro:<span class="built_in">test</span> lihuazhang$ cucumber</span><br><span class="line">You don<span class="string">'t have a '</span>features<span class="string">' directory.  Please create one to get started.</span><br><span class="line">See http://cukes.info/ for more information.</span></span><br></pre></td></tr></table></figure>
+<p>可以看出cucumber会去寻找<code>features</code>目录，先创建一个features目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">zhangmatoMacBook-Pro:<span class="built_in">test</span> lihuazhang$ mkdir features</span><br><span class="line">zhangmatoMacBook-Pro:<span class="built_in">test</span> lihuazhang$ ls</span><br><span class="line">features</span><br><span class="line">zhangmatoMacBook-Pro:<span class="built_in">test</span> lihuazhang$ cucumber</span><br><span class="line">0 scenarios</span><br><span class="line">0 steps</span><br><span class="line">0m0.000s</span><br></pre></td></tr></table></figure>
+<p>因为在features下面什么都没有，所以运行结果都是零。</p>
+<p>那我们创建一个feature，cucumber把feature都命名为xxx.feature, 而每个feature有多个scenario。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Feature:</span> Adding</span><br><span class="line"></span><br><span class="line">    <span class="symbol">Scenario:</span> Add two numbers</span><br><span class="line">        Given the input <span class="string">"2+2"</span></span><br><span class="line">        When the calculator is run</span><br><span class="line">        Then the output should be <span class="string">"4"</span></span><br><span class="line">    <span class="symbol">Scenario:</span> Minus two numbers</span><br><span class="line">        Given the input <span class="string">"2-1"</span></span><br><span class="line">        When the calculator is run</span><br><span class="line">        Then the output should be <span class="string">"0"</span></span><br></pre></td></tr></table></figure>
+<p>cucumber使用<code>Given/When/Then</code>这种叫做<a href="https://github.com/cucumber/cucumber/wiki/Gherkin" target="_blank" rel="external">gherkin</a>的可描述性语言(DSL)。</p>
+<p>feature文件中的每个Given/When/Then步骤在Step文件中都有对应的Ruby执行代码，两类文件通过正则表达式相关联。后面马上讲到。</p>
+<p>让我们再来运行一遍</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zhangmatoMacBook-<span class="symbol">Pro:</span>test lihuazhang$ cucumber </span><br><span class="line"><span class="symbol">Feature:</span> Adding</span><br><span class="line"></span><br><span class="line">  <span class="symbol">Scenario:</span> Add two numbers       <span class="comment"># features/test.feature:3</span></span><br><span class="line">    Given the input <span class="string">"2+2"</span>         <span class="comment"># features/test.feature:4</span></span><br><span class="line">    When the calculator is run    <span class="comment"># features/test.feature:5</span></span><br><span class="line">    Then the output should be <span class="string">"4"</span> <span class="comment"># features/test.feature:6</span></span><br><span class="line"></span><br><span class="line">  <span class="symbol">Scenario:</span> Minus two numbers     <span class="comment"># features/test.feature:7</span></span><br><span class="line">    Given the input <span class="string">"2-1"</span>         <span class="comment"># features/test.feature:8</span></span><br><span class="line">    When the calculator is run    <span class="comment"># features/test.feature:9</span></span><br><span class="line">    Then the output should be <span class="string">"0"</span> <span class="comment"># features/test.feature:10</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span> scenarios (<span class="number">2</span> undefined)</span><br><span class="line"><span class="number">6</span> steps (<span class="number">6</span> undefined)</span><br><span class="line">0m<span class="number">0</span>.<span class="number">005</span>s</span><br><span class="line"></span><br><span class="line">You can implement step definitions <span class="keyword">for</span> undefined steps with these <span class="symbol">snippets:</span></span><br><span class="line"></span><br><span class="line">Given /^the input <span class="string">"([^"</span>]*)<span class="string">"$/ do |arg1|</span><br><span class="line">  pending # express the regexp above with the code you wish you had</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">When /^the calculator is run$/ do</span><br><span class="line">  pending # express the regexp above with the code you wish you had</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">Then /^the output should be "</span>([^<span class="string">"]*)"</span>$/ <span class="keyword">do</span> <span class="params">|arg1|</span></span><br><span class="line">  pending <span class="comment"># express the regexp above with the code you wish you had</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">If you want snippets <span class="keyword">in</span> a different programming language,</span><br><span class="line">just make sure a file with the appropriate file extension</span><br><span class="line">exists where cucumber looks <span class="keyword">for</span> step definitions.</span><br></pre></td></tr></table></figure>
+<p>可以看到我们运行了2个scenarios,6个steps，都没有定义，于是cucumber仁慈的告诉了我们如何实现。于是我们就要开始写step了。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#小小作弊下，就不写的漂亮了。</span></span><br><span class="line">Given /^the input <span class="string">"([^"</span>]*)<span class="string">"$/ do |statement|</span><br><span class="line">    @answer = eval statement</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">When /^the calculator is run$/ do</span><br><span class="line">    puts "</span>Run~<span class="string">"</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">Then /^the output should be "</span>([^<span class="string">"]*)"</span>$/ <span class="keyword">do</span> <span class="params">|answer|</span></span><br><span class="line">    @answer == answer</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>我们再来运行一遍</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">zhangmatoMacBook-<span class="symbol">Pro:</span>test lihuazhang$ cucumber </span><br><span class="line"><span class="symbol">Feature:</span> Adding</span><br><span class="line"></span><br><span class="line">  <span class="symbol">Scenario:</span> Add two numbers       <span class="comment"># features/test.feature:3</span></span><br><span class="line">    Given the input <span class="string">"2+2"</span>         <span class="comment"># features/step_definitions/test_step.rb:1</span></span><br><span class="line">    When the calculator is run    <span class="comment"># features/step_definitions/test_step.rb:5</span></span><br><span class="line">      Run~</span><br><span class="line">    Then the output should be <span class="string">"4"</span> <span class="comment"># features/step_definitions/test_step.rb:9</span></span><br><span class="line"></span><br><span class="line">  <span class="symbol">Scenario:</span> Minus two numbers     <span class="comment"># features/test.feature:7</span></span><br><span class="line">    Given the input <span class="string">"2-1"</span>         <span class="comment"># features/step_definitions/test_step.rb:1</span></span><br><span class="line">    When the calculator is run    <span class="comment"># features/step_definitions/test_step.rb:5</span></span><br><span class="line">      Run~</span><br><span class="line">    Then the output should be <span class="string">"0"</span> <span class="comment"># features/step_definitions/test_step.rb:9</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span> scenarios (<span class="number">2</span> passed)</span><br><span class="line"><span class="number">6</span> steps (<span class="number">6</span> passed)</span><br><span class="line">0m<span class="number">0</span>.<span class="number">005</span>s</span><br></pre></td></tr></table></figure>
+<p>哇，恭喜都通过了。</p>
+<p>好，关于cucumber的介绍就到这里，具体可以去看看<a href="http://www.cnblogs.com/CloudTeng/articles/2214293.html" target="_blank" rel="external">Cucumber的目录结构和执行过程</a></p>
+<ul>
+<li>在简单介绍下Capybara</li>
+</ul>
+<p>Capybara是水豚的意思，在水豚之前有一个老鼠，叫做webrat，你如果在google上搜索<code>capybara webrat</code>的话，会发现一大推类似</p>
+<blockquote><br>Cucumber: Switching from Webrat to Capybara - cakebaker<br>cakebaker.42dh.com/…/cucumber-switching-from… - 网页快照 - 翻译此页<br>19 Sep 2010 – Fortunately, there is an alternative working with both Rails versions: Capybara. And so I decided to make the switch from Webrat to Capybara.<br></blockquote>
+
+<p>Webrat逐渐被Capybara取代，就像selenium逐渐被webdriver取代。</p>
+<p>Capybara主要是用来测试rails和Rack应用的。官网上说</p>
+<blockquote><br>Capybara helps you test Rails and Rack applications by simulating how a real user would interact with your app. It is agnostic about the driver running your tests and comes with Rack::Test and Selenium support built in. WebKit is supported through an external gem.<br></blockquote>
+
+<p>我们主要用Capybara和Webdriver结合起来进行网页自动化测试。（注意：Capybara不支持selenium rc）</p>
+<p>详细请见<a href="https://github.com/jnicklas/capybara" target="_blank" rel="external">Capybara</a>,里面讲的非常详细了。</p>
+<p>##小试牛刀<br>在了解了cucumber和capybara之后，我们可以正式开始写点东西。 在空项目底下，建立类似的目录结构</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">├── features</span><br><span class="line">    ├── example</span><br><span class="line">       ├── example.feature</span><br><span class="line">       ├── step_definitions</span><br><span class="line">       │   └── example_steps.rb</span><br><span class="line">       └── support</span><br><span class="line">           └── env.rb</span><br></pre></td></tr></table></figure>
+<p>我们这个例子是访问百度</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="symbol">Feature:</span> Using baidu</span><br><span class="line"></span><br><span class="line"><span class="symbol">Scenario:</span> Searching <span class="keyword">for</span> a term</span><br><span class="line"></span><br><span class="line">Given I am on baidu.com</span><br><span class="line">When I enter <span class="string">"pizza"</span></span><br><span class="line">And I press <span class="string">"百度一下"</span></span><br><span class="line">Then I should see <span class="string">"pizza_百度百科"</span></span><br></pre></td></tr></table></figure>
+<p>Given/When/And/Then很明了的告诉我们，打开百度，输入pizza，然后点击百度一下，然后就能看到pizza_百度百科。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Given /^I am on baidu\.com$/ <span class="keyword">do</span></span><br><span class="line">  Capybara.app_host = <span class="string">"http://www.baidu.com"</span></span><br><span class="line">  visit(<span class="string">'/'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">When /^I enter <span class="string">"([^"</span>]*)<span class="string">"$/ do |term|</span><br><span class="line">  fill_in('wd',:with =&gt; term)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">When /^(?:|I )press "</span>([^<span class="string">"]*)"</span>$/ <span class="keyword">do</span> <span class="params">|button|</span></span><br><span class="line">  puts button</span><br><span class="line">  click_button(button)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Then /^(?<span class="symbol">:|I</span> )should see <span class="string">"([^"</span>]*)<span class="string">"$/ do |text|</span><br><span class="line">  if page.respond_to? :should</span><br><span class="line">    page.should have_content(text)</span><br><span class="line">  else</span><br><span class="line">    assert page.has_content?(text)</span><br><span class="line">  end</span><br><span class="line">end</span></span><br></pre></td></tr></table></figure>
+<p>接着就是值得一提的env.rb，这是cucumber的环境配置文件。</p>
+<blockquote><br>The file features/support/env.rb is always the very first file to be loaded when Cucumber starts a test run. You use it to prepare the environment for the rest of your support and step definition code to operate.<br></blockquote>
+
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'capybara'</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'capybara/cucumber'</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'capybara/dsl'</span></span><br><span class="line"></span><br><span class="line">Capybara.app_host = <span class="string">"http://www.baidu.com"</span></span><br><span class="line">Capybara.default_driver = <span class="symbol">:selenium</span></span><br></pre></td></tr></table></figure>
+<p>让我们来运行一下</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">zhangmatoMacBook-<span class="symbol">Pro:</span>features lihuazhang$ cucumber example/example.feature </span><br><span class="line"><span class="symbol">Feature:</span> Using baidu</span><br><span class="line"></span><br><span class="line">  <span class="symbol">Scenario:</span> Searching <span class="keyword">for</span> a term   <span class="comment"># example/example.feature:4</span></span><br><span class="line">    Given I am on baidu.com        <span class="comment"># example/step_definitions/example_steps.rb:1</span></span><br><span class="line">    When I enter <span class="string">"pizza"</span>           <span class="comment"># example/step_definitions/example_steps.rb:6</span></span><br><span class="line">    And I press <span class="string">"百度一下"</span>             <span class="comment"># example/step_definitions/example_steps.rb:10</span></span><br><span class="line">      百度一下</span><br><span class="line">    Then I should see <span class="string">"pizza_百度百科"</span> <span class="comment"># example/step_definitions/example_steps.rb:15</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span> scenario (<span class="number">1</span> passed)</span><br><span class="line"><span class="number">4</span> steps (<span class="number">4</span> passed)</span><br><span class="line">0m9.<span class="number">184</span>s</span><br></pre></td></tr></table></figure>
+<p>Nice!</p>
+<p>至此，基本的框架搭好了。至于如何配置不同的浏览器，以及如何和page object配合，我们以后再讲。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/capybara/">Capybara</a>
+	</div>
+
+
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/capybara/">capybara</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cucumber/">cucumber</a></li></ul>
+	</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+    
+
+
   
     <article id="post-2012-04-06-webdriver-1-post" class="article article-type-post" itemscope itemprop="blogPost">
   

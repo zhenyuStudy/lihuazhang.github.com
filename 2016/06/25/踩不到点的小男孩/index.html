@@ -3,23 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Jmeter 兵器谱之 Xpath Extractor | 八点下班</title>
+  <title>踩不到点的小男孩 | 八点下班</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extracto">
+  <meta name="description" content="初中的时候，我有剪报的习惯，现在已经不用了，有各种聚合软件帮你节省时间。看到一篇文章，说有个人总是踩不到点，做事情永远在边上转，永远缺最后的临门一脚，那个时候，我还不懂这种感觉。工作以后，才开始有所体会，不过我没有那么背，往往只是一段时间会踩不到点。你能体会那种踩不到点的感觉吗？就好像，在麦当劳里服务员做冰激凌，机器拉出最后一个尖尖头的时候，尖尖头钝了。
+我有两个娃，今年快3岁了。老大是做事情很圆">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jmeter 兵器谱之 Xpath Extractor">
-<meta property="og:url" content="http://8atmyhouse.com/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/index.html">
+<meta property="og:title" content="踩不到点的小男孩">
+<meta property="og:url" content="http://8atmyhouse.com/2016/06/25/踩不到点的小男孩/index.html">
 <meta property="og:site_name" content="八点下班">
-<meta property="og:description" content="前言这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extracto">
-<meta property="og:image" content="https://jzycow.bn1.livefilestore.com/y1mkZeGi_ZuSphq77cecvcz5J1NwURw4cnG5JgR4Ar0pN2TjMfYVwjllWUY9LM-pWS-m92mtRx6lAvb1hLbYSUpa1Mh__u99xrNRP2-pIqWtum_W_dWGH_J6g/xpath.png?psid=1">
-<meta property="og:image" content="https://jzycow.bn1.livefilestore.com/y1mohY_XIe6MBQXnE3vqzOPbsjuuUc6HTUnImhsM8G6n2I5E1ry9mecSCxJuytZWlxGHIsgcNBtSQY-K4PYt1-9xQ9jvbT65BuUt_bRcZWo7tPWYLEq4ryryQ/query.png?psid=1">
-<meta property="og:image" content="https://jzycow.bn1.livefilestore.com/y1mktMNz2jyfvCicq9jS5QnbKT0wNVxDfq13v1MD1QboYPq78Jx8sLv8-YAGaB_waaCQ1c8lDNUISQ8eVIlnfDSVVyuvd6u4cLJE2E5jvnh36rQIymo7wOxLA/http.png?psid=1">
-<meta property="og:image" content="http://jmeter.apache.org/images/screenshots/xpath_extractor.png">
-<meta property="og:updated_time" content="2015-12-16T13:42:46.000Z">
+<meta property="og:description" content="初中的时候，我有剪报的习惯，现在已经不用了，有各种聚合软件帮你节省时间。看到一篇文章，说有个人总是踩不到点，做事情永远在边上转，永远缺最后的临门一脚，那个时候，我还不懂这种感觉。工作以后，才开始有所体会，不过我没有那么背，往往只是一段时间会踩不到点。你能体会那种踩不到点的感觉吗？就好像，在麦当劳里服务员做冰激凌，机器拉出最后一个尖尖头的时候，尖尖头钝了。
+我有两个娃，今年快3岁了。老大是做事情很圆">
+<meta property="og:updated_time" content="2016-06-25T15:22:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jmeter 兵器谱之 Xpath Extractor">
-<meta name="twitter:description" content="前言这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extracto">
-<meta name="twitter:image" content="https://jzycow.bn1.livefilestore.com/y1mkZeGi_ZuSphq77cecvcz5J1NwURw4cnG5JgR4Ar0pN2TjMfYVwjllWUY9LM-pWS-m92mtRx6lAvb1hLbYSUpa1Mh__u99xrNRP2-pIqWtum_W_dWGH_J6g/xpath.png?psid=1">
+<meta name="twitter:title" content="踩不到点的小男孩">
+<meta name="twitter:description" content="初中的时候，我有剪报的习惯，现在已经不用了，有各种聚合软件帮你节省时间。看到一篇文章，说有个人总是踩不到点，做事情永远在边上转，永远缺最后的临门一脚，那个时候，我还不懂这种感觉。工作以后，才开始有所体会，不过我没有那么背，往往只是一段时间会踩不到点。你能体会那种踩不到点的感觉吗？就好像，在麦当劳里服务员做冰激凌，机器拉出最后一个尖尖头的时候，尖尖头钝了。
+我有两个娃，今年快3岁了。老大是做事情很圆">
   
     <link rel="alternative" href="/atom.xml" title="八点下班" type="application/atom+xml">
   
@@ -205,11 +203,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-踩不到点的小男孩" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/" class="article-date">
-  	<time datetime="2013-04-29T13:37:00.000Z" itemprop="datePublished">2013-04-29</time>
+      <a href="/2016/06/25/踩不到点的小男孩/" class="article-date">
+  	<time datetime="2016-06-25T14:49:02.000Z" itemprop="datePublished">2016-06-25</time>
 </a>
     </div>
   
@@ -222,7 +220,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Jmeter 兵器谱之 Xpath Extractor
+      踩不到点的小男孩
     </h1>
   
 
@@ -230,14 +228,10 @@
       
       <div class="article-info article-info-post">
         
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/jmeter/">Jmeter</a>
-	</div>
-
 
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test-china-org/">test-china.org</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
 	</div>
 
         <div class="clearfix"></div>
@@ -247,66 +241,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这主要是 @AskaNeverEnd 引发的血案。AskaNeverEnd 跑去澳洲不学好，用起了 Jmeter。昨天，他突然问了一个问题，如何用 Jmeter 登陆 Https 的网站。于是我就跑去 Jmeter 官网翻有关 SSL 的信息，发现各种纠结。看文档实在是累啊，于是正好手头项目是用 Https， 不妨一试。结果 Https 没怎么试验，倒是体验了一把 Xpath Extractor。</p>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>大家都知道，传统的表单登陆有几个特点：</p>
-<ol>
-<li>有一个特定的 action</li>
-<li>使用 Post 协议</li>
-<li>post 参数一般为用户名和密码</li>
-<li>有很多的 hidden input 随机值</li>
-</ol>
-<p>比如百度的登陆，就有相当多的 hidden input。这些 hidden input 的 value 在每次请求时，都会随机生成不同的值。所以你不得不把它提取出来，参数化。于是我们就用到了 XPATH Extractor。</p>
-<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>假设我们有这样一个登陆的form：</p>
-<pre><code>&lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
-  &lt;input id=&quot;username&quot; name=&quot;username&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
-  &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; value=&quot;&quot;&gt;
-  &lt;input type=&quot;hidden&quot; name=&quot;lt&quot; value=&quot;20120001&quot;&gt;
-  &lt;input type=&quot;hidden&quot; name=&quot;_eventId&quot; value=&quot;submit&quot;&gt;
-  &lt;input class=&quot;btn-submit&quot; name=&quot;submit&quot; value=&quot;Log In&quot; type=&quot;submit&quot;&gt;
-&lt;/form&gt;
-</code></pre><p> 可以看到有两个 hidden input， 其中 lt 值是每次刷新页面时候，随机生成的值，另外一个是固定。那我们的策略是：</p>
-<ol>
-<li>第一次请求这个页面时候，获取随机生成的 lt 值。</li>
-<li>用这个获得的 lt 值，和用户名，密码一起做为 post 的参数，传递到后台去。</li>
-</ol>
-<p>所以在jmeter里面，先创建一个 HTTP 请求，这个请求的作用就是访问网站登录页面，并在这个请求填加后置处理器： XPATH Extractor，来提取请求返回的 html response 里面的 <strong>lt</strong> 的值。</p>
-<p><img src="https://jzycow.bn1.livefilestore.com/y1mkZeGi_ZuSphq77cecvcz5J1NwURw4cnG5JgR4Ar0pN2TjMfYVwjllWUY9LM-pWS-m92mtRx6lAvb1hLbYSUpa1Mh__u99xrNRP2-pIqWtum_W_dWGH_J6g/xpath.png?psid=1" alt="alt text"></p>
-<p>然后在 XPATH Extractor 里，将要提取 lt 的 XPATH query 填写正确， 如下</p>
-<p><img src="https://jzycow.bn1.livefilestore.com/y1mohY_XIe6MBQXnE3vqzOPbsjuuUc6HTUnImhsM8G6n2I5E1ry9mecSCxJuytZWlxGHIsgcNBtSQY-K4PYt1-9xQ9jvbT65BuUt_bRcZWo7tPWYLEq4ryryQ/query.png?psid=1" alt="alt text"></p>
-<p>在第一个 http 的请求中，我们取得了 lt 的值。接着我们创建第二个 http request， 这次要完成的就是将这些参数 post 到 form 制定的 action 中去。</p>
-<p><img src="https://jzycow.bn1.livefilestore.com/y1mktMNz2jyfvCicq9jS5QnbKT0wNVxDfq13v1MD1QboYPq78Jx8sLv8-YAGaB_waaCQ1c8lDNUISQ8eVIlnfDSVVyuvd6u4cLJE2E5jvnh36rQIymo7wOxLA/http.png?psid=1" alt="alt text" title="12"></p>
-<p>需要注意的是，这次的方法变成了 Post， 还有参数都要填写到参数列表中，注意那个 lt 值， jmeter 使用 ${} 获取参数的值。</p>
-<p>好，大功告成，试试看吧。</p>
-<hr>
-<h2 id="XPATH-Extractor-详说"><a href="#XPATH-Extractor-详说" class="headerlink" title="XPATH Extractor 详说"></a>XPATH Extractor 详说</h2><p>盗用下Apache上的图片：<br><img src="http://jmeter.apache.org/images/screenshots/xpath_extractor.png" alt="alt text"></p>
-<p>我们来一一解说下，这些图片上的属性，英语好的人可以直接移步 <a href="http://jmeter.apache.org/usermanual/component_reference.html#XPath_Extractor" title="XPATH Extractor" target="_blank" rel="external">Apache Jmeter Xpath Extractor</a>。</p>
-<p><strong>Name</strong>： XPATH Extractor， 就是一个该节点的描述信息，你可以任意更改，会立刻反应在你的节点树上。<br><strong>Comments</strong>: 同样也是描述信息。<br><strong>Apply to</strong>：一般只针对于那些有子 sample 的 sample， apply to 有4种：</p>
-<ul>
-<li>Main sample only： 只对主 sample 起作用。</li>
-<li>Sub-samples only: 只对子 sample 起作用。</li>
-<li>Main sample and sub-samles: 两种都起作用。</li>
-<li>JMeter Varibale: 这个变量是用于 JMeter的assertion， assertion 会对这个变量的内容起作用。</li>
-</ul>
-<p>XPATH的会对每一个被 <em>Apply to</em> 的 Sample 依次起作用， 并所有的匹配结果都会返回。</p>
-<p><strong>XPATH Parsing Options</strong></p>
-<p><strong>Use Tidy(tolerant parser)</strong>: 如果选择 Use Tidy， 就是解析response的时候将 HTML 转成 XHTML。</p>
-<ul>
-<li>对于所有的 HTML response， 我们应该选择 Use Tidy， 这样的 response 会被转为有效的 XHTML。</li>
-<li>对于所有的 XHTML 和 XML， 就不需要再选择使用 Use Tidy 了。</li>
-</ul>
-<p><strong>Quiet</strong>: tidy 的 quiet flag 设置， 选中了会抑制一些不必要的输出。<br><strong>Report error</strong>： 如果 Tidy 发生错误， 那么触发相应的 Assertion。<br><strong>Show warnings</strong>： 显示 Tidy Warning 信息的开关。</p>
-<p><strong>Use Namespaces</strong>， <strong>Validate XML</strong>，  <strong>Ignore Whitespace</strong>，  <strong>Fetch External DTDs</strong> 这四个只有在 Use Tidy 没有选中才会被激活。</p>
-<p><strong>Use Namespaces</strong>： 如果选中此选项，那么 XML 解析器会使用命名空间，我也不是很熟这一块，可以参考<br><a href="http://www.cnblogs.com/meng-meng/archive/2011/09/26/2192355.html" target="_blank" rel="external">XML解析中的namespace初探</a></p>
-<p> <strong>Validate XML</strong>： 验证 XML 是不是 well formed。</p>
-<p> <strong>Ignore Whitespace</strong>： 忽略空格字符</p>
-<p><strong>Fetch External DTDs</strong>： 获取外部的 DTD 文件</p>
-<p><strong>Return entire XPath fragment instead of text content?</strong>： 这个很简单，举个例子：</p>
-<p>html 片段是：</p>
-<pre><code>&lt;titile&gt;
-Apache JMeter
-&lt;/title&gt;
-</code></pre><p>那么，//title 会返回 “<code>&lt;title&gt;Apache JMeter&lt;/title&gt;</code>“ 而不是 “Apache JMeter”.</p>
-<p><strong>Reference Name</strong>： 就是用来存放 XPATH 提取出来的值。<br><strong>XPath Query</strong>： XPATH 的查询语句。<br><strong>Default Value</strong>： 默认值。</p>
+        <p>初中的时候，我有剪报的习惯，现在已经不用了，有各种聚合软件帮你节省时间。看到一篇文章，说有个人总是踩不到点，做事情永远在边上转，永远缺最后的临门一脚，那个时候，我还不懂这种感觉。工作以后，才开始有所体会，不过我没有那么背，往往只是一段时间会踩不到点。你能体会那种踩不到点的感觉吗？就好像，在麦当劳里服务员做冰激凌，机器拉出最后一个尖尖头的时候，尖尖头钝了。</p>
+<p>我有两个娃，今年快3岁了。老大是做事情很圆满的人，而老二就是那种永远踩不到点的小男孩。走在路上的时候，99%的时间走的很好，最后1%摔一跤。吃东西的时候，前10口可能很优雅，最后1口肯定出状况，不是掉了，就是洒了。给他玩具，玩着玩着永远都会掉。有一次，我说他你怎么老踩不到点，老是出状况啊，他很委屈地跑到我身边，结果撞倒了他们投篮的玩具篮球架。</p>
+<p>我想他大概有他自己的频率。老大是个乖乖娃，那是他的频率。老二踩不到点，那也是他的频率。大部分时候，希望老二像老大一样，毕竟老为他收拾残局真是件烦人的事情。不过小孩成长的过程就是试错的过程吧。老二在外面显得很大胆，各种都敢，而老大就很谨慎。这可能也是老二不停踩不到点的回报吧？</p>
+<p>我常在自己和老婆身上找这种的投影，未遂。我想起来，我初中的时候，语文成绩很好，但是我每次默写古文都不能100分，这大概就是完美中的不完美吧？</p>
 
       
     </div>
@@ -315,13 +253,13 @@ Apache JMeter
   
     
 <div class="copyright">
-  <p><span>本文标题:</span><a href="/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/">Jmeter 兵器谱之 Xpath Extractor</a></p>
+  <p><span>本文标题:</span><a href="/2016/06/25/踩不到点的小男孩/">踩不到点的小男孩</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 恒温 的个人博客">恒温</a></p>
-  <p><span>发布时间:</span>2013年04月29日 - 21时37分</p>
-  <p><span>最后更新:</span>2015年12月16日 - 21时42分</p>
+  <p><span>发布时间:</span>2016年06月25日 - 22时49分</p>
+  <p><span>最后更新:</span>2016年06月25日 - 23时22分</p>
   <p>
-    <span>原始链接:</span><a class="post-url" href="/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/" title="Jmeter 兵器谱之 Xpath Extractor">http://8atmyhouse.com/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/</a>
-    <span class="copy-path" data-clipboard-text="原文: http://8atmyhouse.com/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/　　作者: 恒温" title="点击复制文章链接">
+    <span>原始链接:</span><a class="post-url" href="/2016/06/25/踩不到点的小男孩/" title="踩不到点的小男孩">http://8atmyhouse.com/2016/06/25/踩不到点的小男孩/</a>
+    <span class="copy-path" data-clipboard-text="原文: http://8atmyhouse.com/2016/06/25/踩不到点的小男孩/　　作者: 恒温" title="点击复制文章链接">
         <i class="fa fa-clipboard"></i>
     </span>
   </p>
@@ -335,16 +273,10 @@ Apache JMeter
 
 <nav id="article-nav">
   
-    <div id="article-nav-newer" class="article-nav-title">
-      <a href="/2013/04/30/2013-04-30-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu/">
-        WebDriver 之测试失败自动截图
-      </a>
-    </div>
-  
   
     <div id="article-nav-older" class="article-nav-title">
-      <a href="/2013/04/28/2013-04-28-jmeter-bing-qi-pu-zhi-foreach-controller/">
-        JMeter 兵器谱之 ForEach Controller
+      <a href="/2016/05/14/webdriveragent-简介/">
+        WebDriverAgent 简介
       </a>
     </div>
   
@@ -357,7 +289,7 @@ Apache JMeter
 <!-- Show TOC and tocButton in default, Hide TOC via putting "toc: false" before "---" at [post].md -->
 <div id="toc" class="toc-article">
 <strong class="toc-title">文章目录</strong>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实践"><span class="toc-number">3.</span> <span class="toc-text">实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XPATH-Extractor-详说"><span class="toc-number">4.</span> <span class="toc-text">XPATH Extractor 详说</span></a></li></ol>
+
 </div>
 <style type="text/css">
   .left-col .switch-btn {
@@ -420,7 +352,7 @@ Apache JMeter
 
   <div class="duoshuo" id="comments">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Jmeter 兵器谱之 Xpath Extractor" data-title="Jmeter 兵器谱之 Xpath Extractor" data-url="http://8atmyhouse.com/2013/04/29/2013-04-29-jmeter-bing-qi-pu-zhi-xpath-extractor/"></div>
+	<div class="ds-thread" data-thread-key="踩不到点的小男孩" data-title="踩不到点的小男孩" data-url="http://8atmyhouse.com/2016/06/25/踩不到点的小男孩/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -456,16 +388,14 @@ Apache JMeter
 
   
   
-    
     <div  class="post-nav-button">
-    <a href="/2013/04/30/2013-04-30-webdriver-zhi-ce-shi-shi-bai-zi-dong-jie-tu/" title="上一篇: WebDriver 之测试失败自动截图">
-    <i class="fa fa-angle-left"></i>
-    </a>
-    <a href="/2013/04/28/2013-04-28-jmeter-bing-qi-pu-zhi-foreach-controller/" title="下一篇: JMeter 兵器谱之 ForEach Controller">
+    <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+    <a href="/2016/05/14/webdriveragent-简介/" title="下一篇: WebDriverAgent 简介">
     <i class="fa fa-angle-right"></i>
     </a>
     </div>
   
+    
 
 
 

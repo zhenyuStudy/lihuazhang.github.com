@@ -126,7 +126,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
+						<a href="/tags/metro/" style="font-size: 10px;">Metro</a> <a href="/tags/capybara/" style="font-size: 17.5px;">capybara</a> <a href="/tags/cucumber/" style="font-size: 15px;">cucumber</a> <a href="/tags/factory-gril/" style="font-size: 10px;">factory_gril</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/nexus-7-2013/" style="font-size: 10px;">nexus 7 2013</a> <a href="/tags/pageobject/" style="font-size: 12.5px;">pageobject</a> <a href="/tags/test-china-org/" style="font-size: 20px;">test-china.org</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/xpath/" style="font-size: 10px;">xpath</a> <a href="/tags/南京/" style="font-size: 10px;">南京</a> <a href="/tags/性能测试/" style="font-size: 10px;">性能测试</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/移动测试/" style="font-size: 10px;">移动测试</a> <a href="/tags/翻译/" style="font-size: 10px;">翻译</a> <a href="/tags/陆犯焉识/" style="font-size: 10px;">陆犯焉识</a>
 					</div>
 				</section>
 				
@@ -203,6 +203,90 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-2013-06-27-ruby-here-doc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/06/27/2013-06-27-ruby-here-doc/" class="article-date">
+  	<time datetime="2013-06-27T13:37:00.000Z" itemprop="datePublished">2013-06-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/06/27/2013-06-27-ruby-here-doc/">ruby 的 Heredocs</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>看 <a href="https://github.com/capistrano">Capistrano</a> 源码， 在 <code>capistrano / bin / capify</code> 下，发现<br><code>here doc</code> 的写法，</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unindent</span><span class="params">(string)</span></span></span><br><span class="line">  indentation = string[<span class="regexp">/\A\s*/</span>]</span><br><span class="line">  string.strip.gsub(<span class="regexp">/^<span class="subst">#&#123;indentation&#125;</span>/</span>, <span class="string">""</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"> <span class="string">"Capfile"</span> =&gt; unindent(&lt;&lt;-FILE),</span><br><span class="line"></span><br><span class="line">    load <span class="string">'deploy'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Uncomment if you are using Rails' asset pipeline</span></span><br><span class="line">    <span class="comment"># load 'deploy/assets'</span></span><br><span class="line"></span><br><span class="line">    load <span class="string">'config/deploy'</span> <span class="comment"># remove this line to skip loading any of the default tasks</span></span><br><span class="line">  FILE</span><br></pre></td></tr></table></figure>
+<p>孤陋寡闻的我立马google 了一把找到篇好文，抄下来分享：</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/ruby/">ruby</a>
+	</div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a  href="/2013/06/27/2013-06-27-ruby-here-doc/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    
+        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+        <script>
+        var yiliaConfig = {
+        fancybox: true,
+        mathjax: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false
+        }
+        </script>
+    
+
+
   
     <article id="post-2013-06-26-shell-script-to-control-tomcat" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1131,103 +1215,6 @@ Apache JMeter
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/windows/">windows</a>
-	</div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-    
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-        <script>
-        var yiliaConfig = {
-        fancybox: true,
-        mathjax: true,
-        animate: true,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        open_in_new: false
-        }
-        </script>
-    
-
-
-  
-    <article id="post-2013-02-12-shi-yong-capybara-deng-lu-bai-du" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/02/12/2013-02-12-shi-yong-capybara-deng-lu-bai-du/" class="article-date">
-  	<time datetime="2013-02-12T09:14:00.000Z" itemprop="datePublished">2013-02-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/02/12/2013-02-12-shi-yong-capybara-deng-lu-bai-du/">使用 capybara 登陆百度</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>ShiLongLu 问你有什么办法测试百度的登录窗口呢？这是差不多2个月前的问题了，我一直忙于 Dota 圣剑传说。恰巧春节有时间看了下。</p>
-<p>百度登陆的时候是弹出一个对话框，如图：</p>
-<p><img src="/photos/baidulogin.png" alt=""></p>
-<p>但是这个对话框是用 iframe 实现的。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">height</span>=<span class="string">"100%"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">width</span>=<span class="string">"100%"</span> <span class="attr">scrolling</span>=<span class="string">"no"</span> <span class="attr">src</span>=<span class="string">"http://www.baidu.com/cache/user/html/login-1.2.html"</span> <span class="attr">marginheight</span>=<span class="string">"0"</span> <span class="attr">marginwidth</span>=<span class="string">"0"</span> <span class="attr">id</span>=<span class="string">"login_iframe"</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>所以在填写用户名和密码的时候，需要先 switch 到这个 frame 上去， </p>
-<blockquote>
-<p>When working inside a frame, you should use Capybara’s within_frame method.</p>
-<ul>
-<li>(Object) within_frame(frame_id)</li>
-</ul>
-<p>Execute the given block within the given iframe given the id of that iframe. Only works on some drivers (e.g. Selenium)</p>
-<p>Parameters:<br>frame_id (String) — Id of the frame</p>
-</blockquote>
-<p>所以我们的实现基本如下：</p>
-<p>baidu.feature:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Given I am on baidu.com</span><br><span class="line">When I  click <span class="string">"登录"</span></span><br><span class="line">And I switch to login form</span><br><span class="line">And I enter <span class="string">"lihuazhang@hotmail.com"</span> <span class="keyword">for</span> <span class="string">"帐号"</span></span><br><span class="line">And I enter <span class="string">"204646"</span> <span class="keyword">for</span> <span class="string">"密码"</span></span><br><span class="line">And I click <span class="string">"登录"</span> button</span><br><span class="line">Then I should see <span class="string">"zhangzuichi"</span></span><br></pre></td></tr></table></figure>
-<p>step_definition.rb:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">When /^I enter <span class="string">"(.*?)"</span> <span class="keyword">for</span> <span class="string">"(.*?)"</span>$/ <span class="keyword">do</span> <span class="params">|value, key|</span></span><br><span class="line">  <span class="keyword">if</span> key == <span class="string">"帐号"</span></span><br><span class="line">    within_frame <span class="string">'login_iframe'</span> <span class="keyword">do</span></span><br><span class="line">      fill_in <span class="string">'pass_login_username_0'</span>, <span class="symbol">:with</span> =&gt; value</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">     within_frame <span class="string">'login_iframe'</span> <span class="keyword">do</span></span><br><span class="line">      fill_in <span class="string">'pass_login_password_0'</span>, <span class="symbol">:with</span> =&gt; value</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">When /^I click <span class="string">"(.*?)"</span> button$/ <span class="keyword">do</span> <span class="params">|arg1|</span></span><br><span class="line">  within_frame <span class="string">'login_iframe'</span> <span class="keyword">do</span></span><br><span class="line">    click_button <span class="string">'pass_login_input_submit_0'</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p>大致如此，在 firefox 下测试通过。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/capybara/">Capybara</a>
 	</div>
 
 
